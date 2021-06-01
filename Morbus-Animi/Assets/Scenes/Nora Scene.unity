@@ -344,7 +344,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4914783968788438699, guid: 16d52d1001164e44a8800bbd10e69481, type: 3}
       propertyPath: cameraDirection
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4914783968788438702, guid: 16d52d1001164e44a8800bbd10e69481, type: 3}
       propertyPath: m_Name
