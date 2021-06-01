@@ -1,0 +1,190 @@
+Using pre-set license
+Built from '2020.3/staging' branch; Version is '2020.3.0f1 (c7b5465681fb) revision 13088070'; Using compiler version '192528614'; Build Type 'Release'
+OS: 'Windows 10 Home; OS build 19042.985; Version 2009; 64bit' Language: 'en' Physical Memory: 32686 MB
+BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1, IsPro: 0
+
+ COMMAND LINE ARGUMENTS:
+C:\Program Files\Unity\Hub\Editor\2020.3.0f1\Editor\Unity.exe
+-adb2
+-batchMode
+-noUpm
+-name
+AssetImportWorker0
+-projectPath
+D:/Projektstudium/Projekt/Morbus-Animi/Morbus-Animi
+-logFile
+Logs/AssetImportWorker0.log
+-srvPort
+56235
+Successfully changed project path to: D:/Projektstudium/Projekt/Morbus-Animi/Morbus-Animi
+D:/Projektstudium/Projekt/Morbus-Animi/Morbus-Animi
+Using Asset Import Pipeline V2.
+Refreshing native plugins compatible for Editor in 25.60 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Initialize engine version: 2020.3.0f1 (c7b5465681fb)
+[Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/2020.3.0f1/Editor/Data/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path D:/Projektstudium/Projekt/Morbus-Animi/Morbus-Animi/Assets
+GfxDevice: creating device client; threaded=0
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.1]
+    Renderer: NVIDIA GeForce RTX 3070 (ID=0x2484)
+    Vendor:   
+    VRAM:     8043 MB
+    Driver:   27.21.14.5751
+Initialize mono
+Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/2020.3.0f1/Editor/Data/Managed'
+Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/2020.3.0f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit'
+Mono config path = 'C:/Program Files/Unity/Hub/Editor/2020.3.0f1/Editor/Data/MonoBleedingEdge/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56816
+Begin MonoManager ReloadAssembly
+Registering precompiled unity dll's ...
+Register platform support module: C:/Program Files/Unity/Hub/Editor/2020.3.0f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
+Registered in 0.094330 seconds.
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 18.40 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  2.841 seconds
+Platform modules already initialized, skipping
+Registering precompiled user dll's ...
+Registered in 0.045248 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 0.21 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.455 seconds
+Platform modules already initialized, skipping
+========================================================================
+Worker process is ready to serve import requests
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.03 seconds
+Refreshing native plugins compatible for Editor in 0.21 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1116 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 57.2 MB.
+System memory in use after: 57.3 MB.
+
+Unloading 10 unused Assets to reduce memory usage. Loaded Objects now: 1559.
+Total: 1.503400 ms (FindLiveObjects: 0.122500 ms CreateObjectMapping: 0.028100 ms MarkObjects: 1.293600 ms  DeleteObjects: 0.058400 ms)
+
+========================================================================
+Received Import Request.
+  path: Assets/Prefabs/room_norah.prefab
+  artifactKey: Guid(e92fbf885d839874db9c1cc7b453f6d2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/room_norah.prefab using Guid(e92fbf885d839874db9c1cc7b453f6d2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '517f2e67e9a17f726eace76bc6aa9d83') in 0.104064 seconds
+  Import took 0.107153 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000140 seconds.
+  path: Assets/Blender/day-of-the-dead-3368234_1280.png
+  artifactKey: Guid(5bce3caab7fbdd84d95ce6a39f604c6f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Blender/day-of-the-dead-3368234_1280.png using Guid(5bce3caab7fbdd84d95ce6a39f604c6f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e68b3943124c15bbb6d27aa22a753cd6') in 0.046709 seconds
+  Import took 0.048232 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000184 seconds.
+  path: Assets/Blender/smiley.png
+  artifactKey: Guid(77d01b26ced3fb5449d3b98786bed199) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Blender/smiley.png using Guid(77d01b26ced3fb5449d3b98786bed199) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1c7ab0a8dd2cfed4ef2adcefaaa2d11d') in 0.014257 seconds
+  Import took 0.016251 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000140 seconds.
+  path: Assets/Blender/room_norah.blend
+  artifactKey: Guid(a0119508155253a469b38a69c041387b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Blender/room_norah.blend using Guid(a0119508155253a469b38a69c041387b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '11c0a4372ac311ca7ea132fcc22c97e0') in 0.621660 seconds
+  Import took 0.624776 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000154 seconds.
+  path: Assets/Blender/first_dummy.blend
+  artifactKey: Guid(beb6fbdebf6e41d4792f3359a906db54) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Blender/first_dummy.blend using Guid(beb6fbdebf6e41d4792f3359a906db54) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3a0a142da98256d149d3a5495a16ccbf') in 0.057608 seconds
+  Import took 0.059358 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000157 seconds.
+  path: Assets/Blender/semicolon.png
+  artifactKey: Guid(d0321a841b376b74ab6b7c1c35410fd5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Blender/semicolon.png using Guid(d0321a841b376b74ab6b7c1c35410fd5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0dbfd117d22b8da1f5f4a6bb6a5b40e8') in 0.010873 seconds
+  Import took 0.012395 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000168 seconds.
+  path: Assets/Blender/room_norah.fbx
+  artifactKey: Guid(050400a468ed2da48aad33e4f9682ad8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Blender/room_norah.fbx using Guid(050400a468ed2da48aad33e4f9682ad8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7208625c73f46e86063dbc205efe29f3') in 0.472123 seconds
+  Import took 0.474831 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 1.519822 seconds.
+  path: Assets/Prefabs/FixedCamArea.prefab
+  artifactKey: Guid(1a4427543c776a44ba1ed6400546d600) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/FixedCamArea.prefab using Guid(1a4427543c776a44ba1ed6400546d600) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '41d3e3b1aaa25941f6a62a02f3237b5d') in 0.020273 seconds
+  Import took 0.022252 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000155 seconds.
+  path: Assets/Prefabs/ThirdPersonPlayer.prefab
+  artifactKey: Guid(865cdecd4f2fe9041afc2b68aaec8835) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/ThirdPersonPlayer.prefab using Guid(865cdecd4f2fe9041afc2b68aaec8835) Importer(815301076,1909f56bfc062723c751e8b465ee728b) The AnimationClip 'New_Animation' used by the Animation component 'ThirdPersonPlayer' must be marked as Legacy.
+
+The AnimationClip 'New_Animation' used by the Animation component 'ThirdPersonPlayer(Clone)' must be marked as Legacy.
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEditor.EditorUtility:Internal_InstantiateRemoveAllNonAnimationComponentsSingle (UnityEngine.Object,UnityEngine.Vector3,UnityEngine.Quaternion)
+UnityEditor.EditorUtility:InstantiateRemoveAllNonAnimationComponents (UnityEngine.Object,UnityEngine.Vector3,UnityEngine.Quaternion)
+UnityEditor.EditorUtility:InstantiateForAnimatorPreview (UnityEngine.Object)
+UnityEditor.GameObjectInspector/PreviewData:UpdateGameObject (UnityEngine.Object)
+UnityEditor.GameObjectInspector/PreviewData:.ctor (UnityEngine.Object)
+UnityEditor.GameObjectInspector:GetPreviewData ()
+UnityEditor.GameObjectInspector:RenderStaticPreview (string,UnityEngine.Object[],int,int)
+UnityEditor.AssetPreviewUpdater:CreatePreviewForAsset (UnityEngine.Object,UnityEngine.Object[],string)
+
+[C:\buildslave\unity\build\Modules/Animation/Animation.cpp line 2050]
+
+The AnimationClip 'New_Animation' used by the Animation component 'ThirdPersonPlayer(Clone)AnimatorPreview' must be marked as Legacy.
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEditor.EditorUtility:InitInstantiatedPreviewRecursive (UnityEngine.GameObject)
+UnityEditor.EditorUtility:InstantiateForAnimatorPreview (UnityEngine.Object)
+UnityEditor.GameObjectInspector/PreviewData:UpdateGameObject (UnityEngine.Object)
+UnityEditor.GameObjectInspector/PreviewData:.ctor (UnityEngine.Object)
+UnityEditor.GameObjectInspector:GetPreviewData ()
+UnityEditor.GameObjectInspector:RenderStaticPreview (string,UnityEngine.Object[],int,int)
+UnityEditor.AssetPreviewUpdater:CreatePreviewForAsset (UnityEngine.Object,UnityEngine.Object[],string)
+
+[C:\buildslave\unity\build\Modules/Animation/Animation.cpp line 2050]
+
+ -> (artifact id: 'b1c1d0462c230ad61c1df4ed5714f282') in 0.031417 seconds
+  Import took 0.032980 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000142 seconds.
+  path: Assets/Prefabs/FollowCamArea.prefab
+  artifactKey: Guid(16d52d1001164e44a8800bbd10e69481) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/FollowCamArea.prefab using Guid(16d52d1001164e44a8800bbd10e69481) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a226f0d012ad5c9a4377b45e809fe645') in 0.015826 seconds
+  Import took 0.017396 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 402.162229 seconds.
+  path: Assets/Materials/Unlit_Hologram.mat
+  artifactKey: Guid(db9326b829487314ca076fa01108c04e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/Unlit_Hologram.mat using Guid(db9326b829487314ca076fa01108c04e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '19d47b1dee021fc186439785988c56c2') in 0.016018 seconds
+  Import took 0.017944 seconds .
+
+AssetImportWorkerClient::OnTransportError - code=2 error=End of file
