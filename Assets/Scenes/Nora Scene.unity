@@ -241,6 +241,14 @@ PrefabInstance:
       propertyPath: mainCamera
       value: 
       objectReference: {fileID: 408838765}
+    - target: {fileID: 5480189708575337103, guid: 865cdecd4f2fe9041afc2b68aaec8835, type: 3}
+      propertyPath: rotationMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5480189708575337103, guid: 865cdecd4f2fe9041afc2b68aaec8835, type: 3}
+      propertyPath: mouseSensitivity
+      value: 438
+      objectReference: {fileID: 0}
     - target: {fileID: 5480189708575337104, guid: 865cdecd4f2fe9041afc2b68aaec8835, type: 3}
       propertyPath: m_RootOrder
       value: 1

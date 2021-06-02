@@ -1,6 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
+
+
 
 
 public enum MACameraMode {
@@ -21,6 +25,15 @@ public enum MACameraDirection {
     Left = 3
 }
 
+public enum MARotationMode {
+    FirstPersonIdentical = 0,
+    MovementDirectional = 1
+}
+
+
+
+
+
 public class MACharacterController : MonoBehaviour {
     [Range(0, 1000f)]
     public float movementAcceleration;
@@ -31,7 +44,7 @@ public class MACharacterController : MonoBehaviour {
     [Range(1, 3f)]
     public float maxMovementSprintSpeedFactor;
 
-    [Range(0, 150)]
+    [Range(0, 550)]
     public float mouseSensitivity;
 
     [Range(0, 1000)]
@@ -76,7 +89,7 @@ public class MACharacterController : MonoBehaviour {
     [HideInInspector]
     public MACameraMode cameraMode = MACameraMode.ThirdPerson;
     public MAKeyboardControlMode keyboardControlMode = MAKeyboardControlMode.Global;
-
+    public MARotationMode rotationMode = MARotationMode.MovementDirectional;
 
     [Range(0, 1)]
     public float camSlerpFactor;
@@ -148,9 +161,8 @@ public class MACharacterController : MonoBehaviour {
     private void FixedUpdate() {
         this.CalculateMovement();
 
-        if (this.framesTillStart > 5) {
-            this.CalculateRotation();
-        }
+        this.CalculateRotation();
+
 
         if (this.inJump) {
             this.framesTillJump++;
@@ -415,7 +427,28 @@ public class MACharacterController : MonoBehaviour {
 
 
     private void CalculateRotation() {
+        if (this.framesTillStart > 5) {
+            switch (this.rotationMode) {
+                case MARotationMode.FirstPersonIdentical:
+                    this.CalculateFirstPersonRotation();
+                    break;
+                case MARotationMode.MovementDirectional:
+                    this.CalculateMovementDirectionalRotation();
+                    break;
+                default:
+                    break;
+            }
+        }
 
+       
+    }
+
+    private void CalculateMovementDirectionalRotation() {
+        this.yRotator.transform.rotation = Quaternion.identity;
+        this.yRotator.transform.rotation = Quaternion.Euler(0, 0, 4);
+    }
+
+    private void CalculateFirstPersonRotation() {
         this.xRotationAmount = -Input.GetAxis("Mouse Y") * this.mouseSensitivity * Time.deltaTime;
         this.currentXRotation += this.xRotationAmount;
 
@@ -434,4 +467,6 @@ public class MACharacterController : MonoBehaviour {
             this.xRotator.transform.Rotate(Vector3.right, this.xRotationAmount);
         }
     }
+
+    
 }
