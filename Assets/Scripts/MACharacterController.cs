@@ -137,7 +137,10 @@ public class MACharacterController : MonoBehaviour {
 
     public Animator animator;
     public Animation animation;
-
+    
+    //for item interaction
+    MAInteractable hover;
+    //public GameObject playerInventory;
 
     void Start() {
         this.currentXRotation = 0;
@@ -468,5 +471,36 @@ public class MACharacterController : MonoBehaviour {
         }
     }
 
-    
+    private void ManageInteraction()
+    {
+        Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+        if (Input.GetMouseButtonDown(0))
+        {
+
+            if (Physics.Raycast(ray, out hit))
+            {
+                MAInteractable interactable = hit.collider.GetComponent<MAInteractable>();
+                if (this.hover == interactable)
+                {
+                    if (Input.GetMouseButtonDown(0) && interactable != null)
+                    {
+                        this.hover.MAInteract();
+                    }
+                    return;
+                }
+                if (interactable != null)
+                {
+                    this.hover = interactable;
+                    this.hover.setHover();
+                }
+                else
+                {
+                    this.hover.removeHover();
+                    this.hover = null;
+                }
+
+            }
+        }
+    }
 }
