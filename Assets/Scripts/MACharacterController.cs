@@ -47,6 +47,9 @@ public class MACharacterController : MonoBehaviour {
     [Range(0, 550)]
     public float mouseSensitivity;
 
+    public bool lockMouse = true;
+
+
     [Range(0, 1000)]
     public float jumpForce;
 
@@ -146,7 +149,8 @@ public class MACharacterController : MonoBehaviour {
         this.currentXRotation = 0;
         this.xRotationAmount = 0;
 
-        Cursor.lockState = CursorLockMode.Locked;
+        
+        Cursor.lockState = this.lockMouse? CursorLockMode.Locked: CursorLockMode.None;
 
         this.last3Speeds = new Vector3[3];
     }
@@ -155,7 +159,7 @@ public class MACharacterController : MonoBehaviour {
     void Update() {
         this.ManageCamGoalRotation();
         this.ManageJump();
-        this.ManageSmartCam();
+       
 
         this.ManageIdleAnimation();
 
@@ -172,6 +176,7 @@ public class MACharacterController : MonoBehaviour {
         }
         this.CalculateSpeedAverage();
 
+        this.ManageSmartCam();
 
         this.framesTillStart++;
         this.millisecondsSinceStart += Time.deltaTime;
@@ -227,7 +232,7 @@ public class MACharacterController : MonoBehaviour {
                 break;
         }
 
-        this.SlerpCam();
+        this.LerpCam();
     }
 
 
@@ -241,7 +246,7 @@ public class MACharacterController : MonoBehaviour {
     }
 
 
-    private void SlerpCam() {
+    private void LerpCam() {
         this.mainCamera.transform.position = Vector3.Slerp(this.mainCamera.transform.position, this.currentCameraGoal.position, this.camSlerpFactor);
         this.mainCamera.transform.rotation = Quaternion.Slerp(this.mainCamera.transform.rotation, this.currentCameraGoal.rotation, this.camSlerpFactor);
     }
