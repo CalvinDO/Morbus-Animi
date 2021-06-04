@@ -7,12 +7,15 @@ public class MAMazeGenerator : MonoBehaviour {
 
     public GameObject floorStone;
     public GameObject visualCheckStone;
+    public MAMazeConnection connectionStone;
 
     public float floorStoneSize;
 
     public float floorDensitiy;
 
-    public GameObject mazeElementContainer;
+    public GameObject circleContainer;
+    public GameObject connectionsContainer;
+
 
     public int amountRings;
     public float ringGapDistance;
@@ -20,69 +23,48 @@ public class MAMazeGenerator : MonoBehaviour {
     [Range(0, 0.25f)]
     public float connectionFrequency;
 
-    [Range(0, 2)]
+    [Range(0, 0.75f)]
     public float connectionRandomness;
 
     [Range(0, 0.5f)]
     public float nextRingOffsetFactor;
 
-    [Range(0.001f, 1f)]
-    public float minConnectionDensityAngleIncrease;
+    public float minConnectionDistance;
 
-
-    private float currentMinConnectionDensity;
-
-
-    private List<List<float>> connectionsList = new List<List<float>>();
 
 
     //private float ringIndex = 1;
     //private float stoneIndex = 0;
 
+    private bool newMazeLastFrame = false;
+    int framesTillNewMaze = 0;
 
     void Start() {
         this.Init();
     }
 
     void Init() {
-        GameObject.Destroy(this.mazeElementContainer);
 
-        this.mazeElementContainer = null;
-        this.mazeElementContainer = new GameObject("Container");
-        this.currentMinConnectionDensity = this.minConnectionDensityAngleIncrease;
-        this.GenerateCircles();
+        foreach (Transform child in this.circleContainer.transform) {
+            GameObject.Destroy(child.gameObject);
+        }
+
+
+        foreach (Transform child in this.connectionsContainer.transform) {
+            MAMazeConnection mazeConnection = child.gameObject.GetComponent<MAMazeConnection>();
+            mazeConnection.isNewStone = false;
+            GameObject.Destroy(child.gameObject);
+        }
+
+        this.GenerateMaze();
     }
 
 
     void Update() {
 
-        /*'
-        if (this.ringIndex <= this.amountRings) {
-            float r = this.ringGapDistance * ringIndex;
-
-
-            float u = 2 * Mathf.PI * r;
-            float amountFloorStones = u * this.floorDensitiy;
-            //Debug.Log($"amountFloorStones: {amountFloorStones}");
-
-
-            if (this.stoneIndex < amountFloorStones) {
-                // Debug.Log(stoneIndex / amountFloorStones);
-                float phi = (this.stoneIndex / amountFloorStones) * 360 * Mathf.Deg2Rad;
-                this.DrawStone(r, phi);
-                this.stoneIndex++;
-            }
-            else {
-                this.stoneIndex = 0;
-                this.ringIndex++;
-            }
-        }
-        */
-
         if (Input.GetKeyUp(KeyCode.R)) {
             this.Init();
         }
-
     }
 
 
@@ -107,73 +89,33 @@ public class MAMazeGenerator : MonoBehaviour {
             float max = (connectionIndex + this.connectionRandomness) / amountConnections * 360 * Mathf.Deg2Rad + ringOffset;
 
             float phi = Random.Range(min, max) % (2 * Mathf.PI);
-            this.DrawStone(r + this.floorStoneSize / 2, phi);
-            /*
-            if (this.IsConnectionValid(phi, ringIndex)) {
-                this.DrawStone(r + this.floorStoneSize / 2, phi);
-                connections.Add(phi);
+            float radius = r + this.floorStoneSize / 2;
 
 
-                numberOfConnections++;
+            if (this.IsConnectionValid(phi, radius, ringIndex)) {
+                this.DrawConnectionStone(radius, phi, ringIndex);
             }
-            else {
-                numberOfUnsuccessfulTries++;
-                connectionIndex--;
-            }
-
-            if (numberOfUnsuccessfulTries > this.maxTriesInRowBeforeAbort) {
-                this.currentMinConnectionDensity += this.minConnectionDensityAngleIncrease;
-                numberOfDensityIncreases++;
-
-
-            }
-
-            if (numberOfDensityIncreases > this.maxTriesInRowBeforeAbort) {
-                connectionIndex = amountConnections;
-                numberOfUnsuccessfulTries = 0;
-            }
-
-            if (numberOfConnections >= amountConnections) {
-                connectionIndex = amountConnections;
-                break;
-            }
-            */
         }
-        this.connectionsList.Add(connections);
     }
 
 
-    bool IsConnectionValid(float phi, int ringIndex) {
-        if (ringIndex <= 1) {
-            return true;
-        }
+    bool IsConnectionValid(float phi, float radius, int ringIndex) {
+        Collider[] hitColliders = Physics.OverlapSphere(new Vector3(radius * Mathf.Cos(phi), 0, radius * Mathf.Sin(phi)), this.minConnectionDistance);
 
-        Debug.Log("checking Phis for ringIndex: " + ringIndex);
+        foreach (Collider col in hitColliders) {
+            if (col.gameObject.GetComponent<MAMazeConnection>()) {
+                MAMazeConnection mazeConnection = col.gameObject.GetComponent<MAMazeConnection>();
 
-        foreach (float connection in this.connectionsList[ringIndex - 1]) {
-            // Debug.Log(connection - this.minConnectionDensityAngle);
-            //Debug.Log("vs phi:" + phi);
-            float minPhi = connection - this.currentMinConnectionDensity;
-            float maxPhi = connection + this.currentMinConnectionDensity;
-
-            Debug.Log("minPhi:" + minPhi);
-            Debug.Log("maxPhi:" + maxPhi);
-
-            float r = this.ringGapDistance * (ringIndex - 1);
-            this.DrawVisualCheck(r, minPhi);
-            this.DrawVisualCheck(r, maxPhi);
-
-
-            if (phi < minPhi || phi > maxPhi) {
-
-                return false;
+                if (mazeConnection.isNewStone && mazeConnection.ring == ringIndex - 1) {
+                    return false;
+                }
             }
         }
         return true;
     }
 
 
-    void GenerateCircles() {
+    void GenerateMaze() {
         for (int ringIndex = 0; ringIndex <= this.amountRings; ringIndex++) {
             float r = this.ringGapDistance * (ringIndex + 1);
 
@@ -189,31 +131,36 @@ public class MAMazeGenerator : MonoBehaviour {
 
         for (int stoneIndex = 0; stoneIndex < amountFloorStones; stoneIndex++) {
             float phi = (stoneIndex / amountFloorStones) * 360 * Mathf.Deg2Rad;
-            this.DrawStone(r, phi);
+            this.DrawStone(r, phi, this.circleContainer);
         }
     }
 
     void DrawVisualCheck(float r, float phi) {
         Vector3 position = new Vector3(r * Mathf.Cos(phi), 0, r * Mathf.Sin(phi));
-        this.DrawStone(position, Quaternion.Euler(0, -phi * Mathf.Rad2Deg, 0) * this.floorStone.transform.rotation);
-        GameObject.Instantiate(this.visualCheckStone, position, this.floorStone.transform.rotation, this.mazeElementContainer.transform);
+        GameObject.Instantiate(this.visualCheckStone, position, Quaternion.Euler(0, -phi * Mathf.Rad2Deg, 0) * this.floorStone.transform.rotation, this.circleContainer.transform);
     }
 
-    void DrawStone(float r, float phi) {
+    void DrawConnectionStone(float r, float phi, int ring) {
         Vector3 position = new Vector3(r * Mathf.Cos(phi), 0, r * Mathf.Sin(phi));
-        this.DrawStone(position, Quaternion.Euler(0, -phi * Mathf.Rad2Deg, 0) * this.floorStone.transform.rotation);
+        Quaternion rotation = Quaternion.Euler(0, -phi * Mathf.Rad2Deg, 0) * this.floorStone.transform.rotation;
+        this.DrawConnectionStone(position, rotation, ring);
     }
 
+    void DrawStone(float r, float phi, GameObject parent) {
+        Vector3 position = new Vector3(r * Mathf.Cos(phi), 0, r * Mathf.Sin(phi));
+        this.DrawStone(position, Quaternion.Euler(0, -phi * Mathf.Rad2Deg, 0) * this.floorStone.transform.rotation, parent);
+    }
 
-    void DrawStone(Vector3 position, Quaternion rotation) {
+    void DrawConnectionStone(Vector3 position, Quaternion rotation, int ring) {
+        this.connectionStone.isNewStone = true;
+        GameObject.Instantiate(this.connectionStone, position, rotation, this.connectionsContainer.transform);
+    }
 
-        GameObject.Instantiate(this.floorStone, position, rotation, this.mazeElementContainer.transform);
+    void DrawStone(Vector3 position, Quaternion rotation, GameObject parent) {
+        GameObject.Instantiate(this.floorStone, position, rotation, parent.transform);
     }
 
     void DrawStone(Vector3 position) {
-
-        GameObject.Instantiate(this.floorStone, position, this.floorStone.transform.rotation, this.mazeElementContainer.transform);
+        GameObject.Instantiate(this.floorStone, position, this.floorStone.transform.rotation, this.circleContainer.transform);
     }
-
-
 }
