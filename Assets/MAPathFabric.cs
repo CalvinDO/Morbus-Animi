@@ -24,17 +24,27 @@ public class MAPathFabric : MonoBehaviour {
 
     public MAMazeConnection connectionStone;
 
-    [Range(0, 10)]
-    public float timeTillDirectionChange;
+    [Range(0, 30)]
+    public int framesTillDirectionChange;
 
-    [Range(0, 2)]
-    public float timeTillDirectionChangeAfterCrash;
+    [Range(0, 30)]
+    public float framesTillDirectionChangeAfterCrash;
+
+    [Range(0, 100)]
+    public int minFramesTillDirectionChange;
+
+    [Range(0, 100)]
+    public int maxFramesTillDirectionChange;
+
+    public GameObject distanceTriggerLeft;
+    public GameObject distanceTriggerFront;
+    public GameObject distanceTriggerRight;
+
+    public float collisionDetectionSize;
 
 
-    public GameObject distanceTrigger;
-
-    private float timeSinceLastChange = 0;
-    private float timeSinceLastCrash = 0;
+    private int framesSinceLastChange = 0;
+    private float framesSinceLastCrash = 0;
 
     private bool recentlyCrashed = false;
     public bool fatalCrashed = false;
@@ -42,8 +52,30 @@ public class MAPathFabric : MonoBehaviour {
     private int triesToExit = 0;
     public int maxTriesToExit;
 
+    public int framesTillStoneDrop;
+    private int framesSinceLastStoneDrop = 0;
+
+
+    public int framesTillDirectionalWeightChange;
+
+    public MAPathFabricDirection directionalWeight;
+    [Range(0, 1)]
+    public float directionalWeightStrength;
+
+    [Range(0, 1)]
+    public float reproductionChance;
+
+    [Range(0, 10)]
+    public int streightLinerLimit;
+    private int streightLinerCounter = 0;
+
+    private int streightLinerStreak;
+
+    private float framesSinceLastDirectionalWeightChange;
+
 
     void Start() {
+
     }
 
     private void Initialize(Vector3 position, Quaternion rotation) {
@@ -59,6 +91,10 @@ public class MAPathFabric : MonoBehaviour {
 
         this.CalculateAngularVelocity();
 
+        this.SetRandomTurnFrequency();
+
+        this.SetRandomDirectionalWeight();
+
         if (!this.fatalCrashed) {
             if (!this.Move()) {
                 this.fatalCrashed = true;
@@ -67,37 +103,108 @@ public class MAPathFabric : MonoBehaviour {
         }
 
 
+
     }
 
+    private void SetRandomDirectionalWeight() {
+        if (this.framesSinceLastDirectionalWeightChange > this.framesTillDirectionalWeightChange) {
+            this.framesSinceLastDirectionalWeightChange = 0;
+            this.ChangeRandomDirectionalWeight();
+
+            this.ModuloDirection(this.directionalWeight);
+            Debug.Log(this.directionalWeight);
+        }
+        else {
+            this.framesSinceLastDirectionalWeightChange++;
+        }
+    }
+
+    private void ChangeRandomDirectionalWeight() {
+        this.directionalWeight -= this.GetRandomDirectionChange();
+
+    }
+
+    private void SetRandomTurnFrequency() {
+
+    }
 
     private void CalculateAngularVelocity() {
         this.angularVelocity = this.angularSpeed / this.transform.position.magnitude;
     }
 
 
-    private void RandomDirectionChange() {
+    private bool RandomDirectionChange() {
 
-        if (this.timeSinceLastChange > this.timeTillDirectionChange) {
+        if (this.framesSinceLastChange > this.framesTillDirectionChange) {
+            int randomRotChange = this.GetWeightedRandomDirectionChange();
 
-            int randomRotChange = this.GetRandomDirectionChange();
             this.direction += randomRotChange;
             this.ModuloDirection();
 
 
 
+            if (this.streightLinerCounter > this.streightLinerLimit) {
+
+            }
+            if (randomRotChange == 0) {
+                if (this.streightLinerCounter > this.streightLinerLimit) {
+                    randomRotChange = this.GetWeightedRandomDirectionChange();
+                    this.direction += randomRotChange;
+                    this.ModuloDirection();
+                    return true;
+                }
+                else {
+                    this.streightLinerCounter++;
+                    return true;
+                }
+            }
+
+
+            this.streightLinerCounter = 0;
+
+            if (randomRotChange == -3) {
+                randomRotChange = 1;
+            }
+
             this.transform.Rotate(randomRotChange == 1 ? new Vector3(0, -90) : new Vector3(0, 90));
 
-            this.GenerateNewFabric(180, 2);
-           // this.GenerateNewFabric(90, 1);
-           // this.GenerateNewFabric(90, -1);
-            this.GenerateNewFabric(90, -1);
-           // this.GenerateNewFabric(-90, -1);
 
-            this.timeSinceLastChange = 0;
-            Debug.Log("RandomDirectionChange!");
+            if (this.IsCrashing()) {
+                if (!this.FindCrashExit()) {
+                    return false;
+                }
+            }
+
+            if (Random.Range(0f, 1f) < this.reproductionChance) {
+                this.GenerateNewFabric(180, -2);
+
+            }
+
+            this.framesSinceLastChange = 0;
+
+            this.framesTillDirectionChange = Random.Range(this.minFramesTillDirectionChange, this.maxFramesTillDirectionChange);
         }
 
-        this.timeSinceLastChange += Time.deltaTime;
+        this.framesSinceLastChange++;
+
+        return true;
+    }
+
+    private int GetWeightedRandomDirectionChange() {
+        float random = Random.Range(0f, 1f);
+
+        if (random < this.directionalWeightStrength) {
+            int destinatedWeight = this.directionalWeight - this.direction;
+
+
+            return destinatedWeight % 1;
+        }
+
+        return this.GetRandomDirectionChange();
+    }
+
+    private int GetRandomDirectionChange() {
+        return ((int)Random.Range(0, 2)) == 1 ? -1 : 1;
     }
 
     private void GenerateNewFabric(float angle, int directionChange) {
@@ -118,14 +225,54 @@ public class MAPathFabric : MonoBehaviour {
 
     }
 
+    private void ModuloDirection(MAPathFabricDirection old) {
+        old = (MAPathFabricDirection)((int)old % 4);
+
+
+        if ((int)old == -1) {
+            old = MAPathFabricDirection.Inwards;
+        }
+
+        if ((int)old == -2) {
+            old = MAPathFabricDirection.Left;
+        }
+
+        if ((int)old == -3) {
+            old = MAPathFabricDirection.Outwards;
+        }
+
+        if ((int)old == -4) {
+            old = MAPathFabricDirection.Right;
+        }
+
+        return;
+    }
     private void ModuloDirection() {
+        this.direction = (MAPathFabricDirection)((int)this.direction % 4);
+
+
+        if ((int)this.direction == -1) {
+            this.direction = MAPathFabricDirection.Inwards;
+        }
+
+        if ((int)this.direction == -2) {
+            this.direction = MAPathFabricDirection.Left;
+        }
+
+        if ((int)this.direction == -3) {
+            this.direction = MAPathFabricDirection.Outwards;
+        }
+
+        if ((int)this.direction == -4) {
+            this.direction = MAPathFabricDirection.Right;
+        }
+
+        return;
+
         if ((int)this.direction > 3) {
             this.direction = 0;
         }
 
-        if (this.direction < 0) {
-            this.direction = MAPathFabricDirection.Inwards;
-        }
     }
 
     private bool Move() {
@@ -133,31 +280,34 @@ public class MAPathFabric : MonoBehaviour {
         if (this.IsCrashing()) {
             if (!this.FindCrashExit()) {
                 if (this.triesToExit > this.maxTriesToExit) {
-                    Debug.Log("CRASH because no Exit found!");
+                    //Debug.Log("CRASH because no Exit found!");
                     return false;
                 }
 
-                triesToExit += 1;
+                this.triesToExit += 1;
             }
 
 
 
-            Debug.Log("Crashing!");
+            //Debug.Log("Crashing!");
             this.recentlyCrashed = true;
 
         }
 
+        this.ModuloDirection();
 
         if (this.recentlyCrashed) {
-            if (this.timeSinceLastCrash > this.timeTillDirectionChangeAfterCrash) {
+            if (this.framesSinceLastCrash > this.framesTillDirectionChangeAfterCrash) {
 
-                this.timeSinceLastCrash = 0;
+                this.framesSinceLastCrash = 0;
                 this.recentlyCrashed = false;
             }
-            this.timeSinceLastCrash += Time.deltaTime;
+            this.framesSinceLastCrash++;
         }
         else {
-            this.RandomDirectionChange();
+            if (!this.RandomDirectionChange()) {
+                return false;
+            }
         }
 
 
@@ -181,22 +331,29 @@ public class MAPathFabric : MonoBehaviour {
                 return false;
         }
 
-        GameObject.Instantiate(this.connectionStone, this.transform.position, this.pathFabricRotator.transform.rotation);
+        if (this.framesSinceLastStoneDrop % this.framesTillStoneDrop == 0) {
+            this.DrawStone();
+            this.framesSinceLastStoneDrop = 0;
+        }
+        this.framesSinceLastStoneDrop++;
 
         return true;
     }
 
+    private void DrawStone() {
+        GameObject.Instantiate(this.connectionStone, this.transform.position, this.transform.rotation);
+    }
+
     private bool IsCrashing() {
-        return Physics.OverlapSphere(this.distanceTrigger.transform.position, 2).Length > 0;
+
+        return Physics.OverlapBox(this.distanceTriggerFront.transform.position, new Vector3(1, 1, 1) * this.collisionDetectionSize).Length > 0;
     }
 
 
     private Vector3 GetRandomCrashRotation() {
         if (Random.Range(0, 2) == 1) {
-            this.increaseDirection(-1);
             return new Vector3(0, 90);
         }
-        this.increaseDirection(1);
         return new Vector3(0, -90);
     }
 
@@ -205,27 +362,32 @@ public class MAPathFabric : MonoBehaviour {
         this.ModuloDirection();
     }
 
+    private bool IsLeftFree() {
+        return !(Physics.OverlapSphere(this.distanceTriggerLeft.transform.position, 4).Length > 0);
+    }
+
+    private bool IsRightFree() {
+        return !(Physics.OverlapSphere(this.distanceTriggerRight.transform.position, 4).Length > 0);
+    }
+
     private bool FindCrashExit() {
-        Quaternion oldRotation = this.transform.rotation;
-
         Vector3 firstRotation = this.GetRandomCrashRotation();
-        this.transform.Rotate(firstRotation);
 
-        if (this.IsCrashing()) {
-            this.transform.Rotate(new Vector3(0, 180));
-            this.direction += 2;
-            this.ModuloDirection();
-
-            if (this.IsCrashing()) {
-                this.transform.rotation = oldRotation;
+        if (firstRotation.y == -90) {
+            if (this.IsRightFree()) {
+                this.transform.Rotate(-firstRotation);
+                this.direction -= 1;
+            }
+            else if (this.IsLeftFree()) {
+                this.transform.Rotate(firstRotation);
+                this.direction += 1;
+            }
+            else {
                 return false;
             }
         }
-        this.transform.rotation = oldRotation;
         return true;
     }
 
-    private int GetRandomDirectionChange() {
-        return Random.Range(0, 2) == 1 ? 1 : -1;
-    }
+
 }
