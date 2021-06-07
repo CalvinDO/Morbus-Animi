@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class MAInteractable : MonoBehaviour
 {
-    public enum interactType {item, obstacle, climb};
+    public enum interactType {item, obstacle, climb, lever};
     public interactType currentSelection = interactType.item;
     public float radius = 3f;
     public GameObject textDisplay;
@@ -47,6 +47,9 @@ private void Start()
             case interactType.obstacle:
                 newHoverText = "open [E]";
                 break;
+            case interactType.lever:
+                newHoverText = "flip [E]";
+                break;
             default:
                 newHoverText = "interact [E]";
                 break;
@@ -57,10 +60,6 @@ private void Start()
     }
 
     public virtual void MAInteract()
-    {
-        // this is overwritten
-    }
-    public virtual void MAClimb()
     {
         // this is overwritten
     }

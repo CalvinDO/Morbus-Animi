@@ -1,0 +1,46 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class MALeverInteraction : MAInteractable
+{
+    public int leverIndex;
+    private PuzzleManager puzzleManager;
+    public bool isLast;
+    public GameObject door;
+    private bool isFlipped;
+    public override void MAInteract()
+    {
+        base.MAInteract();
+        if (!isFlipped)
+        {
+            if (currentSelection == interactType.lever)
+            {
+                FlipLever();
+                checkIfSolved();
+            }
+        }
+    }
+
+    void FlipLever()
+    {
+        if (leverIndex == this.puzzleManager.counter)
+        {
+            Debug.Log("flipped switch number " + this.puzzleManager.counter);
+            this.puzzleManager.counter++;
+        }
+        else
+        {
+            Debug.Log("this lever doesn't do anything yet");
+        }
+        textDisplay.SetActive(false);
+        isFlipped = true;
+    }
+    void checkIfSolved()
+    {
+        if (isLast && (leverIndex + 1) == this.puzzleManager.counter)
+        {
+            Destroy(this.door);
+        }
+    }
+}
