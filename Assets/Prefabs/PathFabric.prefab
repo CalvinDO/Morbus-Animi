@@ -138,7 +138,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4061828182922642089}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5.5, y: 0, z: 0}
+  m_LocalPosition: {x: -8, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8402126465573798599}
@@ -169,7 +169,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4774907040197279854}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 5.5, y: 0, z: 0}
+  m_LocalPosition: {x: 8, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6894665454411029207}
@@ -301,25 +301,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1dada0f9784474241bc8f25eb0202cb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.61
-  angularSpeed: 65.17
+  speed: 0.561
+  angularSpeed: 80.8
   pathFabricRotator: {fileID: 0}
   direction: 1
   connectionStone: {fileID: 0}
-  framesTillDirectionChange: 7
-  framesTillDirectionChangeAfterCrash: 14.3
-  minFramesTillDirectionChange: 24
-  maxFramesTillDirectionChange: 47
+  framesTillDirectionChange: 4
+  framesTillDirectionChangeAfterCrash: 7.6
+  minFramesTillDirectionChange: 9
+  maxFramesTillDirectionChange: 21
   distanceTriggerLeft: {fileID: 4061828182922642089}
   distanceTriggerFront: {fileID: 6089982513965060433}
   distanceTriggerRight: {fileID: 4774907040197279854}
-  collisionDetectionSize: 4.3
+  collisionDetectionSize: 4
   fatalCrashed: 0
   maxTriesToExit: 1
   framesTillStoneDrop: 3
-  framesTillDirectionalWeightChange: 780
+  framesTillDirectionalWeightChange: 10000
   directionalWeight: 2
-  directionalWeightStrength: 0.005
+  directionalWeightStrength: 1
+  reproductionChance: 0
+  streightLinerFramesLimit: 0
 --- !u!1 &6089982513965060433
 GameObject:
   m_ObjectHideFlags: 0
@@ -344,7 +346,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6089982513965060433}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 5.27}
+  m_LocalPosition: {x: 0, y: 0, z: 8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 9175802613570029837}

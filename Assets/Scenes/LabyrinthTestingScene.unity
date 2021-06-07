@@ -974,7 +974,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6089982513765170726, guid: afc872662c87c1c4697af51191cf5bea, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 32
+      value: 10.7
       objectReference: {fileID: 0}
     - target: {fileID: 6089982513765170726, guid: afc872662c87c1c4697af51191cf5bea, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1009,16 +1009,8 @@ PrefabInstance:
       value: PathFabric
       objectReference: {fileID: 0}
     - target: {fileID: 6089982513765170729, guid: afc872662c87c1c4697af51191cf5bea, type: 3}
-      propertyPath: speed
-      value: 0.736
-      objectReference: {fileID: 0}
-    - target: {fileID: 6089982513765170729, guid: afc872662c87c1c4697af51191cf5bea, type: 3}
-      propertyPath: direction
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6089982513765170729, guid: afc872662c87c1c4697af51191cf5bea, type: 3}
       propertyPath: angularSpeed
-      value: 70.62
+      value: 69.56
       objectReference: {fileID: 0}
     - target: {fileID: 6089982513765170729, guid: afc872662c87c1c4697af51191cf5bea, type: 3}
       propertyPath: connectionStone
@@ -1026,7 +1018,7 @@ PrefabInstance:
       objectReference: {fileID: 727945277}
     - target: {fileID: 6089982513765170729, guid: afc872662c87c1c4697af51191cf5bea, type: 3}
       propertyPath: directionalWeight
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6089982513765170729, guid: afc872662c87c1c4697af51191cf5bea, type: 3}
       propertyPath: pathFabricRotator
@@ -1034,51 +1026,39 @@ PrefabInstance:
       objectReference: {fileID: 850454863}
     - target: {fileID: 6089982513765170729, guid: afc872662c87c1c4697af51191cf5bea, type: 3}
       propertyPath: reproductionChance
-      value: 0.484
-      objectReference: {fileID: 0}
-    - target: {fileID: 6089982513765170729, guid: afc872662c87c1c4697af51191cf5bea, type: 3}
-      propertyPath: streightLinerLimit
-      value: 1
+      value: 0.18
       objectReference: {fileID: 0}
     - target: {fileID: 6089982513765170729, guid: afc872662c87c1c4697af51191cf5bea, type: 3}
       propertyPath: collisionDetectionSize
-      value: 4
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6089982513765170729, guid: afc872662c87c1c4697af51191cf5bea, type: 3}
+      propertyPath: streightLinerFramesLimit
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6089982513765170729, guid: afc872662c87c1c4697af51191cf5bea, type: 3}
       propertyPath: directionalWeightStrength
-      value: 0.553
-      objectReference: {fileID: 0}
-    - target: {fileID: 6089982513765170729, guid: afc872662c87c1c4697af51191cf5bea, type: 3}
-      propertyPath: framesTillDirectionChange
-      value: 4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6089982513765170729, guid: afc872662c87c1c4697af51191cf5bea, type: 3}
       propertyPath: maxFramesTillDirectionChange
-      value: 24
+      value: 44
       objectReference: {fileID: 0}
     - target: {fileID: 6089982513765170729, guid: afc872662c87c1c4697af51191cf5bea, type: 3}
       propertyPath: minFramesTillDirectionChange
       value: 12
       objectReference: {fileID: 0}
-    - target: {fileID: 6089982513765170729, guid: afc872662c87c1c4697af51191cf5bea, type: 3}
-      propertyPath: framesTillDirectionalWeightChange
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 6089982513765170729, guid: afc872662c87c1c4697af51191cf5bea, type: 3}
-      propertyPath: framesTillDirectionChangeAfterCrash
-      value: 7.6
-      objectReference: {fileID: 0}
     - target: {fileID: 6089982513965060430, guid: afc872662c87c1c4697af51191cf5bea, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 8
+      value: 7.1
       objectReference: {fileID: 0}
     - target: {fileID: 6407174512502269997, guid: afc872662c87c1c4697af51191cf5bea, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -8
+      value: -6.4
       objectReference: {fileID: 0}
     - target: {fileID: 7667729278622670554, guid: afc872662c87c1c4697af51191cf5bea, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 8
+      value: 6.7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: afc872662c87c1c4697af51191cf5bea, type: 3}
