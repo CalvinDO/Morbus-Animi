@@ -193,7 +193,7 @@ Transform:
   m_GameObject: {fileID: 727945276}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 357.9, y: -69.3, z: 33.1}
-  m_LocalScale: {x: 4, y: 4, z: 4}
+  m_LocalScale: {x: 6, y: 6, z: 6}
   m_Children:
   - {fileID: 1036948373}
   m_Father: {fileID: 0}
@@ -1026,7 +1026,7 @@ PrefabInstance:
       objectReference: {fileID: 850454863}
     - target: {fileID: 6089982513765170729, guid: afc872662c87c1c4697af51191cf5bea, type: 3}
       propertyPath: reproductionChance
-      value: 0.18
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6089982513765170729, guid: afc872662c87c1c4697af51191cf5bea, type: 3}
       propertyPath: collisionDetectionSize
@@ -1042,23 +1042,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6089982513765170729, guid: afc872662c87c1c4697af51191cf5bea, type: 3}
       propertyPath: maxFramesTillDirectionChange
-      value: 44
+      value: 23
       objectReference: {fileID: 0}
     - target: {fileID: 6089982513765170729, guid: afc872662c87c1c4697af51191cf5bea, type: 3}
       propertyPath: minFramesTillDirectionChange
-      value: 12
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 6089982513965060430, guid: afc872662c87c1c4697af51191cf5bea, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 7.1
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 6407174512502269997, guid: afc872662c87c1c4697af51191cf5bea, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6.4
+      value: -10.1
       objectReference: {fileID: 0}
     - target: {fileID: 7667729278622670554, guid: afc872662c87c1c4697af51191cf5bea, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 6.7
+      value: 11.6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: afc872662c87c1c4697af51191cf5bea, type: 3}

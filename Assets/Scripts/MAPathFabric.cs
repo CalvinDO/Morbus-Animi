@@ -77,7 +77,7 @@ public class MAPathFabric : MonoBehaviour {
 
 
     void Start() {
-
+        directionalWeightStatic = directionalWeight;
     }
 
     private void Initialize(Vector3 position, Quaternion rotation) {
@@ -103,12 +103,9 @@ public class MAPathFabric : MonoBehaviour {
                 GameObject.Destroy(this.gameObject);
             }
         }
-
-
-
     }
 
-    private void SetRandomDirectionalWeight() {
+    public void SetRandomDirectionalWeight() {
         if (this.framesSinceLastDirectionalWeightChange > this.framesTillDirectionalWeightChange) {
             this.framesSinceLastDirectionalWeightChange = 0;
             this.ChangeRandomDirectionalWeight();
@@ -126,11 +123,11 @@ public class MAPathFabric : MonoBehaviour {
 
     }
 
-    private void SetRandomTurnFrequency() {
+    public void SetRandomTurnFrequency() {
 
     }
 
-    private void CalculateAngularVelocity() {
+    public void CalculateAngularVelocity() {
         this.angularVelocity = this.angularSpeed / this.transform.position.magnitude;
     }
 
@@ -196,7 +193,7 @@ public class MAPathFabric : MonoBehaviour {
 
         if (random < this.directionalWeightStrength) {
 
-            Debug.Log(directionalWeightStatic);
+            Debug.Log("Turning to: " + this.directionalWeight);
 
             int destinatedWeight = directionalWeightStatic - this.direction;
 
@@ -228,8 +225,11 @@ public class MAPathFabric : MonoBehaviour {
     }
 
     private int ModuloDirection(int old) {
-        return ((old % 4) - 4);
+        int modulo = old % 4;
+
+        return modulo < 0 ? 4 - modulo : modulo;
     }
+
     private MAPathFabricDirection ModuloDirection(MAPathFabricDirection old) {
         old = (MAPathFabricDirection)((int)old % 4);
 
@@ -275,12 +275,12 @@ public class MAPathFabric : MonoBehaviour {
         return;
     }
 
-    private bool Move() {
+    public bool Move() {
 
         if (this.IsCrashing()) {
             if (!this.FindCrashExit()) {
                 if (this.triesToExit > this.maxTriesToExit) {
-                    //Debug.Log("CRASH because no Exit found!");
+                    Debug.Log("CRASH because no Exit found!");
                     return false;
                 }
 
