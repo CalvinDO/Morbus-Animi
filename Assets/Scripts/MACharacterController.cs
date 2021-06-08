@@ -143,6 +143,7 @@ public class MACharacterController : MonoBehaviour {
     
     //for item interaction
     MAInteractable hover;
+    MASprayable wall;
     //public GameObject playerInventory;
 
     void Start() {
@@ -480,6 +481,17 @@ public class MACharacterController : MonoBehaviour {
     {
         Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
+        if (Input.GetMouseButtonDown(1))
+        {
+            if (Physics.Raycast(ray, out hit))
+            {
+                MASprayable sprayable = hit.collider.GetComponent<MASprayable>();
+                if (this.wall == sprayable)
+                {
+                    this.wall.Spray();
+                }
+            }
+        }
         if (Input.GetMouseButtonDown(0))
         {
 
@@ -504,7 +516,6 @@ public class MACharacterController : MonoBehaviour {
                     this.hover.removeHover();
                     this.hover = null;
                 }
-
             }
         }
     }
