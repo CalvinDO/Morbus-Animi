@@ -10,6 +10,10 @@ public enum MAPathFabricDirection {
     Inwards = 3
 }
 
+public enum MACrashDirection {
+    Left = 0,
+
+}
 public class MAPathFabric : MonoBehaviour {
 
     [Range(0, 1)]
@@ -22,7 +26,8 @@ public class MAPathFabric : MonoBehaviour {
 
     public MAPathFabricDirection direction;
 
-    public MAMazeConnection connectionStone;
+    public GameObject connectionStone;
+    public GameObject generatedStonesContainer;
 
     [Range(0, 30)]
     public int framesTillDirectionChange;
@@ -40,6 +45,7 @@ public class MAPathFabric : MonoBehaviour {
     public GameObject distanceTriggerFront;
     public GameObject distanceTriggerRight;
 
+    [Range(0, 6)]
     public float collisionDetectionSize;
 
 
@@ -56,28 +62,23 @@ public class MAPathFabric : MonoBehaviour {
     private int framesSinceLastStoneDrop = 0;
 
 
-    public int framesTillDirectionalWeightChange;
 
-    public static MAPathFabricDirection directionalWeightStatic;
-    public MAPathFabricDirection directionalWeight;
-
-    [Range(0, 1)]
-    public float directionalWeightStrength;
 
     [Range(0, 1)]
     public float reproductionChance;
 
+
     [Range(0, 10)]
     public int streightLinerFramesLimit;
+
     private int streightLinerFramesCounter = 0;
 
     private int streightLinerStreak;
 
-    private float framesSinceLastDirectionalWeightChange;
+
 
 
     void Start() {
-        directionalWeightStatic = directionalWeight;
     }
 
     private void Initialize(Vector3 position, Quaternion rotation) {
@@ -85,7 +86,6 @@ public class MAPathFabric : MonoBehaviour {
         this.transform.position = position;
         this.transform.rotation = rotation;
 
-        directionalWeightStatic = directionalWeight;
     }
 
     // Update is called once per frame
@@ -95,33 +95,16 @@ public class MAPathFabric : MonoBehaviour {
 
         this.SetRandomTurnFrequency();
 
-        this.SetRandomDirectionalWeight();
 
         if (!this.fatalCrashed) {
             if (!this.Move()) {
                 this.fatalCrashed = true;
-                GameObject.Destroy(this.gameObject);
+                this.gameObject.SetActive(false);
             }
         }
     }
 
-    public void SetRandomDirectionalWeight() {
-        if (this.framesSinceLastDirectionalWeightChange > this.framesTillDirectionalWeightChange) {
-            this.framesSinceLastDirectionalWeightChange = 0;
-            this.ChangeRandomDirectionalWeight();
 
-            directionalWeightStatic = this.ModuloDirection(directionalWeightStatic);
-            directionalWeightStatic = directionalWeight;
-        }
-        else {
-            this.framesSinceLastDirectionalWeightChange++;
-        }
-    }
-
-    private void ChangeRandomDirectionalWeight() {
-        directionalWeight -= this.GetRandomDirectionChange();
-
-    }
 
     public void SetRandomTurnFrequency() {
 
@@ -142,26 +125,6 @@ public class MAPathFabric : MonoBehaviour {
             this.ModuloDirection();
 
 
-            /*
-            if (randomRotChange == 0) {
-
-                if (this.streightLinerFramesCounter > this.streightLinerFramesLimit) {
-
-                    randomRotChange = this.GetWeightedRandomDirectionChange();
-                    this.direction += randomRotChange;
-                    this.ModuloDirection();
-                    return true;
-                }
-                else {
-                    this.streightLinerFramesCounter++;
-                    return true;
-                }
-            }
-         
-
-            this.streightLinerFramesCounter = 0;
-               */
-
             if (randomRotChange != 0) {
                 this.transform.Rotate(randomRotChange == 1 ? new Vector3(0, -90) : new Vector3(0, 90));
             }
@@ -175,7 +138,7 @@ public class MAPathFabric : MonoBehaviour {
             }
 
             if (Random.Range(0f, 1f) < this.reproductionChance) {
-                this.GenerateNewFabric(180, -2);
+                this.InstantiateNewGenerator(180, -2);
             }
 
             this.framesSinceLastChange = 0;
@@ -191,28 +154,34 @@ public class MAPathFabric : MonoBehaviour {
     private int GetWeightedRandomDirectionChange() {
         float random = Random.Range(0f, 1f);
 
-        if (random < this.directionalWeightStrength) {
+        if (random < MAPathManager.directionalWeightStrengthStatic) {
 
-            Debug.Log("Turning to: " + this.directionalWeight);
+            Debug.Log("directionalWeightStatic: " + MAPathManager.directionalWeightStatic);
 
-            int destinatedWeight = directionalWeightStatic - this.direction;
+            int destinatedWeight =MAPathManager.directionalWeightStatic - this.direction;
 
-
-            return (int)Mathf.Sign(this.ModuloDirection(destinatedWeight));
+            int moduloedDirection = this.ModuloDirection(destinatedWeight);
+            if (destinatedWeight == 0) {
+                return 0;
+            }
+            return (int)Mathf.Sign(destinatedWeight);
         }
 
-        return this.GetRandomDirectionChange();
+        return GetRandomDirectionChange();
     }
 
-    private int GetRandomDirectionChange() {
+    public static int GetRandomDirectionChange() {
         return ((int)Random.Range(0, 2)) == 1 ? -1 : 1;
     }
 
-    private void GenerateNewFabric(float angle, int directionChange) {
-        GameObject newRotator = GameObject.Instantiate(new GameObject("PathRotator"));
-        MAPathFabric newFabric = GameObject.Instantiate(this.gameObject, this.transform.position, this.transform.rotation, newRotator.transform).GetComponentInChildren<MAPathFabric>();
-        newFabric.Initialize(this.transform.position, this.transform.rotation);
+    private void InstantiateNewGenerator(float angle, int directionChange) {
+        GameObject newGenerator = GameObject.Instantiate(new GameObject("PathGenerator"));
+        GameObject newRotator = GameObject.Instantiate(new GameObject("PathRotator"), newGenerator.transform);
+        GameObject newGeneratedStonesContainer = GameObject.Instantiate(new GameObject("GeneratedStonesContainer"), newGenerator.transform);
 
+        MAPathFabric newFabric = GameObject.Instantiate(this.gameObject, this.transform.position, this.transform.rotation, newRotator.transform).GetComponentInChildren<MAPathFabric>();
+
+        newFabric.Initialize(this.transform.position, this.transform.rotation);
 
         newFabric.transform.Rotate(new Vector3(0, angle, 0));
         newFabric.direction = this.direction;
@@ -221,7 +190,7 @@ public class MAPathFabric : MonoBehaviour {
         newFabric.ModuloDirection();
 
         newFabric.pathFabricRotator = newRotator;
-
+        newFabric.generatedStonesContainer = newGeneratedStonesContainer;
     }
 
     private int ModuloDirection(int old) {
@@ -230,7 +199,7 @@ public class MAPathFabric : MonoBehaviour {
         return modulo < 0 ? 4 - modulo : modulo;
     }
 
-    private MAPathFabricDirection ModuloDirection(MAPathFabricDirection old) {
+    public static MAPathFabricDirection ModuloDirection(MAPathFabricDirection old) {
         old = (MAPathFabricDirection)((int)old % 4);
 
 
@@ -280,7 +249,7 @@ public class MAPathFabric : MonoBehaviour {
         if (this.IsCrashing()) {
             if (!this.FindCrashExit()) {
                 if (this.triesToExit > this.maxTriesToExit) {
-                    Debug.Log("CRASH because no Exit found!");
+                  // Debug.Log("CRASH because no Exit found!");
                     return false;
                 }
 
@@ -289,7 +258,6 @@ public class MAPathFabric : MonoBehaviour {
 
 
 
-            //Debug.Log("Crashing!");
             this.recentlyCrashed = true;
 
         }
@@ -329,7 +297,7 @@ public class MAPathFabric : MonoBehaviour {
                 this.transform.position -= this.transform.position.normalized * speed;
                 break;
             default:
-                Debug.Log("CRASH because unknown direction!");
+               Debug.Log("CRASH because unknown direction!");
                 return false;
         }
 
@@ -343,12 +311,12 @@ public class MAPathFabric : MonoBehaviour {
     }
 
     private void DrawStone() {
-        GameObject.Instantiate(this.connectionStone, this.transform.position, this.transform.rotation);
+        GameObject.Instantiate(this.connectionStone, this.transform.position, this.transform.rotation, this.generatedStonesContainer.transform);
     }
 
     private bool IsCrashing() {
 
-        return Physics.OverlapBox(this.distanceTriggerFront.transform.position, new Vector3(1, 1, 1) * this.collisionDetectionSize).Length > 0;
+        return Physics.OverlapBox(this.distanceTriggerFront.transform.position, new Vector3(1, 1, 1) * this.collisionDetectionSize, this.transform.rotation).Length > 0;
     }
 
 
@@ -373,23 +341,17 @@ public class MAPathFabric : MonoBehaviour {
     }
 
     private bool FindCrashExit() {
-        Vector3 firstRotation = this.GetRandomCrashRotation();
-
-        if (firstRotation.y == -90) {
-            if (this.IsRightFree()) {
-                this.transform.Rotate(-firstRotation);
-                this.direction -= 1;
-            }
-            else if (this.IsLeftFree()) {
-                this.transform.Rotate(firstRotation);
-                this.direction += 1;
-            }
-            else {
-                return false;
-            }
+        if (this.IsRightFree()) {
+            this.transform.Rotate(new Vector3(0, 90));
+            this.direction -= 1;
+        }
+        else if (this.IsLeftFree()) {
+            this.transform.Rotate(new Vector3(0, -90));
+            this.direction += 1;
+        }
+        else {
+            return false;
         }
         return true;
     }
-
-
 }
