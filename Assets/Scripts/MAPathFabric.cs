@@ -10,6 +10,16 @@ public enum MAPathFabricDirection {
     Inwards = 3
 }
 
+public enum MAPathDescriptionTurn {
+
+    Right = 0,
+    Outwards = 1,
+    Left = 2,
+    Inwards = 3,
+    None = 4
+}
+
+
 public enum MACrashDirection {
     Left = 0,
 
@@ -28,6 +38,9 @@ public class MAPathFabric : MonoBehaviour {
 
     public GameObject connectionStone;
     public GameObject generatedStonesContainer;
+
+    [HideInInspector]
+    public List<GameObject> generatedStonesList;
 
     [Range(0, 30)]
     public int framesTillDirectionChange;
@@ -75,17 +88,21 @@ public class MAPathFabric : MonoBehaviour {
 
     private int streightLinerStreak;
 
+    [HideInInspector]
+    public MAWinnerPathFabric winnerPathFabric;
 
-
+    [HideInInspector]
+    public MAPathDescriptionTurn choosedDirection = MAPathDescriptionTurn.None;
 
     void Start() {
     }
 
-    private void Initialize(Vector3 position, Quaternion rotation) {
+    public void Initialize(Vector3 position, Quaternion rotation) {
 
         this.transform.position = position;
         this.transform.rotation = rotation;
 
+        this.fatalCrashed = false;
     }
 
     // Update is called once per frame
@@ -115,6 +132,25 @@ public class MAPathFabric : MonoBehaviour {
     }
 
 
+
+    public void DestroyGeneratedStones(int afterThisIndex) {
+        int index = 0;
+        foreach (Transform child in this.generatedStonesContainer.transform) {
+            
+            if (index > afterThisIndex) {
+                Destroy(child.gameObject);
+            }
+            
+            index++;
+        }
+
+
+        this.generatedStonesList.RemoveRange(afterThisIndex, this.generatedStonesList.Count - (afterThisIndex));
+    }
+
+
+
+
     private bool RandomDirectionChange(bool IsInstantanious) {
 
         if (this.framesSinceLastChange > this.framesTillDirectionChange || IsInstantanious) {
@@ -123,6 +159,7 @@ public class MAPathFabric : MonoBehaviour {
 
             this.direction += randomRotChange;
             this.ModuloDirection();
+
 
 
             if (randomRotChange != 0) {
@@ -136,6 +173,8 @@ public class MAPathFabric : MonoBehaviour {
                 }
                 this.ModuloDirection();
             }
+
+            this.DecisionTo((MAPathDescriptionTurn)this.direction);
 
             if (Random.Range(0f, 1f) < this.reproductionChance) {
                 this.InstantiateNewGenerator(180, -2);
@@ -151,6 +190,15 @@ public class MAPathFabric : MonoBehaviour {
         return true;
     }
 
+    private void DecisionTo(MAPathDescriptionTurn after) {
+
+
+        if (!this.winnerPathFabric) {
+            return;
+        }
+        this.winnerPathFabric.AddPathDescriptionPoint(this.generatedStonesList.Count -1, after);
+    }
+
     private int GetWeightedRandomDirectionChange() {
         float random = Random.Range(0f, 1f);
 
@@ -158,7 +206,7 @@ public class MAPathFabric : MonoBehaviour {
 
             Debug.Log("directionalWeightStatic: " + MAPathManager.directionalWeightStatic);
 
-            int destinatedWeight =MAPathManager.directionalWeightStatic - this.direction;
+            int destinatedWeight = MAPathManager.directionalWeightStatic - this.direction;
 
             int moduloedDirection = this.ModuloDirection(destinatedWeight);
             if (destinatedWeight == 0) {
@@ -174,7 +222,7 @@ public class MAPathFabric : MonoBehaviour {
         return ((int)Random.Range(0, 2)) == 1 ? -1 : 1;
     }
 
-    private void InstantiateNewGenerator(float angle, int directionChange) {
+    public void InstantiateNewGenerator(float angle, int directionChange) {
         GameObject newGenerator = GameObject.Instantiate(new GameObject("PathGenerator"));
         GameObject newRotator = GameObject.Instantiate(new GameObject("PathRotator"), newGenerator.transform);
         GameObject newGeneratedStonesContainer = GameObject.Instantiate(new GameObject("GeneratedStonesContainer"), newGenerator.transform);
@@ -192,6 +240,31 @@ public class MAPathFabric : MonoBehaviour {
         newFabric.pathFabricRotator = newRotator;
         newFabric.generatedStonesContainer = newGeneratedStonesContainer;
     }
+
+    public MAPathFabric InstantiateNewGenerator() {
+        GameObject newGenerator = GameObject.Instantiate(new GameObject("PathGenerator"));
+        GameObject newRotator = GameObject.Instantiate(new GameObject("PathRotator"), newGenerator.transform);
+        GameObject newGeneratedStonesContainer = GameObject.Instantiate(new GameObject("GeneratedStonesContainer"), newGenerator.transform);
+
+        MAPathFabric newFabric = this.GetInstantiatedNewFabric(newRotator.transform);
+
+        newFabric.Initialize(this.transform.position, this.transform.rotation);
+
+        newFabric.direction = this.direction;
+
+        newFabric.ModuloDirection();
+
+        newFabric.pathFabricRotator = newRotator;
+        newFabric.generatedStonesContainer = newGeneratedStonesContainer;
+
+        return newFabric;
+    }
+
+    public virtual MAPathFabric GetInstantiatedNewFabric(Transform parent) {
+        return GameObject.Instantiate(this.gameObject, this.transform.position, this.transform.rotation, parent).GetComponentInChildren<MAPathFabric>();
+    }
+
+
 
     private int ModuloDirection(int old) {
         int modulo = old % 4;
@@ -221,7 +294,7 @@ public class MAPathFabric : MonoBehaviour {
 
         return old;
     }
-    private void ModuloDirection() {
+    public void ModuloDirection() {
         this.direction = (MAPathFabricDirection)((int)this.direction % 4);
 
 
@@ -245,17 +318,23 @@ public class MAPathFabric : MonoBehaviour {
     }
 
     public bool Move() {
+        this.CalculateAngularVelocity();
 
         if (this.IsCrashing()) {
+
             if (!this.FindCrashExit()) {
+
                 if (this.triesToExit > this.maxTriesToExit) {
-                  // Debug.Log("CRASH because no Exit found!");
+
+                    // Debug.Log("CRASH because no Exit found!");
                     return false;
                 }
 
                 this.triesToExit += 1;
+
             }
 
+            this.ModuloDirection();
 
 
             this.recentlyCrashed = true;
@@ -297,7 +376,7 @@ public class MAPathFabric : MonoBehaviour {
                 this.transform.position -= this.transform.position.normalized * speed;
                 break;
             default:
-               Debug.Log("CRASH because unknown direction!");
+                Debug.Log("CRASH because unknown direction!");
                 return false;
         }
 
@@ -311,7 +390,8 @@ public class MAPathFabric : MonoBehaviour {
     }
 
     private void DrawStone() {
-        GameObject.Instantiate(this.connectionStone, this.transform.position, this.transform.rotation, this.generatedStonesContainer.transform);
+        GameObject newStone = GameObject.Instantiate(this.connectionStone, this.transform.position, this.transform.rotation, this.generatedStonesContainer.transform);
+        this.generatedStonesList.Add(newStone);
     }
 
     private bool IsCrashing() {
@@ -341,17 +421,33 @@ public class MAPathFabric : MonoBehaviour {
     }
 
     private bool FindCrashExit() {
-        if (this.IsRightFree()) {
-            this.transform.Rotate(new Vector3(0, 90));
-            this.direction -= 1;
-        }
-        else if (this.IsLeftFree()) {
+        if (this.IsRightFree() && this.IsLeftFree()) {
+            if (Random.Range(0, 2) == 1) {
+                this.transform.Rotate(new Vector3(0, 90));
+                this.direction -= 1;
+                this.ModuloDirection();
+
+                this.DecisionTo((MAPathDescriptionTurn)this.direction);
+                return true;
+            }
             this.transform.Rotate(new Vector3(0, -90));
             this.direction += 1;
         }
-        else {
-            return false;
+
+        if (this.IsRightFree()) {
+            this.transform.Rotate(new Vector3(0, 90));
+            this.direction -= 1;
+
+            return true;
         }
-        return true;
+
+        if (this.IsLeftFree()) {
+            this.transform.Rotate(new Vector3(0, -90));
+            this.direction += 1;
+
+            return true;
+        }
+
+        return false;
     }
 }
