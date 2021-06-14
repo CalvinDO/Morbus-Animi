@@ -38,6 +38,7 @@ public class MAPathFabric : MonoBehaviour {
 
     public GameObject connectionStone;
     public GameObject generatedStonesContainer;
+    public GameObject tempPredictionStonesContainer;
 
     [HideInInspector]
     public List<GameObject> generatedStonesList;
@@ -94,6 +95,16 @@ public class MAPathFabric : MonoBehaviour {
     [HideInInspector]
     public MAPathDescriptionTurn choosedDirection = MAPathDescriptionTurn.None;
 
+    [HideInInspector]
+    public List<GameObject> tempPredictionStones;
+
+
+
+    [HideInInspector]
+    public List<MAPathDescriptionPoint> tempDescriptionPoints;
+
+
+
     void Start() {
     }
 
@@ -103,6 +114,8 @@ public class MAPathFabric : MonoBehaviour {
         this.transform.rotation = rotation;
 
         this.fatalCrashed = false;
+
+        this.tempDescriptionPoints = new List<MAPathDescriptionPoint>();
     }
 
     // Update is called once per frame
@@ -131,19 +144,42 @@ public class MAPathFabric : MonoBehaviour {
         this.angularVelocity = this.angularSpeed / this.transform.position.magnitude;
     }
 
+    public void WritePathToWinnerFabric() {
+        this.winnerPathFabric.pathDescription.AddRange(this.tempDescriptionPoints);
+
+        foreach (Transform stone in this.tempPredictionStonesContainer.transform) {
+            this.DrawStoneToWinnerPathFabric(stone.gameObject);
+        }
+    }
+
+    public void ClearTempDescriptionPoints() {
+        this.tempDescriptionPoints.Clear();
+    }
+
+    public void DestroyTempPredictionStones() {
+
+        foreach (Transform child in this.tempPredictionStonesContainer.transform) {
+
+            Destroy(child.gameObject);
+
+        }
+
+        this.tempPredictionStones.Clear();
+    }
 
 
     public void DestroyGeneratedStones(int afterThisIndex) {
+
         int index = 0;
+
         foreach (Transform child in this.generatedStonesContainer.transform) {
-            
+
             if (index > afterThisIndex) {
                 Destroy(child.gameObject);
             }
-            
+
             index++;
         }
-
 
         this.generatedStonesList.RemoveRange(afterThisIndex, this.generatedStonesList.Count - (afterThisIndex));
     }
@@ -192,11 +228,11 @@ public class MAPathFabric : MonoBehaviour {
 
     private void DecisionTo(MAPathDescriptionTurn after) {
 
-
         if (!this.winnerPathFabric) {
             return;
         }
-        this.winnerPathFabric.AddPathDescriptionPoint(this.generatedStonesList.Count -1, after);
+
+        this.tempDescriptionPoints.Add(new MAPathDescriptionPoint(this.tempPredictionStones.Count - 1, after));
     }
 
     private int GetWeightedRandomDirectionChange() {
@@ -390,8 +426,13 @@ public class MAPathFabric : MonoBehaviour {
     }
 
     private void DrawStone() {
-        GameObject newStone = GameObject.Instantiate(this.connectionStone, this.transform.position, this.transform.rotation, this.generatedStonesContainer.transform);
-        this.generatedStonesList.Add(newStone);
+        GameObject newStone = GameObject.Instantiate(this.connectionStone, this.transform.position, this.transform.rotation, this.tempPredictionStonesContainer.transform);
+        this.tempPredictionStones.Add(newStone);
+    }
+
+    private void DrawStoneToWinnerPathFabric(GameObject stone) {
+        GameObject newStone = GameObject.Instantiate(stone, stone.transform.position, stone.transform.rotation, this.generatedStonesContainer.transform);
+        this.winnerPathFabric.generatedStonesList.Add(newStone);
     }
 
     private bool IsCrashing() {

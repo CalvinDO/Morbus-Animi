@@ -3,20 +3,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public class MAPathDescriptionPoint {
+    public int stoneIndex;
+    public MAPathDescriptionTurn direction;
+
+    public MAPathDescriptionPoint(int stoneIndex, MAPathDescriptionTurn direction) {
+        this.stoneIndex = stoneIndex;
+        this.direction = direction;
+    }
+}
 
 
 public class MAWinnerPathFabric : MAPathFabric {
 
-    public class MAPathDescriptionPoint {
-        public int stoneIndex;
-        public MAPathDescriptionTurn direction;
-
-        public MAPathDescriptionPoint(int stoneIndex, MAPathDescriptionTurn direction) {
-            this.stoneIndex = stoneIndex;
-            this.direction = direction;
-        }
-    }
-
+   
 
 
     public MAPathFabric standardPathFabric;
@@ -42,8 +42,6 @@ public class MAWinnerPathFabric : MAPathFabric {
     public int framesTillUpdate;
 
     private bool crashed = false;
-
-    public int currentGeneratedDescriptionPoints = 0;
 
 
     private int triesToFreePredictor = 0;
@@ -74,27 +72,32 @@ public class MAWinnerPathFabric : MAPathFabric {
             if (this.isPredictorStuck && this.triesToFreePredictor > this.maxTriesToFreePredictor) {
 
                 this.ShortenDescriptionAndSetPredictor(1);
-
                 this.isPredictorStuck = false;
                 this.triesToFreePredictor = 0;
             }
             else {
-                this.currentGeneratedDescriptionPoints = 0;
 
                 if (this.LoopPrognoseUpdates()) {
                     this.isPredictorStuck = false;
                     this.triesToFreePredictor = 0;
+
+                    this.predictor.WritePathToWinnerFabric();
+
                     Debug.Log("reached prediction frames!");
                 }
                 else {
                     this.isPredictorStuck = true;
                     this.triesToFreePredictor++;
                 }
+                this.DeleteTempDescriptionAndStones();
+
             }
         }
         else {
+           
             if (this.isPredictorStuck) {
-                this.ShortenDescriptionAndSetPredictor(this.currentGeneratedDescriptionPoints);
+                this.DeleteTempDescriptionAndStones();
+                //this.ShortenDescriptionAndSetPredictor(this.currentGeneratedDescriptionPoints);
             }
         }
 
@@ -105,6 +108,10 @@ public class MAWinnerPathFabric : MAPathFabric {
        
     }
 
+    private void DeleteTempDescriptionAndStones() {
+        this.predictor.ClearTempDescriptionPoints();
+        this.predictor.DestroyTempPredictionStones();
+    }
 
     private bool LoopPrognoseUpdates() {
 
@@ -220,7 +227,6 @@ public class MAWinnerPathFabric : MAPathFabric {
 
     public void AddPathDescriptionPoint(int stoneIndex, MAPathDescriptionTurn pathDescriptionTurn) {
         this.pathDescription.Add(new MAPathDescriptionPoint(stoneIndex, pathDescriptionTurn));
-        this.currentGeneratedDescriptionPoints++;
     }
 
     public override MAPathFabric GetInstantiatedNewFabric(Transform parent) {
