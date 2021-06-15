@@ -153,6 +153,36 @@ Transform:
   m_Father: {fileID: 1587340581}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &19575066
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 19575067}
+  m_Layer: 0
+  m_Name: BorderCircleStonesContainer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &19575067
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 19575066}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 234.74657, y: -86.8065, z: 0.85487974}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 253132987}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &253132986
 GameObject:
   m_ObjectHideFlags: 0
@@ -183,6 +213,7 @@ Transform:
   - {fileID: 421273159}
   - {fileID: 488144881}
   - {fileID: 2001623922}
+  - {fileID: 19575067}
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -979,6 +1010,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 421273158}
     - target: {fileID: 6089982513765170729, guid: afc872662c87c1c4697af51191cf5bea, type: 3}
+      propertyPath: reproductionChance
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6089982513765170729, guid: afc872662c87c1c4697af51191cf5bea, type: 3}
       propertyPath: generatedStonesContainer
       value: 
       objectReference: {fileID: 488144880}
@@ -1006,6 +1041,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4413799173129006912, guid: 2fe38782d2366554c8ede72a9e201ad6, type: 3}
+      propertyPath: directionalWeightStrength
+      value: 0.799
+      objectReference: {fileID: 0}
+    - target: {fileID: 4413799173129006912, guid: 2fe38782d2366554c8ede72a9e201ad6, type: 3}
+      propertyPath: framesTillDirectionalWeightChange
+      value: 46
+      objectReference: {fileID: 0}
     - target: {fileID: 4413799173129006913, guid: 2fe38782d2366554c8ede72a9e201ad6, type: 3}
       propertyPath: m_Name
       value: PathManager
@@ -1076,29 +1119,45 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 703467154}
     - target: {fileID: 2354790862031124269, guid: 90eb2e7cc7618da4e874d6cd59ad6cb6, type: 3}
+      propertyPath: labyrinthRadius
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 2354790862031124269, guid: 90eb2e7cc7618da4e874d6cd59ad6cb6, type: 3}
       propertyPath: framesTillUpdate
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2354790862031124269, guid: 90eb2e7cc7618da4e874d6cd59ad6cb6, type: 3}
       propertyPath: predictionFrames
-      value: 361
+      value: 284
       objectReference: {fileID: 0}
     - target: {fileID: 2354790862031124269, guid: 90eb2e7cc7618da4e874d6cd59ad6cb6, type: 3}
       propertyPath: pathFabricRotator
       value: 
       objectReference: {fileID: 421273158}
     - target: {fileID: 2354790862031124269, guid: 90eb2e7cc7618da4e874d6cd59ad6cb6, type: 3}
+      propertyPath: reproductionChance
+      value: 0.215
+      objectReference: {fileID: 0}
+    - target: {fileID: 2354790862031124269, guid: 90eb2e7cc7618da4e874d6cd59ad6cb6, type: 3}
       propertyPath: standardPathFabric
       value: 
       objectReference: {fileID: 1755658865911235301}
     - target: {fileID: 2354790862031124269, guid: 90eb2e7cc7618da4e874d6cd59ad6cb6, type: 3}
       propertyPath: maxTriesToFreePredictor
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2354790862031124269, guid: 90eb2e7cc7618da4e874d6cd59ad6cb6, type: 3}
       propertyPath: generatedStonesContainer
       value: 
       objectReference: {fileID: 488144880}
+    - target: {fileID: 2354790862031124269, guid: 90eb2e7cc7618da4e874d6cd59ad6cb6, type: 3}
+      propertyPath: streightLinerFramesLimit
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2354790862031124269, guid: 90eb2e7cc7618da4e874d6cd59ad6cb6, type: 3}
+      propertyPath: borderCircleStonesContainer
+      value: 
+      objectReference: {fileID: 19575066}
     - target: {fileID: 7312802761190461992, guid: 90eb2e7cc7618da4e874d6cd59ad6cb6, type: 3}
       propertyPath: m_Name
       value: WinnerPathFabric

@@ -16,8 +16,6 @@ public class MAPathDescriptionPoint {
 
 public class MAWinnerPathFabric : MAPathFabric {
 
-   
-
 
     public MAPathFabric standardPathFabric;
 
@@ -50,11 +48,37 @@ public class MAWinnerPathFabric : MAPathFabric {
 
     private bool showPrediction = true;
 
+    [Range(0, 200)]
+    public int labyrinthRadius;
+    private bool reachedLabyrinthRadius = false;
+    public GameObject borderCircleStonesContainer;
+
+    private int deadEndDescriptionIndex = 0;
+
 
     void Start() {
+        this.GenerateBorderCircle();
         this.InstantiatePrognoseFabric();
     }
 
+    private void GenerateBorderCircle() {
+        float u = (float)(2 * Math.PI * this.labyrinthRadius);
+        float r = this.labyrinthRadius + 10;
+
+
+        int amountStones = (int)u;
+
+        for (int stoneIndex = 0; stoneIndex < amountStones; stoneIndex++) {
+            float phi = ((float)stoneIndex / (float)amountStones * 360);
+
+            Vector3 position = new Vector3(r * Mathf.Cos(phi), 0, r * Mathf.Sin(phi));
+            Vector3 rotation = new Vector3(0, phi);
+
+            GameObject newbBorderCircleStone = GameObject.Instantiate(this.connectionStone, position, Quaternion.Euler(rotation), this.borderCircleStonesContainer.transform);
+            newbBorderCircleStone.name = "BorderCircleStone";
+        }
+
+    }
 
     void Update() {
         if (this.framesSinceFirstUpdate % this.framesTillUpdate != 0) {
@@ -62,50 +86,90 @@ public class MAWinnerPathFabric : MAPathFabric {
             return;
         }
 
-        if (this.framesSinceFirstUpdate > 5) {
-            // Debug.Log("Hello Debugger :)");
-        }
+        if (this.reachedLabyrinthRadius) {
 
-
-        if (this.showPrediction) {
-
-            if (this.isPredictorStuck && this.triesToFreePredictor > this.maxTriesToFreePredictor) {
-
-                this.ShortenDescriptionAndSetPredictor(1);
-                this.isPredictorStuck = false;
-                this.triesToFreePredictor = 0;
-            }
-            else {
-
-                if (this.LoopPrognoseUpdates()) {
-                    this.isPredictorStuck = false;
-                    this.triesToFreePredictor = 0;
-
-                    this.predictor.WritePathToWinnerFabric();
-
-                    Debug.Log("reached prediction frames!");
-                }
-                else {
-                    this.isPredictorStuck = true;
-                    this.triesToFreePredictor++;
-                }
-                this.DeleteTempDescriptionAndStones();
-
-            }
+            this.UpdateDeadEndGeneration();
         }
         else {
-           
-            if (this.isPredictorStuck) {
+            this.UpdateWinningPath();
+        }
+    }
+
+    private void UpdateDeadEndGeneration() {
+        this.deadEndDescriptionIndex++;
+        //int randomDescriptionIndex = Random.Range(0, this.pathDescription.Count - 1);
+
+        if (this.deadEndDescriptionIndex < this.pathDescription.Count - 1) {
+
+            this.InstantiateDeadEnderAt(this.deadEndDescriptionIndex);
+        }
+    }
+
+    private void InstantiateDeadEnderAt(int index) {
+
+        MAPathDescriptionPoint descriptionPoint = this.pathDescription[index];
+
+        this.InstantiateGeneratorAtPoint(descriptionPoint);
+    }
+
+
+    public MAPathFabric InstantiateGeneratorAtPoint(MAPathDescriptionPoint descriptionPoint) {
+        GameObject newGenerator = GameObject.Instantiate(new GameObject("PathGenerator"));
+        GameObject newRotator = GameObject.Instantiate(new GameObject("PathRotator"), newGenerator.transform);
+        GameObject newGeneratedStonesContainer = GameObject.Instantiate(new GameObject("GeneratedStonesContainer"), newGenerator.transform);
+
+        MAPathFabric newFabric = this.GetInstantiatedNewFabric(newRotator.transform);
+        newFabric.isPrognoseFabric = false;
+        newFabric.reproductionChance = this.reproductionChance;
+        newFabric.pathFabricRotator = newRotator;
+        newFabric.generatedStonesContainer = newGeneratedStonesContainer;
+
+        newFabric.enabled = true;
+
+        Transform currentStone = this.predictor.generatedStonesList[descriptionPoint.stoneIndex + 2].transform;
+
+
+
+        //going opposite direction
+        newFabric.Initialize(currentStone.position, Quaternion.Euler(new Vector3(0, -180)) * currentStone.rotation);
+
+        MAPathDescriptionTurn currentTurn = descriptionPoint.direction;
+        MAPathDescriptionTurn newTurn = currentTurn + 2;
+        newTurn = this.ModuloDirection(newTurn);
+
+        newFabric.direction = (MAPathFabricDirection)newTurn;
+
+        newFabric.ModuloDirection();
+
+
+
+        return newFabric;
+    }
+
+    private void UpdateWinningPath() {
+        if (this.LoopPrognoseUpdates()) {
+            this.predictor.WritePathToWinnerFabric();
+
+            this.DeleteTempDescriptionAndStones();
+
+
+            this.triesToFreePredictor = 0;
+
+        }
+        else {
+            this.triesToFreePredictor++;
+
+            if (this.triesToFreePredictor > this.maxTriesToFreePredictor) {
+                this.ShortenDescriptionAndSetPredictor(1);
+
                 this.DeleteTempDescriptionAndStones();
-                //this.ShortenDescriptionAndSetPredictor(this.currentGeneratedDescriptionPoints);
+
+
+                this.triesToFreePredictor = 0;
             }
         }
 
-
-        this.showPrediction = !this.showPrediction;
-
-
-       
+        this.ResetPredictorPosition();
     }
 
     private void DeleteTempDescriptionAndStones() {
@@ -120,12 +184,25 @@ public class MAWinnerPathFabric : MAPathFabric {
             if (!this.UpdatePrognoseFabric(frameIndex)) {
                 return false;
             }
+
+            if (this.reachedLabyrinthRadius) {
+                return true;
+            }
         }
 
         return true;
     }
 
 
+    private void ResetPredictorPosition() {
+        if (this.pathDescription.Count <= 0) {
+            return;
+        }
+
+        MAPathDescriptionPoint descriptionPoint = this.pathDescription[this.pathDescription.Count - 1];
+
+        this.SetPredictorToStone(descriptionPoint);
+    }
 
     private void ShortenDescriptionAndSetPredictor(int iteration) {
 
@@ -134,7 +211,7 @@ public class MAWinnerPathFabric : MAPathFabric {
             int descriptionIndex = this.pathDescription.Count - 1;
 
             MAPathDescriptionPoint prevPoint = null;
-            if (descriptionIndex > 0) {
+            if (descriptionIndex > 1) {
                 prevPoint = this.pathDescription[descriptionIndex - 1];
 
             }
@@ -214,7 +291,18 @@ public class MAWinnerPathFabric : MAPathFabric {
             this.predictor.fatalCrashed = true;
             return false;
         }
+
+        this.CheckMagnitudeAgainstRadius();
+
         return true;
+    }
+
+    private void CheckMagnitudeAgainstRadius() {
+        if (this.predictor.transform.position.magnitude > this.labyrinthRadius) {
+            this.predictor.WritePathToWinnerFabric();
+
+            this.reachedLabyrinthRadius = true;
+        }
     }
 
     private void InstantiatePrognoseFabric() {
@@ -223,6 +311,7 @@ public class MAWinnerPathFabric : MAPathFabric {
         }
         this.predictor = this.InstantiateNewGenerator();
         this.predictor.enabled = false;
+        this.predictor.isPrognoseFabric = true;
     }
 
     public void AddPathDescriptionPoint(int stoneIndex, MAPathDescriptionTurn pathDescriptionTurn) {
