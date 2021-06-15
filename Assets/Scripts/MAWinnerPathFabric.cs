@@ -19,6 +19,8 @@ public class MAWinnerPathFabric : MAPathFabric {
 
     public MAPathFabric standardPathFabric;
 
+    public GameObject borderCircleStone;
+
     public List<MAPathDescriptionPoint> pathDescription = new List<MAPathDescriptionPoint>();
 
     public int predictionFrames;
@@ -50,10 +52,14 @@ public class MAWinnerPathFabric : MAPathFabric {
 
     [Range(0, 200)]
     public int labyrinthRadius;
-    private bool reachedLabyrinthRadius = false;
+    public bool won = false;
     public GameObject borderCircleStonesContainer;
 
     private int deadEndDescriptionIndex = 0;
+
+    [Range(0, 50)]
+    public int framesTillNextDeadEndGenerator;
+    private int framesSinceDeadEnderFirstIteration = 0;
 
 
     void Start() {
@@ -63,7 +69,7 @@ public class MAWinnerPathFabric : MAPathFabric {
 
     private void GenerateBorderCircle() {
         float u = (float)(2 * Math.PI * this.labyrinthRadius);
-        float r = this.labyrinthRadius + 10;
+        float r = this.labyrinthRadius;
 
 
         int amountStones = (int)u;
@@ -72,10 +78,10 @@ public class MAWinnerPathFabric : MAPathFabric {
             float phi = ((float)stoneIndex / (float)amountStones * 360);
 
             Vector3 position = new Vector3(r * Mathf.Cos(phi), 0, r * Mathf.Sin(phi));
-            Vector3 rotation = new Vector3(0, phi);
+            Vector3 rotation = new Vector3(0, Mathf.Rad2Deg * -phi);
 
-            GameObject newbBorderCircleStone = GameObject.Instantiate(this.connectionStone, position, Quaternion.Euler(rotation), this.borderCircleStonesContainer.transform);
-            newbBorderCircleStone.name = "BorderCircleStone";
+            GameObject newBorderStone = GameObject.Instantiate(this.borderCircleStone, position, Quaternion.Euler(rotation), this.borderCircleStonesContainer.transform);
+            newBorderStone.SetActive(true);
         }
 
     }
@@ -86,9 +92,12 @@ public class MAWinnerPathFabric : MAPathFabric {
             return;
         }
 
-        if (this.reachedLabyrinthRadius) {
+        if (this.won) {
+
 
             this.UpdateDeadEndGeneration();
+
+            this.framesSinceDeadEnderFirstIteration++;
         }
         else {
             this.UpdateWinningPath();
@@ -96,12 +105,15 @@ public class MAWinnerPathFabric : MAPathFabric {
     }
 
     private void UpdateDeadEndGeneration() {
+        if (this.framesSinceDeadEnderFirstIteration % this.framesTillNextDeadEndGenerator != 0) {
+            return;
+        }
+
         this.deadEndDescriptionIndex++;
-        //int randomDescriptionIndex = Random.Range(0, this.pathDescription.Count - 1);
 
-        if (this.deadEndDescriptionIndex < this.pathDescription.Count - 1) {
+        if (this.deadEndDescriptionIndex < this.pathDescription.Count - 2) {
 
-            this.InstantiateDeadEnderAt(this.deadEndDescriptionIndex);
+            this.InstantiateDeadEnderAt(this.pathDescription.Count - 1 - this.deadEndDescriptionIndex);
         }
     }
 
@@ -185,7 +197,7 @@ public class MAWinnerPathFabric : MAPathFabric {
                 return false;
             }
 
-            if (this.reachedLabyrinthRadius) {
+            if (this.won) {
                 return true;
             }
         }
@@ -193,8 +205,13 @@ public class MAWinnerPathFabric : MAPathFabric {
         return true;
     }
 
+    public void Win() {
+        this.predictor.WritePathToWinnerFabric();
+        this.won = true;
+    }
 
-    private void ResetPredictorPosition() {
+
+    public void ResetPredictorPosition() {
         if (this.pathDescription.Count <= 0) {
             return;
         }
@@ -298,11 +315,6 @@ public class MAWinnerPathFabric : MAPathFabric {
     }
 
     private void CheckMagnitudeAgainstRadius() {
-        if (this.predictor.transform.position.magnitude > this.labyrinthRadius) {
-            this.predictor.WritePathToWinnerFabric();
-
-            this.reachedLabyrinthRadius = true;
-        }
     }
 
     private void InstantiatePrognoseFabric() {

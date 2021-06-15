@@ -448,7 +448,21 @@ public class MAPathFabric : MonoBehaviour {
 
     public bool IsCrashing() {
 
-        return Physics.OverlapBox(this.distanceTriggerFront.transform.position, new Vector3(1, 1, 1) * this.collisionDetectionSize, this.transform.rotation).Length > 0;
+        Collider[] overlapBoxes = Physics.OverlapBox(this.distanceTriggerFront.transform.position, new Vector3(1, 1, 1) * this.collisionDetectionSize, this.transform.rotation);
+
+        foreach (Collider col in overlapBoxes) {
+            if (col.transform.gameObject.name.Equals("BorderCircleStoneCollider")) {
+                if (this.isPrognoseFabric) {
+
+                    this.winnerPathFabric.Win();
+
+                    return false;
+                }
+            }
+
+        }
+
+        return overlapBoxes.Length > 0;
     }
 
 

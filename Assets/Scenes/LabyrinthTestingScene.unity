@@ -215,7 +215,7 @@ Transform:
   - {fileID: 2001623922}
   - {fileID: 19575067}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &421273158
 GameObject:
@@ -308,7 +308,7 @@ Transform:
   m_Children:
   - {fileID: 1036948373}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &748271251
 PrefabInstance:
@@ -546,7 +546,7 @@ GameObject:
   - component: {fileID: 1036948371}
   - component: {fileID: 1036948370}
   m_Layer: 6
-  m_Name: PathStoneVisual
+  m_Name: PathStoneCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -629,6 +629,133 @@ Transform:
   m_Father: {fileID: 703467155}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+--- !u!1 &1068853554
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1068853555}
+  - component: {fileID: 1068853558}
+  - component: {fileID: 1068853557}
+  - component: {fileID: 1068853556}
+  m_Layer: 6
+  m_Name: BorderCircleStoneCollider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1068853555
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1068853554}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1264274775}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+--- !u!64 &1068853556
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1068853554}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &1068853557
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1068853554}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 9511ee8d48d76a84281c5d3d47a709bc, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &1068853558
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1068853554}
+  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1264274774
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1264274775}
+  m_Layer: 6
+  m_Name: BorderCircleStone
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &1264274775
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1264274774}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 6, y: 6, z: 6}
+  m_Children:
+  - {fileID: 1068853555}
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1429038887
 GameObject:
   m_ObjectHideFlags: 0
@@ -998,8 +1125,16 @@ PrefabInstance:
       value: PathFabric
       objectReference: {fileID: 0}
     - target: {fileID: 6089982513765170729, guid: afc872662c87c1c4697af51191cf5bea, type: 3}
+      propertyPath: speed
+      value: 0.597
+      objectReference: {fileID: 0}
+    - target: {fileID: 6089982513765170729, guid: afc872662c87c1c4697af51191cf5bea, type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6089982513765170729, guid: afc872662c87c1c4697af51191cf5bea, type: 3}
+      propertyPath: angularSpeed
+      value: 91.9
       objectReference: {fileID: 0}
     - target: {fileID: 6089982513765170729, guid: afc872662c87c1c4697af51191cf5bea, type: 3}
       propertyPath: connectionStone
@@ -1018,9 +1153,25 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 488144880}
     - target: {fileID: 6089982513765170729, guid: afc872662c87c1c4697af51191cf5bea, type: 3}
+      propertyPath: framesTillDirectionChange
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6089982513765170729, guid: afc872662c87c1c4697af51191cf5bea, type: 3}
+      propertyPath: maxFramesTillDirectionChange
+      value: 28
+      objectReference: {fileID: 0}
+    - target: {fileID: 6089982513765170729, guid: afc872662c87c1c4697af51191cf5bea, type: 3}
+      propertyPath: minFramesTillDirectionChange
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 6089982513765170729, guid: afc872662c87c1c4697af51191cf5bea, type: 3}
       propertyPath: tempPredictionStonesContainer
       value: 
       objectReference: {fileID: 2001623921}
+    - target: {fileID: 6089982513765170729, guid: afc872662c87c1c4697af51191cf5bea, type: 3}
+      propertyPath: framesTillDirectionChangeAfterCrash
+      value: 3.3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: afc872662c87c1c4697af51191cf5bea, type: 3}
 --- !u!114 &1755658865911235301 stripped
@@ -1043,11 +1194,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4413799173129006912, guid: 2fe38782d2366554c8ede72a9e201ad6, type: 3}
       propertyPath: directionalWeightStrength
-      value: 0.799
+      value: 0.366
       objectReference: {fileID: 0}
     - target: {fileID: 4413799173129006912, guid: 2fe38782d2366554c8ede72a9e201ad6, type: 3}
       propertyPath: framesTillDirectionalWeightChange
-      value: 46
+      value: 69
       objectReference: {fileID: 0}
     - target: {fileID: 4413799173129006913, guid: 2fe38782d2366554c8ede72a9e201ad6, type: 3}
       propertyPath: m_Name
@@ -1107,8 +1258,16 @@ PrefabInstance:
     m_TransformParent: {fileID: 421273159}
     m_Modifications:
     - target: {fileID: 2354790862031124269, guid: 90eb2e7cc7618da4e874d6cd59ad6cb6, type: 3}
+      propertyPath: speed
+      value: 0.616
+      objectReference: {fileID: 0}
+    - target: {fileID: 2354790862031124269, guid: 90eb2e7cc7618da4e874d6cd59ad6cb6, type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2354790862031124269, guid: 90eb2e7cc7618da4e874d6cd59ad6cb6, type: 3}
+      propertyPath: angularSpeed
+      value: 55.27
       objectReference: {fileID: 0}
     - target: {fileID: 2354790862031124269, guid: 90eb2e7cc7618da4e874d6cd59ad6cb6, type: 3}
       propertyPath: maxIterations
@@ -1128,23 +1287,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2354790862031124269, guid: 90eb2e7cc7618da4e874d6cd59ad6cb6, type: 3}
       propertyPath: predictionFrames
-      value: 284
+      value: 91
       objectReference: {fileID: 0}
+    - target: {fileID: 2354790862031124269, guid: 90eb2e7cc7618da4e874d6cd59ad6cb6, type: 3}
+      propertyPath: borderCircleStone
+      value: 
+      objectReference: {fileID: 1264274774}
     - target: {fileID: 2354790862031124269, guid: 90eb2e7cc7618da4e874d6cd59ad6cb6, type: 3}
       propertyPath: pathFabricRotator
       value: 
       objectReference: {fileID: 421273158}
     - target: {fileID: 2354790862031124269, guid: 90eb2e7cc7618da4e874d6cd59ad6cb6, type: 3}
       propertyPath: reproductionChance
-      value: 0.215
+      value: 0.091
       objectReference: {fileID: 0}
     - target: {fileID: 2354790862031124269, guid: 90eb2e7cc7618da4e874d6cd59ad6cb6, type: 3}
       propertyPath: standardPathFabric
       value: 
       objectReference: {fileID: 1755658865911235301}
     - target: {fileID: 2354790862031124269, guid: 90eb2e7cc7618da4e874d6cd59ad6cb6, type: 3}
+      propertyPath: collisionDetectionSize
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2354790862031124269, guid: 90eb2e7cc7618da4e874d6cd59ad6cb6, type: 3}
       propertyPath: maxTriesToFreePredictor
-      value: 5
+      value: 65
       objectReference: {fileID: 0}
     - target: {fileID: 2354790862031124269, guid: 90eb2e7cc7618da4e874d6cd59ad6cb6, type: 3}
       propertyPath: generatedStonesContainer
@@ -1155,9 +1322,29 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2354790862031124269, guid: 90eb2e7cc7618da4e874d6cd59ad6cb6, type: 3}
+      propertyPath: framesTillDirectionChange
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2354790862031124269, guid: 90eb2e7cc7618da4e874d6cd59ad6cb6, type: 3}
       propertyPath: borderCircleStonesContainer
       value: 
       objectReference: {fileID: 19575066}
+    - target: {fileID: 2354790862031124269, guid: 90eb2e7cc7618da4e874d6cd59ad6cb6, type: 3}
+      propertyPath: maxFramesTillDirectionChange
+      value: 22
+      objectReference: {fileID: 0}
+    - target: {fileID: 2354790862031124269, guid: 90eb2e7cc7618da4e874d6cd59ad6cb6, type: 3}
+      propertyPath: minFramesTillDirectionChange
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2354790862031124269, guid: 90eb2e7cc7618da4e874d6cd59ad6cb6, type: 3}
+      propertyPath: framesTillNextDeadEndGenerator
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 2354790862031124269, guid: 90eb2e7cc7618da4e874d6cd59ad6cb6, type: 3}
+      propertyPath: framesTillDirectionChangeAfterCrash
+      value: 3.9
+      objectReference: {fileID: 0}
     - target: {fileID: 7312802761190461992, guid: 90eb2e7cc7618da4e874d6cd59ad6cb6, type: 3}
       propertyPath: m_Name
       value: WinnerPathFabric
