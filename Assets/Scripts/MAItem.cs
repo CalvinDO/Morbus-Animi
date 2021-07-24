@@ -8,4 +8,5 @@ public class MAItem : ScriptableObject
     [Multiline]
     [Tooltip("write multiple lines of text.")]
     public string description = "Item Description";
+    public int value;
 }

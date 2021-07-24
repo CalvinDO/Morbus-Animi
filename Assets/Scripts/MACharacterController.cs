@@ -151,7 +151,7 @@ public class MACharacterController : MonoBehaviour {
         this.xRotationAmount = 0;
 
         
-        Cursor.lockState = this.lockMouse? CursorLockMode.Locked: CursorLockMode.None;
+        //Cursor.lockState = this.lockMouse? CursorLockMode.Locked: CursorLockMode.None;
 
         this.last3Speeds = new Vector3[3];
     }
@@ -160,6 +160,7 @@ public class MACharacterController : MonoBehaviour {
     void Update() {
         this.ManageCamGoalRotation();
         this.ManageJump();
+        this.ManageInteraction();
        
 
         this.ManageIdleAnimation();
@@ -486,9 +487,15 @@ public class MACharacterController : MonoBehaviour {
             if (Physics.Raycast(ray, out hit))
             {
                 MASprayable sprayable = hit.collider.GetComponent<MASprayable>();
-                if (this.wall == sprayable)
+                if (sprayable != null)
                 {
-                    this.wall.Spray();
+                    this.wall = sprayable;
+                    Vector3 difference = this.transform.position - hit.point;
+                    this.wall.Spray(hit.point, sprayable.transform.rotation, difference);
+                }
+                else
+                {
+                    this.wall = null;
                 }
             }
         }

@@ -34,6 +34,18 @@ public class MAItemInteraction : MAInteractable
     void PickUp()
     {
         MAInventory.instance.Add(this.item);
+        //this is actually meant for inventory use
+        switch (this.item.name)
+        {
+            case "Spray":
+                MASprayCan sprayCan = GameObject.FindGameObjectWithTag("SprayCan").GetComponent<MASprayCan>();
+                sprayCan.charges += this.item.value;
+                break;
+            default:
+                Debug.Log("no such item");
+                break;
+        }
+        //this stays
         Destroy(this.gameObject);
         textDisplay.SetActive(false);
     }
