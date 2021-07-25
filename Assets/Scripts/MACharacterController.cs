@@ -31,6 +31,10 @@ public enum MARotationMode {
 }
 
 
+public enum SpaceType {
+    Euclidean = 0,
+    Radial = 1
+}
 
 
 
@@ -89,7 +93,7 @@ public class MACharacterController : MonoBehaviour {
     public Transform thirdPCameraGoal;
     public Transform goalRotator;
 
-    [HideInInspector]
+
     public MACameraMode cameraMode = MACameraMode.ThirdPerson;
     public MAKeyboardControlMode keyboardControlMode = MAKeyboardControlMode.Global;
     public MARotationMode rotationMode = MARotationMode.MovementDirectional;
@@ -140,20 +144,26 @@ public class MACharacterController : MonoBehaviour {
 
     public Animator animator;
     public Animation animation;
-    
+
     //for item interaction
     MAInteractable hover;
     MASprayable wall;
     //public GameObject playerInventory;
 
+
+    public SpaceType spaceType;
+
+
+
     void Start() {
         this.currentXRotation = 0;
         this.xRotationAmount = 0;
 
-        
+
         //Cursor.lockState = this.lockMouse? CursorLockMode.Locked: CursorLockMode.None;
 
         this.last3Speeds = new Vector3[3];
+
     }
 
 
@@ -161,10 +171,13 @@ public class MACharacterController : MonoBehaviour {
         this.ManageCamGoalRotation();
         this.ManageJump();
         this.ManageInteraction();
-       
+
 
         this.ManageIdleAnimation();
 
+        this.framesTillStart++;
+        this.millisecondsSinceStart += Time.deltaTime;
+        this.scaledTimeSinceStart += Time.deltaTime;
     }
 
     private void FixedUpdate() {
@@ -180,9 +193,6 @@ public class MACharacterController : MonoBehaviour {
 
         this.ManageSmartCam();
 
-        this.framesTillStart++;
-        this.millisecondsSinceStart += Time.deltaTime;
-        this.scaledTimeSinceStart += Time.deltaTime;
     }
 
     private void CalculateMovement() {
@@ -234,21 +244,32 @@ public class MACharacterController : MonoBehaviour {
                 break;
         }
 
-        this.LerpCam();
+        this.SlerpCam();
     }
 
 
     private void ManageCamGoalRotation() {
+        if (this.spaceType == SpaceType.Radial) {
+            // this.ManageRadialCamGoalRotation();
+            return;
+        }
+
         if (Input.GetKeyUp(KeyCode.RightArrow)) {
             this.goalRotator.Rotate(Vector3.up * 90);
         }
         if (Input.GetKeyUp(KeyCode.LeftArrow)) {
             this.goalRotator.Rotate(Vector3.up * 90);
         }
+
+    }
+
+    private void ManageRadialCamGoalRotation() {
+        float phi = Vector3.Angle(this.transform.position, Vector3.forward);
+        this.goalRotator.rotation = Quaternion.Euler(0, phi, 0);
     }
 
 
-    private void LerpCam() {
+    private void SlerpCam() {
         this.mainCamera.transform.position = Vector3.Slerp(this.mainCamera.transform.position, this.currentCameraGoal.position, this.camSlerpFactor);
         this.mainCamera.transform.rotation = Quaternion.Slerp(this.mainCamera.transform.rotation, this.currentCameraGoal.rotation, this.camSlerpFactor);
     }
@@ -266,7 +287,7 @@ public class MACharacterController : MonoBehaviour {
     private void AccelerateXZ() {
 
         if (!this.movementEnabled) {
-            //return;
+            return;
         }
 
         Vector3 resultingVector = Vector3.zero;
@@ -325,7 +346,12 @@ public class MACharacterController : MonoBehaviour {
 
 
     private Vector3 GetMovementVectorInDirection(Vector3 direction) {
-        Vector3 rotated = this.transform.rotation * direction;
+
+        if (this.spaceType == SpaceType.Radial) {
+            return this.GetRadialMovementVectorInDirection(direction);
+        }
+
+        Vector3 rotated;
 
         switch (this.keyboardControlMode) {
             case MAKeyboardControlMode.CameraGoalAligned:
@@ -345,6 +371,45 @@ public class MACharacterController : MonoBehaviour {
         return Vector3.ProjectOnPlane(rotated, Vector3.up).normalized;
     }
 
+    private Vector3 GetRadialMovementVectorInDirection(Vector3 direction) {
+        Vector3 rotated = Vector3.zero;
+
+        if (direction.z == 1) {
+            rotated = -this.transform.position;
+            //return Vector3.ProjectOnPlane(-this.transform.position, Vector3.up).normalized;
+        }
+
+        if (direction.z == -1) {
+            rotated = this.transform.position;
+            //return Vector3.ProjectOnPlane(this.transform.position, Vector3.up).normalized;
+        }
+
+        if (direction.x == 1) {
+            rotated = Quaternion.Euler(0, -90, 0) * this.transform.position;
+            // return Vector3.ProjectOnPlane(Quaternion.Euler(0, -90, 0) * this.transform.position, Vector3.up).normalized;
+        }
+
+        if (direction.x == -1) {
+            rotated = Quaternion.Euler(0, 90, 0) * this.transform.position;
+            //return Vector3.ProjectOnPlane(Quaternion.Euler(0, 90, 0) * this.transform.position, Vector3.up).normalized;
+        }
+
+        switch (this.keyboardControlMode) {
+            case MAKeyboardControlMode.CameraGoalAligned:
+                rotated = this.currentCameraGoal.transform.rotation * rotated;
+                break;
+            case MAKeyboardControlMode.CameraCurrentAligned:
+                //rotated = this.mainCamera.transform.rotation *  rotated;
+                break;
+            case MAKeyboardControlMode.Global:
+                rotated = this.transform.rotation * rotated;
+                break;
+            default:
+                break;
+        }
+
+        return Vector3.ProjectOnPlane(rotated, Vector3.up).normalized;
+    }
 
     private void LimitSpeed() {
         //Limit the Player Speed because without it acceleration would result in infinite speed!
@@ -450,12 +515,27 @@ public class MACharacterController : MonoBehaviour {
             }
         }
 
-       
+
     }
 
     private void CalculateMovementDirectionalRotation() {
+        if (this.spaceType == SpaceType.Radial) {
+            this.CalculateRadialMovementDirectionalRotation();
+            return;
+        }
+
         this.yRotator.transform.rotation = Quaternion.identity;
         this.yRotator.transform.rotation = Quaternion.Euler(0, 0, 4);
+    }
+
+    private void CalculateRadialMovementDirectionalRotation() {
+        float phi = Vector3.Angle(Vector3.ProjectOnPlane(this.transform.position, Vector3.up), Vector3.back);
+
+        if (this.transform.position.x < 0) {
+            phi = 360 - phi;
+        }
+
+        this.transform.rotation = Quaternion.Euler(0, -phi, 0);
     }
 
     private void CalculateFirstPersonRotation() {
@@ -478,48 +558,37 @@ public class MACharacterController : MonoBehaviour {
         }
     }
 
-    private void ManageInteraction()
-    {
+    private void ManageInteraction() {
         Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
-        if (Input.GetMouseButtonDown(1))
-        {
-            if (Physics.Raycast(ray, out hit))
-            {
+        if (Input.GetMouseButtonDown(1)) {
+            if (Physics.Raycast(ray, out hit)) {
                 MASprayable sprayable = hit.collider.GetComponent<MASprayable>();
-                if (sprayable != null)
-                {
+                if (sprayable != null) {
                     this.wall = sprayable;
                     Vector3 difference = this.transform.position - hit.point;
                     this.wall.Spray(hit.point, sprayable.transform.rotation, difference);
                 }
-                else
-                {
+                else {
                     this.wall = null;
                 }
             }
         }
-        if (Input.GetMouseButtonDown(0))
-        {
+        if (Input.GetMouseButtonDown(0)) {
 
-            if (Physics.Raycast(ray, out hit))
-            {
+            if (Physics.Raycast(ray, out hit)) {
                 MAInteractable interactable = hit.collider.GetComponent<MAInteractable>();
-                if (this.hover == interactable)
-                {
-                    if (Input.GetMouseButtonDown(0) && interactable != null)
-                    {
+                if (this.hover == interactable) {
+                    if (Input.GetMouseButtonDown(0) && interactable != null) {
                         this.hover.MAInteract();
                     }
                     return;
                 }
-                if (interactable != null)
-                {
+                if (interactable != null) {
                     this.hover = interactable;
                     this.hover.setHover();
                 }
-                else
-                {
+                else {
                     this.hover.removeHover();
                     this.hover = null;
                 }
