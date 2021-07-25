@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class MAInteractable : MonoBehaviour
 {
-    public enum interactType {item, obstacle, climb, lever};
+    public enum interactType {item, obstacle, climb, lever, image};
     public interactType currentSelection = interactType.item;
     public float radius = 3f;
     public GameObject textDisplay;
@@ -41,6 +41,9 @@ private void Start()
     {
         switch (currentSelection)
         {
+            case interactType.image:
+                newHoverText = "take picture [E]";
+                break;
             case interactType.item:
                 newHoverText = "pick up [E]";
                 break;
