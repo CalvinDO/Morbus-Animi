@@ -15,7 +15,8 @@ public enum MACameraMode {
 public enum MAKeyboardControlMode {
     Global = 0,
     CameraGoalAligned = 1,
-    CameraCurrentAligned = 2
+    CameraCurrentAligned = 2,
+    CameraGoalRotatorAligned = 3
 }
 
 public enum MACameraDirection {
@@ -168,7 +169,7 @@ public class MACharacterController : MonoBehaviour {
 
 
     void Update() {
-        this.ManageCamGoalRotation();
+        this.ManageUserControlledCamGoalRotation();
         this.ManageJump();
         this.ManageInteraction();
 
@@ -248,10 +249,10 @@ public class MACharacterController : MonoBehaviour {
     }
 
 
-    private void ManageCamGoalRotation() {
+    private void ManageUserControlledCamGoalRotation() {
         if (this.spaceType == SpaceType.Radial) {
-            // this.ManageRadialCamGoalRotation();
-            return;
+            //this.ManageUserControlledRadialCamGoalRotation();
+            //return;
         }
 
         if (Input.GetKeyUp(KeyCode.RightArrow)) {
@@ -263,7 +264,7 @@ public class MACharacterController : MonoBehaviour {
 
     }
 
-    private void ManageRadialCamGoalRotation() {
+    private void ManageUserControlledRadialCamGoalRotation() {
         float phi = Vector3.Angle(this.transform.position, Vector3.forward);
         this.goalRotator.rotation = Quaternion.Euler(0, phi, 0);
     }
@@ -396,13 +397,15 @@ public class MACharacterController : MonoBehaviour {
 
         switch (this.keyboardControlMode) {
             case MAKeyboardControlMode.CameraGoalAligned:
-                rotated = this.currentCameraGoal.transform.rotation * rotated;
+                throw new Exception("Radial Space + CameraGoalAligned not implemented!");
                 break;
             case MAKeyboardControlMode.CameraCurrentAligned:
-                //rotated = this.mainCamera.transform.rotation *  rotated;
+                throw new Exception("Radial Space + CameraCurrentAligned not implemented!");
                 break;
             case MAKeyboardControlMode.Global:
-                rotated = this.transform.rotation * rotated;
+                break;
+            case MAKeyboardControlMode.CameraGoalRotatorAligned:
+                rotated = ( this.goalRotator.transform.localRotation) * rotated;
                 break;
             default:
                 break;
