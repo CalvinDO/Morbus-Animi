@@ -40,7 +40,8 @@ public class MALeverInteraction : MAInteractable
     {
         if (isLast && (leverIndex + 1) == this.puzzleManager.counter)
         {
-            Destroy(this.door);
+            //Destroy(this.door);
+            this.door.transform.Rotate(new Vector3(0, 90, 0));
         }
     }
 }
