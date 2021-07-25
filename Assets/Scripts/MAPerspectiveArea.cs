@@ -13,7 +13,6 @@ public class MAPerspectiveArea : MonoBehaviour {
 
     }
 
-    // Update is called once per frame
     void Update() {
 
     }
@@ -29,11 +28,15 @@ public class MAPerspectiveArea : MonoBehaviour {
         //All Cam Areas!
         characterController.spaceType = this.spaceType;
 
+
         //Fixed Cam Area!
+
         if (this.isFixed) {
+
             characterController.cameraMode = MACameraMode.Fixed;
-            characterController.fixedCameraGoal = this.fixedCameraTarget.transform;
             characterController.keyboardControlMode = MAKeyboardControlMode.CameraCurrentAligned;
+
+            characterController.fixedCameraGoal = this.fixedCameraTarget.transform;
             return;
         }
 

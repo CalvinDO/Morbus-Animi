@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1d83de8abbeed764eb04d5de979bc7c5, type: 3}
-  m_Name: NoraDadPicture
+  m_Name: NoraDadPicture 1
   m_EditorClassIdentifier: 
   name: New Item
   icon: {fileID: 0}
