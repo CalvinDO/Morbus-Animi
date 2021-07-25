@@ -32,7 +32,7 @@ public enum MARotationMode {
 }
 
 
-public enum SpaceType {
+public enum MASpaceType {
     Euclidean = 0,
     Radial = 1
 }
@@ -152,7 +152,7 @@ public class MACharacterController : MonoBehaviour {
     //public GameObject playerInventory;
 
 
-    public SpaceType spaceType;
+    public MASpaceType spaceType;
 
 
 
@@ -250,7 +250,7 @@ public class MACharacterController : MonoBehaviour {
 
 
     private void ManageUserControlledCamGoalRotation() {
-        if (this.spaceType == SpaceType.Radial) {
+        if (this.spaceType == MASpaceType.Radial) {
             //this.ManageUserControlledRadialCamGoalRotation();
             //return;
         }
@@ -269,6 +269,12 @@ public class MACharacterController : MonoBehaviour {
         this.goalRotator.rotation = Quaternion.Euler(0, phi, 0);
     }
 
+    public void SetDefaultModeAndSpaceType() {
+        this.cameraMode = MACameraMode.ThirdPerson;
+        this.spaceType = MASpaceType.Radial;
+        this.keyboardControlMode = MAKeyboardControlMode.CameraGoalRotatorAligned;
+        this.fixedCameraGoal = null;
+    }
 
     private void SlerpCam() {
         this.mainCamera.transform.position = Vector3.Slerp(this.mainCamera.transform.position, this.currentCameraGoal.position, this.camSlerpFactor);
@@ -348,7 +354,7 @@ public class MACharacterController : MonoBehaviour {
 
     private Vector3 GetMovementVectorInDirection(Vector3 direction) {
 
-        if (this.spaceType == SpaceType.Radial) {
+        if (this.spaceType == MASpaceType.Radial) {
             return this.GetRadialMovementVectorInDirection(direction);
         }
 
@@ -357,6 +363,9 @@ public class MACharacterController : MonoBehaviour {
         switch (this.keyboardControlMode) {
             case MAKeyboardControlMode.CameraGoalAligned:
                 rotated = this.currentCameraGoal.transform.rotation * direction;
+                break;
+            case MAKeyboardControlMode.CameraGoalRotatorAligned:
+                rotated = this.goalRotator.transform.localRotation * direction;
                 break;
             case MAKeyboardControlMode.CameraCurrentAligned:
                 rotated = this.mainCamera.transform.rotation * direction;
@@ -405,7 +414,7 @@ public class MACharacterController : MonoBehaviour {
             case MAKeyboardControlMode.Global:
                 break;
             case MAKeyboardControlMode.CameraGoalRotatorAligned:
-                rotated = ( this.goalRotator.transform.localRotation) * rotated;
+                rotated = this.goalRotator.transform.localRotation * rotated;
                 break;
             default:
                 break;
@@ -522,13 +531,13 @@ public class MACharacterController : MonoBehaviour {
     }
 
     private void CalculateMovementDirectionalRotation() {
-        if (this.spaceType == SpaceType.Radial) {
+        if (this.spaceType == MASpaceType.Radial) {
             this.CalculateRadialMovementDirectionalRotation();
             return;
         }
 
-        this.yRotator.transform.rotation = Quaternion.identity;
-        this.yRotator.transform.rotation = Quaternion.Euler(0, 0, 4);
+        //this.yRotator.transform.rotation = Quaternion.identity;
+       // this.yRotator.transform.rotation = Quaternion.Euler(0, 0, 4);
     }
 
     private void CalculateRadialMovementDirectionalRotation() {
