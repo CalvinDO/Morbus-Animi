@@ -5,7 +5,7 @@ using UnityEngine;
 public class MALeverInteraction : MAInteractable
 {
     public int leverIndex;
-    private PuzzleManager puzzleManager;
+    public PuzzleManager puzzleManager;
     public bool isLast;
     public GameObject door;
     private bool isFlipped;
@@ -28,13 +28,13 @@ public class MALeverInteraction : MAInteractable
         {
             Debug.Log("flipped switch number " + this.puzzleManager.counter);
             this.puzzleManager.counter++;
+            isFlipped = true;
         }
         else
         {
             Debug.Log("this lever doesn't do anything yet");
         }
         textDisplay.SetActive(false);
-        isFlipped = true;
     }
     void checkIfSolved()
     {
