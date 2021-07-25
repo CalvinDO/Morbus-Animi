@@ -259,7 +259,7 @@ public class MACharacterController : MonoBehaviour {
             this.goalRotator.Rotate(Vector3.up * 90);
         }
         if (Input.GetKeyUp(KeyCode.LeftArrow)) {
-            this.goalRotator.Rotate(Vector3.up * 90);
+            this.goalRotator.Rotate(Vector3.up * -90);
         }
 
     }
