@@ -42,16 +42,16 @@ private void Start()
         switch (currentSelection)
         {
             case interactType.image:
-                newHoverText = "take picture [E]";
+                newHoverText = "take picture [Left Mouse]";
                 break;
             case interactType.item:
-                newHoverText = "pick up [E]";
+                newHoverText = "pick up [Left Mouse]";
                 break;
             case interactType.obstacle:
-                newHoverText = "open [E]";
+                newHoverText = "open [Left Mouse]";
                 break;
             case interactType.lever:
-                newHoverText = "flip [E]";
+                newHoverText = "flip [Left Mouse]";
                 break;
             default:
                 newHoverText = "interact [E]";

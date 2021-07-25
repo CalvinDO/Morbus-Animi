@@ -26,8 +26,8 @@ public class MALeverInteraction : MAInteractable
     {
         if (leverIndex == this.puzzleManager.counter)
         {
-            Debug.Log("flipped switch number " + this.puzzleManager.counter);
             this.puzzleManager.counter++;
+            Debug.Log("flipped switch number " + this.puzzleManager.counter);
             isFlipped = true;
         }
         else
@@ -40,8 +40,9 @@ public class MALeverInteraction : MAInteractable
     {
         if (isLast && (leverIndex + 1) == this.puzzleManager.counter)
         {
+            Debug.Log("the door opened!");
             //Destroy(this.door);
-            this.door.transform.Rotate(new Vector3(0, 90, 0));
+            this.door.transform.Rotate(new Vector3(0, 0, 90));
         }
     }
 }

@@ -206,7 +206,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 425aec977a57b7741b23bf779a94ec81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentSelection: 0
+  currentSelection: 3
   radius: 2
   textDisplay: {fileID: 1474538059}
   hoverTextObject: {fileID: 400966969}
@@ -214,6 +214,20 @@ MonoBehaviour:
   puzzleManager: {fileID: 957985513}
   isLast: 1
   door: {fileID: 2077442181}
+--- !u!64 &132556130
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 132556125}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 2534964839176971238, guid: 11ae458723321ae479a54c774f384dbe, type: 3}
 --- !u!1 &352395748
 GameObject:
   m_ObjectHideFlags: 0
@@ -712,7 +726,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d71785d53b03cc4a920f8a6df130435, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  counter: 1
+  counter: 0
 --- !u!4 &957985514
 Transform:
   m_ObjectHideFlags: 0
@@ -843,7 +857,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 425aec977a57b7741b23bf779a94ec81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentSelection: 0
+  currentSelection: 3
   radius: 2
   textDisplay: {fileID: 1474538059}
   hoverTextObject: {fileID: 400966969}
@@ -851,6 +865,20 @@ MonoBehaviour:
   puzzleManager: {fileID: 957985513}
   isLast: 0
   door: {fileID: 2077442181}
+--- !u!64 &1002171990
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1002171985}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 2534964839176971238, guid: 11ae458723321ae479a54c774f384dbe, type: 3}
 --- !u!1001 &1066300849
 PrefabInstance:
   m_ObjectHideFlags: 0
