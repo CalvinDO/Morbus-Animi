@@ -5,6 +5,24 @@ using UnityEngine.SceneManagement;
 
 public class MAMainMenu : MonoBehaviour
 {
+    public GameObject menuCanvas;
+    public bool isMainMenu;
+    void Update()
+    {
+        bool current = menuCanvas.activeSelf;
+        if (Input.GetKeyDown(KeyCode.Escape) && !isMainMenu)
+        {
+            menuCanvas.SetActive(!current);
+            if (current)
+            {
+                ResumeGame();
+            }
+            else
+            {
+                PauseGame();
+            }
+        }
+    }
     public void PlayGame ()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
@@ -14,5 +32,13 @@ public class MAMainMenu : MonoBehaviour
     {
         Debug.Log("quit.");
         Application.Quit();
+    }
+    public void PauseGame()
+    {
+        Time.timeScale = 0;
+    }
+    public void ResumeGame()
+    {
+        Time.timeScale = 1;
     }
 }
