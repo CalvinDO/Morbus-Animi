@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MAInteractWithObject : MAInteractable
 {
@@ -11,13 +12,16 @@ public class MAInteractWithObject : MAInteractable
         inventory = MAInventory.instance;
         base.MAInteract();
 
-        if (this.currentSelection == interactType.item)
+        switch (currentSelection)
         {
-            PickUp();
-        }
-        else
-        {
-            Open();
+            case interactType.item:
+                PickUp();
+                break;
+            case interactType.obstacle:
+                Open();
+                break;
+            default:
+                break;
         }
     }
 

@@ -1549,7 +1549,7 @@ GameObject:
   m_Component:
   - component: {fileID: 234826297734886012}
   m_Layer: 0
-  m_Name: MenuPrefab 1
+  m_Name: MenuPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
