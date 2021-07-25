@@ -1126,7 +1126,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6089982513765170729, guid: afc872662c87c1c4697af51191cf5bea, type: 3}
       propertyPath: speed
-      value: 0.597
+      value: 0.706
       objectReference: {fileID: 0}
     - target: {fileID: 6089982513765170729, guid: afc872662c87c1c4697af51191cf5bea, type: 3}
       propertyPath: m_Enabled
@@ -1134,7 +1134,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6089982513765170729, guid: afc872662c87c1c4697af51191cf5bea, type: 3}
       propertyPath: angularSpeed
-      value: 91.9
+      value: 88.3
       objectReference: {fileID: 0}
     - target: {fileID: 6089982513765170729, guid: afc872662c87c1c4697af51191cf5bea, type: 3}
       propertyPath: connectionStone
@@ -1149,6 +1149,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6089982513765170729, guid: afc872662c87c1c4697af51191cf5bea, type: 3}
+      propertyPath: collisionDetectionSize
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6089982513765170729, guid: afc872662c87c1c4697af51191cf5bea, type: 3}
       propertyPath: generatedStonesContainer
       value: 
       objectReference: {fileID: 488144880}
@@ -1158,11 +1162,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6089982513765170729, guid: afc872662c87c1c4697af51191cf5bea, type: 3}
       propertyPath: maxFramesTillDirectionChange
-      value: 28
+      value: 23
       objectReference: {fileID: 0}
     - target: {fileID: 6089982513765170729, guid: afc872662c87c1c4697af51191cf5bea, type: 3}
       propertyPath: minFramesTillDirectionChange
-      value: 20
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 6089982513765170729, guid: afc872662c87c1c4697af51191cf5bea, type: 3}
       propertyPath: tempPredictionStonesContainer
@@ -1194,7 +1198,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4413799173129006912, guid: 2fe38782d2366554c8ede72a9e201ad6, type: 3}
       propertyPath: directionalWeightStrength
-      value: 0.366
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4413799173129006912, guid: 2fe38782d2366554c8ede72a9e201ad6, type: 3}
       propertyPath: framesTillDirectionalWeightChange
@@ -1259,7 +1263,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2354790862031124269, guid: 90eb2e7cc7618da4e874d6cd59ad6cb6, type: 3}
       propertyPath: speed
-      value: 0.616
+      value: 0.168
       objectReference: {fileID: 0}
     - target: {fileID: 2354790862031124269, guid: 90eb2e7cc7618da4e874d6cd59ad6cb6, type: 3}
       propertyPath: m_Enabled
@@ -1267,7 +1271,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2354790862031124269, guid: 90eb2e7cc7618da4e874d6cd59ad6cb6, type: 3}
       propertyPath: angularSpeed
-      value: 55.27
+      value: 10.6
       objectReference: {fileID: 0}
     - target: {fileID: 2354790862031124269, guid: 90eb2e7cc7618da4e874d6cd59ad6cb6, type: 3}
       propertyPath: maxIterations
@@ -1287,7 +1291,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2354790862031124269, guid: 90eb2e7cc7618da4e874d6cd59ad6cb6, type: 3}
       propertyPath: predictionFrames
-      value: 91
+      value: 252
       objectReference: {fileID: 0}
     - target: {fileID: 2354790862031124269, guid: 90eb2e7cc7618da4e874d6cd59ad6cb6, type: 3}
       propertyPath: borderCircleStone
@@ -1299,7 +1303,7 @@ PrefabInstance:
       objectReference: {fileID: 421273158}
     - target: {fileID: 2354790862031124269, guid: 90eb2e7cc7618da4e874d6cd59ad6cb6, type: 3}
       propertyPath: reproductionChance
-      value: 0.091
+      value: 0.181
       objectReference: {fileID: 0}
     - target: {fileID: 2354790862031124269, guid: 90eb2e7cc7618da4e874d6cd59ad6cb6, type: 3}
       propertyPath: standardPathFabric
@@ -1311,7 +1315,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2354790862031124269, guid: 90eb2e7cc7618da4e874d6cd59ad6cb6, type: 3}
       propertyPath: maxTriesToFreePredictor
-      value: 65
+      value: 48
       objectReference: {fileID: 0}
     - target: {fileID: 2354790862031124269, guid: 90eb2e7cc7618da4e874d6cd59ad6cb6, type: 3}
       propertyPath: generatedStonesContainer
@@ -1331,7 +1335,7 @@ PrefabInstance:
       objectReference: {fileID: 19575066}
     - target: {fileID: 2354790862031124269, guid: 90eb2e7cc7618da4e874d6cd59ad6cb6, type: 3}
       propertyPath: maxFramesTillDirectionChange
-      value: 22
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 2354790862031124269, guid: 90eb2e7cc7618da4e874d6cd59ad6cb6, type: 3}
       propertyPath: minFramesTillDirectionChange
@@ -1339,7 +1343,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2354790862031124269, guid: 90eb2e7cc7618da4e874d6cd59ad6cb6, type: 3}
       propertyPath: framesTillNextDeadEndGenerator
-      value: 9
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 2354790862031124269, guid: 90eb2e7cc7618da4e874d6cd59ad6cb6, type: 3}
       propertyPath: framesTillDirectionChangeAfterCrash
