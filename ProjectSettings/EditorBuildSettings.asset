@@ -4,5 +4,11 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: 374935684ac39b44299ab40673642d9c
+  - enabled: 1
+    path: Assets/Scenes/Nora Scene.unity
+    guid: 437ff52253a31d440867e2e56eecad29
   m_configObjects: {}
