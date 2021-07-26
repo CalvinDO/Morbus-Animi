@@ -602,21 +602,24 @@ public class MACharacterController : MonoBehaviour {
 
             if (Physics.Raycast(ray, out hit)) {
                 MAInteractable interactable = hit.collider.GetComponent<MAInteractable>();
+                if (interactable != null)
+                {
+                    this.hover = interactable;
+                    this.hover.setHover();
+                }
+                else
+                {
+                    if (this.hover != null)
+                    {
+                        this.hover.removeHover();
+
+                        this.hover = null;
+                    }
+                }
                 if (this.hover == interactable) {
                     if (Input.GetMouseButtonDown(0) && interactable != null) {
                         this.hover.MAInteract();
                         this.hover.clearText();
-                    }
-                }
-                if (interactable != null) {
-                    this.hover = interactable;
-                    this.hover.setHover();
-                }
-                else {
-                    if (this.hover != null) {
-                    this.hover.removeHover();
-
-                    this.hover = null;
                     }
                 }
             }
