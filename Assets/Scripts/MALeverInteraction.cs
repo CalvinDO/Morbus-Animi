@@ -8,9 +8,18 @@ public class MALeverInteraction : MAInteractable
     public PuzzleManager puzzleManager;
     public bool isLast;
     public GameObject door;
-    private bool isFlipped;
+    public bool isFlipped;
+
+    public AudioClip correctSound;
+
+    public AudioSource leverSwitchSound;
+
+
     public override void MAInteract()
     {
+        if (this.puzzleManager == null) {
+            return;
+        }
         base.MAInteract();
         if (!isFlipped)
         {
@@ -24,6 +33,12 @@ public class MALeverInteraction : MAInteractable
 
     void FlipLever()
     {
+
+        Debug.Log(leverIndex);
+        Debug.Log(this.puzzleManager.counter);
+
+        this.leverSwitchSound.PlayOneShot(this.leverSwitchSound.clip);
+
         if (leverIndex == this.puzzleManager.counter)
         {
             this.puzzleManager.counter++;
@@ -36,11 +51,14 @@ public class MALeverInteraction : MAInteractable
         }
         textDisplay.SetActive(false);
     }
+
     void checkIfSolved()
     {
         if (isLast && (leverIndex + 1) == this.puzzleManager.counter)
         {
+
             Debug.Log("the door opened!");
+            this.leverSwitchSound.PlayOneShot(this.correctSound);
             //Destroy(this.door);
             this.door.transform.Rotate(new Vector3(0, 0, 90));
         }

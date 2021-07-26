@@ -154,7 +154,7 @@ public class MACharacterController : MonoBehaviour {
 
     public MASpaceType spaceType;
 
-
+    public AudioSource footsteps;
 
     void Start() {
         this.currentXRotation = 0;
@@ -302,23 +302,27 @@ public class MACharacterController : MonoBehaviour {
         if (Input.GetKey("w")) {
             Vector3 forward = GetMovementVectorInDirection(Vector3.forward);
 
+            this.playFootsteps();
             resultingVector += forward;
         }
 
         if (Input.GetKey("a")) {
             Vector3 left = GetMovementVectorInDirection(Vector3.left);
+            this.playFootsteps();
 
             resultingVector += left;
         }
 
         if (Input.GetKey("s")) {
             Vector3 back = GetMovementVectorInDirection(Vector3.back);
+            this.playFootsteps();
 
             resultingVector += back;
         }
 
         if (Input.GetKey("d")) {
             Vector3 right = GetMovementVectorInDirection(Vector3.right);
+            this.playFootsteps();
 
             resultingVector += right;
         }
@@ -331,6 +335,13 @@ public class MACharacterController : MonoBehaviour {
         Vector3 scaledNormalizedResult = normalizedSum * this.movementAcceleration;
 
         this.rb.AddForce(scaledNormalizedResult, ForceMode.Acceleration);
+    }
+
+    private void playFootsteps() {
+        if (this.footsteps.isPlaying) {
+            return;
+        }
+        this.footsteps.PlayOneShot(this.footsteps.clip);
     }
 
 
@@ -571,6 +582,7 @@ public class MACharacterController : MonoBehaviour {
     }
 
     private void ManageInteraction() {
+
         Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
         if (Input.GetMouseButtonDown(1)) {
@@ -594,15 +606,17 @@ public class MACharacterController : MonoBehaviour {
                     if (Input.GetMouseButtonDown(0) && interactable != null) {
                         this.hover.MAInteract();
                     }
-                    return;
                 }
                 if (interactable != null) {
                     this.hover = interactable;
                     this.hover.setHover();
                 }
                 else {
+                    if (this.hover != null) {
                     this.hover.removeHover();
+
                     this.hover = null;
+                    }
                 }
             }
         }

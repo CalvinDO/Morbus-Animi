@@ -7,6 +7,11 @@ public class MAMainMenu : MonoBehaviour
 {
     public GameObject menuCanvas;
     public bool isMainMenu;
+
+
+    public AudioSource clickSound;
+
+
     void Update()
     {
         bool current = menuCanvas.activeSelf;
@@ -40,5 +45,9 @@ public class MAMainMenu : MonoBehaviour
     public void ResumeGame()
     {
         Time.timeScale = 1;
+    }
+
+    public void playClickSound() {
+        this.clickSound.PlayOneShot(this.clickSound.clip);
     }
 }
