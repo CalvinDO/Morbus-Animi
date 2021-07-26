@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d83de8abbeed764eb04d5de979bc7c5, type: 3}
   m_Name: NoraDadPicture 1
   m_EditorClassIdentifier: 
-  name: New Item
-  icon: {fileID: 0}
-  description: Item Description
+  name: Nora's Dad Picture
+  icon: {fileID: 21300000, guid: 7477edbb0871c864495febee3eced840, type: 3}
+  description: Here is some text about Nora's Dad.
   value: 0

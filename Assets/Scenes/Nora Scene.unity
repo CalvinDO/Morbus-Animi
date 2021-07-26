@@ -123,6 +123,63 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1001 &837240
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2515375899625496458, guid: fa337dd7d058f474d98b66efaf8ba31e, type: 3}
+      propertyPath: m_Name
+      value: PicturePrefab
+      objectReference: {fileID: 0}
+    - target: {fileID: 4691950067118147802, guid: fa337dd7d058f474d98b66efaf8ba31e, type: 3}
+      propertyPath: m_RootOrder
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 4691950067118147802, guid: fa337dd7d058f474d98b66efaf8ba31e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 12.010496
+      objectReference: {fileID: 0}
+    - target: {fileID: 4691950067118147802, guid: fa337dd7d058f474d98b66efaf8ba31e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 5.2031555
+      objectReference: {fileID: 0}
+    - target: {fileID: 4691950067118147802, guid: fa337dd7d058f474d98b66efaf8ba31e, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -8.813412
+      objectReference: {fileID: 0}
+    - target: {fileID: 4691950067118147802, guid: fa337dd7d058f474d98b66efaf8ba31e, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4691950067118147802, guid: fa337dd7d058f474d98b66efaf8ba31e, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4691950067118147802, guid: fa337dd7d058f474d98b66efaf8ba31e, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4691950067118147802, guid: fa337dd7d058f474d98b66efaf8ba31e, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4691950067118147802, guid: fa337dd7d058f474d98b66efaf8ba31e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4691950067118147802, guid: fa337dd7d058f474d98b66efaf8ba31e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4691950067118147802, guid: fa337dd7d058f474d98b66efaf8ba31e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: fa337dd7d058f474d98b66efaf8ba31e, type: 3}
 --- !u!1 &36674733
 GameObject:
   m_ObjectHideFlags: 0
@@ -501,6 +558,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &894231761 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2515375899625496458, guid: fa337dd7d058f474d98b66efaf8ba31e, type: 3}
+  m_PrefabInstance: {fileID: 837240}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &957985512
 GameObject:
   m_ObjectHideFlags: 0
@@ -883,6 +945,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1928384564868567068, guid: 865cdecd4f2fe9041afc2b68aaec8835, type: 3}
   m_PrefabInstance: {fileID: 1110672405}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1529920865 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8308188722711053131, guid: fa337dd7d058f474d98b66efaf8ba31e, type: 3}
+  m_PrefabInstance: {fileID: 837240}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1586588478
 GameObject:
   m_ObjectHideFlags: 0
@@ -1079,6 +1146,17 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1961013022 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1488643815400334544, guid: fa337dd7d058f474d98b66efaf8ba31e, type: 3}
+  m_PrefabInstance: {fileID: 837240}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &300222377577502871
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1232,6 +1310,30 @@ PrefabInstance:
       propertyPath: hoverTextObject
       value: 
       objectReference: {fileID: 400966969}
+    - target: {fileID: 907558838341707009, guid: 877a897567a0b644f9900f71862d49fb, type: 3}
+      propertyPath: text
+      value: 
+      objectReference: {fileID: 1961013022}
+    - target: {fileID: 907558838341707009, guid: 877a897567a0b644f9900f71862d49fb, type: 3}
+      propertyPath: panel
+      value: 
+      objectReference: {fileID: 1529920865}
+    - target: {fileID: 907558838341707009, guid: 877a897567a0b644f9900f71862d49fb, type: 3}
+      propertyPath: canvas
+      value: 
+      objectReference: {fileID: 894231761}
+    - target: {fileID: 907558838341707009, guid: 877a897567a0b644f9900f71862d49fb, type: 3}
+      propertyPath: picture
+      value: 
+      objectReference: {fileID: 11400000, guid: dd097e76d1125fe479a666de914086ca, type: 2}
+    - target: {fileID: 907558838341707009, guid: 877a897567a0b644f9900f71862d49fb, type: 3}
+      propertyPath: textDisplay
+      value: 
+      objectReference: {fileID: 1474538059}
+    - target: {fileID: 907558838341707009, guid: 877a897567a0b644f9900f71862d49fb, type: 3}
+      propertyPath: hoverTextObject
+      value: 
+      objectReference: {fileID: 400966969}
     - target: {fileID: 1136655407790107074, guid: 877a897567a0b644f9900f71862d49fb, type: 3}
       propertyPath: m_RootOrder
       value: 12
@@ -1285,6 +1387,30 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 957985513}
     - target: {fileID: 2287028791249405976, guid: 877a897567a0b644f9900f71862d49fb, type: 3}
+      propertyPath: hoverTextObject
+      value: 
+      objectReference: {fileID: 400966969}
+    - target: {fileID: 5500120483464416630, guid: 877a897567a0b644f9900f71862d49fb, type: 3}
+      propertyPath: text
+      value: 
+      objectReference: {fileID: 1961013022}
+    - target: {fileID: 5500120483464416630, guid: 877a897567a0b644f9900f71862d49fb, type: 3}
+      propertyPath: panel
+      value: 
+      objectReference: {fileID: 1529920865}
+    - target: {fileID: 5500120483464416630, guid: 877a897567a0b644f9900f71862d49fb, type: 3}
+      propertyPath: canvas
+      value: 
+      objectReference: {fileID: 894231761}
+    - target: {fileID: 5500120483464416630, guid: 877a897567a0b644f9900f71862d49fb, type: 3}
+      propertyPath: picture
+      value: 
+      objectReference: {fileID: 11400000, guid: 6d228ce970a378b49b0fa3e7fd511a69, type: 2}
+    - target: {fileID: 5500120483464416630, guid: 877a897567a0b644f9900f71862d49fb, type: 3}
+      propertyPath: textDisplay
+      value: 
+      objectReference: {fileID: 1474538059}
+    - target: {fileID: 5500120483464416630, guid: 877a897567a0b644f9900f71862d49fb, type: 3}
       propertyPath: hoverTextObject
       value: 
       objectReference: {fileID: 400966969}
