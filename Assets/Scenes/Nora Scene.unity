@@ -537,9 +537,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 529332262}
+  - component: {fileID: 529332263}
   m_Layer: 0
   m_Name: SprayCan
-  m_TagString: Untagged
+  m_TagString: SprayCan
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -558,6 +559,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &529332263
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 529332261}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 161746cacb039af4d9391c0842e40917, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  charges: 0
+  graffiti: {fileID: 21300000, guid: 4e2ef8c5700259e4a8e7549b8b4ecc32, type: 3}
 --- !u!1 &894231761 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2515375899625496458, guid: fa337dd7d058f474d98b66efaf8ba31e, type: 3}
@@ -1377,6 +1392,10 @@ PrefabInstance:
     - target: {fileID: 1136655407790107074, guid: 877a897567a0b644f9900f71862d49fb, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1775969966178038658, guid: 877a897567a0b644f9900f71862d49fb, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 2287028791249405976, guid: 877a897567a0b644f9900f71862d49fb, type: 3}
       propertyPath: textDisplay

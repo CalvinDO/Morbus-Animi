@@ -11,12 +11,12 @@ public class MAInteractable : MonoBehaviour {
     public UnityEngine.UI.Text hoverTextObject;
 
     private Material standardMaterial;
-    private MeshRenderer meshRenderer;
+    //private MeshRenderer meshRenderer;
     private string newHoverText;
 
     private void Start() {
-        this.meshRenderer = this.GetComponent<MeshRenderer>();
-        this.standardMaterial = this.meshRenderer.material;
+        //this.meshRenderer = this.GetComponent<MeshRenderer>();
+        //this.standardMaterial = this.meshRenderer.material;
     }
 
     void OnDrawGizmosSelected() {
@@ -38,7 +38,7 @@ public class MAInteractable : MonoBehaviour {
 
 
         textDisplay.SetActive(false);
-        this.meshRenderer.material = standardMaterial;
+        //this.meshRenderer.material = standardMaterial;
     }
 
     public void setHover() {
@@ -66,10 +66,15 @@ public class MAInteractable : MonoBehaviour {
         }
         textDisplay.SetActive(true);
         hoverTextObject.text = newHoverText;
-        this.meshRenderer.sharedMaterial.SetFloat("Vector1_e2245ad420544fc4a4469d436b48ff82", 0.4f);
+        //this.meshRenderer.sharedMaterial.SetFloat("Vector1_e2245ad420544fc4a4469d436b48ff82", 0.4f);
     }
 
     public virtual void MAInteract() {
         // this is overwritten
+    }
+
+    public void clearText()
+    {
+        this.textDisplay = null;
     }
 }

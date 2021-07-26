@@ -2475,7 +2475,8 @@ GameObject:
   - component: {fileID: 2612519340199814813}
   - component: {fileID: 262756024843391575}
   - component: {fileID: 8232496146199744647}
-  m_Layer: 0
+  - component: {fileID: 1349745615216558257}
+  m_Layer: 7
   m_Name: labyrinth_mit_zeugWalls
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2560,6 +2561,18 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -5741174448488666723, guid: b5bb9f75c56a66940971e6effb841dcc, type: 3}
+--- !u!114 &1349745615216558257
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1775969966178038658}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca9b8d28a78970346aef68c3cfb41be1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1796359576237538345
 GameObject:
   m_ObjectHideFlags: 0

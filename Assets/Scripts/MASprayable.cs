@@ -18,7 +18,7 @@ public class MASprayable : MonoBehaviour
             sprayPrefab = new GameObject("spray");
             sprayPrefab.AddComponent<SpriteRenderer>();
             sprayPrefab.GetComponent<SpriteRenderer>().sprite = sprayCan.graffiti;
-            sprayPrefab.transform.localScale += new Vector3(1.5f, 1.5f, 1.5f);
+            sprayPrefab.transform.localScale -= new Vector3(1.5f, 1.5f, 1.5f);
             rotation *= Quaternion.Euler(0, -90, 0);
             float xMovement = Mathf.Abs(difference.x) * (0.01f / difference.x);
             Debug.Log("x movement is" + xMovement);
