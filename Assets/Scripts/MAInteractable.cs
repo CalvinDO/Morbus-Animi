@@ -75,6 +75,7 @@ public class MAInteractable : MonoBehaviour {
 
     public void clearText()
     {
+        hoverTextObject.text = null;
         this.textDisplay = null;
     }
 }

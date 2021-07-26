@@ -7819,7 +7819,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25c3a47e6ed38e54bb1009ecd5e934d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentSelection: 0
+  currentSelection: 4
   radius: 3
   textDisplay: {fileID: 0}
   hoverTextObject: {fileID: 0}
@@ -11399,7 +11399,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25c3a47e6ed38e54bb1009ecd5e934d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentSelection: 0
+  currentSelection: 4
   radius: 3
   textDisplay: {fileID: 0}
   hoverTextObject: {fileID: 0}

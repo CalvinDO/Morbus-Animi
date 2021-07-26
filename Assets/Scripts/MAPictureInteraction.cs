@@ -11,6 +11,7 @@ public class MAPictureInteraction : MAInteractable
     public Text text;
     public override void MAInteract()
     {
+        clearText();
         base.MAInteract();
         panel.GetComponent<Image>().sprite = picture.icon;
         text.text = picture.description;
