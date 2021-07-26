@@ -9,10 +9,12 @@ public class MAPictureInteraction : MAInteractable
     public GameObject canvas;
     public GameObject panel;
     public Text text;
-    public GameObject darkNorah;
+    public MADarkNorah darkNorah;
 
     public void showNorah() {
-        this.darkNorah.SetActive(true);
+        this.darkNorah.gameObject.SetActive(true);
+
+        this.darkNorah.StartMoving();
     }
 
     private void OnTriggerEnter(Collider other) {
