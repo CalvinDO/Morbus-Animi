@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Nora's Mom Picture
   icon: {fileID: 21300000, guid: 1d5cb51aa1e60854186a7a762725fc0c, type: 3}
-  description: Here is some text about Nora's Mom.
+  description: My mom always said the same than my dad did.
   value: 0
