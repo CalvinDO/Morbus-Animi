@@ -619,7 +619,7 @@ public class MACharacterController : MonoBehaviour {
                 if (this.hover == interactable) {
                     if (Input.GetMouseButtonDown(0) && interactable != null) {
                         this.hover.MAInteract();
-                        this.hover.clearText();
+                        //this.hover.clearText();
                     }
                 }
             }

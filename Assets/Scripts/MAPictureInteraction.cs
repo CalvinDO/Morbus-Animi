@@ -9,14 +9,32 @@ public class MAPictureInteraction : MAInteractable
     public GameObject canvas;
     public GameObject panel;
     public Text text;
+    public GameObject darkNorah;
+
+    public void showNorah() {
+        this.darkNorah.SetActive(true);
+    }
+
+    private void OnTriggerEnter(Collider other) {
+        if (other.GetComponent<MACharacterController>() == null) {
+            return;
+        }
+
+        this.MAInteract();
+    }
     public override void MAInteract()
     {
         clearText();
         base.MAInteract();
         panel.GetComponent<Image>().sprite = picture.icon;
         text.text = picture.description;
-        canvas.SetActive(!canvas.activeSelf);
-        if (canvas.activeSelf)
+
+        if (this.darkNorah != null) {
+            canvas.GetComponentInChildren<Button>().onClick.AddListener(this.showNorah);
+        }
+
+        canvas.gameObject.SetActive(!canvas.gameObject.activeSelf);
+        if (canvas.gameObject.activeSelf)
         {
             Time.timeScale = 0;
         }
