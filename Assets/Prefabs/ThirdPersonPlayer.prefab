@@ -1433,6 +1433,7 @@ MonoBehaviour:
   animator: {fileID: 1943279514}
   animation: {fileID: 1943279515}
   spaceType: 1
+  footsteps: {fileID: 0}
 --- !u!54 &548188418280555937
 Rigidbody:
   m_ObjectHideFlags: 0

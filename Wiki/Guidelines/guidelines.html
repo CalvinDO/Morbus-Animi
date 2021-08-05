@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guidelines</title>
+</head>
+
+<body>
+    <h1>
+        Guidelines
+    </h1>
+
+    <h2>
+        Allgemein
+    </h2>
+    <h3>
+        Ordnerstruktur
+    </h3>
+
+    <ul>
+        <li>Assets
+            <ul>
+                <li>Prefabs</li>
+                <ul>
+                    <li>Tunnel</li>
+                    <li>Props</li>
+                    <li>UI</li>
+                    <li>Physics</li>
+                    <li>Manager (MenuManager)</li>
+                    <li>VFX</li>
+                </ul>
+                <li>Audio</li>
+                <ul>
+                    <li>Ambience</li>
+                    <li>Interaction</li>
+                    <li>AreaSounds</li>
+                </ul>
+
+                <li>Scripts</li>
+                <ul>
+                    <li>Editor</li>
+                    <ul>
+                        <li>Subordner exakt identisch zu dem jeweiligem Runtime Script ! - Hinter Klassennamen
+                            "Editor.cs"</li>
+                    </ul>
+                    <li>Runtime</li>
+                    <ul>
+                        <li>GameScripts</li>
+                        <li>Debugging</li>
+                        <li>Manager</li>
+                        <li>SceneManager</li>
+                    </ul>
+                </ul>
+                <li>Textures and Materials</li>
+                <ul>
+                    <li>
+                        Gleiche Ordnerstruktur wie "Prefabs" nur ohne Manager etc.
+                    </li>
+                </ul>
+                <li>Shader</li>
+                <ul>
+                    <li>
+                        Aufbauend auf Ordnerstruktur "Textures and Materials" - wo Shader benötigt
+                    </li>
+                </ul>
+                <li>Meshes</li>
+                <ul>
+                    <li>
+                        Gleiche Ordnerstruktur wie "Prefabs" nur ohne Manager etc.
+                    </li>
+                </ul>
+
+                <li>Fonts</li>
+            </ul>
+        </li>
+        <li>Packages
+            <ul>
+                <li>Addons</li>
+                <li>Plugins</li>
+                <li>Keine einfachen FBX Modelle etc.!</li>
+            </ul>
+        </li>
+    </ul>
+
+    <h2>
+        Dev
+    </h2>
+
+
+    <h2>
+        Art
+    </h2>
+
+    <h3>
+        Namensgebung
+    </h3>
+
+    <h4>
+        Allgemein
+    </h4>
+
+    <p>
+        Kein Objekt, außer der Spielwürfel, ist nach seinem geometrischen Ursprung benannt. <br>
+        Nicht:
+
+    </p>
+
+    <ul>
+        <li>
+            Cylinder.001
+        </li>
+        <li>
+            Cylinder.002
+        </li>
+    </ul>
+
+    <h4>
+        Sprache
+    </h4>
+
+    <p>
+        Alles ist in Englisch geschrieben. Bitte unbekannte Wörter auf Google kurz auf Englisch übersetzen.
+    </p>
+
+    Die Geometrie bitte auch so nennen wie das Überobjekt. <br>
+
+    Nur Nummern aufzählen, wenn es keine Alternative gibt.
+
+
+    <ul>
+        <li>
+            spine - Hip
+        </li>
+        <li>
+            spine.001 - Waist
+        </li>
+        <li>
+            spine.002 - Belly / Tummy
+        </li>
+        <li>
+            spine.003 - Chest/
+        </li>
+        <li>
+            spine.004 - Neck
+        </li>
+        <li>
+            spine.005 - Head
+        </li>
+    </ul>
+
+    <h2>
+        Audio
+    </h2>
+
+    <h3>
+        Geometrie
+    </h3>
+
+    <h4>
+        Pivot/Origin
+    </h4>
+    <p>
+        Allgemein befindet sich der Pivot von Objekten an der Stelle, an der sie entweder Montiert sind, oder darauf
+        stehen. <br>
+        Bei breiteren Objekten am besten in der Mitte vom Objekt auf der Bodenebene, so dass sie einfach auf die gleiche
+        Höhe des Bodens gesetzt werden können, oder, wenn sich ein anderer logischer Schluss ergibt, auf dieses.
+        <br>
+        Bei Räumen/ Tunneln bitte den Pivot auf Welt-0 der Höhen-Achse setzen.
+        <br>
+        Bewegliche Objekte haben ihren Pivot an der Stelle, um die sie sich im Spiel drehen sollen.
+
+    </p>
+
+    <h4>
+        Skalierungen
+    </h4>
+
+    <h4>
+        Rechtshändiges zu Linkshändiges Koordinatensystem
+    </h4>
+
+</body>
+
+</html>
