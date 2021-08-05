@@ -190,12 +190,49 @@
         Skalierungen
     </h4>
     <p>
-        Alle Objekte besitzen eine Skalierung von ( 1, 1, 1);
+        Alle Objekte besitzen eine Skalierung von ( 1, 1, 1)!
     </p>
     <h4>
-        Rechtshändiges zu Linkshändiges Koordinatensystem
+        Rechtshändiges zu Linkshändiges Koordinatensystem - Blender zu Unity
     </h4>
 
+    Blender-Export:
+    <ol>
+        <li>
+            Ctrl + A -> Apply Rotation & Scale
+        </li>
+        <li>
+            file -> Export -> Export as FBX
+        </li>
+        <li>
+            Bitte nur die Objekte exportieren, die auch tatsächlich exportiert werden sollen. Gegebenenfalls Include ->
+            Limit to = Selected Objects
+        </li>
+        <li>
+            Bei den zu exportierenden Objekttypen macht "Camera" so gut wie nie Sinn, und könnte die zum Spielstart
+            gebrauchte Kamera überschreiben!
+        </li>
+        <li>
+            Transform
+            <ul>
+                <li>
+                    Scale = 1.00
+                </li>
+                <li>
+                    Apply Scalings = AllLocal
+                </li>
+                <li>
+                    Forward = -Z Forward
+                </li>
+                <li>
+                    Up = Y Up
+                </li>
+            </ul>
+        </li>
+        <li>
+            Armature -> Add Leaf Bones AUS! Gibt schlechte Performance! Ausnahme: Dynamic Hair Rigging, etc.
+        </li>
+    </ol>
 
     <h2>
         Versionskontrolle
