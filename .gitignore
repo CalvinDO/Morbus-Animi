@@ -60,4 +60,5 @@ sysinfo.txt
 crashlytics-build.properties
 
 # Private Testing Folder
+_privateTesting
 
