@@ -144,7 +144,7 @@ public class MACharacterController : MonoBehaviour {
 
 
     public Animator animator;
-    public Animation animation;
+    public float idleVelocityThreshhold;
 
     //for item interaction
     MAInteractable hover;
@@ -174,7 +174,7 @@ public class MACharacterController : MonoBehaviour {
         this.ManageInteraction();
 
 
-        this.ManageIdleAnimation();
+        this.ControlAnimation();
 
         this.framesTillStart++;
         this.millisecondsSinceStart += Time.deltaTime;
@@ -224,10 +224,13 @@ public class MACharacterController : MonoBehaviour {
     }
 
 
-    private void ManageIdleAnimation() {
-        if (this.rb.velocity.magnitude > 0.1f) {
-            this.animator.Play("New Animation", -1, 1.3f);
+    private void ControlAnimation() {
+        if (Vector3.ProjectOnPlane(this.rb.velocity, Vector3.up).magnitude > this.idleVelocityThreshhold) {
+            this.animator.SetBool("isWalking", true);
+            return;
         }
+        this.animator.SetBool("isWalking", false);
+
     }
 
 
@@ -548,7 +551,7 @@ public class MACharacterController : MonoBehaviour {
         }
 
         //this.yRotator.transform.rotation = Quaternion.identity;
-       // this.yRotator.transform.rotation = Quaternion.Euler(0, 0, 4);
+        // this.yRotator.transform.rotation = Quaternion.Euler(0, 0, 4);
     }
 
     private void CalculateRadialMovementDirectionalRotation() {
@@ -602,15 +605,12 @@ public class MACharacterController : MonoBehaviour {
 
             if (Physics.Raycast(ray, out hit)) {
                 MAInteractable interactable = hit.collider.GetComponent<MAInteractable>();
-                if (interactable != null)
-                {
+                if (interactable != null) {
                     this.hover = interactable;
                     this.hover.setHover();
                 }
-                else
-                {
-                    if (this.hover != null)
-                    {
+                else {
+                    if (this.hover != null) {
                         this.hover.removeHover();
 
                         this.hover = null;

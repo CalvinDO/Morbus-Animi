@@ -49,7 +49,7 @@ Material:
     - _CutoutThresh: 0
     - _Distance: 1
     - _Speed: 1
-    - _Transparency: 0.05
+    - _Transparency: 0
     m_Colors:
     - Color_ba4a56263c8847d5bfdf2e7024c38c34: {r: 1, g: 0, b: 0, a: 1}
     - Color_ef1b8cfaa5ac400eb018bbfa1827452b: {r: 0.3396226, g: 0.3396226, b: 0.3396226, a: 1}
