@@ -46,13 +46,19 @@ public class MACharacterController : MonoBehaviour {
     [Range(0, 10f)]
     public float maxMovementSpeed;
 
-    [Range(1, 3f)]
+    [Range(1, 10f)]
     public float maxMovementSprintSpeedFactor;
 
     [Range(0, 550)]
     public float mouseSensitivity;
 
     public bool lockMouse = true;
+
+
+    private bool directionInputExists = false;
+    private bool isTooFast = false;
+
+    public MAGroundCheck groundCheck;
 
 
     [Range(0, 1000)]
@@ -102,8 +108,6 @@ public class MACharacterController : MonoBehaviour {
     [Range(0, 1)]
     public float camSlerpFactor;
 
-
-    bool isGrounded = true;
 
     private bool sprinting = false;
     private float timeSinceSprintStarted = 0;
@@ -157,6 +161,7 @@ public class MACharacterController : MonoBehaviour {
     public AudioSource footsteps;
 
     void Start() {
+
         this.currentXRotation = 0;
         this.xRotationAmount = 0;
 
@@ -165,12 +170,15 @@ public class MACharacterController : MonoBehaviour {
 
         this.last3Speeds = new Vector3[3];
 
+
+        this.rb.velocity = new Vector3(0, 5, 3);
     }
 
 
     void Update() {
+
         this.ManageUserControlledCamGoalRotation();
-        this.ManageJump();
+        this.ManageJumpNRun();
         this.ManageInteraction();
 
 
@@ -182,6 +190,7 @@ public class MACharacterController : MonoBehaviour {
     }
 
     private void FixedUpdate() {
+
         this.CalculateMovement();
 
         this.CalculateRotation();
@@ -197,12 +206,17 @@ public class MACharacterController : MonoBehaviour {
     }
 
     private void CalculateMovement() {
+
+        if (!this.groundCheck.isGrounded) {
+            return;
+        }
+
+
         this.AccelerateXZ();
 
         this.LimitSpeed();
 
-        this.SlowDown();
-
+        //this.SlowDown();
 
         if (this.isBobbingEnabled) {
             this.CalculateBob();
@@ -284,15 +298,19 @@ public class MACharacterController : MonoBehaviour {
         this.mainCamera.transform.rotation = Quaternion.Slerp(this.mainCamera.transform.rotation, this.currentCameraGoal.rotation, this.camSlerpFactor);
     }
 
-
+    /*
     private void OnCollisionStay(Collision collision) {
         if (this.framesTillJump > 10) {
-            this.isGrounded = true;
+            this.groundCheck.isGrounded = true;
             this.inJump = false;
             this.framesTillJump = 0;
         }
     }
+    */
 
+    private void OnCollisionEnter(Collision collision) {
+        this.rb.velocity = new Vector3(this.last3Speeds[0].x, this.rb.velocity.y, this.last3Speeds[0].z);
+    }
 
     private void AccelerateXZ() {
 
@@ -302,42 +320,53 @@ public class MACharacterController : MonoBehaviour {
 
         Vector3 resultingVector = Vector3.zero;
 
+        this.directionInputExists = false;
+
         if (Input.GetKey("w")) {
+
             Vector3 forward = GetMovementVectorInDirection(Vector3.forward);
 
-            this.playFootsteps();
+            this.directionInputExists = true;
             resultingVector += forward;
         }
 
         if (Input.GetKey("a")) {
-            Vector3 left = GetMovementVectorInDirection(Vector3.left);
-            this.playFootsteps();
 
+            Vector3 left = GetMovementVectorInDirection(Vector3.left);
+
+            this.directionInputExists = true;
             resultingVector += left;
         }
 
         if (Input.GetKey("s")) {
-            Vector3 back = GetMovementVectorInDirection(Vector3.back);
-            this.playFootsteps();
 
+            Vector3 back = GetMovementVectorInDirection(Vector3.back);
+
+            this.directionInputExists = true;
             resultingVector += back;
         }
 
         if (Input.GetKey("d")) {
-            Vector3 right = GetMovementVectorInDirection(Vector3.right);
-            this.playFootsteps();
 
+            Vector3 right = GetMovementVectorInDirection(Vector3.right);
+
+            this.directionInputExists = true;
             resultingVector += right;
         }
 
-        this.ManageSprinting();
+        if (this.directionInputExists) {
 
+            this.playFootsteps();
+            this.ManageSprinting();
 
-        Vector3 normalizedSum = resultingVector.normalized;
+            Vector3 normalizedSum = resultingVector.normalized;
 
-        Vector3 scaledNormalizedResult = normalizedSum * this.movementAcceleration;
+            Vector3 scaledNormalizedResult = normalizedSum * this.movementAcceleration;
 
-        this.rb.AddForce(scaledNormalizedResult, ForceMode.Acceleration);
+            if (!this.isTooFast) {
+                this.rb.AddForce(scaledNormalizedResult, ForceMode.Acceleration);
+            }
+        }
     }
 
     private void playFootsteps() {
@@ -351,13 +380,13 @@ public class MACharacterController : MonoBehaviour {
     private void ManageSprinting() {
         if (Input.GetKey("left shift")) {
             this.sprinting = true;
-            this.fpsCamera.fieldOfView = Mathf.Lerp(this.standardFOV, this.sprintFOV, this.timeSinceSprintStarted);
+            //this.mainCamera.fieldOfView = Mathf.Lerp(this.standardFOV, this.sprintFOV, this.timeSinceSprintStarted);
 
             this.timeSinceSprintStarted += this.SprintFOVLerpFactor;
         }
         else {
             this.sprinting = false;
-            this.fpsCamera.fieldOfView = Mathf.Lerp(this.sprintFOV, this.standardFOV, this.timeSinceSprintStarted);
+            //this.mainCamera.fieldOfView = Mathf.Lerp(this.sprintFOV, this.standardFOV, this.timeSinceSprintStarted);
 
             this.timeSinceSprintStarted -= this.SprintFOVLerpFactor;
         }
@@ -439,38 +468,52 @@ public class MACharacterController : MonoBehaviour {
 
     private void LimitSpeed() {
         //Limit the Player Speed because without it acceleration would result in infinite speed!
+
+        if (!this.directionInputExists) {
+            return;
+        }
+
+
         Vector3 velocityXZ = Vector3.ProjectOnPlane(this.rb.velocity, Vector3.up);
 
-        bool isToFast = false;
+        this.isTooFast = false;
         float maxSpeedForCompare;
 
         float maxMovementSprintSpeed = this.maxMovementSprintSpeedFactor * this.maxMovementSpeed;
 
 
         switch (this.sprinting) {
+
             case true:
-                isToFast = velocityXZ.magnitude > maxMovementSprintSpeed;
+
+                this.isTooFast = velocityXZ.magnitude > maxMovementSprintSpeed;
                 maxSpeedForCompare = this.maxMovementSprintSpeedFactor;
+
                 break;
             case false:
-                isToFast = velocityXZ.magnitude > this.maxMovementSpeed;
+
+                this.isTooFast = velocityXZ.magnitude > this.maxMovementSpeed;
                 maxSpeedForCompare = this.maxMovementSpeed;
 
                 break;
         }
 
-        if (isToFast) {
+        //Depricated code to set the character speed to the max speed.
+        //Depricated because it produces continous walking when changing directions while pressing other keys
+        /*
+        if (this.isTooFast) {
 
-            Vector3 newVelocityXZ = velocityXZ.normalized * maxSpeedForCompare;
+            Vector3 newVelocityXZ = velocityXZ.normalized * maxSpeedForCompare * 0.94f;
 
             this.rb.velocity = new Vector3(newVelocityXZ.x, this.rb.velocity.y, newVelocityXZ.z);
         }
+        */
     }
 
 
     private void SlowDown() {
 
-        if (!(Input.GetKey("w") || Input.GetKey("a") || Input.GetKey("s") || Input.GetKey("d")) && this.isGrounded) {
+        if (!(Input.GetKey("w") || Input.GetKey("a") || Input.GetKey("s") || Input.GetKey("d")) && this.groundCheck.isGrounded) {
             Vector3 velocity = this.rb.velocity;
 
             velocity.x *= (1 - this.slowDownFactor);
@@ -481,21 +524,22 @@ public class MACharacterController : MonoBehaviour {
     }
 
 
-    private void ManageJump() {
+    private void ManageJumpNRun() {
+        this.ManageJump();
+    }
 
-        if (Input.GetKeyDown("space") && this.isGrounded) {
+    private void ManageJump() {
+        if (Input.GetKeyDown("space") && this.groundCheck.isGrounded) {
 
             Vector3 force = Vector3.up * this.jumpForce;
 
             rb.AddForce(force, ForceMode.Impulse);
 
             this.transform.Translate(Vector3.up * 0.01f);
-            this.isGrounded = false;
+           // this.groundCheck.isGrounded = false;
             this.inJump = true;
         }
     }
-
-
 
     private void CalculateBob() {
 

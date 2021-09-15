@@ -14,8 +14,8 @@ TagManager:
   - UI
   - DistanceTrigger
   - Wall
-  - 
-  - 
+  - MA_Character
+  - MA_GroundCheck
   - 
   - 
   - 
