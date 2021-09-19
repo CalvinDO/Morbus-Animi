@@ -60,6 +60,10 @@ public class MACharacterController : MonoBehaviour {
 
     public MAGroundCheck groundCheck;
 
+    private bool isCollidingWall = false;
+
+    public float minWalljumpVelocity = 0.5f;
+    public float minWalljumpYVelocity = 0.5f;
 
     [Range(0, 1000)]
     public float jumpForce;
@@ -76,6 +80,7 @@ public class MACharacterController : MonoBehaviour {
 
     public Vector3[] last3Speeds;
 
+    private Vector3 speedBeforeWallContact;
 
     public GameObject xRotator;
     public GameObject yRotator;
@@ -169,7 +174,7 @@ public class MACharacterController : MonoBehaviour {
         //Cursor.lockState = this.lockMouse? CursorLockMode.Locked: CursorLockMode.None;
 
         this.last3Speeds = new Vector3[3];
-
+        this.speedBeforeWallContact = Vector3.zero;
 
         this.rb.velocity = new Vector3(0, 5, 3);
     }
@@ -298,19 +303,35 @@ public class MACharacterController : MonoBehaviour {
         this.mainCamera.transform.rotation = Quaternion.Slerp(this.mainCamera.transform.rotation, this.currentCameraGoal.rotation, this.camSlerpFactor);
     }
 
-    /*
+
     private void OnCollisionStay(Collision collision) {
-        if (this.framesTillJump > 10) {
-            this.groundCheck.isGrounded = true;
-            this.inJump = false;
-            this.framesTillJump = 0;
+
+        if (collision.gameObject.CompareTag("JumpNRunElement")) {
+
+            this.isCollidingWall = true;
+        }
+
+    }
+
+    private void OnCollisionExit(Collision collision) {
+
+        if (collision.gameObject.CompareTag("JumpNRunElement")) {
+
+            this.isCollidingWall = false;
         }
     }
-    */
 
     private void OnCollisionEnter(Collision collision) {
+
         this.rb.velocity = new Vector3(this.last3Speeds[0].x, this.rb.velocity.y, this.last3Speeds[0].z);
+
+        if (collision.gameObject.CompareTag("JumpNRunElement")) {
+
+            this.speedBeforeWallContact = this.rb.velocity;
+            this.isCollidingWall = true;
+        }
     }
+
 
     private void AccelerateXZ() {
 
@@ -322,33 +343,33 @@ public class MACharacterController : MonoBehaviour {
 
         this.directionInputExists = false;
 
-        if (Input.GetKey("w")) {
+        if (Input.GetKey(KeyCode.W)) {
 
-            Vector3 forward = GetMovementVectorInDirection(Vector3.forward);
+            Vector3 forward = GetUnitVectorInInputDirection(Vector3.forward);
 
             this.directionInputExists = true;
             resultingVector += forward;
         }
 
-        if (Input.GetKey("a")) {
+        if (Input.GetKey(KeyCode.A)) {
 
-            Vector3 left = GetMovementVectorInDirection(Vector3.left);
+            Vector3 left = GetUnitVectorInInputDirection(Vector3.left);
 
             this.directionInputExists = true;
             resultingVector += left;
         }
 
-        if (Input.GetKey("s")) {
+        if (Input.GetKey(KeyCode.S)) {
 
-            Vector3 back = GetMovementVectorInDirection(Vector3.back);
+            Vector3 back = GetUnitVectorInInputDirection(Vector3.back);
 
             this.directionInputExists = true;
             resultingVector += back;
         }
 
-        if (Input.GetKey("d")) {
+        if (Input.GetKey(KeyCode.D)) {
 
-            Vector3 right = GetMovementVectorInDirection(Vector3.right);
+            Vector3 right = GetUnitVectorInInputDirection(Vector3.right);
 
             this.directionInputExists = true;
             resultingVector += right;
@@ -395,7 +416,7 @@ public class MACharacterController : MonoBehaviour {
     }
 
 
-    private Vector3 GetMovementVectorInDirection(Vector3 direction) {
+    private Vector3 GetUnitVectorInInputDirection(Vector3 direction) {
 
         if (this.spaceType == MASpaceType.Radial) {
             return this.GetRadialMovementVectorInDirection(direction);
@@ -529,16 +550,49 @@ public class MACharacterController : MonoBehaviour {
     }
 
     private void ManageJump() {
-        if (Input.GetKeyDown("space") && this.groundCheck.isGrounded) {
 
-            Vector3 force = Vector3.up * this.jumpForce;
+        if (Input.GetKeyDown("space")) {
 
-            rb.AddForce(force, ForceMode.Impulse);
-
-            this.transform.Translate(Vector3.up * 0.01f);
-           // this.groundCheck.isGrounded = false;
-            this.inJump = true;
+            if (this.groundCheck.isGrounded) {
+                this.PerformeSimpleJump();
+            }
+            else {
+                if (this.WallJumpAllowed()) {
+                    this.PerformWallJump();
+                }
+            }
         }
+    }
+
+    private bool WallJumpAllowed() {
+
+        Vector3 XZPlaneProjectedSpeedBeforeWall = Vector3.ProjectOnPlane(this.speedBeforeWallContact, Vector3.up);
+        Vector2 XZSpeedBeforeWall = new Vector2(XZPlaneProjectedSpeedBeforeWall.x, XZPlaneProjectedSpeedBeforeWall.z);
+        float ySpeedBeforeWall = this.speedBeforeWallContact.y;
+
+        bool isXZMagnitudeHighEnough = XZSpeedBeforeWall.magnitude > this.minWalljumpVelocity;
+        bool isYSpeedHighEnough = ySpeedBeforeWall > this.minWalljumpYVelocity;
+
+        Debug.Log(XZSpeedBeforeWall.magnitude);
+        
+        return this.isCollidingWall && isXZMagnitudeHighEnough && isYSpeedHighEnough;
+    }
+
+    private void PerformWallJump() {
+
+        Debug.Log("WallJump!");
+
+    }
+
+
+    private void PerformeSimpleJump() {
+        Vector3 force = Vector3.up * this.jumpForce;
+
+        rb.AddForce(force, ForceMode.Impulse);
+
+        this.transform.Translate(Vector3.up * 0.01f);
+
+        this.inJump = true;
     }
 
     private void CalculateBob() {
