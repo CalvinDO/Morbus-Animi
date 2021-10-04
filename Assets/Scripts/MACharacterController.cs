@@ -60,6 +60,10 @@ public class MACharacterController : MonoBehaviour {
 
     public MAGroundCheck groundCheck;
 
+    public Transform defaultTranslation;
+    public Transform slideTransform;
+
+
     private bool isCollidingWall = false;
 
     public float minWalljumpVelocity = 0.5f;
@@ -87,7 +91,7 @@ public class MACharacterController : MonoBehaviour {
 
     public GameObject cameraRotator;
 
-
+    public GameObject physicalBody;
 
     float xRotationAmount = 0;
     float yRotationAmount = 0;
@@ -116,6 +120,7 @@ public class MACharacterController : MonoBehaviour {
 
     private bool sprinting = false;
     private float timeSinceSprintStarted = 0;
+    public float slideSpeedThreshhold;
     public float SprintFOVLerpFactor;
 
     bool movementEnabled = true;
@@ -165,6 +170,11 @@ public class MACharacterController : MonoBehaviour {
 
     public AudioSource footsteps;
 
+    public float maxSlideDuration;
+    private float remainingSlideTime;
+    private bool isSliding = false;
+
+
     void Start() {
 
         this.currentXRotation = 0;
@@ -175,6 +185,8 @@ public class MACharacterController : MonoBehaviour {
 
         this.last3Speeds = new Vector3[3];
         this.speedBeforeWallContact = Vector3.zero;
+
+        this.remainingSlideTime = this.maxSlideDuration;
 
         this.rb.velocity = new Vector3(0, 5, 3);
     }
@@ -192,6 +204,8 @@ public class MACharacterController : MonoBehaviour {
         this.framesTillStart++;
         this.millisecondsSinceStart += Time.deltaTime;
         this.scaledTimeSinceStart += Time.deltaTime;
+
+
     }
 
     private void FixedUpdate() {
@@ -339,55 +353,64 @@ public class MACharacterController : MonoBehaviour {
             return;
         }
 
-        Vector3 resultingVector = Vector3.zero;
-
         this.directionInputExists = false;
 
-        if (Input.GetKey(KeyCode.W)) {
+        Vector3 normalizedSummedInput = this.getNormalizedSummedInputVector();
 
-            Vector3 forward = GetUnitVectorInInputDirection(Vector3.forward);
-
-            this.directionInputExists = true;
-            resultingVector += forward;
-        }
-
-        if (Input.GetKey(KeyCode.A)) {
-
-            Vector3 left = GetUnitVectorInInputDirection(Vector3.left);
-
-            this.directionInputExists = true;
-            resultingVector += left;
-        }
-
-        if (Input.GetKey(KeyCode.S)) {
-
-            Vector3 back = GetUnitVectorInInputDirection(Vector3.back);
-
-            this.directionInputExists = true;
-            resultingVector += back;
-        }
-
-        if (Input.GetKey(KeyCode.D)) {
-
-            Vector3 right = GetUnitVectorInInputDirection(Vector3.right);
-
-            this.directionInputExists = true;
-            resultingVector += right;
-        }
 
         if (this.directionInputExists) {
 
             this.playFootsteps();
             this.ManageSprinting();
 
-            Vector3 normalizedSum = resultingVector.normalized;
-
-            Vector3 scaledNormalizedResult = normalizedSum * this.movementAcceleration;
+            Vector3 scaledNormalizedResult = normalizedSummedInput * this.movementAcceleration;
 
             if (!this.isTooFast) {
                 this.rb.AddForce(scaledNormalizedResult, ForceMode.Acceleration);
             }
         }
+    }
+
+    private Vector3 getNormalizedSummedInputVector() {
+        Vector3 resultingVector = Vector3.zero;
+
+        resultingVector += this.GetUnitVectorToInput(KeyCode.W);
+        resultingVector += this.GetUnitVectorToInput(KeyCode.A);
+        resultingVector += this.GetUnitVectorToInput(KeyCode.S);
+        resultingVector += this.GetUnitVectorToInput(KeyCode.D);
+
+        return resultingVector.normalized;
+    }
+
+    private Vector3 GetUnitVectorToInput(KeyCode keyCode) {
+
+        if (!Input.GetKey(keyCode)) {
+            return Vector3.zero;
+        }
+
+        Vector3 direction = Vector3.zero;
+
+        switch (keyCode) {
+            case KeyCode.W:
+                direction = Vector3.forward;
+                break;
+            case KeyCode.A:
+                direction = Vector3.left;
+                break;
+            case KeyCode.S:
+                direction = Vector3.back;
+                break;
+            case KeyCode.D:
+                direction = Vector3.right;
+                break;
+            default:
+                return Vector3.zero;
+        }
+
+        Vector3 directionAccordingToInput = GetUnitVectorInInputDirection(direction);
+
+        this.directionInputExists = true;
+        return directionAccordingToInput;
     }
 
     private void playFootsteps() {
@@ -547,6 +570,51 @@ public class MACharacterController : MonoBehaviour {
 
     private void ManageJumpNRun() {
         this.ManageJump();
+        this.ManageSlide();
+    }
+
+    private void ManageSlide() {
+
+        if (this.isSliding) {
+            this.remainingSlideTime -= Time.deltaTime;
+        }
+
+        if (Input.GetKeyDown(KeyCode.LeftControl)) {
+
+
+            if (this.groundCheck.isGrounded) {
+                Vector3 currentXZvelocity = Vector3.ProjectOnPlane(this.speedBeforeWallContact, Vector3.up);
+                Vector2 currentXZvelocity2D = new Vector2(currentXZvelocity.x, currentXZvelocity.z);
+
+                if (currentXZvelocity2D.magnitude > this.slideSpeedThreshhold) {
+                    this.StartSliding();
+                }
+            }
+        }
+
+        if (this.remainingSlideTime <= 0) {
+            this.EndSliding();
+            return;
+        }
+
+        if (Input.GetKeyUp(KeyCode.LeftControl)) {
+            this.EndSliding();
+        }
+    }
+
+    private void StartSliding() {
+        this.physicalBody.transform.position = this.slideTransform.position;
+        this.physicalBody.transform.rotation = this.slideTransform.rotation;
+
+        this.isSliding = true;
+    }
+
+    private void EndSliding() {
+        this.physicalBody.transform.localPosition = Vector3.zero;
+        this.physicalBody.transform.rotation = Quaternion.identity;
+        this.remainingSlideTime = this.maxSlideDuration;
+
+        this.isSliding = false;
     }
 
     private void ManageJump() {
@@ -574,13 +642,15 @@ public class MACharacterController : MonoBehaviour {
         bool isYSpeedHighEnough = ySpeedBeforeWall > this.minWalljumpYVelocity;
 
         Debug.Log(XZSpeedBeforeWall.magnitude);
-        
+
         return this.isCollidingWall && isXZMagnitudeHighEnough && isYSpeedHighEnough;
     }
 
     private void PerformWallJump() {
 
-        Debug.Log("WallJump!");
+        this.rb.AddForce(this.getNormalizedSummedInputVector() * 200, ForceMode.Impulse);
+
+        this.PerformeSimpleJump();
 
     }
 
@@ -724,3 +794,4 @@ public class MACharacterController : MonoBehaviour {
         }
     }
 }
+
