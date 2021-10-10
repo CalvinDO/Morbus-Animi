@@ -174,6 +174,8 @@ public class MACharacterController : MonoBehaviour {
     private float remainingSlideTime;
     private bool isSliding = false;
 
+    public Collider defaultCollider;
+    public Collider slideCollider;
 
     void Start() {
 
@@ -606,6 +608,9 @@ public class MACharacterController : MonoBehaviour {
         this.physicalBody.transform.position = this.slideTransform.position;
         this.physicalBody.transform.rotation = this.slideTransform.rotation;
 
+        this.defaultCollider.gameObject.SetActive(false);
+        this.slideCollider.gameObject.SetActive(true);
+
         this.isSliding = true;
     }
 
@@ -613,6 +618,10 @@ public class MACharacterController : MonoBehaviour {
         this.physicalBody.transform.localPosition = Vector3.zero;
         this.physicalBody.transform.rotation = Quaternion.identity;
         this.remainingSlideTime = this.maxSlideDuration;
+
+
+        this.defaultCollider.gameObject.SetActive(true);
+        this.slideCollider.gameObject.SetActive(false);
 
         this.isSliding = false;
     }
