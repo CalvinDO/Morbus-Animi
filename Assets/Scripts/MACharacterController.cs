@@ -46,7 +46,7 @@ public class MACharacterController : MonoBehaviour {
     [Range(0, 10f)]
     public float maxMovementSpeed;
 
-    [Range(1, 3f)]
+    [Range(1, 10f)]
     public float maxMovementSprintSpeedFactor;
 
     [Range(0, 550)]
@@ -54,6 +54,20 @@ public class MACharacterController : MonoBehaviour {
 
     public bool lockMouse = true;
 
+
+    private bool directionInputExists = false;
+    private bool isTooFast = false;
+
+    public MAGroundCheck groundCheck;
+
+    public Transform defaultTranslation;
+    public Transform slideTransform;
+
+
+    private bool isCollidingWall = false;
+
+    public float minWalljumpVelocity = 0.5f;
+    public float minWalljumpYVelocity = 0.5f;
 
     [Range(0, 1000)]
     public float jumpForce;
@@ -70,13 +84,14 @@ public class MACharacterController : MonoBehaviour {
 
     public Vector3[] last3Speeds;
 
+    private Vector3 speedBeforeWallContact;
 
     public GameObject xRotator;
     public GameObject yRotator;
 
     public GameObject cameraRotator;
 
-
+    public GameObject physicalBody;
 
     float xRotationAmount = 0;
     float yRotationAmount = 0;
@@ -103,10 +118,9 @@ public class MACharacterController : MonoBehaviour {
     public float camSlerpFactor;
 
 
-    bool isGrounded = true;
-
     private bool sprinting = false;
     private float timeSinceSprintStarted = 0;
+    public float slideSpeedThreshhold;
     public float SprintFOVLerpFactor;
 
     bool movementEnabled = true;
@@ -144,7 +158,7 @@ public class MACharacterController : MonoBehaviour {
 
 
     public Animator animator;
-    public Animation animation;
+    public float idleVelocityThreshhold;
 
     //for item interaction
     MAInteractable hover;
@@ -156,7 +170,13 @@ public class MACharacterController : MonoBehaviour {
 
     public AudioSource footsteps;
 
+    public float maxSlideDuration;
+    private float remainingSlideTime;
+    private bool isSliding = false;
+
+
     void Start() {
+
         this.currentXRotation = 0;
         this.xRotationAmount = 0;
 
@@ -164,24 +184,32 @@ public class MACharacterController : MonoBehaviour {
         //Cursor.lockState = this.lockMouse? CursorLockMode.Locked: CursorLockMode.None;
 
         this.last3Speeds = new Vector3[3];
+        this.speedBeforeWallContact = Vector3.zero;
 
+        this.remainingSlideTime = this.maxSlideDuration;
+
+        this.rb.velocity = new Vector3(0, 5, 3);
     }
 
 
     void Update() {
+
         this.ManageUserControlledCamGoalRotation();
-        this.ManageJump();
+        this.ManageJumpNRun();
         this.ManageInteraction();
 
 
-        this.ManageIdleAnimation();
+        this.ControlAnimation();
 
         this.framesTillStart++;
         this.millisecondsSinceStart += Time.deltaTime;
         this.scaledTimeSinceStart += Time.deltaTime;
+
+
     }
 
     private void FixedUpdate() {
+
         this.CalculateMovement();
 
         this.CalculateRotation();
@@ -197,12 +225,17 @@ public class MACharacterController : MonoBehaviour {
     }
 
     private void CalculateMovement() {
+
+        if (!this.groundCheck.isGrounded) {
+            return;
+        }
+
+
         this.AccelerateXZ();
 
         this.LimitSpeed();
 
-        this.SlowDown();
-
+        //this.SlowDown();
 
         if (this.isBobbingEnabled) {
             this.CalculateBob();
@@ -224,10 +257,13 @@ public class MACharacterController : MonoBehaviour {
     }
 
 
-    private void ManageIdleAnimation() {
-        if (this.rb.velocity.magnitude > 0.1f) {
-            this.animator.Play("New Animation", -1, 1.3f);
+    private void ControlAnimation() {
+        if (Vector3.ProjectOnPlane(this.rb.velocity, Vector3.up).magnitude > this.idleVelocityThreshhold) {
+            this.animator.SetBool("isWalking", true);
+            return;
         }
+        this.animator.SetBool("isWalking", false);
+
     }
 
 
@@ -283,10 +319,30 @@ public class MACharacterController : MonoBehaviour {
 
 
     private void OnCollisionStay(Collision collision) {
-        if (this.framesTillJump > 10) {
-            this.isGrounded = true;
-            this.inJump = false;
-            this.framesTillJump = 0;
+
+        if (collision.gameObject.CompareTag("JumpNRunElement")) {
+
+            this.isCollidingWall = true;
+        }
+
+    }
+
+    private void OnCollisionExit(Collision collision) {
+
+        if (collision.gameObject.CompareTag("JumpNRunElement")) {
+
+            this.isCollidingWall = false;
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision) {
+
+        this.rb.velocity = new Vector3(this.last3Speeds[0].x, this.rb.velocity.y, this.last3Speeds[0].z);
+
+        if (collision.gameObject.CompareTag("JumpNRunElement")) {
+
+            this.speedBeforeWallContact = this.rb.velocity;
+            this.isCollidingWall = true;
         }
     }
 
@@ -297,44 +353,64 @@ public class MACharacterController : MonoBehaviour {
             return;
         }
 
+        this.directionInputExists = false;
+
+        Vector3 normalizedSummedInput = this.getNormalizedSummedInputVector();
+
+
+        if (this.directionInputExists) {
+
+            this.playFootsteps();
+            this.ManageSprinting();
+
+            Vector3 scaledNormalizedResult = normalizedSummedInput * this.movementAcceleration;
+
+            if (!this.isTooFast) {
+                this.rb.AddForce(scaledNormalizedResult, ForceMode.Acceleration);
+            }
+        }
+    }
+
+    private Vector3 getNormalizedSummedInputVector() {
         Vector3 resultingVector = Vector3.zero;
 
-        if (Input.GetKey("w")) {
-            Vector3 forward = GetMovementVectorInDirection(Vector3.forward);
+        resultingVector += this.GetUnitVectorToInput(KeyCode.W);
+        resultingVector += this.GetUnitVectorToInput(KeyCode.A);
+        resultingVector += this.GetUnitVectorToInput(KeyCode.S);
+        resultingVector += this.GetUnitVectorToInput(KeyCode.D);
 
-            this.playFootsteps();
-            resultingVector += forward;
+        return resultingVector.normalized;
+    }
+
+    private Vector3 GetUnitVectorToInput(KeyCode keyCode) {
+
+        if (!Input.GetKey(keyCode)) {
+            return Vector3.zero;
         }
 
-        if (Input.GetKey("a")) {
-            Vector3 left = GetMovementVectorInDirection(Vector3.left);
-            this.playFootsteps();
+        Vector3 direction = Vector3.zero;
 
-            resultingVector += left;
+        switch (keyCode) {
+            case KeyCode.W:
+                direction = Vector3.forward;
+                break;
+            case KeyCode.A:
+                direction = Vector3.left;
+                break;
+            case KeyCode.S:
+                direction = Vector3.back;
+                break;
+            case KeyCode.D:
+                direction = Vector3.right;
+                break;
+            default:
+                return Vector3.zero;
         }
 
-        if (Input.GetKey("s")) {
-            Vector3 back = GetMovementVectorInDirection(Vector3.back);
-            this.playFootsteps();
+        Vector3 directionAccordingToInput = GetUnitVectorInInputDirection(direction);
 
-            resultingVector += back;
-        }
-
-        if (Input.GetKey("d")) {
-            Vector3 right = GetMovementVectorInDirection(Vector3.right);
-            this.playFootsteps();
-
-            resultingVector += right;
-        }
-
-        this.ManageSprinting();
-
-
-        Vector3 normalizedSum = resultingVector.normalized;
-
-        Vector3 scaledNormalizedResult = normalizedSum * this.movementAcceleration;
-
-        this.rb.AddForce(scaledNormalizedResult, ForceMode.Acceleration);
+        this.directionInputExists = true;
+        return directionAccordingToInput;
     }
 
     private void playFootsteps() {
@@ -348,13 +424,13 @@ public class MACharacterController : MonoBehaviour {
     private void ManageSprinting() {
         if (Input.GetKey("left shift")) {
             this.sprinting = true;
-            this.fpsCamera.fieldOfView = Mathf.Lerp(this.standardFOV, this.sprintFOV, this.timeSinceSprintStarted);
+            //this.mainCamera.fieldOfView = Mathf.Lerp(this.standardFOV, this.sprintFOV, this.timeSinceSprintStarted);
 
             this.timeSinceSprintStarted += this.SprintFOVLerpFactor;
         }
         else {
             this.sprinting = false;
-            this.fpsCamera.fieldOfView = Mathf.Lerp(this.sprintFOV, this.standardFOV, this.timeSinceSprintStarted);
+            //this.mainCamera.fieldOfView = Mathf.Lerp(this.sprintFOV, this.standardFOV, this.timeSinceSprintStarted);
 
             this.timeSinceSprintStarted -= this.SprintFOVLerpFactor;
         }
@@ -363,7 +439,7 @@ public class MACharacterController : MonoBehaviour {
     }
 
 
-    private Vector3 GetMovementVectorInDirection(Vector3 direction) {
+    private Vector3 GetUnitVectorInInputDirection(Vector3 direction) {
 
         if (this.spaceType == MASpaceType.Radial) {
             return this.GetRadialMovementVectorInDirection(direction);
@@ -436,38 +512,52 @@ public class MACharacterController : MonoBehaviour {
 
     private void LimitSpeed() {
         //Limit the Player Speed because without it acceleration would result in infinite speed!
+
+        if (!this.directionInputExists) {
+            return;
+        }
+
+
         Vector3 velocityXZ = Vector3.ProjectOnPlane(this.rb.velocity, Vector3.up);
 
-        bool isToFast = false;
+        this.isTooFast = false;
         float maxSpeedForCompare;
 
         float maxMovementSprintSpeed = this.maxMovementSprintSpeedFactor * this.maxMovementSpeed;
 
 
         switch (this.sprinting) {
+
             case true:
-                isToFast = velocityXZ.magnitude > maxMovementSprintSpeed;
+
+                this.isTooFast = velocityXZ.magnitude > maxMovementSprintSpeed;
                 maxSpeedForCompare = this.maxMovementSprintSpeedFactor;
+
                 break;
             case false:
-                isToFast = velocityXZ.magnitude > this.maxMovementSpeed;
+
+                this.isTooFast = velocityXZ.magnitude > this.maxMovementSpeed;
                 maxSpeedForCompare = this.maxMovementSpeed;
 
                 break;
         }
 
-        if (isToFast) {
+        //Depricated code to set the character speed to the max speed.
+        //Depricated because it produces continous walking when changing directions while pressing other keys
+        /*
+        if (this.isTooFast) {
 
-            Vector3 newVelocityXZ = velocityXZ.normalized * maxSpeedForCompare;
+            Vector3 newVelocityXZ = velocityXZ.normalized * maxSpeedForCompare * 0.94f;
 
             this.rb.velocity = new Vector3(newVelocityXZ.x, this.rb.velocity.y, newVelocityXZ.z);
         }
+        */
     }
 
 
     private void SlowDown() {
 
-        if (!(Input.GetKey("w") || Input.GetKey("a") || Input.GetKey("s") || Input.GetKey("d")) && this.isGrounded) {
+        if (!(Input.GetKey("w") || Input.GetKey("a") || Input.GetKey("s") || Input.GetKey("d")) && this.groundCheck.isGrounded) {
             Vector3 velocity = this.rb.velocity;
 
             velocity.x *= (1 - this.slowDownFactor);
@@ -478,21 +568,102 @@ public class MACharacterController : MonoBehaviour {
     }
 
 
-    private void ManageJump() {
+    private void ManageJumpNRun() {
+        this.ManageJump();
+        this.ManageSlide();
+    }
 
-        if (Input.GetKeyDown("space") && this.isGrounded) {
+    private void ManageSlide() {
 
-            Vector3 force = Vector3.up * this.jumpForce;
+        if (this.isSliding) {
+            this.remainingSlideTime -= Time.deltaTime;
+        }
 
-            rb.AddForce(force, ForceMode.Impulse);
+        if (Input.GetKeyDown(KeyCode.LeftControl)) {
 
-            this.transform.Translate(Vector3.up * 0.01f);
-            this.isGrounded = false;
-            this.inJump = true;
+
+            if (this.groundCheck.isGrounded) {
+                Vector3 currentXZvelocity = Vector3.ProjectOnPlane(this.speedBeforeWallContact, Vector3.up);
+                Vector2 currentXZvelocity2D = new Vector2(currentXZvelocity.x, currentXZvelocity.z);
+
+                if (currentXZvelocity2D.magnitude > this.slideSpeedThreshhold) {
+                    this.StartSliding();
+                }
+            }
+        }
+
+        if (this.remainingSlideTime <= 0) {
+            this.EndSliding();
+            return;
+        }
+
+        if (Input.GetKeyUp(KeyCode.LeftControl)) {
+            this.EndSliding();
         }
     }
 
+    private void StartSliding() {
+        this.physicalBody.transform.position = this.slideTransform.position;
+        this.physicalBody.transform.rotation = this.slideTransform.rotation;
 
+        this.isSliding = true;
+    }
+
+    private void EndSliding() {
+        this.physicalBody.transform.localPosition = Vector3.zero;
+        this.physicalBody.transform.rotation = Quaternion.identity;
+        this.remainingSlideTime = this.maxSlideDuration;
+
+        this.isSliding = false;
+    }
+
+    private void ManageJump() {
+
+        if (Input.GetKeyDown("space")) {
+
+            if (this.groundCheck.isGrounded) {
+                this.PerformeSimpleJump();
+            }
+            else {
+                if (this.WallJumpAllowed()) {
+                    this.PerformWallJump();
+                }
+            }
+        }
+    }
+
+    private bool WallJumpAllowed() {
+
+        Vector3 XZPlaneProjectedSpeedBeforeWall = Vector3.ProjectOnPlane(this.speedBeforeWallContact, Vector3.up);
+        Vector2 XZSpeedBeforeWall = new Vector2(XZPlaneProjectedSpeedBeforeWall.x, XZPlaneProjectedSpeedBeforeWall.z);
+        float ySpeedBeforeWall = this.speedBeforeWallContact.y;
+
+        bool isXZMagnitudeHighEnough = XZSpeedBeforeWall.magnitude > this.minWalljumpVelocity;
+        bool isYSpeedHighEnough = ySpeedBeforeWall > this.minWalljumpYVelocity;
+
+        Debug.Log(XZSpeedBeforeWall.magnitude);
+
+        return this.isCollidingWall && isXZMagnitudeHighEnough && isYSpeedHighEnough;
+    }
+
+    private void PerformWallJump() {
+
+        this.rb.AddForce(this.getNormalizedSummedInputVector() * 200, ForceMode.Impulse);
+
+        this.PerformeSimpleJump();
+
+    }
+
+
+    private void PerformeSimpleJump() {
+        Vector3 force = Vector3.up * this.jumpForce;
+
+        rb.AddForce(force, ForceMode.Impulse);
+
+        this.transform.Translate(Vector3.up * 0.01f);
+
+        this.inJump = true;
+    }
 
     private void CalculateBob() {
 
@@ -548,7 +719,7 @@ public class MACharacterController : MonoBehaviour {
         }
 
         //this.yRotator.transform.rotation = Quaternion.identity;
-       // this.yRotator.transform.rotation = Quaternion.Euler(0, 0, 4);
+        // this.yRotator.transform.rotation = Quaternion.Euler(0, 0, 4);
     }
 
     private void CalculateRadialMovementDirectionalRotation() {
@@ -602,15 +773,12 @@ public class MACharacterController : MonoBehaviour {
 
             if (Physics.Raycast(ray, out hit)) {
                 MAInteractable interactable = hit.collider.GetComponent<MAInteractable>();
-                if (interactable != null)
-                {
+                if (interactable != null) {
                     this.hover = interactable;
                     this.hover.setHover();
                 }
-                else
-                {
-                    if (this.hover != null)
-                    {
+                else {
+                    if (this.hover != null) {
                         this.hover.removeHover();
 
                         this.hover = null;
@@ -626,3 +794,4 @@ public class MACharacterController : MonoBehaviour {
         }
     }
 }
+

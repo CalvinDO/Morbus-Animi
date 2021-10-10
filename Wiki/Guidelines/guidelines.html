@@ -23,6 +23,12 @@
     <ul>
         <li>Assets
             <ul>
+                <li>Scenes</li>
+                <ul>
+                    <li>MainScene</li>
+                    <li>CutScenes</li>
+                    <li>UIScenes</li>
+                </ul>
                 <li>Prefabs</li>
                 <ul>
                     <li>Tunnel</li>
@@ -38,7 +44,6 @@
                     <li>Interaction</li>
                     <li>AreaSounds</li>
                 </ul>
-
                 <li>Scripts</li>
                 <ul>
                     <li>Editor</li>
@@ -159,7 +164,7 @@
         Pivot/Origin
     </h4>
     <p>
-        Allgemein befindet sich der Pivot von Objekten an der Stelle, an der sie entweder Montiert sind, oder darauf
+        Allgemein befindet sich der Pivot von Objekten an der Stelle, an der sie entweder montiert sind, oder darauf
         stehen. <br> <br>
         Bei breiteren Objekten am besten in der Mitte vom Objekt auf der Bodenebene, so dass sie einfach auf die gleiche
         Höhe des Bodens gesetzt werden können, oder, wenn sich ein anderer logischer Schluss ergibt, auf dieses.
@@ -167,6 +172,12 @@
         Bei Räumen/ Tunneln bitte den Pivot auf Welt-0 der Höhen-Achse setzen.
         <br> <br>
         Bewegliche Objekte haben ihren Pivot an der Stelle, um die sie sich im Spiel drehen sollen.
+        <br> <br>
+        Objekte werden nicht voneinander getrennt, wenn es nicht notwendig ist, und viele Objekte erzeugt. Beispiel:
+        Blume (die nicht zerissen werden soll) -> Blätter existieren nicht als einzelne Objekte.
+        <br> <br>
+        Möbel o.Ä. können vom Raum getrennt werden, da sie eventuell wiederverwendet werden und es im Nachhinein Arbeit
+        ist, sie zu trennen.
         <br> <br>
         Rotation/Orientierung der Objekte: <br>
         Das lokale Koordinatensystem eines Objektes sollte möglichst entlang seiner tatsächlichen Ausrichtung angebracht
@@ -219,10 +230,10 @@
                     Scale = 1.00
                 </li>
                 <li>
-                    Apply Scalings = AllLocal
+                    Apply Scalings = FBX All (viele benutzen All Local, doch das gibt bei uns anscheinend Probleme)
                 </li>
                 <li>
-                    Forward = -Z Forward
+                    Forward = Z Forward
                 </li>
                 <li>
                     Up = Y Up
@@ -230,7 +241,30 @@
             </ul>
         </li>
         <li>
-            Armature -> Add Leaf Bones AUS! Gibt schlechte Performance! Ausnahme: Dynamic Hair Rigging, etc.
+            Armature -> Add Leaf Bones AUS! Gibt schlechte Performance! Ausnahme: Dynamic Hair Rigging, etc. (Bitte
+            vorher andere aus dem Team fragen)
+        </li>
+        <li>
+            Bake Animation -> Bake Animation an.
+
+            <ul>
+                <li>
+                    Key all Bones = an
+                </li>
+                <li>
+                    NLA Strips = aus
+                </li>
+                <li>
+                    All Actions = an (Wenn es Probleme gibt, dass Animation (Aktionen) exportiert werden, die gar nicht
+                    mehr wirklich vorhanden sind, dann lieber AUS schalten)
+                </li>
+                <li>
+                    Force Start/End Keying = aus
+                </li>
+            </ul>
+        </li>
+        <li>
+            Export FBX :)
         </li>
     </ol>
 
