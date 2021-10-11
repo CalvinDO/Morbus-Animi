@@ -585,7 +585,7 @@ public class MACharacterController : MonoBehaviour {
 
 
             if (this.groundCheck.isGrounded) {
-                Vector3 currentXZvelocity = Vector3.ProjectOnPlane(this.speedBeforeWallContact, Vector3.up);
+                Vector3 currentXZvelocity = Vector3.ProjectOnPlane(this.rb.velocity, Vector3.up);
                 Vector2 currentXZvelocity2D = new Vector2(currentXZvelocity.x, currentXZvelocity.z);
 
                 if (currentXZvelocity2D.magnitude > this.slideSpeedThreshhold) {

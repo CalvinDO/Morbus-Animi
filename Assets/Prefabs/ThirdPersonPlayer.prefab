@@ -103,7 +103,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4956536749511618883}
   m_Layer: 8
-  m_Name: Default_Translation
+  m_Name: Default_Transform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -282,7 +282,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3094416466247905044
 Transform:
   m_ObjectHideFlags: 0
@@ -778,7 +778,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3219436218694975809}
   m_Layer: 8
-  m_Name: Slide_Translation
+  m_Name: Slide_Transform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
