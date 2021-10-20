@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MAGroundCheck : MonoBehaviour
 {
-    public bool isGrounded;
+    public bool isGrounded = true;
 
 
     void Start()

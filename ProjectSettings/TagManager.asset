@@ -6,6 +6,7 @@ TagManager:
   tags:
   - SprayCan
   - JumpNRunElement
+  - SwingbarTrigger
   layers:
   - Default
   - TransparentFX

@@ -177,6 +177,10 @@ public class MACharacterController : MonoBehaviour {
     public Collider defaultCollider;
     public Collider slideCollider;
 
+
+    public MACharacterSwingTrigger characterSwingTrigger;
+    public Transform swingGrabPosition;
+
     void Start() {
 
         this.currentXRotation = 0;
@@ -573,6 +577,21 @@ public class MACharacterController : MonoBehaviour {
     private void ManageJumpNRun() {
         this.ManageJump();
         this.ManageSlide();
+        this.ManageSwing();
+    }
+
+    private void ManageSwing() {
+        if (this.groundCheck.isGrounded) {
+            return;
+        }
+
+        if (!this.characterSwingTrigger.isSwingbarReachable) {
+            return;
+        }
+
+        if (Input.GetKey(KeyCode.Space)) {
+            this.characterSwingTrigger.reachableSwingbar.SetCharacterInitialPosition(this);
+        }
     }
 
     private void ManageSlide() {
