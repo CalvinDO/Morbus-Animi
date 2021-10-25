@@ -871,6 +871,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9199259026516661009}
+  - component: {fileID: 4982674107295644036}
   m_Layer: 8
   m_Name: ThirdPCamRotator
   m_TagString: Untagged
@@ -893,6 +894,26 @@ Transform:
   m_Father: {fileID: 6404148241480252427}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+--- !u!114 &4982674107295644036
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7943579179455273203}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 908a866a1e9787647987e0324d2daa6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Target: {fileID: 9199259026516661009}
+  Distance: 3.58
+  XSpeed: 5
+  YSpeed: 5
+  YMinLimit: -90
+  YMaxLimit: 90
+  DistanceMin: 0.5
+  DistanceMax: 5000
 --- !u!1 &8462947387098071626
 GameObject:
   m_ObjectHideFlags: 0

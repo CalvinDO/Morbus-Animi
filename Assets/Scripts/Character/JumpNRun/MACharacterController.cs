@@ -118,7 +118,7 @@ public class MACharacterController : MonoBehaviour {
     public float camSlerpFactor;
 
 
-    private bool sprinting = false;
+    private bool isSprinting = false;
     private float timeSinceSprintStarted = 0;
     public float slideSpeedThreshhold;
     public float SprintFOVLerpFactor;
@@ -180,6 +180,8 @@ public class MACharacterController : MonoBehaviour {
 
     public MACharacterSwingTrigger characterSwingTrigger;
     public Transform swingGrabPosition;
+    private bool isSwinging = false;
+
 
     void Start() {
 
@@ -187,14 +189,14 @@ public class MACharacterController : MonoBehaviour {
         this.xRotationAmount = 0;
 
 
-        //Cursor.lockState = this.lockMouse? CursorLockMode.Locked: CursorLockMode.None;
+        Cursor.lockState = this.lockMouse ? CursorLockMode.Locked : CursorLockMode.None;
 
         this.last3Speeds = new Vector3[3];
         this.speedBeforeWallContact = Vector3.zero;
 
         this.remainingSlideTime = this.maxSlideDuration;
 
-        this.rb.velocity = new Vector3(0, 5, 3);
+        // this.rb.velocity = new Vector3(0, 5, 3);
     }
 
 
@@ -212,6 +214,11 @@ public class MACharacterController : MonoBehaviour {
         this.scaledTimeSinceStart += Time.deltaTime;
 
 
+    }
+
+    private void OnApplicationPause(bool pause) {
+        //currently dead code
+        Cursor.lockState = CursorLockMode.None;
     }
 
     private void FixedUpdate() {
@@ -264,12 +271,26 @@ public class MACharacterController : MonoBehaviour {
 
 
     private void ControlAnimation() {
+
+        if (this.rb.velocity.magnitude > this.idleVelocityThreshhold) {
+            this.physicalBody.transform.rotation = Quaternion.Euler(0, Vector3.SignedAngle(Vector3.forward, Vector3.ProjectOnPlane(this.rb.velocity, Vector3.up), Vector3.up), 0);
+        }
+
+        if (this.isSprinting) {
+            this.animator.SetBool("isSprinting", true);
+            this.animator.SetBool("isWalking", false);
+            return;
+        }
+
+        this.animator.SetBool("isSprinting", false);
+
+
         if (Vector3.ProjectOnPlane(this.rb.velocity, Vector3.up).magnitude > this.idleVelocityThreshhold) {
             this.animator.SetBool("isWalking", true);
             return;
         }
-        this.animator.SetBool("isWalking", false);
 
+        this.animator.SetBool("isWalking", false);
     }
 
 
@@ -319,8 +340,17 @@ public class MACharacterController : MonoBehaviour {
     }
 
     private void SlerpCam() {
-        this.mainCamera.transform.position = Vector3.Slerp(this.mainCamera.transform.position, this.currentCameraGoal.position, this.camSlerpFactor);
-        this.mainCamera.transform.rotation = Quaternion.Slerp(this.mainCamera.transform.rotation, this.currentCameraGoal.rotation, this.camSlerpFactor);
+        switch (this.cameraMode) {
+            case MACameraMode.Fixed:
+
+                this.mainCamera.transform.position = Vector3.Slerp(this.mainCamera.transform.position, this.currentCameraGoal.position, this.camSlerpFactor);
+                this.mainCamera.transform.rotation = Quaternion.Slerp(this.mainCamera.transform.rotation, this.currentCameraGoal.rotation, this.camSlerpFactor);
+
+                break;
+            case MACameraMode.ThirdPerson:
+                this.mainCamera.transform.SetPositionAndRotation(this.currentCameraGoal.position, this.currentCameraGoal.rotation);
+                break;
+        }
     }
 
 
@@ -364,10 +394,11 @@ public class MACharacterController : MonoBehaviour {
         Vector3 normalizedSummedInput = this.getNormalizedSummedInputVector();
 
 
+        this.ManageSprinting();
+
         if (this.directionInputExists) {
 
             this.playFootsteps();
-            this.ManageSprinting();
 
             Vector3 scaledNormalizedResult = normalizedSummedInput * this.movementAcceleration;
 
@@ -428,14 +459,14 @@ public class MACharacterController : MonoBehaviour {
 
 
     private void ManageSprinting() {
-        if (Input.GetKey("left shift")) {
-            this.sprinting = true;
+        if (Input.GetKey("left shift") && this.directionInputExists) {
+            this.isSprinting = true;
             //this.mainCamera.fieldOfView = Mathf.Lerp(this.standardFOV, this.sprintFOV, this.timeSinceSprintStarted);
 
             this.timeSinceSprintStarted += this.SprintFOVLerpFactor;
         }
         else {
-            this.sprinting = false;
+            this.isSprinting = false;
             //this.mainCamera.fieldOfView = Mathf.Lerp(this.sprintFOV, this.standardFOV, this.timeSinceSprintStarted);
 
             this.timeSinceSprintStarted -= this.SprintFOVLerpFactor;
@@ -532,7 +563,7 @@ public class MACharacterController : MonoBehaviour {
         float maxMovementSprintSpeed = this.maxMovementSprintSpeedFactor * this.maxMovementSpeed;
 
 
-        switch (this.sprinting) {
+        switch (this.isSprinting) {
 
             case true:
 
@@ -589,8 +620,19 @@ public class MACharacterController : MonoBehaviour {
             return;
         }
 
+        if (this.isSwinging) {
+            if (!Input.GetKey(KeyCode.Space)) {
+                //Stop Swinging
+                this.isSwinging = false;
+            }
+            else {
+                return;
+            }
+        }
+
         if (Input.GetKey(KeyCode.Space)) {
             this.characterSwingTrigger.reachableSwingbar.SetCharacterInitialPosition(this);
+            this.isSwinging = true;
         }
     }
 
