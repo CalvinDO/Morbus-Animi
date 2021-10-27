@@ -12483,6 +12483,10 @@ PrefabInstance:
       propertyPath: m_ConnectedAnchor.z
       value: 50.567997
       objectReference: {fileID: 0}
+    - target: {fileID: 1515980923278938686, guid: e60a91a171e03f74b8b8130b52b0f1a1, type: 3}
+      propertyPath: m_ConnectedAnchor.x
+      value: -0.0000011920929
+      objectReference: {fileID: 0}
     - target: {fileID: 3004264557115144435, guid: e60a91a171e03f74b8b8130b52b0f1a1, type: 3}
       propertyPath: m_Name
       value: Swingbar

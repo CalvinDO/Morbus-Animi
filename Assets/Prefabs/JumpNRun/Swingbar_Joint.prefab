@@ -53,6 +53,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 155446430217677160}
+  - component: {fileID: 6866769761640697978}
   - component: {fileID: 7821617301977564774}
   - component: {fileID: 1515980923278938686}
   m_Layer: 0
@@ -75,9 +76,23 @@ Transform:
   m_Children:
   - {fileID: 5415543209653277263}
   - {fileID: 7651119378067718503}
+  - {fileID: 2037668488637144866}
   m_Father: {fileID: 7792822319451102412}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6866769761640697978
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2266059555115891243}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9ba91713963be74db19de670d148693, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb: {fileID: 2267989733777517618}
 --- !u!54 &7821617301977564774
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -106,7 +121,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 0, y: 1, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.0000011920929, y: 0, z: 0}
+  m_ConnectedAnchor: {x: 0, y: 0, z: 0}
   m_UseSpring: 0
   m_Spring:
     spring: 0
@@ -130,6 +145,50 @@ HingeJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
+--- !u!1 &2434508778546748092
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2037668488637144866}
+  - component: {fileID: 3098437115895771005}
+  m_Layer: 0
+  m_Name: SwingCollider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2037668488637144866
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2434508778546748092}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 155446430217677160}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &3098437115895771005
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2434508778546748092}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.5, y: 0.5, z: 2}
+  m_Center: {x: 0, y: 0, z: 1}
 --- !u!1 &2871451820299384159
 GameObject:
   m_ObjectHideFlags: 0
@@ -234,7 +293,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7792822319451102412}
-  - component: {fileID: 4017359609476830904}
   - component: {fileID: 2267989733777517618}
   m_Layer: 0
   m_Name: Swingbar_Joint
@@ -258,19 +316,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 90}
---- !u!114 &4017359609476830904
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3004264557115144435}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a9ba91713963be74db19de670d148693, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rb: {fileID: 2267989733777517618}
 --- !u!54 &2267989733777517618
 Rigidbody:
   m_ObjectHideFlags: 0
