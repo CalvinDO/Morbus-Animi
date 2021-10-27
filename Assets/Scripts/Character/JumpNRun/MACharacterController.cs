@@ -624,6 +624,7 @@ public class MACharacterController : MonoBehaviour {
             if (!Input.GetKey(KeyCode.Space)) {
                 //Stop Swinging
                 this.isSwinging = false;
+                this.characterSwingTrigger.reachableSwingbar.ReleaseCharacter(this);
             }
             else {
                 return;

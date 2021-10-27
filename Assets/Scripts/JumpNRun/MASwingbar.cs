@@ -4,35 +4,64 @@ using UnityEngine;
 
 public class MASwingbar : MonoBehaviour {
     public Rigidbody rb;
+    private GameObject currentRotator;
+    private MACharacterController attachedCharacter;
 
+    private Vector3[] last2CharacterFeetPositions;
 
     void Start() {
-
+        //initialize empty
+        this.last2CharacterFeetPositions = new Vector3[2];
+        this.last2CharacterFeetPositions[0] = Vector3.zero;
+        this.last2CharacterFeetPositions[1] = this.last2CharacterFeetPositions[0];
     }
 
-    // Update is called once per frame
+
     void Update() {
 
+        if (this.attachedCharacter == null) {
+            return;
+        }
+
+        this.last2CharacterFeetPositions[1] = this.last2CharacterFeetPositions[0];
+        this.last2CharacterFeetPositions[0] = this.attachedCharacter.transform.position;
     }
 
     public void SetCharacterInitialPosition(MACharacterController characterController) {
+        this.attachedCharacter = characterController;
+
 
         characterController.rb.isKinematic = true;
 
-        GameObject characterRotator = new GameObject();
-        characterRotator.name = "CharacterRotator";
+        this.currentRotator = new GameObject();
+        this.currentRotator.name = "CurrentRotator";
 
-        characterRotator.transform.SetPositionAndRotation(characterController.swingGrabPosition.position, characterController.swingGrabPosition.rotation);
+        this.currentRotator.transform.SetPositionAndRotation(characterController.swingGrabPosition.position, characterController.swingGrabPosition.rotation);
 
-        characterRotator.transform.SetParent(this.transform);
 
-        characterController.transform.SetParent(characterRotator.transform);
-        characterRotator.transform.LookAt(this.transform);
+        characterController.transform.SetParent(this.currentRotator.transform);
+        this.currentRotator.transform.LookAt(this.transform);
 
-        Vector3 handToSwingbar = this.transform.position - characterRotator.transform.position;
-        characterRotator.transform.Translate(handToSwingbar);
+        this.transform.LookAt(characterController.transform);
+        this.currentRotator.transform.SetParent(this.transform);
+
+        Vector3 handToSwingbar = this.transform.position - this.currentRotator.transform.position;
+        this.currentRotator.transform.Translate(handToSwingbar);
 
 
         this.rb.centerOfMass = characterController.transform.position;
+    }
+
+    public void ReleaseCharacter(MACharacterController characterController) {
+
+        characterController.transform.SetParent(null);
+        characterController.rb.isKinematic = false;
+
+        Vector3 tangentialVelocity = (this.last2CharacterFeetPositions[0] - this.last2CharacterFeetPositions[1]) * (1 / Time.deltaTime);
+        characterController.rb.velocity = tangentialVelocity;
+
+        GameObject.Destroy(this.currentRotator);
+        this.currentRotator = null;
+        this.attachedCharacter = null;
     }
 }
