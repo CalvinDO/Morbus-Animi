@@ -18,7 +18,7 @@ TagManager:
   - Wall
   - MA_Character
   - MA_GroundCheck
-  - 
+  - MA_WeightCollider
   - 
   - 
   - 

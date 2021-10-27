@@ -180,6 +180,8 @@ public class MACharacterController : MonoBehaviour {
 
     public MACharacterSwingTrigger characterSwingTrigger;
     public Transform swingGrabPosition;
+    public Transform swingFootUpPosition;
+
     private bool isSwinging = false;
 
 

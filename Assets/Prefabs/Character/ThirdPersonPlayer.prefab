@@ -30,6 +30,7 @@ Transform:
   - {fileID: 4956536749511618883}
   - {fileID: 3219436218694975809}
   - {fileID: 1039997808753021869}
+  - {fileID: 4494251013626885576}
   m_Father: {fileID: 96229848711621201}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -343,6 +344,36 @@ CapsuleCollider:
   m_Height: 0.36
   m_Direction: 1
   m_Center: {x: 0, y: 0.21, z: 0.12}
+--- !u!1 &4327874801151623774
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4494251013626885576}
+  m_Layer: 8
+  m_Name: SwingFootUpDirection
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4494251013626885576
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4327874801151623774}
+  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0.866, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 9193302593600946144}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!1 &4748489846233496094
 GameObject:
   m_ObjectHideFlags: 0
@@ -369,7 +400,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4748489846233496094}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.15, z: 0}
+  m_LocalPosition: {x: 0, y: 2.191, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2190268800412664216}
@@ -400,8 +431,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.44, y: 0.6038225, z: 0.5848274}
-  m_Center: {x: 0, y: -0.25191125, z: 0.05123329}
+  m_Size: {x: 0.44, y: 0.9895568, z: 0.5848274}
+  m_Center: {x: 0, y: -0.4907024, z: 0.05123329}
 --- !u!1 &5796218976814307369
 GameObject:
   m_ObjectHideFlags: 0
@@ -534,6 +565,7 @@ MonoBehaviour:
   slideCollider: {fileID: 1963699060850433040}
   characterSwingTrigger: {fileID: 2415645609979186630}
   swingGrabPosition: {fileID: 1039997808753021869}
+  swingFootUpPosition: {fileID: 4494251013626885576}
 --- !u!54 &1402342497931596602
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -937,13 +969,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8462947387098071626}
-  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 2, z: 0}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0.7071068, w: 0}
+  m_LocalPosition: {x: 0, y: 2.191, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 9193302593600946144}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 180}
 --- !u!1 &9023473552688222592
 GameObject:
   m_ObjectHideFlags: 0

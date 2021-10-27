@@ -155,7 +155,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2037668488637144866}
   - component: {fileID: 3098437115895771005}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: SwingCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
