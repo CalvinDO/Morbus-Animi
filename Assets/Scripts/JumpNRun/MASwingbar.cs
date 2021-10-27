@@ -5,17 +5,31 @@ using UnityEngine;
 public class MASwingbar : MonoBehaviour {
     public Rigidbody rb;
     private GameObject currentRotator;
+    private MACharacterController attachedCharacter;
+
+    private Vector3[] last2CharacterFeetPositions;
 
     void Start() {
-
+        //initialize empty
+        this.last2CharacterFeetPositions = new Vector3[2];
+        this.last2CharacterFeetPositions[0] = Vector3.zero;
+        this.last2CharacterFeetPositions[1] = this.last2CharacterFeetPositions[0];
     }
 
-    // Update is called once per frame
+
     void Update() {
 
+        if (this.attachedCharacter == null) {
+            return;
+        }
+
+        this.last2CharacterFeetPositions[1] = this.last2CharacterFeetPositions[0];
+        this.last2CharacterFeetPositions[0] = this.attachedCharacter.transform.position;
     }
 
     public void SetCharacterInitialPosition(MACharacterController characterController) {
+        this.attachedCharacter = characterController;
+
 
         characterController.rb.isKinematic = true;
 
@@ -39,9 +53,15 @@ public class MASwingbar : MonoBehaviour {
     }
 
     public void ReleaseCharacter(MACharacterController characterController) {
+
         characterController.transform.SetParent(null);
         characterController.rb.isKinematic = false;
+
+        Vector3 tangentialVelocity = (this.last2CharacterFeetPositions[0] - this.last2CharacterFeetPositions[1]) * (1 / Time.deltaTime);
+        characterController.rb.velocity = tangentialVelocity;
+
         GameObject.Destroy(this.currentRotator);
         this.currentRotator = null;
+        this.attachedCharacter = null;
     }
 }
