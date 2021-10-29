@@ -123,7 +123,8 @@ public class MACharacterController : MonoBehaviour {
     public float slideSpeedThreshhold;
     public float SprintFOVLerpFactor;
 
-    bool movementEnabled = true;
+    [HideInInspector]
+    public bool movementEnabled = true;
     int framesTillStart = 0;
 
     int framesTillJump = 0;

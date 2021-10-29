@@ -30,12 +30,25 @@ public class MASwingbar : MonoBehaviour {
 
     public void SetCharacterInitialPosition(MACharacterController characterController) {
 
+        this.rb.isKinematic = false;
+
         this.attachedCharacter = characterController;
 
+        //prepare Character values
         characterController.rb.isKinematic = true;
         Vector3 oldPos = characterController.transform.position;
         characterController.transform.position += Vector3.right * (this.transform.position.x - characterController.transform.position.x);
+
+
+        float dot = Vector3.Dot(characterController.physicalBody.transform.forward, this.transform.up);
+
         characterController.transform.rotation = Quaternion.identity;
+
+        if (dot < 0) {
+
+            characterController.physicalBody.transform.Rotate(Vector3.up * 180);
+        }
+
 
 
 
@@ -64,13 +77,21 @@ public class MASwingbar : MonoBehaviour {
         this.currentRotator.transform.SetParent(this.transform);
 
 
+        Debug.Log("setcharacterinitial");
+
         //this.rb.centerOfMass = characterController.transform.position;
     }
 
     public void RotateSwingTowardsCharacter(MACharacterController characterController) {
 
-        this.transform.localRotation = Quaternion.identity;
-        this.rb.angularVelocity = Vector3.zero;
+        // this.transform.localRotation = Quaternion.identity;
+        // this.rb.angularVelocity = Vector3.zero;
+
+        Debug.Log(this.currentRotator.transform.eulerAngles);
+        if (this.currentRotator.transform.eulerAngles.y != 0) {
+            this.transform.Rotate(new Vector3(-(this.currentRotator.transform.eulerAngles.x + 90), 0));
+            return;
+        }
 
         this.transform.Rotate(new Vector3(this.currentRotator.transform.eulerAngles.x + 90, 0));
     }
@@ -81,7 +102,6 @@ public class MASwingbar : MonoBehaviour {
         characterController.transform.rotation = Quaternion.identity;
         characterController.rb.isKinematic = false;
 
-      //  this.transform.LookAt(Vector3.down);
 
         Vector3 tangentialVelocity = (this.last2CharacterFeetPositions[0] - this.last2CharacterFeetPositions[1]) * (1 / Time.deltaTime);
         characterController.rb.velocity = tangentialVelocity;
@@ -89,5 +109,11 @@ public class MASwingbar : MonoBehaviour {
         GameObject.Destroy(this.currentRotator);
         this.currentRotator = null;
         this.attachedCharacter = null;
+
+        this.rb.angularVelocity = Vector3.zero;
+        this.rb.velocity = Vector3.zero;
+        this.transform.localRotation = Quaternion.identity;
+
+        this.rb.isKinematic = true;
     }
 }

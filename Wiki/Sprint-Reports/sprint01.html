@@ -19,12 +19,12 @@
         CameraController "Assassins-Creed-Like"
     </h3>
     <ul>
-        <input type="checkbox">
+        <input type="checkbox" checked>
         Wenn Character steht: Kamera dreht sich durch Maus um Character herum, Character dreht sich nicht, Kopf
-        schaut weg von
+        <input type="checkbox">Schaut weg von
         Kamera
         <br>
-        <input type="checkbox">
+        <input type="checkbox" checked>
         Wenn Character anfängt zu laufen: läuft vor der Kamera weg, Körper und Kopf sind alligned
         <br>
     </ul>
@@ -45,15 +45,20 @@
         Swing-Mechanik
     </h3>
     <ul>
-        <input type="checkbox">Wenn der Spieler in der Luft die Leertaste gedrückt hält, greift der Character Stangen an
+        <input type="checkbox" checked>Wenn der Spieler in der Luft die Leertaste gedrückt hält, greift der Character
+        Stangen an
         der Decke
         <br>
-        <input type="checkbox">Der Character schwingt an der Stange, bis der Spieler aufhört die Leertaste zu drücken,
-        oder ein Zeitintervall
+        <input type="checkbox" checked>Der Character schwingt an der Stange, bis der Spieler aufhört die Leertaste zu
+        drücken,
+        <input type="checkbox"> oder ein Zeitintervall
         abgelaufen ist, und Norah die Balance verliert
         <br>
-        <input type="checkbox">Anschließend ist der Character mit seiner finalen Fliehkraft der Physik überlassen.
+        <input type="checkbox" checked>Anschließend ist der Character mit seiner finalen Fliehkraft der Physik
+        überlassen.
         <br>
+        Problem: Schwingung lässt sich nach Character-Release nicht mehr aufhalten, isKinematic wird sofort wieder
+        zurückgesetzt
     </ul>
 </body>
 
