@@ -207,7 +207,7 @@ public class MACharacterController : MonoBehaviour {
 
         this.ManageUserControlledCamGoalRotation();
         this.ManageJumpNRun();
-        this.ManageInteraction();
+        //this.ManageInteraction();
 
 
         this.ControlAnimation();
@@ -364,6 +364,32 @@ public class MACharacterController : MonoBehaviour {
             this.isCollidingWall = true;
         }
 
+        MAInteractable interactable = collision.collider.GetComponent<MAInteractable>();
+        if (interactable != null)
+        {
+            this.hover = interactable;
+            this.hover.setHover();
+        }
+        if (Input.GetMouseButtonDown(1))
+        {
+            MASprayable sprayable = collision.collider.GetComponent<MASprayable>();
+            if (sprayable != null)
+            {
+                this.wall = sprayable;
+                //Vector3 difference = this.transform.position - hit.point;                    //have to change spray since interaction is now collider based instead of raycast
+                //this.wall.Spray(hit.point, sprayable.transform.rotation, difference);
+            }
+            else
+            {
+                this.wall = null;
+            }
+        }
+        if (Input.GetKey("e") && interactable != null)
+        {
+            this.hover.MAInteract();
+            //this.hover.clearText();
+        }
+
     }
 
     private void OnCollisionExit(Collision collision) {
@@ -371,6 +397,12 @@ public class MACharacterController : MonoBehaviour {
         if (collision.gameObject.CompareTag("JumpNRunElement")) {
 
             this.isCollidingWall = false;
+        }
+
+        if (this.hover != null)
+        {
+            this.hover.removeHover();
+            this.hover = null;
         }
     }
 
@@ -823,48 +855,6 @@ public class MACharacterController : MonoBehaviour {
         }
         else {
             this.xRotator.transform.Rotate(Vector3.right, this.xRotationAmount);
-        }
-    }
-
-    private void ManageInteraction() {
-
-        Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
-        if (Input.GetMouseButtonDown(1)) {
-            if (Physics.Raycast(ray, out hit)) {
-                MASprayable sprayable = hit.collider.GetComponent<MASprayable>();
-                if (sprayable != null) {
-                    this.wall = sprayable;
-                    Vector3 difference = this.transform.position - hit.point;
-                    this.wall.Spray(hit.point, sprayable.transform.rotation, difference);
-                }
-                else {
-                    this.wall = null;
-                }
-            }
-        }
-        if (Input.GetMouseButtonDown(0)) {
-
-            if (Physics.Raycast(ray, out hit)) {
-                MAInteractable interactable = hit.collider.GetComponent<MAInteractable>();
-                if (interactable != null) {
-                    this.hover = interactable;
-                    this.hover.setHover();
-                }
-                else {
-                    if (this.hover != null) {
-                        this.hover.removeHover();
-
-                        this.hover = null;
-                    }
-                }
-                if (this.hover == interactable) {
-                    if (Input.GetMouseButtonDown(0) && interactable != null) {
-                        this.hover.MAInteract();
-                        //this.hover.clearText();
-                    }
-                }
-            }
         }
     }
 }

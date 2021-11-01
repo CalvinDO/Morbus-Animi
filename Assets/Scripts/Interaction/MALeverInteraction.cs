@@ -5,7 +5,7 @@ using UnityEngine;
 public class MALeverInteraction : MAInteractable
 {
     public int leverIndex;
-    public PuzzleManager puzzleManager;
+    public MAPuzzleManager puzzleManager;
     public bool isLast;
     public GameObject door;
     public bool isFlipped;

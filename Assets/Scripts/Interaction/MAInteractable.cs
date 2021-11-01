@@ -60,6 +60,9 @@ public class MAInteractable : MonoBehaviour {
             case interactType.lever:
                 newHoverText = "flip [Left Mouse]";
                 break;
+            case interactType.climb:
+                newHoverText = "climb ladder [E]";
+                break;
             default:
                 newHoverText = "interact [E]";
                 break;
