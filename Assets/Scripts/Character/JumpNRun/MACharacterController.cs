@@ -201,8 +201,6 @@ public class MACharacterController : MonoBehaviour {
 
         // this.rb.velocity = new Vector3(0, 5, 3);
     }
-
-
     void Update() {
 
         this.ManageUserControlledCamGoalRotation();
@@ -218,7 +216,10 @@ public class MACharacterController : MonoBehaviour {
 
 
     }
-
+    private void Awake()
+    {
+        DontDestroyOnLoad(this.gameObject);
+    }
     private void OnApplicationPause(bool pause) {
         //currently dead code
         Cursor.lockState = CursorLockMode.None;

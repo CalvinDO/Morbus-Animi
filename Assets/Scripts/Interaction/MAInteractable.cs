@@ -1,7 +1,7 @@
 using UnityEngine;
 
 public class MAInteractable : MonoBehaviour {
-    public enum interactType { item, obstacle, climb, lever, image };
+    public enum interactType { item, obstacle, climb, lever, image, waterwheel, elevator };
     public interactType currentSelection = interactType.item;
 
     public float radius = 3f;
@@ -62,6 +62,12 @@ public class MAInteractable : MonoBehaviour {
                 break;
             case interactType.climb:
                 newHoverText = "climb ladder [E]";
+                break;
+            case interactType.waterwheel:
+                newHoverText = "dump water [E]";
+                break;
+            case interactType.elevator:
+                newHoverText = "change floor [E]";
                 break;
             default:
                 newHoverText = "interact [E]";

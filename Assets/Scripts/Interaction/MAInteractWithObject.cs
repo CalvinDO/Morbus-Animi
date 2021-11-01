@@ -20,6 +20,9 @@ public class MAInteractWithObject : MAInteractable
             case interactType.obstacle:
                 Open();
                 break;
+            case interactType.waterwheel:
+                DumpWater();
+                break;
             default:
                 break;
         }
@@ -37,6 +40,17 @@ public class MAInteractWithObject : MAInteractable
         if (inventory.items.Contains(this.item))
         {
             Destroy(this.gameObject);
+            textDisplay.SetActive(false);
+        }
+    }
+    void DumpWater()
+    {
+        if (inventory.items.Contains(this.item))
+        {
+            inventory.Remove(this.item);
+
+            Debug.Log("water wheel activated");
+
             textDisplay.SetActive(false);
         }
     }

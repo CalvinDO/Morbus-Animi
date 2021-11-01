@@ -19,6 +19,9 @@ public class MAItemInteraction : MAInteractable
             case interactType.item:
                 PickUp();
                 break;
+            case interactType.waterwheel:
+                DumpWater();
+                break;
             default:
                 break;
         }
@@ -42,11 +45,22 @@ public class MAItemInteraction : MAInteractable
                 sprayCan.charges += this.item.value;
                 break;
             default:
-                Debug.Log("no such item");
                 break;
         }
         //this stays
         Destroy(this.gameObject);
         textDisplay.SetActive(false);
+    }
+
+    void DumpWater()
+    {
+        if (inventory.items.Contains(this.item))
+        {
+            inventory.Remove(this.item);
+
+            Debug.Log("water wheel activated");
+
+            textDisplay.SetActive(false);
+        }
     }
 }
