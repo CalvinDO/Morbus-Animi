@@ -24,7 +24,7 @@ public class MAFrustumDetector : MonoBehaviour {
 
         Physics.Raycast(ray, out hit, this.light.range);
 
-
+        
         Vector3 hitConnection = hit.point - this.transform.position;
 
 
@@ -35,13 +35,17 @@ public class MAFrustumDetector : MonoBehaviour {
             return;
         }
 
-        if (this.hitsCharacter(hit)) {
+        
+        if (this.characterWhichGotHit(hit) != null) {
             Debug.DrawRay(ray.origin, hit.point - this.transform.position);
             this.light.color = Color.red;
         }
     }
 
-    private MACharacterController hitsCharacter(RaycastHit hit) {
+    private MACharacterController characterWhichGotHit(RaycastHit hit) {
+        if (hit.transform == null) {
+            return null;
+        }
         return hit.transform.gameObject.GetComponent<MACharacterController>();
     }
 }
