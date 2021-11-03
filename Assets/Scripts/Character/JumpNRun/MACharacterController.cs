@@ -178,12 +178,19 @@ public class MACharacterController : MonoBehaviour {
     public Collider defaultCollider;
     public Collider slideCollider;
 
+    public GameObject slideTransforms;
 
     public MACharacterSwingTrigger characterSwingTrigger;
     public Transform swingGrabPosition;
     public Transform swingFootUpPosition;
 
+    [Range(0, 3)]
+    public float swingReleaseVelocityFactor;
+
     private bool isSwinging = false;
+
+
+
 
 
     void Start() {
@@ -203,12 +210,12 @@ public class MACharacterController : MonoBehaviour {
     }
     void Update() {
 
+        this.ControlAnimationAndVelocityRotation();
         this.ManageUserControlledCamGoalRotation();
         this.ManageJumpNRun();
         //this.ManageInteraction();
 
 
-        this.ControlAnimation();
 
         this.framesTillStart++;
         this.millisecondsSinceStart += Time.deltaTime;
@@ -216,8 +223,7 @@ public class MACharacterController : MonoBehaviour {
 
 
     }
-    private void Awake()
-    {
+    private void Awake() {
         DontDestroyOnLoad(this.gameObject);
     }
     private void OnApplicationPause(bool pause) {
@@ -274,10 +280,14 @@ public class MACharacterController : MonoBehaviour {
     }
 
 
-    private void ControlAnimation() {
+    private void ControlAnimationAndVelocityRotation() {
 
         if (this.rb.velocity.magnitude > this.idleVelocityThreshhold) {
-            this.physicalBody.transform.rotation = Quaternion.Euler(0, Vector3.SignedAngle(Vector3.forward, Vector3.ProjectOnPlane(this.rb.velocity, Vector3.up), Vector3.up), 0);
+            this.physicalBody.transform.rotation = this.slideTransforms.transform.rotation = Quaternion.Euler(0, Vector3.SignedAngle(Vector3.forward, Vector3.ProjectOnPlane(this.rb.velocity, Vector3.up), Vector3.up), 0);
+
+            if (this.isSliding) {
+                this.physicalBody.transform.rotation = this.slideTransform.rotation;
+            }
         }
 
         if (this.isSprinting) {
@@ -366,27 +376,22 @@ public class MACharacterController : MonoBehaviour {
         }
 
         MAInteractable interactable = collision.collider.GetComponent<MAInteractable>();
-        if (interactable != null)
-        {
+        if (interactable != null) {
             this.hover = interactable;
             this.hover.setHover();
         }
-        if (Input.GetMouseButtonDown(1))
-        {
+        if (Input.GetMouseButtonDown(1)) {
             MASprayable sprayable = collision.collider.GetComponent<MASprayable>();
-            if (sprayable != null)
-            {
+            if (sprayable != null) {
                 this.wall = sprayable;
                 //Vector3 difference = this.transform.position - hit.point;                    //have to change spray since interaction is now collider based instead of raycast
                 //this.wall.Spray(hit.point, sprayable.transform.rotation, difference);
             }
-            else
-            {
+            else {
                 this.wall = null;
             }
         }
-        if (Input.GetKey("e") && interactable != null)
-        {
+        if (Input.GetKey("e") && interactable != null) {
             this.hover.MAInteract();
             //this.hover.clearText();
         }
@@ -400,8 +405,7 @@ public class MACharacterController : MonoBehaviour {
             this.isCollidingWall = false;
         }
 
-        if (this.hover != null)
-        {
+        if (this.hover != null) {
             this.hover.removeHover();
             this.hover = null;
         }
@@ -681,13 +685,16 @@ public class MACharacterController : MonoBehaviour {
 
         if (Input.GetKeyDown(KeyCode.LeftControl)) {
 
-
             if (this.groundCheck.isGrounded) {
-                Vector3 currentXZvelocity = Vector3.ProjectOnPlane(this.rb.velocity, Vector3.up);
-                Vector2 currentXZvelocity2D = new Vector2(currentXZvelocity.x, currentXZvelocity.z);
 
-                if (currentXZvelocity2D.magnitude > this.slideSpeedThreshhold) {
-                    this.StartSliding();
+                if (this.isSprinting) {
+
+                    Vector3 currentXZvelocity = Vector3.ProjectOnPlane(this.rb.velocity, Vector3.up);
+                    Vector2 currentXZvelocity2D = new Vector2(currentXZvelocity.x, currentXZvelocity.z);
+
+                    if (currentXZvelocity2D.magnitude > this.slideSpeedThreshhold) {
+                        this.StartSliding();
+                    }
                 }
             }
         }
@@ -704,12 +711,13 @@ public class MACharacterController : MonoBehaviour {
 
     private void StartSliding() {
         this.physicalBody.transform.position = this.slideTransform.position;
-        this.physicalBody.transform.rotation = this.slideTransform.rotation;
 
         this.defaultCollider.gameObject.SetActive(false);
         this.slideCollider.gameObject.SetActive(true);
 
         this.isSliding = true;
+
+        this.movementEnabled = false;
     }
 
     private void EndSliding() {
@@ -722,6 +730,8 @@ public class MACharacterController : MonoBehaviour {
         this.slideCollider.gameObject.SetActive(false);
 
         this.isSliding = false;
+
+        this.movementEnabled = true;
     }
 
     private void ManageJump() {

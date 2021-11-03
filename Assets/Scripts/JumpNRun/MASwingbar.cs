@@ -7,26 +7,22 @@ public class MASwingbar : MonoBehaviour {
     private GameObject currentRotator;
     private MACharacterController attachedCharacter;
 
-    private Vector3[] last2CharacterFeetPositions;
 
     void Start() {
-        //initialize empty
-        this.last2CharacterFeetPositions = new Vector3[2];
-        this.last2CharacterFeetPositions[0] = Vector3.zero;
-        this.last2CharacterFeetPositions[1] = this.last2CharacterFeetPositions[0];
-
+        this.InitializeCharacterFeetPositions();
     }
 
 
     void Update() {
 
-        if (this.attachedCharacter == null) {
-            return;
-        }
-
-        this.last2CharacterFeetPositions[1] = this.last2CharacterFeetPositions[0];
-        this.last2CharacterFeetPositions[0] = this.attachedCharacter.transform.position;
     }
+
+    private void InitializeCharacterFeetPositions() {
+        //this.last2CharacterFeetPositions = new Vector3[2];
+        //this.last2CharacterFeetPositions[0] = Vector3.zero;
+        //this.last2CharacterFeetPositions[1] = this.last2CharacterFeetPositions[0];
+    }
+
 
     public void SetCharacterInitialPosition(MACharacterController characterController) {
 
@@ -45,11 +41,8 @@ public class MASwingbar : MonoBehaviour {
         characterController.transform.rotation = Quaternion.identity;
 
         if (dot < 0) {
-
             characterController.physicalBody.transform.Rotate(Vector3.up * 180);
         }
-
-
 
 
         this.currentRotator = new GameObject();
@@ -69,6 +62,7 @@ public class MASwingbar : MonoBehaviour {
         this.currentRotator.transform.SetPositionAndRotation(characterController.swingGrabPosition.position, characterController.swingGrabPosition.rotation);
         characterController.transform.SetParent(this.currentRotator.transform);
         this.currentRotator.transform.position = this.transform.position;
+        characterController.movementEnabled = false;
 
 
         this.RotateSwingTowardsCharacter(characterController);
@@ -77,17 +71,13 @@ public class MASwingbar : MonoBehaviour {
         this.currentRotator.transform.SetParent(this.transform);
 
 
-        Debug.Log("setcharacterinitial");
-
         //this.rb.centerOfMass = characterController.transform.position;
     }
 
     public void RotateSwingTowardsCharacter(MACharacterController characterController) {
 
-        // this.transform.localRotation = Quaternion.identity;
-        // this.rb.angularVelocity = Vector3.zero;
-
-        Debug.Log(this.currentRotator.transform.eulerAngles);
+   
+      
         if (this.currentRotator.transform.eulerAngles.y != 0) {
             this.transform.Rotate(new Vector3(-(this.currentRotator.transform.eulerAngles.x + 90), 0));
             return;
@@ -101,10 +91,15 @@ public class MASwingbar : MonoBehaviour {
         characterController.transform.SetParent(null);
         characterController.transform.rotation = Quaternion.identity;
         characterController.rb.isKinematic = false;
+        characterController.movementEnabled = true;
 
 
-        Vector3 tangentialVelocity = (this.last2CharacterFeetPositions[0] - this.last2CharacterFeetPositions[1]) * (1 / Time.deltaTime);
+        Vector3 r = characterController.swingFootUpPosition.position - this.transform.position;
+        Vector3 angularVelocity = this.rb.angularVelocity;
+        Vector3 tangentialVelocity = Vector3.Cross(angularVelocity, r) * characterController.swingReleaseVelocityFactor;
+
         characterController.rb.velocity = tangentialVelocity;
+
 
         GameObject.Destroy(this.currentRotator);
         this.currentRotator = null;
@@ -114,6 +109,9 @@ public class MASwingbar : MonoBehaviour {
         this.rb.velocity = Vector3.zero;
         this.transform.localRotation = Quaternion.identity;
 
+        this.InitializeCharacterFeetPositions();
+
         this.rb.isKinematic = true;
+
     }
 }

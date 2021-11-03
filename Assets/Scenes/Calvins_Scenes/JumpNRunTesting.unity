@@ -5160,6 +5160,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d71785d53b03cc4a920f8a6df130435, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  counter: 1
 --- !u!4 &957985514
 Transform:
   m_ObjectHideFlags: 0
@@ -12654,6 +12655,14 @@ PrefabInstance:
       propertyPath: mainCamera
       value: 
       objectReference: {fileID: 408838765}
+    - target: {fileID: 6404148241480252436, guid: 95a1ea34258df31428e33b52d65e577e, type: 3}
+      propertyPath: movementAcceleration
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 6404148241480252436, guid: 95a1ea34258df31428e33b52d65e577e, type: 3}
+      propertyPath: swingReleaseVelocityFactor
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6404148241480252437, guid: 95a1ea34258df31428e33b52d65e577e, type: 3}
       propertyPath: m_Name
       value: ThirdPersonPlayer
