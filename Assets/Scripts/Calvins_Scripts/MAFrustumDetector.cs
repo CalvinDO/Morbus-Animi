@@ -5,8 +5,25 @@ using UnityEngine;
 public class MAFrustumDetector : MonoBehaviour {
 
     public Light light;
+
+    [HideInInspector]
     public MACharacterController characterController;
     public LayerMask characterLayerMask;
+
+    
+    public bool characterDetected = false;
+    [HideInInspector]
+    public MACharacterController detectedCharacter;
+    [HideInInspector]
+    public Vector3 lastSeenCharacterPosition;
+
+    private bool reachedOldPos = false;
+    private float timeTillCalmDown = 10;
+    private float remainingTimeTillCalmDown = 10;
+
+
+    [Range(0, 5)]
+    public float catchDistance;
 
 
     void Start() {
@@ -14,31 +31,65 @@ public class MAFrustumDetector : MonoBehaviour {
 
 
     void Update() {
+
+
         this.light.color = Color.white;
 
         RaycastHit hit;
 
-        Vector3 characterConnection = (this.characterController.transform.position + new Vector3(0, 1)) - this.transform.position;
+        Vector3 characterConnection = this.characterController.transform.position + new Vector3(0, 1) - this.transform.position;
 
         Ray ray = new Ray(this.transform.position, characterConnection);
 
         Physics.Raycast(ray, out hit, this.light.range);
 
-        
+
         Vector3 hitConnection = hit.point - this.transform.position;
 
 
         float angle = Vector3.Angle(this.transform.TransformDirection(Vector3.forward), hitConnection);
 
 
-        if (angle > this.light.spotAngle) {
+        if (!this.characterDetected) {
+            if (angle > this.light.spotAngle) {
+                return;
+            }
+        }
+
+
+        if (this.characterWhichGotHit(hit) != null) {
+            Debug.DrawRay(ray.origin, hit.point - this.transform.position);
+            this.light.color = Color.yellow;
+
+            this.characterDetected = true;
+            this.detectedCharacter = this.characterWhichGotHit(hit);
+            this.lastSeenCharacterPosition = this.detectedCharacter.transform.position;
+
+
+            float distance = Vector3.Distance(this.transform.position, hit.point);
+            if (distance < this.catchDistance) {
+                this.light.color = Color.red;
+                Debug.Log("Game over! You got catched!");
+            }
+
             return;
         }
 
         
-        if (this.characterWhichGotHit(hit) != null) {
-            Debug.DrawRay(ray.origin, hit.point - this.transform.position);
-            this.light.color = Color.red;
+
+
+        if (Vector3.Distance(this.lastSeenCharacterPosition, this.transform.position) < 2f) {
+            this.reachedOldPos = true;
+
+            this.remainingTimeTillCalmDown -= Time.deltaTime;
+
+            Debug.Log(this.remainingTimeTillCalmDown);
+
+            if (this.remainingTimeTillCalmDown <= 0) {
+                this.characterDetected = false;
+                this.reachedOldPos = false;
+                this.remainingTimeTillCalmDown = this.timeTillCalmDown;
+            }
         }
     }
 

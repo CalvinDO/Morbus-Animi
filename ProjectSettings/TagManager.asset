@@ -19,7 +19,7 @@ TagManager:
   - MA_Character
   - MA_GroundCheck
   - MA_WeightCollider
-  - 
+  - MA_NavMesh
   - 
   - 
   - 

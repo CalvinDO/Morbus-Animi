@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class MANorahsFatherMover : MonoBehaviour {
 
@@ -18,6 +19,9 @@ public class MANorahsFatherMover : MonoBehaviour {
 
     private Transform currentGoal;
 
+    public NavMeshAgent navMeshAgent;
+    public MAFrustumDetector frustumDetector;
+
     void Start() {
         this.currentGoal = this.GetRandomBool();
         this.currentDecisionTime = this.maxDecisionTime;
@@ -25,6 +29,11 @@ public class MANorahsFatherMover : MonoBehaviour {
 
 
     void FixedUpdate() {
+
+        if (this.frustumDetector.characterDetected) {
+            this.navMeshAgent.SetDestination(this.frustumDetector.lastSeenCharacterPosition);
+            return;
+        }
         this.Move();
     }
 
@@ -46,6 +55,7 @@ public class MANorahsFatherMover : MonoBehaviour {
     }
 
     private void Move() {
+
         Vector3 connection = this.currentGoal.position - this.transform.position;
         if (connection.magnitude< this.goalReachThreshhold) {
             return;
@@ -55,7 +65,7 @@ public class MANorahsFatherMover : MonoBehaviour {
         Vector3 increment = connectionDirection * this.speed;
 
         this.transform.LookAt(this.currentGoal.position);
-        this.transform.Translate(increment, Space.World);
+        this.navMeshAgent.Warp(this.transform.position + increment);
     }
 
     private Transform GetRandomBool() {
