@@ -251,7 +251,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentSelection: 0
-  radius: 0.54
+  currentInteraction: 0
+  radius: 0.5
   textDisplay: {fileID: 1726237068}
   hoverTextObject: {fileID: 906042300}
   item: {fileID: 11400000, guid: 4e5173d816bbc7c48a3049a02572482d, type: 2}
@@ -326,7 +327,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 30331541}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 60.71, y: 0.42, z: 47.060936}
+  m_LocalPosition: {x: 54.49, y: 0.42, z: 53.57}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -4447,6 +4448,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentSelection: 6
+  currentInteraction: 0
   radius: 1
   textDisplay: {fileID: 1726237068}
   hoverTextObject: {fileID: 906042300}
@@ -5165,6 +5167,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentSelection: 2
+  currentInteraction: 0
   radius: 1
   textDisplay: {fileID: 1726237068}
   hoverTextObject: {fileID: 906042300}
@@ -5999,7 +6002,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 161746cacb039af4d9391c0842e40917, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  charges: 0
+  charges: 5
   graffiti: {fileID: 21300000, guid: 4e2ef8c5700259e4a8e7549b8b4ecc32, type: 3}
 --- !u!4 &1028640533
 Transform:
@@ -8207,6 +8210,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentSelection: 5
+  currentInteraction: 0
   radius: 2
   textDisplay: {fileID: 1726237068}
   hoverTextObject: {fileID: 906042300}
@@ -10664,6 +10668,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentSelection: 2
+  currentInteraction: 0
   radius: 1
   textDisplay: {fileID: 1726237068}
   hoverTextObject: {fileID: 906042300}
@@ -12700,6 +12705,7 @@ GameObject:
   - component: {fileID: 1934452821}
   - component: {fileID: 1934452820}
   - component: {fileID: 1934452819}
+  - component: {fileID: 1934452823}
   m_Layer: 0
   m_Name: Wall2 (2)
   m_TagString: Untagged
@@ -12783,6 +12789,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 23
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
+--- !u!114 &1934452823
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1934452818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca9b8d28a78970346aef68c3cfb41be1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1942445175
 GameObject:
   m_ObjectHideFlags: 0

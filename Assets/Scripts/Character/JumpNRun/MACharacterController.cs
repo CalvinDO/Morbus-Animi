@@ -213,7 +213,7 @@ public class MACharacterController : MonoBehaviour {
         this.ControlAnimationAndVelocityRotation();
         this.ManageUserControlledCamGoalRotation();
         this.ManageJumpNRun();
-        //this.ManageInteraction();
+        this.ManageRaycastInteraction();
 
 
 
@@ -866,6 +866,54 @@ public class MACharacterController : MonoBehaviour {
         }
         else {
             this.xRotator.transform.Rotate(Vector3.right, this.xRotationAmount);
+        }
+    }
+
+    private void ManageRaycastInteraction()
+    {
+        Ray ray = fpsCamera.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit))
+        {
+            MAInteractable interactable = hit.collider.GetComponent<MAInteractable>();
+            MASprayable sprayable = hit.collider.GetComponent<MASprayable>();
+            if (interactable != null && interactable.currentInteraction.Equals(MAInteractable.interactionType.raycast))
+            {
+                this.hover = interactable;
+                this.hover.setHover();
+                Debug.Log("set hover");
+                Debug.Log(this.hover.name);
+            }
+            else
+            {
+                if (this.hover != null)
+                {
+                    this.hover.removeHover();
+                    this.hover = null;
+                }
+                Debug.Log("no hover");
+            }
+            if (this.hover == interactable)
+            {
+                if (Input.GetMouseButtonDown(0) && interactable != null)
+                {
+                    this.hover.MAInteract();
+                    //this.hover.clearText();
+                    Debug.Log("interacted");
+                }
+            }
+            if (sprayable != null && Input.GetMouseButtonDown(1))
+            {
+                this.wall = sprayable;
+                Vector3 difference = this.transform.position - hit.point;
+                this.wall.Spray(hit.point, sprayable.transform.rotation, difference);
+                Debug.Log("sprayed wall");
+            }
+            else
+            {
+                Debug.Log("no wall");
+                this.wall = null;
+            }
         }
     }
 }

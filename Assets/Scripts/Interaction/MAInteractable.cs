@@ -1,8 +1,10 @@
 using UnityEngine;
 
 public class MAInteractable : MonoBehaviour {
-    public enum interactType { item, obstacle, climb, lever, image, waterwheel, elevator };
-    public interactType currentSelection = interactType.item;
+    public enum objectType { item, obstacle, climb, lever, image, waterwheel, elevator };
+    public enum interactionType { collider, raycast};
+    public objectType currentSelection = objectType.item;
+    public interactionType currentInteraction = interactionType.collider;
 
     public float radius = 3f;
 
@@ -21,7 +23,7 @@ public class MAInteractable : MonoBehaviour {
 
     void OnDrawGizmosSelected() {
         Gizmos.color = Color.yellow;
-        if (currentSelection == interactType.item) {
+        if (currentSelection == objectType.item) {
             Gizmos.DrawWireSphere(transform.position, radius);
         }
         else {
@@ -48,25 +50,25 @@ public class MAInteractable : MonoBehaviour {
         }
 
         switch (currentSelection) {
-            case interactType.image:
+            case objectType.image:
                 newHoverText = "take picture [Left Mouse]";
                 break;
-            case interactType.item:
+            case objectType.item:
                 newHoverText = "pick up [Left Mouse]";
                 break;
-            case interactType.obstacle:
+            case objectType.obstacle:
                 newHoverText = "open [Left Mouse]";
                 break;
-            case interactType.lever:
+            case objectType.lever:
                 newHoverText = "flip [Left Mouse]";
                 break;
-            case interactType.climb:
+            case objectType.climb:
                 newHoverText = "climb ladder [E]";
                 break;
-            case interactType.waterwheel:
+            case objectType.waterwheel:
                 newHoverText = "dump water [E]";
                 break;
-            case interactType.elevator:
+            case objectType.elevator:
                 newHoverText = "change floor [E]";
                 break;
             default:
