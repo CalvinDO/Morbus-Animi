@@ -465,7 +465,11 @@ public class MACharacterController : MonoBehaviour {
                 desiredVelocity = normalizedSummedInput * this.maxMovementSpeed;
             }
 
-            Vector3 newVelocity = this.rb.velocity * (1 - Time.deltaTime * this.transitionSpeed) + desiredVelocity * (Time.deltaTime * this.transitionSpeed);
+            Vector3 oldVelocity = Vector3.ProjectOnPlane(this.rb.velocity, Vector3.up);
+
+            Vector3 newVelocity = oldVelocity * (1 - Time.deltaTime * this.transitionSpeed) + desiredVelocity * (Time.deltaTime * this.transitionSpeed);
+
+            newVelocity += Vector3.up * this.rb.velocity.y;
 
             this.rb.velocity = newVelocity;
         }
@@ -610,6 +614,8 @@ public class MACharacterController : MonoBehaviour {
         return Vector3.ProjectOnPlane(rotated, Vector3.up).normalized;
     }
 
+
+    [Obsolete("Limiting Speed is no longer needed because Character Movement is velocity-controlled, not acceleration-physics-controlled")]
     private void LimitSpeed() {
         //Limit the Player Speed because without it acceleration would result in infinite speed!
 
@@ -913,7 +919,7 @@ public class MACharacterController : MonoBehaviour {
                     this.hover.removeHover();
                     this.hover = null;
                 }
-                Debug.Log("no hover");
+                //Debug.Log("no hover");
             }
             if (this.hover == interactable)
             {
@@ -933,7 +939,7 @@ public class MACharacterController : MonoBehaviour {
             }
             else
             {
-                Debug.Log("no wall");
+                //Debug.Log("no wall");
                 this.wall = null;
             }
         }

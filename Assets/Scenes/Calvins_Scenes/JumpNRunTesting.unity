@@ -12656,12 +12656,24 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6404148241480252436, guid: 95a1ea34258df31428e33b52d65e577e, type: 3}
+      propertyPath: jumpForce
+      value: 380
+      objectReference: {fileID: 0}
+    - target: {fileID: 6404148241480252436, guid: 95a1ea34258df31428e33b52d65e577e, type: 3}
       propertyPath: mainCamera
       value: 
       objectReference: {fileID: 408838765}
     - target: {fileID: 6404148241480252436, guid: 95a1ea34258df31428e33b52d65e577e, type: 3}
+      propertyPath: slowDownFactor
+      value: 0.051
+      objectReference: {fileID: 0}
+    - target: {fileID: 6404148241480252436, guid: 95a1ea34258df31428e33b52d65e577e, type: 3}
       propertyPath: transitionSpeed
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6404148241480252436, guid: 95a1ea34258df31428e33b52d65e577e, type: 3}
+      propertyPath: maxMovementSpeed
+      value: 0.6
       objectReference: {fileID: 0}
     - target: {fileID: 6404148241480252436, guid: 95a1ea34258df31428e33b52d65e577e, type: 3}
       propertyPath: movementAcceleration
