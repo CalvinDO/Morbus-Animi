@@ -40,8 +40,8 @@ public enum MASpaceType {
 
 
 public class MACharacterController : MonoBehaviour {
-    [Range(0, 1000f)]
-    public float movementAcceleration;
+    //[Range(0, 1000f)]
+    //public float movementAcceleration;
 
     [Range(0, 10f)]
     public float transitionSpeed;
@@ -84,6 +84,7 @@ public class MACharacterController : MonoBehaviour {
 
     public Rigidbody rb;
 
+    [HideInInspector]
     public Vector3 speedAverage;
 
     public Vector3[] last3Speeds;
