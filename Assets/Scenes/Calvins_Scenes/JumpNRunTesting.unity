@@ -12607,6 +12607,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 250490488219866939, guid: 95a1ea34258df31428e33b52d65e577e, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: 82d0cc1e473380549ac92a074df9e772, type: 2}
     - target: {fileID: 6404148241480252427, guid: 95a1ea34258df31428e33b52d65e577e, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -12655,6 +12659,10 @@ PrefabInstance:
       propertyPath: mainCamera
       value: 
       objectReference: {fileID: 408838765}
+    - target: {fileID: 6404148241480252436, guid: 95a1ea34258df31428e33b52d65e577e, type: 3}
+      propertyPath: transitionSpeed
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 6404148241480252436, guid: 95a1ea34258df31428e33b52d65e577e, type: 3}
       propertyPath: movementAcceleration
       value: 12

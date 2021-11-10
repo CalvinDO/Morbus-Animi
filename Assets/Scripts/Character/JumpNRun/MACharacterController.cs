@@ -44,6 +44,10 @@ public class MACharacterController : MonoBehaviour {
     public float movementAcceleration;
 
     [Range(0, 10f)]
+    public float transitionSpeed;
+
+
+    [Range(0, 10f)]
     public float maxMovementSpeed;
 
     [Range(1, 10f)]
@@ -210,6 +214,8 @@ public class MACharacterController : MonoBehaviour {
     }
     void Update() {
 
+        this.CalculateMovement();
+
         this.ControlAnimationAndVelocityRotation();
         this.ManageUserControlledCamGoalRotation();
         this.ManageJumpNRun();
@@ -220,9 +226,8 @@ public class MACharacterController : MonoBehaviour {
         this.framesTillStart++;
         this.millisecondsSinceStart += Time.deltaTime;
         this.scaledTimeSinceStart += Time.deltaTime;
-
-
     }
+
     private void Awake() {
         DontDestroyOnLoad(this.gameObject);
     }
@@ -233,18 +238,18 @@ public class MACharacterController : MonoBehaviour {
 
     private void FixedUpdate() {
 
-        this.CalculateMovement();
+  
 
-        this.CalculateRotation();
+        //this.CalculateAimRotation();
 
 
         if (this.inJump) {
             this.framesTillJump++;
         }
-        this.CalculateSpeedAverage();
+
+        //this.CalculateSpeedAverage();
 
         this.ManageSmartCam();
-
     }
 
     private void CalculateMovement() {
@@ -256,9 +261,9 @@ public class MACharacterController : MonoBehaviour {
 
         this.AccelerateXZ();
 
-        this.LimitSpeed();
+        //this.LimitSpeed();
 
-        //this.SlowDown();
+        this.SlowDown();
 
         if (this.isBobbingEnabled) {
             this.CalculateBob();
@@ -440,13 +445,48 @@ public class MACharacterController : MonoBehaviour {
 
             this.playFootsteps();
 
+            /*
             Vector3 scaledNormalizedResult = normalizedSummedInput * this.movementAcceleration;
 
             if (!this.isTooFast) {
                 this.rb.AddForce(scaledNormalizedResult, ForceMode.Acceleration);
             }
+            */
+
+            Vector3 desiredVelocity;
+            
+           
+
+
+            if (this.isSprinting) {
+                desiredVelocity = normalizedSummedInput * this.maxMovementSpeed * this.maxMovementSprintSpeedFactor;
+            }
+            else {
+                desiredVelocity = normalizedSummedInput * this.maxMovementSpeed;
+            }
+
+            Vector3 newVelocity = this.rb.velocity * (1 - Time.deltaTime * this.transitionSpeed) + desiredVelocity * (Time.deltaTime * this.transitionSpeed);
+
+            this.rb.velocity = newVelocity;
         }
     }
+    private void ManageSprinting() {
+        if (Input.GetKey("left shift") && this.directionInputExists) {
+            this.isSprinting = true;
+            //this.mainCamera.fieldOfView = Mathf.Lerp(this.standardFOV, this.sprintFOV, this.timeSinceSprintStarted);
+
+            this.timeSinceSprintStarted += this.SprintFOVLerpFactor;
+        }
+        else {
+            this.isSprinting = false;
+            //this.mainCamera.fieldOfView = Mathf.Lerp(this.sprintFOV, this.standardFOV, this.timeSinceSprintStarted);
+
+            this.timeSinceSprintStarted -= this.SprintFOVLerpFactor;
+        }
+
+        this.timeSinceSprintStarted = Mathf.Clamp(this.timeSinceSprintStarted, 0, 1);
+    }
+
 
     private Vector3 getNormalizedSummedInputVector() {
         Vector3 resultingVector = Vector3.zero;
@@ -497,23 +537,6 @@ public class MACharacterController : MonoBehaviour {
         this.footsteps.PlayOneShot(this.footsteps.clip);
     }
 
-
-    private void ManageSprinting() {
-        if (Input.GetKey("left shift") && this.directionInputExists) {
-            this.isSprinting = true;
-            //this.mainCamera.fieldOfView = Mathf.Lerp(this.standardFOV, this.sprintFOV, this.timeSinceSprintStarted);
-
-            this.timeSinceSprintStarted += this.SprintFOVLerpFactor;
-        }
-        else {
-            this.isSprinting = false;
-            //this.mainCamera.fieldOfView = Mathf.Lerp(this.sprintFOV, this.standardFOV, this.timeSinceSprintStarted);
-
-            this.timeSinceSprintStarted -= this.SprintFOVLerpFactor;
-        }
-
-        this.timeSinceSprintStarted = Mathf.Clamp(this.timeSinceSprintStarted, 0, 1);
-    }
 
 
     private Vector3 GetUnitVectorInInputDirection(Vector3 direction) {
@@ -634,7 +657,7 @@ public class MACharacterController : MonoBehaviour {
 
     private void SlowDown() {
 
-        if (!(Input.GetKey("w") || Input.GetKey("a") || Input.GetKey("s") || Input.GetKey("d")) && this.groundCheck.isGrounded) {
+        if (!this.directionInputExists && this.groundCheck.isGrounded) {
             Vector3 velocity = this.rb.velocity;
 
             velocity.x *= (1 - this.slowDownFactor);
@@ -812,7 +835,8 @@ public class MACharacterController : MonoBehaviour {
     }
 
 
-    private void CalculateRotation() {
+    [Obsolete("CalculateAimRotation is deprecated, affected Transforms get rotated by the MouseOrbit - Rotation automatically")]
+    private void CalculateAimRotation() {
         if (this.framesTillStart > 5) {
             switch (this.rotationMode) {
                 case MARotationMode.FirstPersonIdentical:
@@ -825,8 +849,6 @@ public class MACharacterController : MonoBehaviour {
                     break;
             }
         }
-
-
     }
 
     private void CalculateMovementDirectionalRotation() {
