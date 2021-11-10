@@ -76,8 +76,6 @@ public class MASwingbar : MonoBehaviour {
 
     public void RotateSwingTowardsCharacter(MACharacterController characterController) {
 
-   
-      
         if (this.currentRotator.transform.eulerAngles.y != 0) {
             this.transform.Rotate(new Vector3(-(this.currentRotator.transform.eulerAngles.x + 90), 0));
             return;
@@ -97,6 +95,9 @@ public class MASwingbar : MonoBehaviour {
         Vector3 r = characterController.swingFootUpPosition.position - this.transform.position;
         Vector3 angularVelocity = this.rb.angularVelocity;
         Vector3 tangentialVelocity = Vector3.Cross(angularVelocity, r) * characterController.swingReleaseVelocityFactor;
+
+
+        Debug.Log(tangentialVelocity);
 
         characterController.rb.velocity = tangentialVelocity;
 
