@@ -12673,7 +12673,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6404148241480252436, guid: 95a1ea34258df31428e33b52d65e577e, type: 3}
       propertyPath: maxMovementSpeed
-      value: 0.6
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 6404148241480252436, guid: 95a1ea34258df31428e33b52d65e577e, type: 3}
       propertyPath: movementAcceleration

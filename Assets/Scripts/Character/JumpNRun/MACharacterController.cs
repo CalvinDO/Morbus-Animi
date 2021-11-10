@@ -131,7 +131,7 @@ public class MACharacterController : MonoBehaviour {
     public bool movementEnabled = true;
     int framesTillStart = 0;
 
-    int framesTillJump = 0;
+    int framesSinceJump = 0;
     bool inJump = false;
 
     float threashold = 0.001f;
@@ -216,6 +216,8 @@ public class MACharacterController : MonoBehaviour {
 
         this.CalculateMovement();
 
+        this.CalculateSpeedAverage();
+
         this.ControlAnimationAndVelocityRotation();
         this.ManageUserControlledCamGoalRotation();
         this.ManageJumpNRun();
@@ -238,16 +240,11 @@ public class MACharacterController : MonoBehaviour {
 
     private void FixedUpdate() {
 
-  
-
         //this.CalculateAimRotation();
 
-
         if (this.inJump) {
-            this.framesTillJump++;
+            this.framesSinceJump++;
         }
-
-        //this.CalculateSpeedAverage();
 
         this.ManageSmartCam();
     }
