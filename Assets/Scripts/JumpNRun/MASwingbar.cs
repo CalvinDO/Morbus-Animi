@@ -8,6 +8,7 @@ public class MASwingbar : MonoBehaviour {
     private MACharacterController attachedCharacter;
 
 
+
     void Start() {
         this.InitializeCharacterFeetPositions();
     }
@@ -32,18 +33,21 @@ public class MASwingbar : MonoBehaviour {
 
         //prepare Character values
         characterController.rb.isKinematic = true;
-        Vector3 oldPos = characterController.transform.position;
-        characterController.transform.position += Vector3.right * (this.transform.position.x - characterController.transform.position.x);
+        characterController.movementEnabled = false;
+
+        //set character to y z plane of swingbar for centering
+
+        characterController.transform.position -= this.transform.right * this.transform.InverseTransformPoint(characterController.transform.position).x;
 
 
-        float dot = Vector3.Dot(characterController.physicalBody.transform.forward, this.transform.up);
+        characterController.physicalBody.transform.rotation = Quaternion.identity;
 
-        characterController.transform.rotation = Quaternion.identity;
+        Vector3 pointToLookAt = new Vector3(this.transform.position.x, characterController.transform.position.y, this.transform.position.z);
+      
 
-        if (dot < 0) {
-            characterController.physicalBody.transform.Rotate(Vector3.up * 180);
-        }
+        characterController.transform.LookAt(pointToLookAt);
 
+   
 
         this.currentRotator = new GameObject();
         this.currentRotator.name = "CurrentRotator";
@@ -55,36 +59,38 @@ public class MASwingbar : MonoBehaviour {
         characterController.transform.SetParent(this.currentRotator.transform);
         this.currentRotator.transform.LookAt(this.transform);
 
-
+        
         //move Character so arms grab the bar
 
         characterController.transform.SetParent(null);
         this.currentRotator.transform.SetPositionAndRotation(characterController.swingGrabPosition.position, characterController.swingGrabPosition.rotation);
         characterController.transform.SetParent(this.currentRotator.transform);
         this.currentRotator.transform.position = this.transform.position;
-        characterController.movementEnabled = false;
-
-
+        
+        
         this.RotateSwingTowardsCharacter(characterController);
 
 
         this.currentRotator.transform.SetParent(this.transform);
-
-
+        
+       
         //this.rb.centerOfMass = characterController.transform.position;
     }
 
+
     public void RotateSwingTowardsCharacter(MACharacterController characterController) {
 
-        if (this.currentRotator.transform.eulerAngles.y != 0) {
-            this.transform.Rotate(new Vector3(-(this.currentRotator.transform.eulerAngles.x + 90), 0));
+  
+        if (Vector3.Dot(this.transform.up, this.currentRotator.transform.forward) > 0) {
+            this.transform.Rotate(new Vector3(this.currentRotator.transform.eulerAngles.x + 90, 0));
             return;
         }
 
-        this.transform.Rotate(new Vector3(this.currentRotator.transform.eulerAngles.x + 90, 0));
+        this.transform.Rotate(new Vector3(-(this.currentRotator.transform.eulerAngles.x + 90), 0));
     }
 
     public void ReleaseCharacter(MACharacterController characterController) {
+
 
         characterController.transform.SetParent(null);
         characterController.transform.rotation = Quaternion.identity;
@@ -96,8 +102,6 @@ public class MASwingbar : MonoBehaviour {
         Vector3 angularVelocity = this.rb.angularVelocity;
         Vector3 tangentialVelocity = Vector3.Cross(angularVelocity, r) * characterController.swingReleaseVelocityFactor;
 
-
-        Debug.Log(tangentialVelocity);
 
         characterController.rb.velocity = tangentialVelocity;
 
