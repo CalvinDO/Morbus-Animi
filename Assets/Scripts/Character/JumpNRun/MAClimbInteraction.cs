@@ -5,9 +5,11 @@ using UnityEngine;
 public class MAClimbInteraction : MAInteractable
 {
     public GameObject destination;
-    public Vector3 forwardAtTop;
+    public Vector3 forwardMovement;
     public float duration;
     public float finishDuration;
+    public enum ClimbLocation { top, bottom};
+    public ClimbLocation currentLocation;
     GameObject player;
     public override void MAInteract()
     {
@@ -18,7 +20,45 @@ public class MAClimbInteraction : MAInteractable
         }
     }
 
-    IEnumerator LerpPosition(Vector3 startPosition, Vector3 ladderTopPosition, Vector3 targetPosition, float duration, float finishDuration)
+    IEnumerator LerpPositionTopToBottom(Vector3 startPosition, Vector3 ladderTop, Vector3 targetPosition,float duration, float finishDuration)
+    {
+        float time = 0;
+
+        player.transform.position = startPosition;
+
+        while (time < finishDuration)
+        {
+            player.transform.position = Vector3.Lerp(startPosition, ladderTop, time / duration);
+            time += Time.deltaTime;
+            yield return null;
+        }
+
+        player.transform.position = ladderTop;
+
+        time = 0;
+
+        while (time < duration)
+        {
+            player.transform.position = Vector3.Lerp(ladderTop, targetPosition, time / duration);
+            time += Time.deltaTime;
+            yield return null;
+        }
+
+        time = 0;
+
+        player.transform.position = targetPosition;
+
+        while (time < finishDuration)
+        {
+            player.transform.position = Vector3.Lerp(targetPosition, targetPosition + forwardMovement, time / duration);
+            time += Time.deltaTime;
+            yield return null;
+        }
+
+        player.transform.position = targetPosition + forwardMovement;
+    }
+
+    IEnumerator LerpPositionBottomToTop(Vector3 startPosition, Vector3 ladderTop, Vector3 targetPosition, float duration, float finishDuration)
     {
         float time = 0;
 
@@ -26,17 +66,17 @@ public class MAClimbInteraction : MAInteractable
 
         while (time < duration)
         {
-            player.transform.position = Vector3.Lerp(startPosition, ladderTopPosition, time / duration);
+            player.transform.position = Vector3.Lerp(startPosition, ladderTop, time / duration);
             time += Time.deltaTime;
             yield return null;
         }
-        player.transform.position = ladderTopPosition;
+        player.transform.position = ladderTop;
 
         time = 0;
 
         while (time < finishDuration)
         {
-            player.transform.position = Vector3.Lerp(ladderTopPosition, targetPosition, time / duration);
+            player.transform.position = Vector3.Lerp(ladderTop, targetPosition, time / duration);
             time += Time.deltaTime;
             yield return null;
         }
@@ -45,7 +85,11 @@ public class MAClimbInteraction : MAInteractable
 
     private void Climb()
     {
-        player = GameObject.Find("ThirdPersonPlayer");
-        StartCoroutine(LerpPosition(player.transform.position, destination.transform.position, (destination.transform.position + forwardAtTop), duration, finishDuration));
+        player = GameObject.Find("SmallNorah");
+        if (currentLocation == ClimbLocation.bottom)
+        {
+            StartCoroutine(LerpPositionBottomToTop(player.transform.position, destination.transform.position, (destination.transform.position + forwardMovement), duration, finishDuration));
+        }
+        else StartCoroutine(LerpPositionTopToBottom(player.transform.position, (player.transform.position + forwardMovement), destination.transform.position, duration, finishDuration));
     }
 }

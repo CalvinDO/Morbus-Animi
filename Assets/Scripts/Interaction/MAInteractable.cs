@@ -23,7 +23,7 @@ public class MAInteractable : MonoBehaviour {
 
     void OnDrawGizmosSelected() {
         Gizmos.color = Color.yellow;
-        if (currentSelection == objectType.item) {
+        if (currentSelection == objectType.item || currentSelection == objectType.climb) {
             Gizmos.DrawWireSphere(transform.position, radius);
         }
         else {
