@@ -5,7 +5,6 @@ using UnityEngine;
 public class MASwingbar : MonoBehaviour {
     public Rigidbody rb;
     private GameObject currentRotator;
-    private MACharacterController attachedCharacter;
 
 
 
@@ -28,8 +27,6 @@ public class MASwingbar : MonoBehaviour {
     public void SetCharacterInitialPosition(MACharacterController characterController) {
 
         this.rb.isKinematic = false;
-
-        this.attachedCharacter = characterController;
 
         //prepare Character values
         characterController.rb.isKinematic = true;
@@ -80,8 +77,7 @@ public class MASwingbar : MonoBehaviour {
 
     public void RotateSwingTowardsCharacter(MACharacterController characterController) {
 
-  
-        if (Vector3.Dot(this.transform.up, this.currentRotator.transform.forward) > 0) {
+        if (Vector3.Dot(this.transform.forward, this.currentRotator.transform.forward) > 0) {
             this.transform.Rotate(new Vector3(this.currentRotator.transform.eulerAngles.x + 90, 0));
             return;
         }
@@ -90,7 +86,7 @@ public class MASwingbar : MonoBehaviour {
     }
 
     public void ReleaseCharacter(MACharacterController characterController) {
-
+        
 
         characterController.transform.SetParent(null);
         characterController.transform.rotation = Quaternion.identity;
@@ -108,7 +104,6 @@ public class MASwingbar : MonoBehaviour {
 
         GameObject.Destroy(this.currentRotator);
         this.currentRotator = null;
-        this.attachedCharacter = null;
 
         this.rb.angularVelocity = Vector3.zero;
         this.rb.velocity = Vector3.zero;
