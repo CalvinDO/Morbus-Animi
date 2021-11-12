@@ -35,7 +35,7 @@ public class MAInteractionController : MonoBehaviour
                 this.wall = null;
             }
         }
-        if (Input.GetKey("e") && interactable != null)
+        if (Input.GetKey("space") && interactable != null)
         {
             this.hover.MAInteract();
             //this.hover.clearText();
