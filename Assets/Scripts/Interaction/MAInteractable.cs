@@ -51,19 +51,19 @@ public class MAInteractable : MonoBehaviour {
 
         switch (currentSelection) {
             case objectType.image:
-                newHoverText = "take picture [Left Mouse]";
+                newHoverText = "take picture [E]";
                 break;
             case objectType.item:
-                newHoverText = "pick up [Left Mouse]";
+                newHoverText = "pick up [E]";
                 break;
             case objectType.obstacle:
-                newHoverText = "open [Left Mouse]";
+                newHoverText = "open [E]";
                 break;
             case objectType.lever:
-                newHoverText = "flip [Left Mouse]";
+                newHoverText = "flip [E]";
                 break;
             case objectType.climb:
-                newHoverText = "climb ladder [E]";
+                newHoverText = "climb ladder [space]";
                 break;
             case objectType.waterwheel:
                 newHoverText = "dump water [E]";
