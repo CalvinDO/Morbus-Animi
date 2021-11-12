@@ -114,7 +114,7 @@ public class MASwingbar : MonoBehaviour {
         this.rb.velocity = Vector3.zero;
         this.transform.localRotation = Quaternion.identity;
 
-        this.InitializeCharacterFeetPositions();
+       // this.InitializeCharacterFeetPositions();
 
         this.rb.isKinematic = true;
 
