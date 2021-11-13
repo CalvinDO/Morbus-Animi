@@ -14,10 +14,10 @@ GameObject:
   - component: {fileID: 9039612986964622779}
   m_Layer: 0
   m_Name: Wallshelf_Wide
-  m_TagString: Untagged
+  m_TagString: JumpNRunElement
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &5292535314242020777
 Transform:

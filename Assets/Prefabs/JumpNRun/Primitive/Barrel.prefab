@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2408577682433731329}
   m_Layer: 0
   m_Name: Barrel
-  m_TagString: Untagged
+  m_TagString: JumpNRunElement
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295

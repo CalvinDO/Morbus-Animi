@@ -18,10 +18,10 @@ GameObject:
   - component: {fileID: 5537105234771283917}
   m_Layer: 0
   m_Name: Table
-  m_TagString: Untagged
+  m_TagString: JumpNRunElement
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &564396564460572512
 Transform:

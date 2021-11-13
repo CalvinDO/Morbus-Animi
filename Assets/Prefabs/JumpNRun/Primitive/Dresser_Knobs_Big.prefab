@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2237595554287902745}
   m_Layer: 0
   m_Name: Dresser_Knobs_Big
-  m_TagString: Untagged
+  m_TagString: JumpNRunElement
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
