@@ -184,8 +184,8 @@ MonoBehaviour:
   textDisplay: {fileID: 0}
   hoverTextObject: {fileID: 0}
   destination: {fileID: 8918725598815852142}
-  duration: 4
-  finishDuration: 1
+  duration: 2
+  finishDuration: 0.5
   currentLocation: 1
 --- !u!65 &8918725598290693293
 BoxCollider:
@@ -250,8 +250,8 @@ MonoBehaviour:
   textDisplay: {fileID: 0}
   hoverTextObject: {fileID: 0}
   destination: {fileID: 8918725599247408239}
-  duration: 4
-  finishDuration: 1
+  duration: 2
+  finishDuration: 0.5
   currentLocation: 1
 --- !u!65 &8918725598296686436
 BoxCollider:
@@ -316,8 +316,8 @@ MonoBehaviour:
   textDisplay: {fileID: 0}
   hoverTextObject: {fileID: 0}
   destination: {fileID: 8918725598541749089}
-  duration: 4
-  finishDuration: 1
+  duration: 2
+  finishDuration: 0.5
   currentLocation: 1
 --- !u!65 &8918725598321670825
 BoxCollider:
@@ -382,8 +382,8 @@ MonoBehaviour:
   textDisplay: {fileID: 0}
   hoverTextObject: {fileID: 0}
   destination: {fileID: 8918725598482512746}
-  duration: 4
-  finishDuration: 1
+  duration: 2
+  finishDuration: 0.5
   currentLocation: 1
 --- !u!65 &8918725598351449651
 BoxCollider:
@@ -448,8 +448,8 @@ MonoBehaviour:
   textDisplay: {fileID: 0}
   hoverTextObject: {fileID: 0}
   destination: {fileID: 8918725598351449650}
-  duration: 4
-  finishDuration: 1
+  duration: 2
+  finishDuration: 0.5
   currentLocation: 0
 --- !u!65 &8918725598482512744
 BoxCollider:
@@ -514,8 +514,8 @@ MonoBehaviour:
   textDisplay: {fileID: 0}
   hoverTextObject: {fileID: 0}
   destination: {fileID: 8918725598321670824}
-  duration: 4
-  finishDuration: 1
+  duration: 2
+  finishDuration: 0.5
   currentLocation: 0
 --- !u!65 &8918725598541749023
 BoxCollider:
@@ -580,8 +580,8 @@ MonoBehaviour:
   textDisplay: {fileID: 0}
   hoverTextObject: {fileID: 0}
   destination: {fileID: 8918725598290693292}
-  duration: 4
-  finishDuration: 1
+  duration: 2
+  finishDuration: 0.5
   currentLocation: 0
 --- !u!65 &8918725598815852140
 BoxCollider:
@@ -646,8 +646,8 @@ MonoBehaviour:
   textDisplay: {fileID: 0}
   hoverTextObject: {fileID: 0}
   destination: {fileID: 8918725598296686439}
-  duration: 4
-  finishDuration: 1
+  duration: 2
+  finishDuration: 0.5
   currentLocation: 0
 --- !u!65 &8918725599247408237
 BoxCollider:
