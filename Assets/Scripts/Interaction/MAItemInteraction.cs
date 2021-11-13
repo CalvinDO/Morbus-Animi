@@ -13,13 +13,13 @@ public class MAItemInteraction : MAInteractable
 
         switch (this.currentSelection)
         {
-            case objectType.obstacle:
+            case ObjectType.obstacle:
                 Open();
                 break;
-            case objectType.item:
+            case ObjectType.item:
                 PickUp();
                 break;
-            case objectType.waterwheel:
+            case ObjectType.waterwheel:
                 DumpWater();
                 break;
             default:

@@ -6367,6 +6367,7 @@ GameObject:
   - component: {fileID: 1050626273}
   - component: {fileID: 1050626272}
   - component: {fileID: 1050626271}
+  - component: {fileID: 1050626274}
   m_Layer: 0
   m_Name: Chair.017 (3)
   m_TagString: Untagged
@@ -6451,6 +6452,20 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1050626269}
   m_Mesh: {fileID: 2856509127259523794, guid: c1d1d8b2cd952ca45b5583d6495d3135, type: 3}
+--- !u!114 &1050626274
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1050626269}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f511d840703140441b8989f2a7431100, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  duration: 1
+  finishDuration: 0.5
 --- !u!1 &1051417488 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4357298143502237729, guid: ff8f1500e5f66204ca73ba6ede49a280, type: 3}

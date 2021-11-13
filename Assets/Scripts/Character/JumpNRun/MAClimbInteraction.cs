@@ -13,7 +13,7 @@ public class MAClimbInteraction : MAInteractable
     public override void MAInteract()
     {
         base.MAInteract();
-        if (currentSelection == objectType.climb)
+        if (currentSelection == ObjectType.climb)
         {
             Climb();
         }
