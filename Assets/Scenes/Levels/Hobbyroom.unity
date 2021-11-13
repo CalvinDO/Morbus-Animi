@@ -849,6 +849,25 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 40a7b615598e4034799b5eb9108b86a0, type: 3}
+--- !u!1 &1341957440 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 40a7b615598e4034799b5eb9108b86a0, type: 3}
+  m_PrefabInstance: {fileID: 1341957439}
+  m_PrefabAsset: {fileID: 0}
+--- !u!64 &1341957441
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1341957440}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 9113909763538508333, guid: 40a7b615598e4034799b5eb9108b86a0, type: 3}
 --- !u!1001 &1622407432
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -870,7 +889,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6404148241480252427, guid: 4a0c55cde13aff64db456884cdef2446, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 0.07
       objectReference: {fileID: 0}
     - target: {fileID: 6404148241480252427, guid: 4a0c55cde13aff64db456884cdef2446, type: 3}
       propertyPath: m_LocalRotation.w
@@ -900,6 +919,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6404148241480252436, guid: 4a0c55cde13aff64db456884cdef2446, type: 3}
+      propertyPath: mainCamera
+      value: 
+      objectReference: {fileID: 408838765}
     - target: {fileID: 6404148241480252437, guid: 4a0c55cde13aff64db456884cdef2446, type: 3}
       propertyPath: m_Name
       value: SmallNorah
