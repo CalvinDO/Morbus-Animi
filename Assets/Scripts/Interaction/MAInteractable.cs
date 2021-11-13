@@ -1,15 +1,14 @@
 using UnityEngine;
 
 public class MAInteractable : MonoBehaviour {
-    public enum objectType { item, obstacle, climb, lever, image, waterwheel, elevator };
-    public enum interactionType { collider, raycast};
-    public objectType currentSelection = objectType.item;
-    public interactionType currentInteraction = interactionType.collider;
+    public enum ObjectType { item, obstacle, climb, lever, image, waterwheel, elevator };
+    public enum InteractionType { collider, raycast};
+    public ObjectType currentSelection = ObjectType.item;
+    public InteractionType currentInteraction = InteractionType.collider;
 
     public float radius = 3f;
 
     public GameObject textDisplay;
-
     public UnityEngine.UI.Text hoverTextObject;
 
     private Material standardMaterial;
@@ -23,7 +22,7 @@ public class MAInteractable : MonoBehaviour {
 
     void OnDrawGizmosSelected() {
         Gizmos.color = Color.yellow;
-        if (currentSelection == objectType.item || currentSelection == objectType.climb) {
+        if (currentSelection == ObjectType.item || currentSelection == ObjectType.climb) {
             Gizmos.DrawWireSphere(transform.position, radius);
         }
         else {
@@ -50,25 +49,25 @@ public class MAInteractable : MonoBehaviour {
         }
 
         switch (currentSelection) {
-            case objectType.image:
+            case ObjectType.image:
                 newHoverText = "take picture [E]";
                 break;
-            case objectType.item:
+            case ObjectType.item:
                 newHoverText = "pick up [E]";
                 break;
-            case objectType.obstacle:
+            case ObjectType.obstacle:
                 newHoverText = "open [E]";
                 break;
-            case objectType.lever:
+            case ObjectType.lever:
                 newHoverText = "flip [E]";
                 break;
-            case objectType.climb:
+            case ObjectType.climb:
                 newHoverText = "climb ladder [space]";
                 break;
-            case objectType.waterwheel:
+            case ObjectType.waterwheel:
                 newHoverText = "dump water [E]";
                 break;
-            case objectType.elevator:
+            case ObjectType.elevator:
                 newHoverText = "change floor [E]";
                 break;
             default:

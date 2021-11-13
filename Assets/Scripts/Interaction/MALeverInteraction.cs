@@ -23,7 +23,7 @@ public class MALeverInteraction : MAInteractable
         base.MAInteract();
         if (!isFlipped)
         {
-            if (currentSelection == objectType.lever)
+            if (currentSelection == ObjectType.lever)
             {
                 FlipLever();
                 checkIfSolved();
