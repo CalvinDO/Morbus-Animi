@@ -21,7 +21,7 @@ public class MAInteractionController : MonoBehaviour
             this.hover = interactable;
             this.hover.setHover();
         }
-        if (Input.GetKey("space") && interactable != null)
+        if (Input.GetKeyDown("space") && interactable != null)
         {
             this.hover.MAInteract();
         }
