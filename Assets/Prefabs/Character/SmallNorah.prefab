@@ -621,7 +621,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29bc2ae6829548e4285b1c547837a589, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  transitionSpeed: 4
+  transitionSpeed: 5.25
   maxMovementSpeed: 0.35
   maxMovementSprintSpeedFactor: 5.5
   mouseSensitivity: 438
@@ -631,6 +631,7 @@ MonoBehaviour:
   slideTransform: {fileID: 3219436218694975809}
   minWalljumpVelocity: 0.5
   minWalljumpYVelocity: -2.02
+  wallJumpImpulse: 67.5
   jumpForce: 142.5
   maxRotationAngle: 60.5
   slowDownFactor: 0.051

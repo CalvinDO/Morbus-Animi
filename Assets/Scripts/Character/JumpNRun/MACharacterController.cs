@@ -69,9 +69,14 @@ public class MACharacterController : MonoBehaviour {
 
 
     private bool isCollidingWall = false;
+    private GameObject lastCollidedWall;
+    private GameObject lastJumpedWall;
 
     public float minWalljumpVelocity = 0.5f;
     public float minWalljumpYVelocity = 0.5f;
+    [Range(0, 100)]
+    public float wallJumpImpulse;
+
 
     [Range(0, 1000)]
     public float jumpForce;
@@ -134,6 +139,7 @@ public class MACharacterController : MonoBehaviour {
 
     int framesSinceJump = 0;
     bool inJump = false;
+    private bool isGrounded;
 
     float threashold = 0.001f;
 
@@ -194,10 +200,6 @@ public class MACharacterController : MonoBehaviour {
 
     private bool isSwinging = false;
 
-
-
-
-
     void Start() {
 
         this.currentXRotation = 0;
@@ -252,7 +254,7 @@ public class MACharacterController : MonoBehaviour {
 
     private void CalculateMovement() {
 
-        if (!this.groundCheck.isGrounded) {
+        if (!this.isGrounded) {
             return;
         }
 
@@ -376,6 +378,7 @@ public class MACharacterController : MonoBehaviour {
         if (collision.gameObject.CompareTag("JumpNRunElement")) {
 
             this.isCollidingWall = true;
+            this.lastCollidedWall = collision.gameObject;
         }
 
         //MAInteractable interactable = collision.collider.GetComponent<MAInteractable>();
@@ -401,18 +404,18 @@ public class MACharacterController : MonoBehaviour {
 
     }
 
-    //private void OnCollisionExit(Collision collision) {
+    private void OnCollisionExit(Collision collision) {
 
-    //    if (collision.gameObject.CompareTag("JumpNRunElement")) {
+        if (collision.gameObject.CompareTag("JumpNRunElement")) {
 
-    //        this.isCollidingWall = false;
-    //    }
+            this.isCollidingWall = false;
+        }
 
-    //    if (this.hover != null) {
-    //        this.hover.removeHover();
-    //        this.hover = null;
-    //    }
-    //}
+        //    if (this.hover != null) {
+        //        this.hover.removeHover();
+        //        this.hover = null;
+        //    }
+    }
 
     private void OnCollisionEnter(Collision collision) {
 
@@ -452,8 +455,8 @@ public class MACharacterController : MonoBehaviour {
             */
 
             Vector3 desiredVelocity;
-            
-           
+
+
 
 
             if (this.isSprinting) {
@@ -661,7 +664,7 @@ public class MACharacterController : MonoBehaviour {
 
     private void SlowDown() {
 
-        if (!this.directionInputExists && this.groundCheck.isGrounded) {
+        if (!this.directionInputExists && this.isGrounded) {
             Vector3 velocity = this.rb.velocity;
 
             velocity.x *= (1 - this.slowDownFactor);
@@ -679,7 +682,7 @@ public class MACharacterController : MonoBehaviour {
     }
 
     private void ManageSwing() {
-        if (this.groundCheck.isGrounded) {
+        if (this.isGrounded) {
             return;
         }
 
@@ -712,7 +715,7 @@ public class MACharacterController : MonoBehaviour {
 
         if (Input.GetKeyDown(KeyCode.LeftControl)) {
 
-            if (this.groundCheck.isGrounded) {
+            if (this.isGrounded) {
 
                 if (this.isSprinting) {
 
@@ -763,14 +766,23 @@ public class MACharacterController : MonoBehaviour {
 
     private void ManageJump() {
 
-        if (Input.GetKeyDown("space")) {
+        if (Input.GetKey("space")) {
+            if (Input.GetKeyDown("space")) {
 
-            if (this.groundCheck.isGrounded) {
-                this.PerformeSimpleJump();
+                if (this.isGrounded) {
+                    this.PerformeSimpleJump();
+                }
+                else {
+                    if (this.WallJumpAllowed()) {
+                        this.PerformWallJump();
+                    }
+                }
             }
             else {
-                if (this.WallJumpAllowed()) {
-                    this.PerformWallJump();
+                if (!this.isGrounded) {
+                    if (this.WallJumpAllowed()) {
+                        this.PerformWallWalk();
+                    }
                 }
             }
         }
@@ -785,17 +797,29 @@ public class MACharacterController : MonoBehaviour {
         bool isXZMagnitudeHighEnough = XZSpeedBeforeWall.magnitude > this.minWalljumpVelocity;
         bool isYSpeedHighEnough = ySpeedBeforeWall > this.minWalljumpYVelocity;
 
-        Debug.Log(XZSpeedBeforeWall.magnitude);
+        bool wallPreviouslyJumped = this.lastJumpedWall == this.lastCollidedWall;
 
-        return this.isCollidingWall && isXZMagnitudeHighEnough && isYSpeedHighEnough;
+        return this.isCollidingWall && isXZMagnitudeHighEnough && isYSpeedHighEnough && !wallPreviouslyJumped;
     }
 
     private void PerformWallJump() {
 
-        this.rb.AddForce(this.getNormalizedSummedInputVector() * 200, ForceMode.Impulse);
+        Debug.Log(this.physicalBody.transform.forward);
+
+        this.rb.AddForce(this.getNormalizedSummedInputVector() * this.wallJumpImpulse, ForceMode.Impulse);
 
         this.PerformeSimpleJump();
 
+        this.SetLastJumpedWall();
+    }
+
+    private void PerformWallWalk() {
+        this.PerformeSimpleJump();
+        this.SetLastJumpedWall();
+    }
+
+    private void SetLastJumpedWall() {
+        this.lastJumpedWall = this.lastCollidedWall;
     }
 
 
@@ -893,6 +917,17 @@ public class MACharacterController : MonoBehaviour {
         else {
             this.xRotator.transform.Rotate(Vector3.right, this.xRotationAmount);
         }
+    }
+
+    public void Ground() {
+        this.isGrounded = true;
+
+        this.lastCollidedWall = null;
+        this.lastJumpedWall = null;
+    }
+
+    public void DeGround() {
+        this.isGrounded = false;
     }
 
     //private void ManageRaycastInteraction()

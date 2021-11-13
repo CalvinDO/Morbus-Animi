@@ -4,25 +4,18 @@ using UnityEngine;
 
 public class MAGroundCheck : MonoBehaviour
 {
-    public bool isGrounded = true;
-
+    private MACharacterController characterController;
 
     void Start()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        this.characterController = this.transform.root.GetComponent<MACharacterController>();
     }
 
     private void OnTriggerStay(Collider other) {
-        this.isGrounded = true;
+        this.characterController.Ground();
     }
 
     private void OnTriggerExit(Collider other) {
-        this.isGrounded = false;
+        this.characterController.DeGround();
     }
 }
