@@ -106,7 +106,7 @@ GameObject:
   - component: {fileID: 6226137894856571900}
   m_Layer: 0
   m_Name: ClimbingOneSide
-  m_TagString: Untagged
+  m_TagString: JumpNRunElement
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
