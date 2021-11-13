@@ -210,7 +210,7 @@ public class MACharacterController : MonoBehaviour {
 
     public MALedgeInteraction ledgeInteraction;
 
-
+    public bool jumped;
 
     void Start() {
 
@@ -791,26 +791,36 @@ public class MACharacterController : MonoBehaviour {
 
     private void ManageJump() {
 
-        if (Input.GetKey("space")) {
-            if (Input.GetKeyDown("space")) {
+        if (Input.GetKey("space"))
+        {
+            jumped = true;
+            if (Input.GetKeyDown("space"))
+            {
 
-                if (this.isGrounded) {
+                if (this.isGrounded)
+                {
                     this.PerformeSimpleJump();
                 }
-                else {
-                    if (this.WallJumpAllowed()) {
+                else
+                {
+                    if (this.WallJumpAllowed())
+                    {
                         this.PerformWallJump();
                     }
                 }
             }
-            else {
-                if (!this.isGrounded) {
-                    if (this.WallJumpAllowed()) {
+            else
+            {
+                if (!this.isGrounded)
+                {
+                    if (this.WallJumpAllowed())
+                    {
                         this.PerformWallWalk();
                     }
                 }
             }
         }
+        else jumped = false;
     }
 
     private bool WallJumpAllowed() {
@@ -957,53 +967,5 @@ public class MACharacterController : MonoBehaviour {
     public void DeGround() {
         this.isGrounded = false;
     }
-
-    //private void ManageRaycastInteraction()
-    //{
-    //    Ray ray = fpsCamera.ScreenPointToRay(Input.mousePosition);
-    //    RaycastHit hit;
-    //    if (Physics.Raycast(ray, out hit))
-    //    {
-    //        MAInteractable interactable = hit.collider.GetComponent<MAInteractable>();
-    //        MASprayable sprayable = hit.collider.GetComponent<MASprayable>();
-    //        if (interactable != null && interactable.currentInteraction.Equals(MAInteractable.interactionType.raycast))
-    //        {
-    //            this.hover = interactable;
-    //            this.hover.setHover();
-    //            Debug.Log("set hover");
-    //            Debug.Log(this.hover.name);
-    //        }
-    //        else
-    //        {
-    //            if (this.hover != null)
-    //            {
-    //                this.hover.removeHover();
-    //                this.hover = null;
-    //            }
-    //            //Debug.Log("no hover");
-    //        }
-    //        if (this.hover == interactable)
-    //        {
-    //            if (Input.GetMouseButtonDown(0) && interactable != null)
-    //            {
-    //                this.hover.MAInteract();
-    //                //this.hover.clearText();
-    //                Debug.Log("interacted");
-    //            }
-    //        }
-    //        if (sprayable != null && Input.GetMouseButtonDown(1))
-    //        {
-    //            this.wall = sprayable;
-    //            Vector3 difference = this.transform.position - hit.point;
-    //            this.wall.Spray(hit.point, sprayable.transform.rotation, difference);
-    //            Debug.Log("sprayed wall");
-    //        }
-    //        else
-    //        {
-    //            //Debug.Log("no wall");
-    //            this.wall = null;
-    //        }
-    //    }
-    //}
 }
 
