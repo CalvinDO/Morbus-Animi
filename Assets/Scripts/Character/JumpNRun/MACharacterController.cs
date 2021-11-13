@@ -52,6 +52,8 @@ public class MACharacterController : MonoBehaviour {
     [Range(0, 10f)]
     public float transitionSpeed;
 
+    [Range(0, 10f)]
+    public float airTransitionSpeed;
 
     [Range(0, 10f)]
     public float maxMovementSpeed;
@@ -77,12 +79,12 @@ public class MACharacterController : MonoBehaviour {
     private bool isCollidingWall = false;
     private GameObject lastCollidedWall;
     private GameObject lastJumpedWall;
+    private Vector3 wallJumpContactNormal;
 
     public float minWalljumpVelocity = 0.5f;
     public float minWalljumpYVelocity = 0.5f;
     [Range(0, 100)]
     public float wallJumpImpulse;
-
 
     [Range(0, 1000)]
     public float jumpForce;
@@ -266,7 +268,7 @@ public class MACharacterController : MonoBehaviour {
     private void CalculateMovement() {
 
         if (!this.isGrounded) {
-            return;
+            //return;
         }
 
 
@@ -390,6 +392,14 @@ public class MACharacterController : MonoBehaviour {
 
             this.isCollidingWall = true;
             this.lastCollidedWall = collision.gameObject;
+
+            if (collision.contactCount > 1) {
+                if (collision.GetContact(0).normal != collision.GetContact(1).normal) {
+                    Debug.LogWarning("collision contact 0 != collision contat 1 !");
+                }
+            }
+
+            this.wallJumpContactNormal = collision.GetContact(0).normal;
         }
 
         //MAInteractable interactable = collision.collider.GetComponent<MAInteractable>();
@@ -477,15 +487,19 @@ public class MACharacterController : MonoBehaviour {
                 desiredVelocity = normalizedSummedInput * this.maxMovementSpeed;
             }
 
+
             Vector3 oldVelocity = Vector3.ProjectOnPlane(this.rb.velocity, Vector3.up);
 
-            Vector3 newVelocity = oldVelocity * (1 - Time.deltaTime * this.transitionSpeed) + desiredVelocity * (Time.deltaTime * this.transitionSpeed);
+            float currentTransitionSpeed = this.isGrounded ? this.transitionSpeed : this.airTransitionSpeed;
+            Vector3 newVelocity = oldVelocity * (1 - Time.deltaTime * currentTransitionSpeed) + desiredVelocity * (Time.deltaTime * currentTransitionSpeed);
 
             newVelocity += Vector3.up * this.rb.velocity.y;
 
             this.rb.velocity = newVelocity;
         }
     }
+
+
     private void ManageSprinting() {
         if (Input.GetKey("left shift") && this.directionInputExists) {
             this.isSprinting = true;
@@ -818,16 +832,17 @@ public class MACharacterController : MonoBehaviour {
         bool isXZMagnitudeHighEnough = XZSpeedBeforeWall.magnitude > this.minWalljumpVelocity;
         bool isYSpeedHighEnough = ySpeedBeforeWall > this.minWalljumpYVelocity;
 
+
         bool wallPreviouslyJumped = this.lastJumpedWall == this.lastCollidedWall;
+
+        Debug.Log("  " + this.isCollidingWall + "  " + isXZMagnitudeHighEnough + "  " + isYSpeedHighEnough + "  " + !wallPreviouslyJumped);
 
         return this.isCollidingWall && isXZMagnitudeHighEnough && isYSpeedHighEnough && !wallPreviouslyJumped;
     }
 
     private void PerformWallJump() {
 
-        Debug.Log(this.physicalBody.transform.forward);
-
-        this.rb.AddForce(this.getNormalizedSummedInputVector() * this.wallJumpImpulse, ForceMode.Impulse);
+        this.rb.AddForce(this.wallJumpContactNormal * this.wallJumpImpulse, ForceMode.Impulse);
 
         this.PerformeSimpleJump();
 
@@ -841,6 +856,8 @@ public class MACharacterController : MonoBehaviour {
 
     private void SetLastJumpedWall() {
         this.lastJumpedWall = this.lastCollidedWall;
+
+        Debug.Log("wall jump or walk ");
     }
 
 
