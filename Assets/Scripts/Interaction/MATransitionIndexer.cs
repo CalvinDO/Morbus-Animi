@@ -25,6 +25,7 @@ public class MATransitionIndexer : MAStateData
         if (MakeTransition(control))
         {
             animator.SetInteger(TransitionParameter.TransitionIndex.ToString(), Index);
+            Debug.Log("Set to index " + Index);
         }
     }
 
@@ -34,6 +35,7 @@ public class MATransitionIndexer : MAStateData
         if (MakeTransition(control))
         {
             animator.SetInteger(TransitionParameter.TransitionIndex.ToString(), Index);
+            Debug.Log("Set to index " + Index);
         }
     }
 
@@ -94,6 +96,7 @@ public class MATransitionIndexer : MAStateData
                         {
                             return false;
                         }
+                        Debug.Log("entered case");
                     }
                     break;
             }
