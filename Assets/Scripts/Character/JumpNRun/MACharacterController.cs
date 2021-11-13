@@ -37,7 +37,13 @@ public enum MASpaceType {
     Radial = 1
 }
 
-
+public enum TransitionParameter
+{
+    Move,
+    Jump,
+    Grounded,
+    TransitionIndex
+}
 
 public class MACharacterController : MonoBehaviour {
     //[Range(0, 1000f)]
@@ -194,7 +200,7 @@ public class MACharacterController : MonoBehaviour {
 
     private bool isSwinging = false;
 
-
+    public MALedgeInteraction ledgeInteraction;
 
 
 
@@ -233,6 +239,7 @@ public class MACharacterController : MonoBehaviour {
 
     private void Awake() {
         DontDestroyOnLoad(this.gameObject);
+        ledgeInteraction = GetComponentInChildren<MALedgeInteraction>();
     }
     private void OnApplicationPause(bool pause) {
         //currently dead code
