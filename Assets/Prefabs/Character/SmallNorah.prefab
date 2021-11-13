@@ -622,6 +622,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   transitionSpeed: 5.25
+  airTransitionSpeed: 2
   maxMovementSpeed: 0.35
   maxMovementSprintSpeedFactor: 5.5
   mouseSensitivity: 438
@@ -1217,7 +1218,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 585aa0f4fe0815e4f96df363b694decd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isGrounded: 0
 --- !u!1001 &1508021309792593522
 PrefabInstance:
   m_ObjectHideFlags: 0
