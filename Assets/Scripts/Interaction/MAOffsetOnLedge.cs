@@ -2,17 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MAOffsetOnLedge : MonoBehaviour
+[CreateAssetMenu(fileName = "New State", menuName = "Assets/Scripts/Interaction/MAToggleGravity")]
+public class MAOffsetOnLedge : MAStateData
 {
-    // Start is called before the first frame update
-    void Start()
+    public override void OnEnter(MACharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
     {
-        
+
+    }
+    public override void UpdateAbility(MACharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
+    {
+
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void OnExit(MACharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
     {
-        
+
     }
 }
