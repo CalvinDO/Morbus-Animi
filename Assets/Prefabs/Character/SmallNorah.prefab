@@ -335,10 +335,10 @@ CapsuleCollider:
   m_Material: {fileID: 13400000, guid: 82d0cc1e473380549ac92a074df9e772, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.2
-  m_Height: 1.632243
+  m_Radius: 0.13
+  m_Height: 1.55
   m_Direction: 1
-  m_Center: {x: 0, y: 0.82, z: 0}
+  m_Center: {x: 0, y: 0.775, z: 0}
 --- !u!1 &3350535686381462166
 GameObject:
   m_ObjectHideFlags: 0
@@ -622,7 +622,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   transitionSpeed: 5.25
-  airTransitionSpeed: 2
+  airTransitionSpeed: 3
   maxMovementSpeed: 0.35
   maxMovementSprintSpeedFactor: 5.5
   mouseSensitivity: 438
@@ -630,7 +630,7 @@ MonoBehaviour:
   groundCheck: {fileID: 7702953765379088309}
   defaultTranslation: {fileID: 4956536749511618883}
   slideTransform: {fileID: 3219436218694975809}
-  minWalljumpVelocity: 0.5
+  minWalljumpVelocity: 0.35
   minWalljumpYVelocity: -2.02
   wallJumpImpulse: 67.5
   jumpForce: 142.5
@@ -678,6 +678,8 @@ MonoBehaviour:
   swingGrabPosition: {fileID: 1039997808753021869}
   swingFootUpPosition: {fileID: 4494251013626885576}
   swingReleaseVelocityFactor: 1
+  ledgeInteraction: {fileID: 0}
+  jumped: 0
 --- !u!54 &1402342497931596602
 Rigidbody:
   m_ObjectHideFlags: 0

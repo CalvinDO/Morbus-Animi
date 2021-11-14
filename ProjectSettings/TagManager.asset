@@ -24,7 +24,7 @@ TagManager:
   - MA_GroundCheck
   - MA_WeightCollider
   - MA_NavMesh
-  - 
+  - MA_Entity
   - 
   - 
   - 

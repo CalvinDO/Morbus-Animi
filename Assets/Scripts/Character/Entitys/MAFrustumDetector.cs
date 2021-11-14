@@ -27,6 +27,7 @@ public class MAFrustumDetector : MonoBehaviour {
 
 
     void Start() {
+        this.characterController = GameObject.Find("SmallNorah").GetComponent<MACharacterController>();
     }
 
 
