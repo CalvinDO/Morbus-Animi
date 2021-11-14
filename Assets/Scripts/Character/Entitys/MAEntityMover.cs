@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class MANorahsFatherMover : MonoBehaviour {
+public class MAEntityMover : MonoBehaviour {
 
     [Range(0, 0.03f)]
     public float speed;
