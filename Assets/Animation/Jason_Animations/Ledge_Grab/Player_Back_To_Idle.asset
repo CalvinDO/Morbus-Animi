@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ce6ad05faf9e18b4bac9555b7dd019ad, type: 3}
-  m_Name: Player_LedgeGrab_TransitionIndexer
+  m_Name: New State
   m_EditorClassIdentifier: 
-  Duration: 2
-  Index: 1
-  transitionConditions: 05000000
+  Duration: 0
+  Index: 0
+  transitionConditions: 

@@ -25,7 +25,7 @@ public class MATransitionIndexer : MAStateData
         if (MakeTransition(control))
         {
             animator.SetInteger(TransitionParameter.TransitionIndex.ToString(), Index);
-            Debug.Log("Set to index " + Index);
+            //Debug.Log("Set to index " + Index);
         }
     }
 
@@ -35,13 +35,17 @@ public class MATransitionIndexer : MAStateData
         if (MakeTransition(control))
         {
             animator.SetInteger(TransitionParameter.TransitionIndex.ToString(), Index);
-            Debug.Log("Set to index " + Index);
         }
     }
 
     public override void OnExit(MACharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
     {
-
+        MACharacterController control = characterState.GetCharacterControl(animator);
+        if (MakeTransition(control))
+        {
+            animator.SetInteger(TransitionParameter.TransitionIndex.ToString(), Index);
+            //Debug.Log("Set to index " + Index);
+        }
     }
 
     private bool MakeTransition(MACharacterController control)
@@ -82,21 +86,21 @@ public class MATransitionIndexer : MAStateData
                 //        }
                 //    }
                 //    break;
-                //case TransitionConditionType.JUMP:
-                //    {
-                //        if (!control.Jump)
-                //        {
-                //            return false;
-                //        }
-                //    }
-                //    break;
+                case TransitionConditionType.JUMP:
+                    {
+                        if (!control.jumped)
+                        {
+                            return false;
+                        }
+                    }
+                    break;
                 case TransitionConditionType.GRABBING_LEDGE:
                     {
                         if (!control.ledgeInteraction.IsGrabbingLedge)
                         {
                             return false;
                         }
-                        Debug.Log("entered case");
+                        //Debug.Log("entered case");
                     }
                     break;
             }
