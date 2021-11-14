@@ -1,79 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &55260292
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 55260295}
-  - component: {fileID: 55260294}
-  m_Layer: 0
-  m_Name: MainCamera
-  m_TagString: MainCamera
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &55260295
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 55260292}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.259426, y: -37.29884, z: -9.085838}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 6404148241480252427}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!20 &55260294
-Camera:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 55260292}
-  m_Enabled: 1
-  serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
-  m_projectionMatrixMode: 1
-  m_GateFitMode: 2
-  m_FOVAxisMode: 0
-  m_SensorSize: {x: 36, y: 24}
-  m_LensShift: {x: 0, y: 0}
-  m_FocalLength: 50
-  m_NormalizedViewPortRect:
-    serializedVersion: 2
-    x: 0
-    y: 0
-    width: 1
-    height: 1
-  near clip plane: 1
-  far clip plane: 1000
-  field of view: 60
-  orthographic: 0
-  orthographic size: 5
-  m_Depth: 0
-  m_CullingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_RenderingPath: -1
-  m_TargetTexture: {fileID: 0}
-  m_TargetDisplay: 0
-  m_TargetEye: 3
-  m_HDR: 1
-  m_AllowMSAA: 1
-  m_AllowDynamicResolution: 0
-  m_ForceIntoRT: 0
-  m_OcclusionCulling: 1
-  m_StereoConvergence: 10
-  m_StereoSeparation: 0.022
 --- !u!1 &2090320055
 GameObject:
   m_ObjectHideFlags: 0
@@ -242,7 +168,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 338159119870231748}
   m_LocalRotation: {x: -0.005629301, y: -0.14208372, z: 0.989809, w: 0.0076706475}
-  m_LocalPosition: {x: 0.15907669, y: -0.3463639, z: 0.033462524}
+  m_LocalPosition: {x: 0.156, y: -0.398, z: 0.213}
   m_LocalScale: {x: 1, y: 1, z: 0.9999895}
   m_Children: []
   m_Father: {fileID: 9199259026516661009}
@@ -267,12 +193,12 @@ Light:
   m_CookieSize: 10
   m_Shadows:
     m_Type: 2
-    m_Resolution: -1
+    m_Resolution: 2
     m_CustomResolution: -1
     m_Strength: 1
-    m_Bias: 0.02
+    m_Bias: 0.01
     m_NormalBias: 0.29
-    m_NearPlane: 2
+    m_NearPlane: 0.1
     m_CullingMatrixOverride:
       e00: 1
       e01: 0
@@ -715,7 +641,6 @@ Transform:
   - {fileID: 9199259026516661009}
   - {fileID: 1022157614763165316}
   - {fileID: 96229848711621201}
-  - {fileID: 55260295}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -732,7 +657,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   transitionSpeed: 5.25
-  airTransitionSpeed: 3
+  slideTransitionSpeed: 1
+  airTransitionSpeed: 2.5
   maxMovementSpeed: 0.35
   maxMovementSprintSpeedFactor: 5.5
   mouseSensitivity: 438
@@ -754,7 +680,7 @@ MonoBehaviour:
   cameraRotator: {fileID: 6404148241556665671}
   physicalBody: {fileID: 3350535686381462166}
   fpsCamera: {fileID: 6404148243089782120}
-  mainCamera: {fileID: 55260294}
+  mainCamera: {fileID: 0}
   fixedCameraGoal: {fileID: 0}
   thirdPCameraGoal: {fileID: 6668616569618225407}
   goalRotator: {fileID: 9199259026516661009}
@@ -933,7 +859,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4eda88048744d1d4f9a9ae79c32886e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainCamera: {fileID: 55260294}
+  mainCamera: {fileID: 0}
 --- !u!1 &6404148241556665671
 GameObject:
   m_ObjectHideFlags: 0

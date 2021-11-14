@@ -288,6 +288,7 @@ MonoBehaviour:
   characterDetected: 0
   detectedCharacter: {fileID: 0}
   lastSeenCharacterPosition: {x: 0, y: 0, z: 0}
+  entityMover: {fileID: 7994824952847853411}
   catchDistance: 1
 --- !u!1 &6093603662661297936
 GameObject:
@@ -301,7 +302,7 @@ GameObject:
   - component: {fileID: 7994824952847853411}
   - component: {fileID: 1467365877746765642}
   m_Layer: 12
-  m_Name: MovingFather
+  m_Name: MovingEntity
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -336,13 +337,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0.0267
-  firstGoal: {fileID: 4664620949847323331}
-  secondGoal: {fileID: 5856182232355380983}
-  goalReachThreshhold: 0
-  minDecisionTime: 2.3
-  maxDecisionTime: 7.7
+  destinationReachThreshhold: 0.23
+  minDecisionTime: 20
+  maxDecisionTime: 60
   navMeshAgent: {fileID: 1467365877746765642}
   frustumDetector: {fileID: 1446209778213229405}
+  randomDestinationRange: 120
 --- !u!195 &1467365877746765642
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -351,7 +351,7 @@ NavMeshAgent:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6093603662661297936}
   m_Enabled: 1
-  m_AgentTypeID: 0
+  m_AgentTypeID: -1372625422
   m_Radius: 0.5
   m_Speed: 1
   m_Acceleration: 8

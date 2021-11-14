@@ -37,8 +37,7 @@ public enum MASpaceType {
     Radial = 1
 }
 
-public enum TransitionParameter
-{
+public enum TransitionParameter {
     Move,
     Jump,
     Grounded,
@@ -51,7 +50,8 @@ public class MACharacterController : MonoBehaviour {
 
     [Range(0, 10f)]
     public float transitionSpeed;
-
+    [Range(0, 10f)]
+    public float slideTransitionSpeed;
     [Range(0, 10f)]
     public float airTransitionSpeed;
 
@@ -120,7 +120,7 @@ public class MACharacterController : MonoBehaviour {
 
 
     public Camera fpsCamera;
-    public Camera mainCamera;
+    private Camera mainCamera;
 
     private Transform currentCameraGoal;
     public Transform fixedCameraGoal;
@@ -224,6 +224,9 @@ public class MACharacterController : MonoBehaviour {
         this.speedBeforeWallContact = Vector3.zero;
 
         this.remainingSlideTime = this.maxSlideDuration;
+
+
+        this.mainCamera = GameObject.Find("MainCamera").GetComponent<Camera>();
 
         // this.rb.velocity = new Vector3(0, 5, 3);
     }
@@ -490,7 +493,13 @@ public class MACharacterController : MonoBehaviour {
 
             Vector3 oldVelocity = Vector3.ProjectOnPlane(this.rb.velocity, Vector3.up);
 
-            float currentTransitionSpeed = this.isGrounded ? this.transitionSpeed : this.airTransitionSpeed;
+
+            float currentTransitionSpeed = this.isGrounded ? (this.isSliding ? this.slideTransitionSpeed : this.transitionSpeed) : this.airTransitionSpeed;
+        
+
+
+            Debug.Log(desiredVelocity.magnitude);
+
             Vector3 newVelocity = oldVelocity * (1 - Time.deltaTime * currentTransitionSpeed) + desiredVelocity * (Time.deltaTime * currentTransitionSpeed);
 
             newVelocity += Vector3.up * this.rb.velocity.y;
@@ -738,7 +747,7 @@ public class MACharacterController : MonoBehaviour {
             this.remainingSlideTime -= Time.deltaTime;
         }
 
-        if (Input.GetKeyDown(KeyCode.LeftControl)) {
+        if (Input.GetKeyDown(KeyCode.Mouse2)) {
 
             if (this.isGrounded) {
 
@@ -759,7 +768,7 @@ public class MACharacterController : MonoBehaviour {
             return;
         }
 
-        if (Input.GetKeyUp(KeyCode.LeftControl)) {
+        if (Input.GetKeyUp(KeyCode.Mouse2)) {
             this.EndSliding();
         }
     }
@@ -785,36 +794,27 @@ public class MACharacterController : MonoBehaviour {
         this.slideCollider.gameObject.SetActive(false);
 
         this.isSliding = false;
-
         this.movementEnabled = true;
     }
 
     private void ManageJump() {
 
-        if (Input.GetKey("space"))
-        {
+        if (Input.GetKey("space")) {
             jumped = true;
-            if (Input.GetKeyDown("space"))
-            {
+            if (Input.GetKeyDown("space")) {
 
-                if (this.isGrounded)
-                {
+                if (this.isGrounded) {
                     this.PerformeSimpleJump();
                 }
-                else
-                {
-                    if (this.WallJumpAllowed())
-                    {
+                else {
+                    if (this.WallJumpAllowed()) {
                         this.PerformWallJump();
                     }
                 }
             }
-            else
-            {
-                if (!this.isGrounded)
-                {
-                    if (this.WallJumpAllowed())
-                    {
+            else {
+                if (!this.isGrounded) {
+                    if (this.WallJumpAllowed()) {
                         this.PerformWallWalk();
                     }
                 }
