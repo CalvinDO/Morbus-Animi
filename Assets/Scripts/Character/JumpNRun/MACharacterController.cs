@@ -497,9 +497,6 @@ public class MACharacterController : MonoBehaviour {
             float currentTransitionSpeed = this.isGrounded ? (this.isSliding ? this.slideTransitionSpeed : this.transitionSpeed) : this.airTransitionSpeed;
         
 
-
-            Debug.Log(desiredVelocity.magnitude);
-
             Vector3 newVelocity = oldVelocity * (1 - Time.deltaTime * currentTransitionSpeed) + desiredVelocity * (Time.deltaTime * currentTransitionSpeed);
 
             newVelocity += Vector3.up * this.rb.velocity.y;
