@@ -9,9 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce6ad05faf9e18b4bac9555b7dd019ad, type: 3}
-  m_Name: New State
+  m_Script: {fileID: 11500000, guid: f30e67732d7ef8840910bd9268e7f0a6, type: 3}
+  m_Name: Player_LedgeGrab_ToggleGrav_Off
   m_EditorClassIdentifier: 
   Duration: 0
-  Index: 0
-  transitionConditions: 
+  OnStart: 1
+  OnEnd: 0
+  On: 0

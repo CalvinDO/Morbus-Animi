@@ -2,17 +2,48 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MAToggleGravity : MonoBehaviour
+[CreateAssetMenu(fileName = "New State", menuName = "Assets/Scripts/Interaction/MAToggleGravity")]
+public class MAToggleGravity : MAStateData
 {
-    // Start is called before the first frame update
-    void Start()
+    public bool OnStart;
+    public bool OnEnd;
+    public bool On;
+
+    public override void OnEnter(MACharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
     {
-        
+        if(OnStart)
+        {
+            MACharacterController controller = characterState.GetCharacterControl(animator);
+            ToggleGrav(controller);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void UpdateAbility(MACharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
     {
-        
+        if (OnStart)
+        {
+            MACharacterController controller = characterState.GetCharacterControl(animator);
+            ToggleGrav(controller);
+        }
+        if (OnEnd)
+        {
+            MACharacterController controller = characterState.GetCharacterControl(animator);
+            ToggleGrav(controller);
+        }
+    }
+
+    public override void OnExit(MACharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
+    {
+        if (OnEnd)
+        {
+            MACharacterController controller = characterState.GetCharacterControl(animator);
+            ToggleGrav(controller);
+        }
+    }
+
+    private void ToggleGrav(MACharacterController controller)
+    {
+        controller.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        controller.GetComponent<Rigidbody>().useGravity = On;
     }
 }

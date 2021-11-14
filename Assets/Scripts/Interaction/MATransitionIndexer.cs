@@ -25,7 +25,6 @@ public class MATransitionIndexer : MAStateData
         if (MakeTransition(control))
         {
             animator.SetInteger(TransitionParameter.TransitionIndex.ToString(), Index);
-            //Debug.Log("Set to index " + Index);
         }
     }
 
@@ -44,7 +43,6 @@ public class MATransitionIndexer : MAStateData
         if (MakeTransition(control))
         {
             animator.SetInteger(TransitionParameter.TransitionIndex.ToString(), Index);
-            //Debug.Log("Set to index " + Index);
         }
     }
 
@@ -92,6 +90,7 @@ public class MATransitionIndexer : MAStateData
                         {
                             return false;
                         }
+                        Debug.Log("jump");
                     }
                     break;
                 case TransitionConditionType.GRABBING_LEDGE:
@@ -100,7 +99,7 @@ public class MATransitionIndexer : MAStateData
                         {
                             return false;
                         }
-                        //Debug.Log("entered case");
+                        Debug.Log("grabbed ledge");
                     }
                     break;
             }

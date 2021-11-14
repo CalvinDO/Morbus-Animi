@@ -835,7 +835,7 @@ public class MACharacterController : MonoBehaviour {
 
         bool wallPreviouslyJumped = this.lastJumpedWall == this.lastCollidedWall;
 
-        Debug.Log("  " + this.isCollidingWall + "  " + isXZMagnitudeHighEnough + "  " + isYSpeedHighEnough + "  " + !wallPreviouslyJumped);
+        //Debug.Log("  " + this.isCollidingWall + "  " + isXZMagnitudeHighEnough + "  " + isYSpeedHighEnough + "  " + !wallPreviouslyJumped);
 
         return this.isCollidingWall && isXZMagnitudeHighEnough && isYSpeedHighEnough && !wallPreviouslyJumped;
     }
@@ -857,7 +857,7 @@ public class MACharacterController : MonoBehaviour {
     private void SetLastJumpedWall() {
         this.lastJumpedWall = this.lastCollidedWall;
 
-        Debug.Log("wall jump or walk ");
+        //Debug.Log("wall jump or walk ");
     }
 
 

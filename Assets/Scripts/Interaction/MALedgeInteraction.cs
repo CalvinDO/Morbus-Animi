@@ -5,20 +5,22 @@ using UnityEngine;
 public class MALedgeInteraction : MonoBehaviour
 {
     public bool IsGrabbingLedge;
-    MALedge ledge = null;
+    public MALedge GrabbedLedge;
+    MALedge CheckLedge = null;
     private void OnTriggerEnter(Collider other)
     {
-        ledge = other.gameObject.GetComponent<MALedge>();
-        if (ledge != null)
+        CheckLedge = other.gameObject.GetComponent<MALedge>();
+        if (CheckLedge != null)
         {
             IsGrabbingLedge = true;
+            // make player face towards ledge
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        ledge = other.gameObject.GetComponent<MALedge>();
-        if (ledge != null)
+        CheckLedge = other.gameObject.GetComponent<MALedge>();
+        if (CheckLedge != null)
         {
             IsGrabbingLedge = false;
         }
