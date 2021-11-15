@@ -680,7 +680,6 @@ MonoBehaviour:
   cameraRotator: {fileID: 6404148241556665671}
   physicalBody: {fileID: 3350535686381462166}
   fpsCamera: {fileID: 6404148243089782120}
-  mainCamera: {fileID: 0}
   fixedCameraGoal: {fileID: 0}
   thirdPCameraGoal: {fileID: 6668616569618225407}
   goalRotator: {fileID: 9199259026516661009}
@@ -714,7 +713,7 @@ MonoBehaviour:
   swingGrabPosition: {fileID: 1039997808753021869}
   swingFootUpPosition: {fileID: 4494251013626885576}
   swingReleaseVelocityFactor: 1
-  ledgeInteraction: {fileID: 0}
+  ledgeInteraction: {fileID: 2090320057}
   jumped: 0
 --- !u!54 &1402342497931596602
 Rigidbody:
