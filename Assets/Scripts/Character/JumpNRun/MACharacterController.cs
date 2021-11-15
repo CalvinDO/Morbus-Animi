@@ -491,6 +491,8 @@ public class MACharacterController : MonoBehaviour {
             }
 
 
+            
+
             Vector3 oldVelocity = Vector3.ProjectOnPlane(this.rb.velocity, Vector3.up);
 
 
