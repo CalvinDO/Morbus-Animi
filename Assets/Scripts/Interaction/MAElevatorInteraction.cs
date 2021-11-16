@@ -19,21 +19,9 @@ public class MAElevatorInteraction : MAInteractable
     {
         float time = 0;
 
-        elevatorDoor.transform.localPosition = openPosition;
-
-        while (time < duration)
-        {
-            elevatorDoor.transform.localPosition = Vector3.Lerp(elevatorDoor.transform.localPosition, closedPosition, time / duration);
-            time += Time.deltaTime;
-        }
         elevatorDoor.transform.localPosition = closedPosition;
-        yield return new WaitForSeconds(duration);
 
-        SceneManager.LoadScene("SceneTransitionTest");
-
-        time = 0;
-
-        elevatorDoor.transform.position = closedPosition;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
 
         while (time < duration)
         {
@@ -41,5 +29,6 @@ public class MAElevatorInteraction : MAInteractable
             time += Time.deltaTime;
         }
         elevatorDoor.transform.localPosition = openPosition;
+        yield return new WaitForSeconds(duration);
     }
 }
