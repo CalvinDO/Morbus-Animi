@@ -13,7 +13,7 @@ public class MALedgeInteraction : MonoBehaviour
         if (CheckLedge != null)
         {
             IsGrabbingLedge = true;
-            // make player face towards ledge
+            GrabbedLedge = CheckLedge;
         }
     }
 
@@ -23,6 +23,7 @@ public class MALedgeInteraction : MonoBehaviour
         if (CheckLedge != null)
         {
             IsGrabbingLedge = false;
+            //GrabbedLedge = null;
         }
     }
 }

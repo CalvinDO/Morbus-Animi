@@ -211,6 +211,10 @@ public class MACharacterController : MonoBehaviour {
     public MALedgeInteraction ledgeInteraction;
 
     public bool jumped;
+    public bool up;
+    public bool down;
+    public bool left;
+    public bool right;
 
     void Start() {
 
@@ -540,15 +544,23 @@ public class MACharacterController : MonoBehaviour {
         switch (keyCode) {
             case KeyCode.W:
                 direction = Vector3.forward;
+                up = true;
+                left = down = right = false;
                 break;
             case KeyCode.A:
                 direction = Vector3.left;
+                left = true;
+                right = down = up = false;
                 break;
             case KeyCode.S:
                 direction = Vector3.back;
+                down = true;
+                left = right = up = false;
                 break;
             case KeyCode.D:
                 direction = Vector3.right;
+                right = true;
+                left = up = down = false;
                 break;
             default:
                 return Vector3.zero;

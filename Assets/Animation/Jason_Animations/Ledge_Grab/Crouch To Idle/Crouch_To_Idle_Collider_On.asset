@@ -9,8 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce6ad05faf9e18b4bac9555b7dd019ad, type: 3}
-  m_Name: Player_LedgeGrab_TransitionIndexer
+  m_Script: {fileID: 11500000, guid: 51f96cc66959e5145bbb2259c337ea01, type: 3}
+  m_Name: Crouch_To_Idle_Collider_On
   m_EditorClassIdentifier: 
-  Index: 1
-  transitionConditions: 0000000005000000
+  OnStart: 1
+  OnEnd: 0
+  On: 1

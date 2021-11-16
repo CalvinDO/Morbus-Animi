@@ -42,7 +42,7 @@ public class MATransitionIndexer : MAStateData
         MACharacterController control = characterState.GetCharacterControl(animator);
         if (MakeTransition(control))
         {
-            animator.SetInteger(TransitionParameter.TransitionIndex.ToString(), Index);
+            animator.SetInteger(TransitionParameter.TransitionIndex.ToString(), 0);
         }
     }
 
@@ -52,45 +52,44 @@ public class MATransitionIndexer : MAStateData
         {
             switch(c)
             {
-                //case TransitionConditionType.UP:
-                //    {
-                //        if (!control.MoveUp)
-                //        {
-                //            return false;
-                //        }
-                //    }
-                //    break;
-                //case TransitionConditionType.DOWN:
-                //    {
-                //        if (!control.MoveDown)
-                //        {
-                //            return false;
-                //        }
-                //    }
-                //    break;
-                //case TransitionConditionType.LEFT:
-                //    {
-                //        if (!control.MoveLeft)
-                //        {
-                //            return false;
-                //        }
-                //    }
-                //    break;
-                //case TransitionConditionType.RIGHT:
-                //    {
-                //        if (!control.MoveRight)
-                //        {
-                //            return false;
-                //        }
-                //    }
-                //    break;
+                case TransitionConditionType.UP:
+                    {
+                        if (!control.up)
+                        {
+                            return false;
+                        }
+                    }
+                    break;
+                case TransitionConditionType.DOWN:
+                    {
+                        if (!control.down)
+                        {
+                            return false;
+                        }
+                    }
+                    break;
+                case TransitionConditionType.LEFT:
+                    {
+                        if (!control.left)
+                        {
+                            return false;
+                        }
+                    }
+                    break;
+                case TransitionConditionType.RIGHT:
+                    {
+                        if (!control.right)
+                        {
+                            return false;
+                        }
+                    }
+                    break;
                 case TransitionConditionType.JUMP:
                     {
                         if (!control.jumped)
                         {
                             return false;
                         }
-                        Debug.Log("jump");
                     }
                     break;
                 case TransitionConditionType.GRABBING_LEDGE:
@@ -99,7 +98,6 @@ public class MATransitionIndexer : MAStateData
                         {
                             return false;
                         }
-                        Debug.Log("grabbed ledge");
                     }
                     break;
             }

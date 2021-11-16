@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New State", menuName = "Assets/Scripts/Interaction/MAToggleGravity")]
-public class MAToggleGravity : MAStateData
+[CreateAssetMenu(fileName = "New State", menuName = "Assets/Scripts/Interaction/MAToggleCollider")]
+public class MAToggleCollider : MAStateData
 {
     public bool OnStart;
     public bool OnEnd;
@@ -11,10 +11,10 @@ public class MAToggleGravity : MAStateData
 
     public override void OnEnter(MACharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
     {
-        if(OnStart)
+        if (OnStart)
         {
             MACharacterController controller = characterState.GetCharacterControl(animator);
-            ToggleGrav(controller);
+            ToggleCol(controller);
         }
     }
 
@@ -28,13 +28,13 @@ public class MAToggleGravity : MAStateData
         if (OnEnd)
         {
             MACharacterController controller = characterState.GetCharacterControl(animator);
-            ToggleGrav(controller);
+            ToggleCol(controller);
         }
     }
 
-    private void ToggleGrav(MACharacterController controller)
+    private void ToggleCol(MACharacterController controller)
     {
         controller.GetComponent<Rigidbody>().velocity = Vector3.zero;
-        controller.GetComponent<Rigidbody>().useGravity = On;
+        controller.GetComponentInChildren<CapsuleCollider>().enabled = On;
     }
 }

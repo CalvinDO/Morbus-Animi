@@ -9,8 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce6ad05faf9e18b4bac9555b7dd019ad, type: 3}
-  m_Name: Player_LedgeGrab_TransitionIndexer
+  m_Script: {fileID: 11500000, guid: a3bbe80f762cc4a4c8e8db9736d26520, type: 3}
+  m_Name: Hang_To_Crouch_Teleport
   m_EditorClassIdentifier: 
-  Index: 1
-  transitionConditions: 0000000005000000
