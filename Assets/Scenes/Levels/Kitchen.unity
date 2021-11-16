@@ -5027,10 +5027,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1143596731889217174, guid: 4a0c55cde13aff64db456884cdef2446, type: 3}
-      propertyPath: mainCamera
-      value: 
-      objectReference: {fileID: 1365434083}
     - target: {fileID: 6404148241480252427, guid: 4a0c55cde13aff64db456884cdef2446, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -5076,9 +5072,9 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6404148241480252436, guid: 4a0c55cde13aff64db456884cdef2446, type: 3}
-      propertyPath: ledgeInteraction
+      propertyPath: mainCamera
       value: 
-      objectReference: {fileID: 1705471209}
+      objectReference: {fileID: 1365434083}
     - target: {fileID: 6404148241480252437, guid: 4a0c55cde13aff64db456884cdef2446, type: 3}
       propertyPath: m_Name
       value: SmallNorah
@@ -5272,17 +5268,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4c144830bc433b94fb854b24138f99a9, type: 3}
---- !u!114 &1705471209 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2090320057, guid: 4a0c55cde13aff64db456884cdef2446, type: 3}
-  m_PrefabInstance: {fileID: 1622407432}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f511d840703140441b8989f2a7431100, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1729674431
 PrefabInstance:
   m_ObjectHideFlags: 0
