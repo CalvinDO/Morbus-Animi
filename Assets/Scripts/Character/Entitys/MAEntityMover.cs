@@ -5,57 +5,75 @@ using UnityEngine.AI;
 
 public class MAEntityMover : MonoBehaviour {
 
-    [Range(0, 0.03f)]
+    [Range(0, 0.1f)]
     public float speed;
 
-    public Transform firstGoal;
-    public Transform secondGoal;
-    public float goalReachThreshhold;
+    [Range(0, 1f)]
+    public float destinationReachThreshhold;
 
     public float minDecisionTime;
     public float maxDecisionTime;
 
     private float currentDecisionTime;
 
-    private Transform currentGoal;
-
     public NavMeshAgent navMeshAgent;
     public MAFrustumDetector frustumDetector;
 
+    public float randomDestinationRange;
+
+    private Transform navMeshCenter;
+
+    private Vector3 randomPointInSphere;
+
     void Start() {
-        this.currentGoal = this.GetRandomBool();
         this.currentDecisionTime = this.maxDecisionTime;
-    }
 
-
-    void FixedUpdate() {
-
-        if (this.frustumDetector.characterDetected) {
-            this.navMeshAgent.SetDestination(this.frustumDetector.lastSeenCharacterPosition);
-            return;
-        }
-        this.Move();
-    }
-
-    private void SwitchDirection() {
-
-        this.currentGoal = this.currentGoal.Equals(this.firstGoal) ? this.secondGoal : this.firstGoal;
-
-        float newDecisionTime = Random.Range(this.minDecisionTime, this.maxDecisionTime);
-        this.currentDecisionTime = newDecisionTime;
-        Debug.Log("switched direction to: " + this.currentGoal.position);
+        this.navMeshCenter = GameObject.Find("NavMeshCenter").transform;
     }
 
     private void Update() {
         this.currentDecisionTime -= Time.deltaTime;
 
         if (this.currentDecisionTime <= 0) {
-            this.SwitchDirection();
+            this.SetNewRandomDestination();
+        }
+
+        if (this.frustumDetector.characterDetected) {
+            this.navMeshAgent.SetDestination(this.frustumDetector.lastSeenCharacterPosition);
+            return;
+        }
+
+   
+        if ((this.navMeshAgent.remainingDistance < this.destinationReachThreshhold) || this.navMeshAgent.pathStatus == NavMeshPathStatus.PathInvalid) {
+            this.SetNewRandomDestination();
+            this.currentDecisionTime = this.maxDecisionTime;
         }
     }
 
-    private void Move() {
 
+    private void SetNewRandomDestination() {
+
+        this.randomPointInSphere = Random.insideUnitSphere * this.randomDestinationRange + this.navMeshCenter.position;
+
+        NavMeshHit hit;
+        NavMesh.SamplePosition(this.randomPointInSphere, out hit, int.MaxValue, 1);
+
+        this.navMeshAgent.SetDestination(hit.position);
+
+
+        float newDecisionTime = Random.Range(this.minDecisionTime, this.maxDecisionTime);
+        this.currentDecisionTime = newDecisionTime;
+
+    }
+
+    private void OnDrawGizmos() {
+        // Gizmos.DrawWireSphere(this.randomPointInSphere, 5);
+        Gizmos.DrawSphere(this.navMeshAgent.destination, 4);
+    }
+
+    [System.Obsolete("Not needed anymore because NavMesh.SetDestination() is used")]
+    private void Move() {
+        /*
         Vector3 connection = this.currentGoal.position - this.transform.position;
         if (connection.magnitude< this.goalReachThreshhold) {
             return;
@@ -66,10 +84,6 @@ public class MAEntityMover : MonoBehaviour {
 
         this.transform.LookAt(this.currentGoal.position);
         this.navMeshAgent.Warp(this.transform.position + increment);
-    }
-
-    private Transform GetRandomBool() {
-        Debug.Log(Random.Range(0, 2));
-        return Random.Range(0, 2) == 0 ? this.firstGoal : this.secondGoal;
+        */
     }
 }

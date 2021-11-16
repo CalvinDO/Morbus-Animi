@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class MAFrustumDetector : MonoBehaviour {
 
@@ -21,6 +22,7 @@ public class MAFrustumDetector : MonoBehaviour {
     private float timeTillCalmDown = 10;
     private float remainingTimeTillCalmDown = 10;
 
+    public MAEntityMover entityMover;
 
     [Range(0, 5)]
     public float catchDistance;
@@ -79,7 +81,7 @@ public class MAFrustumDetector : MonoBehaviour {
         
 
 
-        if (Vector3.Distance(this.lastSeenCharacterPosition, this.transform.position) < 2f) {
+        if (Vector3.Distance(this.lastSeenCharacterPosition, this.transform.position) < 2 || this.entityMover.navMeshAgent.pathStatus == NavMeshPathStatus.PathInvalid) {
             this.reachedOldPos = true;
 
             this.remainingTimeTillCalmDown -= Time.deltaTime;
