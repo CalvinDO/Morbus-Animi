@@ -680,6 +680,7 @@ MonoBehaviour:
   cameraRotator: {fileID: 6404148241556665671}
   physicalBody: {fileID: 3350535686381462166}
   fpsCamera: {fileID: 6404148243089782120}
+  mainCamera: {fileID: 0}
   fixedCameraGoal: {fileID: 0}
   thirdPCameraGoal: {fileID: 6668616569618225407}
   goalRotator: {fileID: 9199259026516661009}
@@ -715,6 +716,10 @@ MonoBehaviour:
   swingReleaseVelocityFactor: 1
   ledgeInteraction: {fileID: 2090320057}
   jumped: 0
+  up: 0
+  down: 0
+  left: 0
+  right: 0
 --- !u!54 &1402342497931596602
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -858,7 +863,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4eda88048744d1d4f9a9ae79c32886e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainCamera: {fileID: 0}
 --- !u!1 &6404148241556665671
 GameObject:
   m_ObjectHideFlags: 0

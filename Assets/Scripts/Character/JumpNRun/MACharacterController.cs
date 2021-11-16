@@ -120,7 +120,7 @@ public class MACharacterController : MonoBehaviour {
 
 
     public Camera fpsCamera;
-    private Camera mainCamera;
+    public Camera mainCamera;
 
     private Transform currentCameraGoal;
     public Transform fixedCameraGoal;

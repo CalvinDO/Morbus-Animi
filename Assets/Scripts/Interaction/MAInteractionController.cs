@@ -7,8 +7,12 @@ public class MAInteractionController : MonoBehaviour
     //for item interaction
     MAInteractable hover;
     MASprayable wall;
-    public Camera mainCamera;
+    Camera mainCamera;
 
+    private void Awake()
+    {
+        mainCamera = this.GetComponent<MACharacterController>().mainCamera;
+    }
     private void Update()
     {
         this.ManageRaycastInteraction();
