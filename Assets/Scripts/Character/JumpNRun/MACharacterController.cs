@@ -872,6 +872,8 @@ public class MACharacterController : MonoBehaviour {
 
     private void PerformWallJump() {
 
+        this.rb.velocity = new Vector3(this.rb.velocity.x, 0, this.rb.velocity.z);
+
         this.rb.AddForce(this.wallJumpContactNormal * this.wallJumpImpulse, ForceMode.Impulse);
 
         this.PerformSimpleJump();
@@ -883,6 +885,8 @@ public class MACharacterController : MonoBehaviour {
     }
 
     private void PerformWallWalk() {
+        this.rb.velocity = new Vector3(this.rb.velocity.x, 0, this.rb.velocity.z);
+
         this.PerformSimpleJump();
         this.SetLastJumpedWall();
         this.lastJumpWasWalkWalk = true;
