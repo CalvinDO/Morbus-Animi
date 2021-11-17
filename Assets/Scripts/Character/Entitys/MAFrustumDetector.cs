@@ -11,7 +11,7 @@ public class MAFrustumDetector : MonoBehaviour {
     public MACharacterController characterController;
     public LayerMask characterLayerMask;
 
-    
+
     public bool characterDetected = false;
     [HideInInspector]
     public MACharacterController detectedCharacter;
@@ -27,6 +27,9 @@ public class MAFrustumDetector : MonoBehaviour {
     [Range(0, 5)]
     public float catchDistance;
 
+    public AudioSource audioSource;
+    public AudioClip iSeeYou;
+    public AudioClip whereAreYou;
 
     void Start() {
         this.characterController = GameObject.Find("SmallNorah").GetComponent<MACharacterController>();
@@ -64,6 +67,10 @@ public class MAFrustumDetector : MonoBehaviour {
             Debug.DrawRay(ray.origin, hit.point - this.transform.position);
             this.light.color = Color.yellow;
 
+            if (!this.characterDetected) {
+                this.audioSource.PlayOneShot(this.iSeeYou);
+            }
+
             this.characterDetected = true;
             this.detectedCharacter = this.characterWhichGotHit(hit);
             this.lastSeenCharacterPosition = this.detectedCharacter.transform.position;
@@ -78,10 +85,15 @@ public class MAFrustumDetector : MonoBehaviour {
             return;
         }
 
-        
+
 
 
         if (Vector3.Distance(this.lastSeenCharacterPosition, this.transform.position) < 2 || this.entityMover.navMeshAgent.pathStatus == NavMeshPathStatus.PathInvalid) {
+
+            if (!this.reachedOldPos) {
+                this.audioSource.PlayOneShot(this.whereAreYou);
+            }
+
             this.reachedOldPos = true;
 
             this.remainingTimeTillCalmDown -= Time.deltaTime;

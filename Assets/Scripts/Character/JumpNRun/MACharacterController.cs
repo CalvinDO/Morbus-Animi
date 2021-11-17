@@ -89,6 +89,10 @@ public class MACharacterController : MonoBehaviour {
     [Range(0, 100)]
     public float wallJumpImpulse;
 
+    public AudioSource jumpNRunAudioSource;
+    public AudioClip wallJumpClip;
+    public AudioClip wallWalkClip;
+   
     [Range(0, 1000)]
     public float jumpForce;
 
@@ -196,6 +200,8 @@ public class MACharacterController : MonoBehaviour {
     public float maxSlideDuration;
     private float remainingSlideTime;
     private bool isSliding = false;
+
+    public AudioClip slideClip;
 
     public Collider defaultCollider;
     public Collider slideCollider;
@@ -800,6 +806,8 @@ public class MACharacterController : MonoBehaviour {
         this.isSliding = true;
 
         this.movementEnabled = false;
+
+        this.jumpNRunAudioSource.PlayOneShot(this.slideClip);
     }
 
     private void EndSliding() {
@@ -870,12 +878,16 @@ public class MACharacterController : MonoBehaviour {
 
         this.SetLastJumpedWall();
 
+        
+        this.jumpNRunAudioSource.PlayOneShot(this.wallJumpClip);
     }
 
     private void PerformWallWalk() {
         this.PerformSimpleJump();
         this.SetLastJumpedWall();
         this.lastJumpWasWalkWalk = true;
+
+        this.jumpNRunAudioSource.PlayOneShot(this.wallWalkClip);
     }
 
     private void SetLastJumpedWall() {
