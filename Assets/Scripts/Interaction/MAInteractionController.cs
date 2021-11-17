@@ -21,12 +21,17 @@ public class MAInteractionController : MonoBehaviour
     {
         //Debug.Log("collided");
         MAInteractable interactable = collider.GetComponent<MAInteractable>();
+        MAElevatorInteraction elevatorInteraction = collider.GetComponent<MAElevatorInteraction>();
         if (interactable != null)
         {
             this.hover = interactable;
             this.hover.setHover();
         }
-        if (Input.GetKeyDown("space") && interactable != null)
+        if (Input.GetKeyDown("space") && interactable != null && elevatorInteraction == null)
+        {
+            this.hover.MAInteract();
+        }
+        if (Input.GetKeyDown("e") && elevatorInteraction != null)
         {
             this.hover.MAInteract();
         }
