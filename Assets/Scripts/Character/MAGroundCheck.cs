@@ -11,11 +11,15 @@ public class MAGroundCheck : MonoBehaviour
         this.characterController = this.transform.root.GetComponent<MACharacterController>();
     }
 
-    private void OnTriggerStay(Collider other) {
-        this.characterController.Ground();
-    }
+    private void Update() {
 
-    private void OnTriggerExit(Collider other) {
-        this.characterController.DeGround();
+        Ray ray = new Ray(this.transform.position, Vector3.down);
+
+        if (Physics.Raycast(ray, out _, 0.1f)) {
+            this.characterController.Ground();
+        }
+        else {
+            this.characterController.DeGround();
+        }
     }
 }

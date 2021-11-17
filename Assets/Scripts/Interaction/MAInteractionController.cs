@@ -19,7 +19,7 @@ public class MAInteractionController : MonoBehaviour
     }
     private void OnTriggerStay(Collider collider)
     {
-        Debug.Log("collided");
+        //Debug.Log("collided");
         MAInteractable interactable = collider.GetComponent<MAInteractable>();
         if (interactable != null)
         {

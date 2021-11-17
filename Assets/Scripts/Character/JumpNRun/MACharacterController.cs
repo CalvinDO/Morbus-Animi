@@ -80,7 +80,10 @@ public class MACharacterController : MonoBehaviour {
     private GameObject lastCollidedWall;
     private GameObject lastJumpedWall;
     private Vector3 wallJumpContactNormal;
+    private bool lastJumpWasWalkWalk = false;
 
+    [Range(0, 0.5f)]
+    public float minWallJumpHeightAboveGround;
     public float minWalljumpVelocity = 0.5f;
     public float minWalljumpYVelocity = 0.5f;
     [Range(0, 100)]
@@ -254,7 +257,7 @@ public class MACharacterController : MonoBehaviour {
 
     private void Awake() {
         DontDestroyOnLoad(this.gameObject);
-        ledgeInteraction = GetComponentInChildren<MALedgeInteraction>();
+        ledgeInteraction = this.GetComponentInChildren<MALedgeInteraction>();
     }
     private void OnApplicationPause(bool pause) {
         //currently dead code
@@ -269,6 +272,8 @@ public class MACharacterController : MonoBehaviour {
             this.framesSinceJump++;
         }
 
+        this.SlowDown();
+
         this.ManageSmartCam();
     }
 
@@ -278,12 +283,10 @@ public class MACharacterController : MonoBehaviour {
             //return;
         }
 
-
         this.AccelerateXZ();
 
         //this.LimitSpeed();
 
-        this.SlowDown();
 
         if (this.isBobbingEnabled) {
             this.CalculateBob();
@@ -397,6 +400,12 @@ public class MACharacterController : MonoBehaviour {
 
         if (collision.gameObject.CompareTag("JumpNRunElement")) {
 
+            if (this.isGrounded) {
+                this.isCollidingWall = false;
+                this.lastCollidedWall = null;
+                return;
+            }
+
             this.isCollidingWall = true;
             this.lastCollidedWall = collision.gameObject;
 
@@ -429,7 +438,6 @@ public class MACharacterController : MonoBehaviour {
         //    this.hover.MAInteract();
         //    //this.hover.clearText();
         //}
-
     }
 
     private void OnCollisionExit(Collision collision) {
@@ -452,7 +460,6 @@ public class MACharacterController : MonoBehaviour {
         if (collision.gameObject.CompareTag("JumpNRunElement")) {
 
             this.speedBeforeWallContact = this.rb.velocity;
-            this.isCollidingWall = true;
         }
     }
 
@@ -495,13 +502,13 @@ public class MACharacterController : MonoBehaviour {
             }
 
 
-            
+
 
             Vector3 oldVelocity = Vector3.ProjectOnPlane(this.rb.velocity, Vector3.up);
 
 
             float currentTransitionSpeed = this.isGrounded ? (this.isSliding ? this.slideTransitionSpeed : this.transitionSpeed) : this.airTransitionSpeed;
-        
+
 
             Vector3 newVelocity = oldVelocity * (1 - Time.deltaTime * currentTransitionSpeed) + desiredVelocity * (Time.deltaTime * currentTransitionSpeed);
 
@@ -758,7 +765,7 @@ public class MACharacterController : MonoBehaviour {
             this.remainingSlideTime -= Time.deltaTime;
         }
 
-        if (Input.GetKeyDown(KeyCode.Mouse2)) {
+        if (Input.GetKeyDown(KeyCode.C)) {
 
             if (this.isGrounded) {
 
@@ -779,7 +786,7 @@ public class MACharacterController : MonoBehaviour {
             return;
         }
 
-        if (Input.GetKeyUp(KeyCode.Mouse2)) {
+        if (Input.GetKeyUp(KeyCode.C)) {
             this.EndSliding();
         }
     }
@@ -812,21 +819,26 @@ public class MACharacterController : MonoBehaviour {
 
         if (Input.GetKey("space")) {
             jumped = true;
+
             if (Input.GetKeyDown("space")) {
 
                 if (this.isGrounded) {
-                    this.PerformeSimpleJump();
+                    this.PerformSimpleJump();
+                    this.lastJumpWasWalkWalk = false;
                 }
                 else {
-                    if (this.WallJumpAllowed()) {
+                    if (this.IsWallJumpOrWalkAllowed()) {
                         this.PerformWallJump();
+                        this.lastJumpWasWalkWalk = false;
                     }
                 }
             }
             else {
                 if (!this.isGrounded) {
-                    if (this.WallJumpAllowed()) {
-                        this.PerformWallWalk();
+                    if (this.IsWallJumpOrWalkAllowed()) {
+                        if (!this.lastJumpWasWalkWalk) {
+                            this.PerformWallWalk();
+                        }
                     }
                 }
             }
@@ -834,7 +846,7 @@ public class MACharacterController : MonoBehaviour {
         else jumped = false;
     }
 
-    private bool WallJumpAllowed() {
+    private bool IsWallJumpOrWalkAllowed() {
 
         Vector3 XZPlaneProjectedSpeedBeforeWall = Vector3.ProjectOnPlane(this.speedBeforeWallContact, Vector3.up);
         Vector2 XZSpeedBeforeWall = new Vector2(XZPlaneProjectedSpeedBeforeWall.x, XZPlaneProjectedSpeedBeforeWall.z);
@@ -843,36 +855,35 @@ public class MACharacterController : MonoBehaviour {
         bool isXZMagnitudeHighEnough = XZSpeedBeforeWall.magnitude > this.minWalljumpVelocity;
         bool isYSpeedHighEnough = ySpeedBeforeWall > this.minWalljumpYVelocity;
 
-
         bool wallPreviouslyJumped = this.lastJumpedWall == this.lastCollidedWall;
 
-        //Debug.Log("  " + this.isCollidingWall + "  " + isXZMagnitudeHighEnough + "  " + isYSpeedHighEnough + "  " + !wallPreviouslyJumped);
+        bool highEnoughAboveGround = !Physics.Raycast(new Ray(this.transform.position, Vector3.down), out _, this.minWallJumpHeightAboveGround);
 
-        return this.isCollidingWall && isXZMagnitudeHighEnough && isYSpeedHighEnough && !wallPreviouslyJumped;
+        return this.isCollidingWall && isXZMagnitudeHighEnough && isYSpeedHighEnough && !wallPreviouslyJumped && highEnoughAboveGround;
     }
 
     private void PerformWallJump() {
 
         this.rb.AddForce(this.wallJumpContactNormal * this.wallJumpImpulse, ForceMode.Impulse);
 
-        this.PerformeSimpleJump();
+        this.PerformSimpleJump();
 
         this.SetLastJumpedWall();
+
     }
 
     private void PerformWallWalk() {
-        this.PerformeSimpleJump();
+        this.PerformSimpleJump();
         this.SetLastJumpedWall();
+        this.lastJumpWasWalkWalk = true;
     }
 
     private void SetLastJumpedWall() {
         this.lastJumpedWall = this.lastCollidedWall;
-
-        //Debug.Log("wall jump or walk ");
     }
 
 
-    private void PerformeSimpleJump() {
+    private void PerformSimpleJump() {
         Vector3 force = Vector3.up * this.jumpForce;
 
         rb.AddForce(force, ForceMode.Impulse);
@@ -971,6 +982,9 @@ public class MACharacterController : MonoBehaviour {
     public void Ground() {
         this.isGrounded = true;
 
+        if (this.jumped) {
+            return;
+        }
         this.lastCollidedWall = null;
         this.lastJumpedWall = null;
     }
