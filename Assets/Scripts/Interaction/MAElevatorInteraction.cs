@@ -9,6 +9,9 @@ public class MAElevatorInteraction : MAInteractable
     public Transform openCoordinates;
     public Transform closedCoordinates;
     float duration = 2f;
+
+    public int sceneIndex;
+
     public override void MAInteract()
     {
         base.MAInteract();
@@ -21,7 +24,7 @@ public class MAElevatorInteraction : MAInteractable
 
         elevatorDoor.transform.localPosition = closedPosition;
 
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        SceneManager.LoadScene(this.sceneIndex);
 
         while (time < duration)
         {
