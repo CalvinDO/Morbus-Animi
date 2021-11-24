@@ -225,6 +225,11 @@ public class MACharacterController : MonoBehaviour {
     public bool left;
     public bool right;
 
+
+
+    public GameObject screenDisplay;
+    public UnityEngine.UI.Text hoverTextObject;
+
     void Start() {
 
         this.currentXRotation = 0;

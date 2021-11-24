@@ -12,7 +12,7 @@ public class MAInteractWithObject : MAInteractable
         inventory = MAInventory.instance;
         base.MAInteract();
 
-        switch (currentSelection)
+        switch (objectType)
         {
             case ObjectType.item:
                 PickUp();

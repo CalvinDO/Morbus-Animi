@@ -43,7 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d843acbfcf9f6d42857fd7e91982441, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  menuCanvas: {fileID: 2515375899625496458}
+  menuCanvas: {fileID: 724214251102560739}
   isMainMenu: 1
   clickSound: {fileID: 0}
 --- !u!1 &376517386016535601
@@ -59,7 +59,7 @@ GameObject:
   - component: {fileID: 3955009452868565795}
   - component: {fileID: 6121594170635106006}
   m_Layer: 5
-  m_Name: Button
+  m_Name: PictureButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -167,7 +167,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2515375899625496458}
+      - m_Target: {fileID: 9165715950517864379}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
@@ -200,9 +200,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4691950067118147802}
+  - component: {fileID: 5688193012476689151}
   m_Layer: 0
   m_Name: PicturePrefab
-  m_TagString: Untagged
+  m_TagString: PictureDisplay
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -223,6 +224,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5688193012476689151
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2515375899625496458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66cc625cece7e594f8d4d3c47047e8b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canvas: {fileID: 724214251102560739}
+  panel: {fileID: 4986403745740446904}
+  text: {fileID: 1488643815400334544}
 --- !u!1 &4693398626061772235
 GameObject:
   m_ObjectHideFlags: 0
@@ -235,7 +251,7 @@ GameObject:
   - component: {fileID: 4063614830303903570}
   - component: {fileID: 549918382857216693}
   m_Layer: 5
-  m_Name: Text
+  m_Name: PictureButtonText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -315,7 +331,7 @@ GameObject:
   - component: {fileID: 1488643815400334544}
   m_Layer: 5
   m_Name: PictureText
-  m_TagString: Untagged
+  m_TagString: PictureText
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -393,7 +409,7 @@ GameObject:
   - component: {fileID: 8410316202833245376}
   - component: {fileID: 4986403745740446904}
   m_Layer: 5
-  m_Name: Panel
+  m_Name: PicturePanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -469,7 +485,7 @@ GameObject:
   - component: {fileID: 7250242982513411747}
   - component: {fileID: 3346938715519511123}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: PictureCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

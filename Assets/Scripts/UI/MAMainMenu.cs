@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class MAMainMenu : MonoBehaviour
 {
-    public GameObject menuCanvas;
+    public Canvas menuCanvas;
     public bool isMainMenu;
 
 
@@ -14,10 +14,10 @@ public class MAMainMenu : MonoBehaviour
 
     void Update()
     {
-        bool current = menuCanvas.activeSelf;
+        bool current = menuCanvas.gameObject.activeSelf;
         if (Input.GetKeyDown(KeyCode.Escape) && !isMainMenu)
         {
-            menuCanvas.SetActive(!current);
+            menuCanvas.gameObject.SetActive(!current);
             if (current)
             {
                 ResumeGame();

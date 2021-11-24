@@ -1,14 +1,20 @@
 using UnityEngine;
 
 public class MAInteractable : MonoBehaviour {
+
+    [HideInInspector]
+    public MACharacterController characterController;
+
     public enum ObjectType { item, obstacle, climb, lever, image, waterwheel, elevator };
     public enum InteractionType { collider, raycast};
-    public ObjectType currentSelection = ObjectType.item;
+    public ObjectType objectType = ObjectType.item;
     public InteractionType currentInteraction = InteractionType.collider;
 
     public float radius = 3f;
 
+    [HideInInspector]
     public GameObject textDisplay;
+    [HideInInspector]
     public UnityEngine.UI.Text hoverTextObject;
 
     private Material standardMaterial;
@@ -18,11 +24,15 @@ public class MAInteractable : MonoBehaviour {
     private void Start() {
         //this.meshRenderer = this.GetComponent<MeshRenderer>();
         //this.standardMaterial = this.meshRenderer.material;
+
+        this.characterController = GameObject.Find("SmallNorah").GetComponent<MACharacterController>();
+        this.textDisplay = this.characterController.screenDisplay;
+        this.hoverTextObject = this.characterController.hoverTextObject;
     }
 
     void OnDrawGizmosSelected() {
         Gizmos.color = Color.yellow;
-        if (currentSelection == ObjectType.item || currentSelection == ObjectType.climb) {
+        if (objectType == ObjectType.item || objectType == ObjectType.climb) {
             Gizmos.DrawWireSphere(transform.position, radius);
         }
         else {
@@ -48,7 +58,7 @@ public class MAInteractable : MonoBehaviour {
             return;
         }
 
-        switch (currentSelection) {
+        switch (objectType) {
             case ObjectType.image:
                 newHoverText = "take picture [E]";
                 break;

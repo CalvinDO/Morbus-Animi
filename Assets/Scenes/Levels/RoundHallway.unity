@@ -178,14 +178,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6121594170635106006, guid: fa337dd7d058f474d98b66efaf8ba31e, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 722572877}
-    - target: {fileID: 6121594170635106006, guid: fa337dd7d058f474d98b66efaf8ba31e, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetActive
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fa337dd7d058f474d98b66efaf8ba31e, type: 3}
 --- !u!1 &36674733
@@ -422,11 +414,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   charges: 0
   graffiti: {fileID: 21300000, guid: 4e2ef8c5700259e4a8e7549b8b4ecc32, type: 3}
---- !u!1 &722572877 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 9165715950517864379, guid: fa337dd7d058f474d98b66efaf8ba31e, type: 3}
-  m_PrefabInstance: {fileID: 837240}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &841464513 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1022157614763165319, guid: 4a0c55cde13aff64db456884cdef2446, type: 3}
@@ -797,7 +784,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 861b3cb8b3b0dbe48a2a395b61fd5908, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentSelection: 6
+  characterController: {fileID: 0}
+  objectType: 0
   currentInteraction: 0
   radius: 5
   textDisplay: {fileID: 841464513}
@@ -891,6 +879,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1022157614763165319, guid: 4a0c55cde13aff64db456884cdef2446, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6404148241480252427, guid: 4a0c55cde13aff64db456884cdef2446, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -939,6 +931,10 @@ PrefabInstance:
       propertyPath: spaceType
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6404148241480252436, guid: 4a0c55cde13aff64db456884cdef2446, type: 3}
+      propertyPath: screenDisplay
+      value: 
+      objectReference: {fileID: 841464513}
     - target: {fileID: 6404148241480252437, guid: 4a0c55cde13aff64db456884cdef2446, type: 3}
       propertyPath: m_Name
       value: SmallNorah

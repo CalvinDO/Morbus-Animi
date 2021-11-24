@@ -11,6 +11,7 @@ TagManager:
   - ScreenText
   - PictureText
   - PictureDisplay
+  - MainCollider
   layers:
   - Default
   - TransparentFX

@@ -342,7 +342,7 @@ GameObject:
   - component: {fileID: 250490488219866939}
   m_Layer: 8
   m_Name: Default_Collider
-  m_TagString: Untagged
+  m_TagString: MainCollider
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -450,7 +450,7 @@ GameObject:
   - component: {fileID: 6817328133499078889}
   m_Layer: 8
   m_Name: Slide_Collider
-  m_TagString: Untagged
+  m_TagString: MainCollider
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -727,6 +727,8 @@ MonoBehaviour:
   down: 0
   left: 0
   right: 0
+  screenDisplay: {fileID: 1022157614763165319}
+  hoverTextObject: {fileID: 1022157614349243134}
 --- !u!54 &1402342497931596602
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1739,8 +1741,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 703dff98af9fe0c4e9b3a2b1d649f5ab, type: 3}
+--- !u!114 &1022157614349243134 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1928384564952470146, guid: 703dff98af9fe0c4e9b3a2b1d649f5ab, type: 3}
+  m_PrefabInstance: {fileID: 1508021309926916220}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1022157614763165316 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1928384564670138104, guid: 703dff98af9fe0c4e9b3a2b1d649f5ab, type: 3}
+  m_PrefabInstance: {fileID: 1508021309926916220}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1022157614763165319 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1928384564670138107, guid: 703dff98af9fe0c4e9b3a2b1d649f5ab, type: 3}
   m_PrefabInstance: {fileID: 1508021309926916220}
   m_PrefabAsset: {fileID: 0}

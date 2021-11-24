@@ -11,7 +11,7 @@ public class MAItemInteraction : MAInteractable
         inventory = MAInventory.instance;
         base.MAInteract();
 
-        switch (this.currentSelection)
+        switch (this.objectType)
         {
             case ObjectType.obstacle:
                 Open();

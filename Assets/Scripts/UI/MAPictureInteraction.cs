@@ -3,45 +3,57 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MAPictureInteraction : MAInteractable
-{
-    public MAItem picture;
-    public GameObject canvas;
-    public GameObject panel;
-    public Text text;
-    public MADarkNorah darkNorah;
+public class MAPictureInteraction : MAInteractable {
+
+
+    public MAPicture picture;
+
+    private MAUIPicturePrefab uiPicturePrefab;
+
+    private void Start() {
+
+        this.uiPicturePrefab = GameObject.Find("PicturePrefab").GetComponent<MAUIPicturePrefab>();
+
+    }
 
     public void showNorah() {
-        this.darkNorah.gameObject.SetActive(true);
+        //this.darkNorah.gameObject.SetActive(true);
 
-        this.darkNorah.StartMoving();
+        // this.darkNorah.StartMoving();
     }
 
     private void OnTriggerEnter(Collider other) {
-        if (other.GetComponent<MACharacterController>() == null) {
+
+        Debug.Log(other.gameObject.name);
+
+        if (!other.CompareTag("MainCollider")) {
             return;
         }
 
+        Debug.Log("interact!");
+
         this.MAInteract();
     }
-    public override void MAInteract()
-    {
-        clearText();
-        base.MAInteract();
-        panel.GetComponent<Image>().sprite = picture.icon;
-        text.text = picture.description;
+    public override void MAInteract() {
+        Debug.Log("interact!");
 
+        this.clearText();
+        base.MAInteract();
+
+        this.uiPicturePrefab.panel.GetComponent<Image>().sprite = picture.icon;
+        this.uiPicturePrefab.text.text = picture.description;
+
+        /*
         if (this.darkNorah != null) {
             canvas.GetComponentInChildren<Button>().onClick.AddListener(this.showNorah);
         }
+        */
 
-        canvas.gameObject.SetActive(!canvas.gameObject.activeSelf);
-        if (canvas.gameObject.activeSelf)
-        {
+        this.uiPicturePrefab.canvas.gameObject.SetActive(!this.uiPicturePrefab.canvas.gameObject.activeSelf);
+        if (this.uiPicturePrefab.canvas.gameObject.activeSelf) {
             Time.timeScale = 0;
         }
-        else
-        {
+        else {
             Time.timeScale = 1;
         }
     }
