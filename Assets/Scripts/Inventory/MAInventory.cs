@@ -29,6 +29,7 @@ public class MAInventory : MonoBehaviour
     {
         items.Add(item);
 
+        Debug.Log("added item:  " + item.name);
         if(onItemChangedCallback != null)
            onItemChangedCallback.Invoke();
     }

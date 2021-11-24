@@ -30,18 +30,15 @@ public class MAPictureInteraction : MAInteractable {
             return;
         }
 
-        Debug.Log("interact!");
 
         this.MAInteract();
     }
     public override void MAInteract() {
-        Debug.Log("interact!");
-
         this.clearText();
         base.MAInteract();
 
-        this.uiPicturePrefab.panel.GetComponent<Image>().sprite = picture.icon;
-        this.uiPicturePrefab.text.text = picture.description;
+
+        this.uiPicturePrefab.showPicture(this.picture);
 
         /*
         if (this.darkNorah != null) {
@@ -49,12 +46,8 @@ public class MAPictureInteraction : MAInteractable {
         }
         */
 
-        this.uiPicturePrefab.canvas.gameObject.SetActive(!this.uiPicturePrefab.canvas.gameObject.activeSelf);
-        if (this.uiPicturePrefab.canvas.gameObject.activeSelf) {
-            Time.timeScale = 0;
-        }
-        else {
-            Time.timeScale = 1;
-        }
+        MAInventory.instance.Add(this.picture);
+
+        GameObject.Destroy(this.gameObject);
     }
 }
