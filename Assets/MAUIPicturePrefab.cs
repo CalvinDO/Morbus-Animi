@@ -9,6 +9,7 @@ public class MAUIPicturePrefab : MonoBehaviour
     public Image panel;
     public Text text;
 
+    public MAMainMenu mainMenu;
 
     public void showPicture(MAPicture picture)
     {
@@ -17,13 +18,9 @@ public class MAUIPicturePrefab : MonoBehaviour
 
 
         this.canvas.gameObject.SetActive(!this.canvas.gameObject.activeSelf);
-        if (this.canvas.gameObject.activeSelf) {
-            Time.timeScale = 0;
-        }
-        else {
-            Time.timeScale = 1;
-        }
 
-        Cursor.lockState = CursorLockMode.None;
+        mainMenu.PauseGame();
+
+        return;
     }
 }

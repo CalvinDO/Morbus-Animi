@@ -130,9 +130,13 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1878860244, guid: fa337dd7d058f474d98b66efaf8ba31e, type: 3}
+      propertyPath: m_Name
+      value: PictureUIManager
+      objectReference: {fileID: 0}
     - target: {fileID: 2515375899625496458, guid: fa337dd7d058f474d98b66efaf8ba31e, type: 3}
       propertyPath: m_Name
-      value: PicturePrefab
+      value: PictureUIPrefab
       objectReference: {fileID: 0}
     - target: {fileID: 4691950067118147802, guid: fa337dd7d058f474d98b66efaf8ba31e, type: 3}
       propertyPath: m_RootOrder
@@ -383,7 +387,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8989659141179001047, guid: aa8573e04729e3845abead9f615ff07d, type: 3}
       propertyPath: m_Name
-      value: DiaryPage
+      value: DiaryPage1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aa8573e04729e3845abead9f615ff07d, type: 3}
@@ -4281,6 +4285,67 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 6388149116632067442, guid: ff8f1500e5f66204ca73ba6ede49a280, type: 3}
+--- !u!1001 &866694417
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 8296798261642827105, guid: aa8573e04729e3845abead9f615ff07d, type: 3}
+      propertyPath: picture
+      value: 
+      objectReference: {fileID: 11400000, guid: 048e7fcdb6475ec41bed8b954f0c3496, type: 2}
+    - target: {fileID: 8613837908406768237, guid: aa8573e04729e3845abead9f615ff07d, type: 3}
+      propertyPath: m_RootOrder
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 8613837908406768237, guid: aa8573e04729e3845abead9f615ff07d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8613837908406768237, guid: aa8573e04729e3845abead9f615ff07d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.004
+      objectReference: {fileID: 0}
+    - target: {fileID: 8613837908406768237, guid: aa8573e04729e3845abead9f615ff07d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 3.078
+      objectReference: {fileID: 0}
+    - target: {fileID: 8613837908406768237, guid: aa8573e04729e3845abead9f615ff07d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8613837908406768237, guid: aa8573e04729e3845abead9f615ff07d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8613837908406768237, guid: aa8573e04729e3845abead9f615ff07d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8613837908406768237, guid: aa8573e04729e3845abead9f615ff07d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8613837908406768237, guid: aa8573e04729e3845abead9f615ff07d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8613837908406768237, guid: aa8573e04729e3845abead9f615ff07d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8613837908406768237, guid: aa8573e04729e3845abead9f615ff07d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8989659141179001047, guid: aa8573e04729e3845abead9f615ff07d, type: 3}
+      propertyPath: m_Name
+      value: DiaryPage2
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: aa8573e04729e3845abead9f615ff07d, type: 3}
 --- !u!1 &872886603 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -7448477546407877965, guid: ff8f1500e5f66204ca73ba6ede49a280, type: 3}
@@ -5729,6 +5794,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   items: []
+  pictures: []
 --- !u!4 &1200912588
 Transform:
   m_ObjectHideFlags: 0

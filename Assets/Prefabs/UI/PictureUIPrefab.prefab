@@ -239,6 +239,7 @@ MonoBehaviour:
   canvas: {fileID: 724214251102560739}
   panel: {fileID: 4986403745740446904}
   text: {fileID: 1488643815400334544}
+  mainMenu: {fileID: 1878860246}
 --- !u!1 &4693398626061772235
 GameObject:
   m_ObjectHideFlags: 0

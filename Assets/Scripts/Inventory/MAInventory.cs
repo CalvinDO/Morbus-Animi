@@ -24,6 +24,7 @@ public class MAInventory : MonoBehaviour
     public OnItemChanged onItemChangedCallback;
 
     public List<MAItem> items = new List<MAItem>();
+    public List<MAPicture> pictures = new List<MAPicture>();
 
     public void Add (MAItem item)
     {
@@ -32,6 +33,14 @@ public class MAInventory : MonoBehaviour
         Debug.Log("added item:  " + item.name);
         if(onItemChangedCallback != null)
            onItemChangedCallback.Invoke();
+    }
+
+    public void AddPicture(MAPicture item) {
+       pictures.Add(item);
+
+        Debug.Log("added picture:  " + item.name);
+        if (onItemChangedCallback != null)
+            onItemChangedCallback.Invoke();
     }
 
     public void Remove(MAItem item)

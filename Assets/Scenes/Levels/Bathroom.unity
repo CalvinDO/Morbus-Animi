@@ -132,7 +132,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2515375899625496458, guid: fa337dd7d058f474d98b66efaf8ba31e, type: 3}
       propertyPath: m_Name
-      value: PicturePrefab
+      value: PictureUIPrefab
       objectReference: {fileID: 0}
     - target: {fileID: 4691950067118147802, guid: fa337dd7d058f474d98b66efaf8ba31e, type: 3}
       propertyPath: m_RootOrder
@@ -177,14 +177,6 @@ PrefabInstance:
     - target: {fileID: 4691950067118147802, guid: fa337dd7d058f474d98b66efaf8ba31e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6121594170635106006, guid: fa337dd7d058f474d98b66efaf8ba31e, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 722572877}
-    - target: {fileID: 6121594170635106006, guid: fa337dd7d058f474d98b66efaf8ba31e, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetActive
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fa337dd7d058f474d98b66efaf8ba31e, type: 3}
@@ -4326,11 +4318,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 644818443148387217, guid: 5f2d9465cdef43644b74baf75dbf34b6, type: 3}
   m_PrefabInstance: {fileID: 716675540}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &722572877 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 9165715950517864379, guid: fa337dd7d058f474d98b66efaf8ba31e, type: 3}
-  m_PrefabInstance: {fileID: 837240}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &731054605
 GameObject:
   m_ObjectHideFlags: 0
@@ -7126,6 +7113,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   items: []
+  pictures: []
 --- !u!4 &1200912588
 Transform:
   m_ObjectHideFlags: 0

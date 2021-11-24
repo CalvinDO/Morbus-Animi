@@ -82,6 +82,7 @@ public class MAFrustumDetector : MonoBehaviour {
                 Debug.Log("Game over! You got catched!");
             }
 
+
             return;
         }
 

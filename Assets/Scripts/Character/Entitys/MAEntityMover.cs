@@ -25,6 +25,9 @@ public class MAEntityMover : MonoBehaviour {
 
     private Vector3 randomPointInSphere;
 
+    public float characterDetectedSpeedIncrease;
+
+
     void Start() {
         this.currentDecisionTime = this.maxDecisionTime;
 
@@ -40,6 +43,7 @@ public class MAEntityMover : MonoBehaviour {
 
         if (this.frustumDetector.characterDetected) {
             this.navMeshAgent.SetDestination(this.frustumDetector.lastSeenCharacterPosition);
+            this.navMeshAgent.speed += this.characterDetectedSpeedIncrease;
             return;
         }
 
@@ -48,6 +52,7 @@ public class MAEntityMover : MonoBehaviour {
             this.SetNewRandomDestination();
             this.currentDecisionTime = this.maxDecisionTime;
         }
+
     }
 
 

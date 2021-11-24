@@ -443,6 +443,7 @@ MonoBehaviour:
   navMeshAgent: {fileID: 1467365877746765642}
   frustumDetector: {fileID: 1446209778213229405}
   randomDestinationRange: 120
+  characterDetectedSpeedIncrease: 0.5
 --- !u!195 &1467365877746765642
 NavMeshAgent:
   m_ObjectHideFlags: 0

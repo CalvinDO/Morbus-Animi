@@ -34,4 +34,11 @@ public class MAElevatorInteraction : MAInteractable
         elevatorDoor.transform.localPosition = openPosition;
         yield return new WaitForSeconds(duration);
     }
+
+    private void OnTriggerEnter(Collider other) {
+        if (other.CompareTag("MainCollider")) {
+            base.MAInteract();
+            StartCoroutine(ChangeFloor(openCoordinates.localPosition, closedCoordinates.localPosition, duration));
+        }
+    }
 }

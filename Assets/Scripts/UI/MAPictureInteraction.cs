@@ -10,26 +10,37 @@ public class MAPictureInteraction : MAInteractable {
 
     private MAUIPicturePrefab uiPicturePrefab;
 
+    private bool isCharacterInTrigger = false;
+
+
     private void Start() {
 
-        this.uiPicturePrefab = GameObject.Find("PicturePrefab").GetComponent<MAUIPicturePrefab>();
+       
 
     }
 
+    private void Update() {
+        if (Input.GetKey(KeyCode.E) && this.isCharacterInTrigger) {
+            this.uiPicturePrefab = GameObject.Find("PictureUIPrefab").GetComponent<MAUIPicturePrefab>();
+            this.uiPicturePrefab.showPicture(this.picture);
+            MAInventory.instance.AddPicture(this.picture);
+
+            GameObject.Destroy(this.gameObject);
+        }
+    }
     public void showNorah() {
         //this.darkNorah.gameObject.SetActive(true);
 
         // this.darkNorah.StartMoving();
     }
 
-    private void OnTriggerEnter(Collider other) {
-
-        Debug.Log(other.gameObject.name);
+    private void OnTriggerStay(Collider other) {
 
         if (!other.CompareTag("MainCollider")) {
             return;
         }
 
+        this.isCharacterInTrigger = true;
 
         this.MAInteract();
     }
@@ -38,16 +49,10 @@ public class MAPictureInteraction : MAInteractable {
         base.MAInteract();
 
 
-        this.uiPicturePrefab.showPicture(this.picture);
-
         /*
         if (this.darkNorah != null) {
             canvas.GetComponentInChildren<Button>().onClick.AddListener(this.showNorah);
         }
         */
-
-        MAInventory.instance.Add(this.picture);
-
-        GameObject.Destroy(this.gameObject);
     }
 }

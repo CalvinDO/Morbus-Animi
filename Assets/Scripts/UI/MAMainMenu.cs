@@ -41,10 +41,12 @@ public class MAMainMenu : MonoBehaviour
     public void PauseGame()
     {
         Time.timeScale = 0;
+        Cursor.lockState = CursorLockMode.None;
     }
     public void ResumeGame()
     {
         Time.timeScale = 1;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     public void playClickSound() {
