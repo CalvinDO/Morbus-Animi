@@ -28,7 +28,6 @@ public class MAInteractable : MonoBehaviour {
         this.characterController = GameObject.Find("SmallNorah").GetComponent<MACharacterController>();
         this.textDisplay = this.characterController.screenDisplay;
         this.hoverTextObject = this.characterController.hoverTextObject;
-        Debug.Log(this.hoverTextObject);
     }
 
     void OnDrawGizmosSelected() {

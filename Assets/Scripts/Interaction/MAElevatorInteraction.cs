@@ -37,8 +37,9 @@ public class MAElevatorInteraction : MAInteractable
 
     private void OnTriggerEnter(Collider other) {
         if (other.CompareTag("MainCollider")) {
-            base.MAInteract();
-            StartCoroutine(ChangeFloor(openCoordinates.localPosition, closedCoordinates.localPosition, duration));
+            //Debug.Log("main collider !");
+            //base.MAInteract();
+            //StartCoroutine(ChangeFloor(openCoordinates.localPosition, closedCoordinates.localPosition, duration));
         }
     }
 }

@@ -20,9 +20,7 @@ public class MAInventoryController : MonoBehaviour {
 
         string inputString = Input.inputString;
 
-        Debug.Log(inputString);
-
-
+ 
         try {
             if (int.Parse(inputString) < 0 || int.Parse(inputString) > 9) {
                 throw new System.Exception();
