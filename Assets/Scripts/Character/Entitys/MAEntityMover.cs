@@ -5,8 +5,15 @@ using UnityEngine.AI;
 
 public class MAEntityMover : MonoBehaviour {
 
-    [Range(0, 0.1f)]
-    public float speed;
+    [Range(0, 1f)]
+    public float defaultSpeed;
+
+    [Range(0, 400f)]
+    public float defaultAngularSpeed;
+
+    [Range(0, 100f)]
+    public float defaultAcceleration;
+
 
     [Range(0, 1f)]
     public float destinationReachThreshhold;
@@ -27,11 +34,15 @@ public class MAEntityMover : MonoBehaviour {
 
     public float characterDetectedSpeedIncrease;
 
+    public float maxSpeed;
 
     void Start() {
         this.currentDecisionTime = this.maxDecisionTime;
 
         this.navMeshCenter = GameObject.Find("NavMeshCenter").transform;
+
+
+        this.SetNavAgentDefaultValues();
     }
 
     private void Update() {
@@ -43,17 +54,40 @@ public class MAEntityMover : MonoBehaviour {
 
         if (this.frustumDetector.characterDetected) {
             this.navMeshAgent.SetDestination(this.frustumDetector.lastSeenCharacterPosition);
-            this.navMeshAgent.speed += this.characterDetectedSpeedIncrease;
+            this.IncreaseEntitySpeed();
             return;
         }
 
-   
+
         if ((this.navMeshAgent.remainingDistance < this.destinationReachThreshhold) || this.navMeshAgent.pathStatus == NavMeshPathStatus.PathInvalid) {
             this.SetNewRandomDestination();
             this.currentDecisionTime = this.maxDecisionTime;
         }
 
     }
+
+    private void IncreaseEntitySpeed() {
+        if (this.navMeshAgent.speed > this.maxSpeed) {
+            return;
+        }
+
+        this.navMeshAgent.speed += this.characterDetectedSpeedIncrease * Time.deltaTime;
+        this.navMeshAgent.angularSpeed += this.characterDetectedSpeedIncrease * Time.deltaTime;
+        this.navMeshAgent.acceleration += this.characterDetectedSpeedIncrease * Time.deltaTime;
+    }
+
+    public void LostCharacter() {
+        this.SetNavAgentDefaultValues();
+    }
+
+
+    private void SetNavAgentDefaultValues() {
+        this.navMeshAgent.speed = this.defaultSpeed;
+        this.navMeshAgent.angularSpeed = this.defaultAngularSpeed;
+        this.navMeshAgent.acceleration = this.defaultAcceleration;
+
+    }
+
 
 
     private void SetNewRandomDestination() {

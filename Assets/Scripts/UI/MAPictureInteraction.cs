@@ -45,6 +45,7 @@ public class MAPictureInteraction : MAInteractable {
         this.MAInteract();
     }
     public override void MAInteract() {
+
         this.clearText();
         base.MAInteract();
 

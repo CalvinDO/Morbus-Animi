@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class MAElevatorInteraction : MAInteractable
-{
+public class MAElevatorInteraction : MAInteractable {
     public GameObject elevatorDoor;
     public Transform openCoordinates;
     public Transform closedCoordinates;
@@ -12,22 +11,19 @@ public class MAElevatorInteraction : MAInteractable
 
     public int sceneIndex;
 
-    public override void MAInteract()
-    {
+    public override void MAInteract() {
         base.MAInteract();
         StartCoroutine(ChangeFloor(openCoordinates.localPosition, closedCoordinates.localPosition, duration));
     }
 
-    IEnumerator ChangeFloor(Vector3 openPosition, Vector3 closedPosition, float duration)
-    {
+    IEnumerator ChangeFloor(Vector3 openPosition, Vector3 closedPosition, float duration) {
         float time = 0;
 
         elevatorDoor.transform.localPosition = closedPosition;
 
         SceneManager.LoadScene(this.sceneIndex);
 
-        while (time < duration)
-        {
+        while (time < duration) {
             elevatorDoor.transform.localPosition = Vector3.Lerp(elevatorDoor.transform.localPosition, openPosition, time / duration);
             time += Time.deltaTime;
         }
@@ -35,11 +31,14 @@ public class MAElevatorInteraction : MAInteractable
         yield return new WaitForSeconds(duration);
     }
 
-    private void OnTriggerEnter(Collider other) {
+    private void OnTriggerStay(Collider other) {
         if (other.CompareTag("MainCollider")) {
-            //Debug.Log("main collider !");
-            //base.MAInteract();
-            //StartCoroutine(ChangeFloor(openCoordinates.localPosition, closedCoordinates.localPosition, duration));
+
+            if (Input.GetKey(KeyCode.E)) {
+
+                base.MAInteract();
+                StartCoroutine(ChangeFloor(openCoordinates.localPosition, closedCoordinates.localPosition, duration));
+            }
         }
     }
 }

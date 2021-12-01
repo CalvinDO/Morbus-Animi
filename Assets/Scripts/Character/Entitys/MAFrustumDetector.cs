@@ -31,6 +31,8 @@ public class MAFrustumDetector : MonoBehaviour {
     public AudioClip iSeeYou;
     public AudioClip whereAreYou;
 
+
+
     void Start() {
         this.characterController = GameObject.Find("SmallNorah").GetComponent<MACharacterController>();
     }
@@ -105,6 +107,8 @@ public class MAFrustumDetector : MonoBehaviour {
                 this.characterDetected = false;
                 this.reachedOldPos = false;
                 this.remainingTimeTillCalmDown = this.timeTillCalmDown;
+
+                this.entityMover.LostCharacter();
             }
         }
     }
