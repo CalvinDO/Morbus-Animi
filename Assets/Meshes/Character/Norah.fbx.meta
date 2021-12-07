@@ -6,6 +6,9 @@ ModelImporter:
   - first:
       74: -1599888037227306911
     second: Rig|metarigAction
+  - first:
+      74: -887982601649841707
+    second: metarig|metarigAction
   externalObjects: {}
   materials:
     materialImportMode: 2

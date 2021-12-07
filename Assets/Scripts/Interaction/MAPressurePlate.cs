@@ -13,7 +13,7 @@ public class MAPressurePlate : MonoBehaviour
         if (other.GetComponent<MAPushable>())
         {
             counter++;
-            Debug.Log(counter);
+            //Debug.Log(counter);
             // call whatever flo wants to do with this mechanic
             test.transform.position += new Vector3(1,0,0);
         }
@@ -24,7 +24,7 @@ public class MAPressurePlate : MonoBehaviour
         if (other.GetComponent<MAPushable>())
         {
             counter--;
-            Debug.Log(counter);
+            //Debug.Log(counter);
             if (counter == 0)
             {
                 test.transform.position -= new Vector3(1, 0, 0);

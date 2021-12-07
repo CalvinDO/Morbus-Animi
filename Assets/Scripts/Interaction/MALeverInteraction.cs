@@ -34,20 +34,20 @@ public class MALeverInteraction : MAInteractable
     void FlipLever()
     {
 
-        Debug.Log(leverIndex);
-        Debug.Log(this.puzzleManager.counter);
+        //Debug.Log(leverIndex);
+        //Debug.Log(this.puzzleManager.counter);
 
         this.leverSwitchSound.PlayOneShot(this.leverSwitchSound.clip);
 
         if (leverIndex == this.puzzleManager.counter)
         {
             this.puzzleManager.counter++;
-            Debug.Log("flipped switch number " + this.puzzleManager.counter);
+            //Debug.Log("flipped switch number " + this.puzzleManager.counter);
             isFlipped = true;
         }
         else
         {
-            Debug.Log("this lever doesn't do anything yet");
+            //Debug.Log("this lever doesn't do anything yet");
         }
         textDisplay.SetActive(false);
     }
@@ -57,7 +57,7 @@ public class MALeverInteraction : MAInteractable
         if (isLast && (leverIndex + 1) == this.puzzleManager.counter)
         {
 
-            Debug.Log("the door opened!");
+            //Debug.Log("the door opened!");
             this.leverSwitchSound.PlayOneShot(this.correctSound);
             //Destroy(this.door);
             this.door.transform.Rotate(new Vector3(0, 0, 90));
