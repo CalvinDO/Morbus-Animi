@@ -30,7 +30,7 @@ public class MAInventory : MonoBehaviour
     {
         items.Add(item);
 
-        Debug.Log("added item:  " + item.name);
+        //Debug.Log("added item:  " + item.name);
         if(onItemChangedCallback != null)
            onItemChangedCallback.Invoke();
     }
@@ -38,7 +38,7 @@ public class MAInventory : MonoBehaviour
     public void AddPicture(MAPicture item) {
        pictures.Add(item);
 
-        Debug.Log("added picture:  " + item.name);
+        //Debug.Log("added picture:  " + item.name);
         if (onItemChangedCallback != null)
             onItemChangedCallback.Invoke();
     }

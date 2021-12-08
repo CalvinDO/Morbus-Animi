@@ -49,7 +49,7 @@ public class MAInteractWithObject : MAInteractable
         {
             inventory.Remove(this.item);
 
-            Debug.Log("water wheel activated");
+            //Debug.Log("water wheel activated");
 
             textDisplay.SetActive(false);
         }
