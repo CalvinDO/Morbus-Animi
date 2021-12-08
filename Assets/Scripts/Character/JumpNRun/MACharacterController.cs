@@ -92,7 +92,7 @@ public class MACharacterController : MonoBehaviour {
     public AudioSource jumpNRunAudioSource;
     public AudioClip wallJumpClip;
     public AudioClip wallWalkClip;
-   
+
     [Range(0, 1000)]
     public float jumpForce;
 
@@ -210,7 +210,7 @@ public class MACharacterController : MonoBehaviour {
 
     public MACharacterSwingTrigger characterSwingTrigger;
     public Transform swingGrabPosition;
-    public Transform swingFootUpPosition;
+    public Transform swingCOM;
 
     [Range(0, 3)]
     public float swingReleaseVelocityFactor;
@@ -230,7 +230,7 @@ public class MACharacterController : MonoBehaviour {
     public GameObject screenDisplay;
     public UnityEngine.UI.Text hoverTextObject;
 
-   
+
 
     void Start() {
 
@@ -326,9 +326,11 @@ public class MACharacterController : MonoBehaviour {
         if (this.rb.velocity.magnitude > this.idleVelocityThreshhold) {
             this.physicalBody.transform.rotation = this.slideTransforms.transform.rotation = Quaternion.Euler(0, Vector3.SignedAngle(Vector3.forward, Vector3.ProjectOnPlane(this.rb.velocity, Vector3.up), Vector3.up), 0);
 
-            if (this.isSliding) {
-                this.physicalBody.transform.rotation = this.slideTransform.rotation;
-            }
+            /*
+             if (this.isSliding) {
+                 this.physicalBody.transform.rotation = this.slideTransform.rotation;
+             }
+            */
         }
 
         if (this.isSprinting) {
@@ -800,26 +802,25 @@ public class MACharacterController : MonoBehaviour {
         }
 
         if (Input.GetKeyUp(KeyCode.C)) {
-            this.EndSliding();
+            if (this.isSliding) {
+                this.EndSliding();
+            }
         }
     }
 
     private void StartSliding() {
-        this.physicalBody.transform.position = this.slideTransform.position;
 
         this.defaultCollider.gameObject.SetActive(false);
         this.slideCollider.gameObject.SetActive(true);
 
         this.isSliding = true;
 
-        this.movementEnabled = false;
-
         this.jumpNRunAudioSource.PlayOneShot(this.slideClip);
+
+        this.animator.SetTrigger("startSlide");
     }
 
     private void EndSliding() {
-        this.physicalBody.transform.localPosition = Vector3.zero;
-        this.physicalBody.transform.rotation = Quaternion.identity;
         this.remainingSlideTime = this.maxSlideDuration;
 
 
@@ -828,6 +829,9 @@ public class MACharacterController : MonoBehaviour {
 
         this.isSliding = false;
         this.movementEnabled = true;
+
+        Debug.Log("end sliding now!");
+        this.animator.SetTrigger("standUp");
     }
 
     private void ManageJump() {
@@ -887,7 +891,7 @@ public class MACharacterController : MonoBehaviour {
 
         this.SetLastJumpedWall();
 
-        
+
         this.jumpNRunAudioSource.PlayOneShot(this.wallJumpClip);
     }
 
@@ -914,6 +918,8 @@ public class MACharacterController : MonoBehaviour {
         this.transform.Translate(Vector3.up * 0.01f);
 
         this.inJump = true;
+
+        this.animator.SetTrigger("jump");
     }
 
     private void CalculateBob() {

@@ -52,7 +52,7 @@ public class MASwingbar : MonoBehaviour {
 
         //Rotate Character so he points at the bar
 
-        this.currentRotator.transform.SetPositionAndRotation(characterController.swingFootUpPosition.position, characterController.swingFootUpPosition.rotation);
+        this.currentRotator.transform.SetPositionAndRotation(characterController.swingCOM.position, characterController.swingCOM.rotation);
         characterController.transform.SetParent(this.currentRotator.transform);
         this.currentRotator.transform.LookAt(this.transform);
 
@@ -94,7 +94,7 @@ public class MASwingbar : MonoBehaviour {
         characterController.movementEnabled = true;
 
 
-        Vector3 r = characterController.swingFootUpPosition.position - this.transform.position;
+        Vector3 r = characterController.swingCOM.position - this.transform.position;
         Vector3 angularVelocity = this.rb.angularVelocity;
         Vector3 tangentialVelocity = Vector3.Cross(angularVelocity, r) * characterController.swingReleaseVelocityFactor;
 
