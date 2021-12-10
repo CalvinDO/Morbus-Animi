@@ -226,6 +226,10 @@ public class MACharacterController : MonoBehaviour {
     public bool right;
 
 
+    //PhysicalBody-Rotation according to inputs
+    [Range(0, 1f)]
+    public float directionRotationSlerpFactor;
+    public Quaternion goalDirectionRotation;
 
     public GameObject screenDisplay;
     public UnityEngine.UI.Text hoverTextObject;
@@ -288,6 +292,12 @@ public class MACharacterController : MonoBehaviour {
         this.SlowDown();
 
         this.ManageSmartCam();
+
+        this.RotatePhysicalBody();
+    }
+
+    private void RotatePhysicalBody() {
+        this.physicalBody.transform.rotation = Quaternion.Slerp(this.physicalBody.transform.rotation, this.goalDirectionRotation, this.directionRotationSlerpFactor);
     }
 
     private void CalculateMovement() {
@@ -323,15 +333,7 @@ public class MACharacterController : MonoBehaviour {
 
     private void ControlAnimationAndVelocityRotation() {
 
-        if (this.rb.velocity.magnitude > this.idleVelocityThreshhold) {
-            this.physicalBody.transform.rotation = this.slideTransforms.transform.rotation = Quaternion.Euler(0, Vector3.SignedAngle(Vector3.forward, Vector3.ProjectOnPlane(this.rb.velocity, Vector3.up), Vector3.up), 0);
 
-            /*
-             if (this.isSliding) {
-                 this.physicalBody.transform.rotation = this.slideTransform.rotation;
-             }
-            */
-        }
 
         if (this.isSprinting) {
             this.animator.SetBool("isSprinting", true);
@@ -348,6 +350,19 @@ public class MACharacterController : MonoBehaviour {
         }
 
         this.animator.SetBool("isWalking", false);
+
+
+        return;
+
+        if (this.rb.velocity.magnitude > this.idleVelocityThreshhold) {
+            this.physicalBody.transform.rotation = this.slideTransforms.transform.rotation = Quaternion.Euler(0, Vector3.SignedAngle(Vector3.forward, Vector3.ProjectOnPlane(this.rb.velocity, Vector3.up), Vector3.up), 0);
+
+            /*
+             if (this.isSliding) {
+                 this.physicalBody.transform.rotation = this.slideTransform.rotation;
+             }
+            */
+        }
     }
 
 
@@ -560,6 +575,10 @@ public class MACharacterController : MonoBehaviour {
         resultingVector += this.GetUnitVectorToInput(KeyCode.S);
         resultingVector += this.GetUnitVectorToInput(KeyCode.D);
 
+        if (this.directionInputExists) {
+            this.goalDirectionRotation = Quaternion.LookRotation(resultingVector);
+        }
+
         return resultingVector.normalized;
     }
 
@@ -597,6 +616,8 @@ public class MACharacterController : MonoBehaviour {
         }
 
         Vector3 directionAccordingToInput = GetUnitVectorInInputDirection(direction);
+
+
 
         this.directionInputExists = true;
         return directionAccordingToInput;
