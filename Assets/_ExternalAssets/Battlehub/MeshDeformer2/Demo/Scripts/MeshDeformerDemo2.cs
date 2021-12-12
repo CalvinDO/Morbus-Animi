@@ -32,7 +32,7 @@ namespace Battlehub.MeshDeformer2
                         Vector3 hitPoint = hitInfo.point;
 
                         float t = CurveUtils.GetT(MeshDeformer, curveIndex, hitPoint);
-                        Debug.Log(t);
+                        //Debug.Log(t);
 
                         GameObject obj = Instantiate(ObjPrefab);
                         MeshDeformerFollow follow = obj.GetComponent<MeshDeformerFollow>();

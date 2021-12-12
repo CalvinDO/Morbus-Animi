@@ -20,20 +20,27 @@ public class MAInteractionController : MonoBehaviour
     private void OnTriggerStay(Collider collider)
     {
         //Debug.Log("collided");
+        Rigidbody PlayerRB = this.GetComponent<Rigidbody>();
         MAInteractable interactable = collider.GetComponent<MAInteractable>();
         MAElevatorInteraction elevatorInteraction = collider.GetComponent<MAElevatorInteraction>();
+        MAPushable pushable = collider.GetComponent<MAPushable>();
         if (interactable != null)
         {
             this.hover = interactable;
             this.hover.setHover();
         }
-        if (Input.GetKeyDown("space") && interactable != null && elevatorInteraction == null)
+        if (Input.GetKeyDown("e") && interactable != null && elevatorInteraction == null)
         {
             this.hover.MAInteract();
         }
         if (Input.GetKeyDown("e") && elevatorInteraction != null)
         {
             this.hover.MAInteract();
+        }
+        if (Input.GetKey("e") && pushable != null)
+        {
+            Debug.Log("entered");
+            pushable.GetComponent<Rigidbody>().velocity = new Vector3(PlayerRB.velocity.x, PlayerRB.velocity.y, PlayerRB.velocity.z);
         }
     }
 

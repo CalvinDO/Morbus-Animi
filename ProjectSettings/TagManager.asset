@@ -12,6 +12,7 @@ TagManager:
   - PictureText
   - PictureDisplay
   - MainCollider
+  - PhysicalPlayerBody
   layers:
   - Default
   - TransparentFX

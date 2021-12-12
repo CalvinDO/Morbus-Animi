@@ -6,6 +6,12 @@ public class MAItemInteraction : MAInteractable
 {
     public MAItem item;
     public MAInventory inventory;
+    private Animator playerAnim;
+
+    private void Start()
+    {
+        playerAnim = GameObject.Find("SmallNorah").GetComponent<Animator>();
+    }
     public override void MAInteract()
     {
         inventory = MAInventory.instance;
@@ -17,6 +23,7 @@ public class MAItemInteraction : MAInteractable
                 Open();
                 break;
             case ObjectType.item:
+                playerAnim.Play("Pickup");
                 PickUp();
                 break;
             case ObjectType.waterwheel:
@@ -31,7 +38,7 @@ public class MAItemInteraction : MAInteractable
         if (inventory.items.Contains(this.item))
         {
             Destroy(this.gameObject);
-            textDisplay.SetActive(false);
+            //textDisplay.SetActive(false);
         }
     }
     void PickUp()
@@ -49,7 +56,7 @@ public class MAItemInteraction : MAInteractable
         }
         //this stays
         Destroy(this.gameObject);
-        textDisplay.SetActive(false);
+        //textDisplay.SetActive(false);
     }
 
     void DumpWater()
@@ -60,7 +67,7 @@ public class MAItemInteraction : MAInteractable
 
             //Debug.Log("water wheel activated");
 
-            textDisplay.SetActive(false);
+            //textDisplay.SetActive(false);
         }
     }
 }

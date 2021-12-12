@@ -44,7 +44,7 @@ public class MAJackUpper : MonoBehaviour {
 
             Debug.DrawLine(this.transform.position, this.transform.position + closestPoint - sameYCharacterClosestPoint);
 
-            Debug.Log(Vector3.Angle(this.transform.forward, closestPoint - sameYCharacterClosestPoint));
+            //Debug.Log(Vector3.Angle(this.transform.forward, closestPoint - sameYCharacterClosestPoint));
 
             if (Vector3.Angle(this.transform.forward, closestPoint - sameYCharacterClosestPoint) < this.minLookAtLedgeDot) {
                

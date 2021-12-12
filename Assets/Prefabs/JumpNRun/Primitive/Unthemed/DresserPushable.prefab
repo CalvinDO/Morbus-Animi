@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 3162508033749494036}
   - component: {fileID: 6760851374913677531}
   - component: {fileID: 7218745653143837187}
+  - component: {fileID: 1656718763}
+  - component: {fileID: 1656718762}
   m_Layer: 0
   m_Name: Dresser
   m_TagString: JumpNRunElement
@@ -95,3 +97,31 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.46978, y: 0.6640496, z: 0.5038949}
   m_Center: {x: 0.0006235838, y: 0.33202475, z: 0.016496174}
+--- !u!54 &1656718763
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3624235846688939567}
+  serializedVersion: 2
+  m_Mass: 10
+  m_Drag: 2
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 0
+--- !u!114 &1656718762
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3624235846688939567}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2f580daf3974d347a6c5c4526c791d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
