@@ -835,6 +835,7 @@ MonoBehaviour:
   slideSpeedThreshhold: 0
   SprintFOVLerpFactor: 5
   movementEnabled: 1
+  isGrounded: 0
   bobbingYIntensity: 0.02
   bobbingXIntensity: 0.02
   bobbingSpeed: 0.3
@@ -1329,13 +1330,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7215570255165993402}
-  m_LocalRotation: {x: 0.073319644, y: -0, z: -0.0000000037252899, w: 0.9973085}
-  m_LocalPosition: {x: 0, y: 0.669, z: -2.081}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.13599998, z: -1.627}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 9199259026516661009}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 8.409, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7506612161376476633
 GameObject:
   m_ObjectHideFlags: 0
@@ -1397,9 +1398,8 @@ MonoBehaviour:
   handUpMaxPosition: {fileID: 3089168511485833950}
   handDownMinPosition: {fileID: 6646665666698900372}
   handUpMaxTolerance: 0.05
-  minLookAtLedgeDot: 20
+  minLookAtLedgeDot: 45
   enoughSpaceTrigger: {fileID: 937621585283811399}
-  isSpaceFree: 0
 --- !u!1 &7943579179455273203
 GameObject:
   m_ObjectHideFlags: 0
@@ -1425,7 +1425,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7943579179455273203}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.154, z: 0}
+  m_LocalPosition: {x: 0, y: 0.746, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6668616569618225407}

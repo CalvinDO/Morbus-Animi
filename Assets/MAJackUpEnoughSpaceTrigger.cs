@@ -28,7 +28,8 @@ public class MAJackUpEnoughSpaceTrigger : MonoBehaviour {
         this.jackUpper.SetSpaceOccupied();
     }
 
-    private void OnCollisionExit(Collider other) {
+    private void OnTriggerExit(Collider other) {
+        Debug.Log(other.gameObject.name);
 
         if (other.isTrigger) {
             return;

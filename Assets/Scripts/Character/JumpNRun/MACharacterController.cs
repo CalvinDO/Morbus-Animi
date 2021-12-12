@@ -154,7 +154,7 @@ public class MACharacterController : MonoBehaviour {
 
     int framesSinceJump = 0;
     bool inJump = false;
-    private bool isGrounded;
+    public bool isGrounded;
 
     float threashold = 0.001f;
 
