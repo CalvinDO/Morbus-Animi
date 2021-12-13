@@ -168,13 +168,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 338159119870231748}
-  m_LocalRotation: {x: -0.005629301, y: -0.14208372, z: 0.989809, w: 0.0076706475}
-  m_LocalPosition: {x: 0.156, y: -0.398, z: 0.213}
-  m_LocalScale: {x: 1, y: 1, z: 0.9999895}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.332, y: -0.108, z: 0.268}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 9199259026516661009}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: -19.037, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!108 &3374848341177078440
 Light:
   m_ObjectHideFlags: 0
@@ -813,7 +813,7 @@ MonoBehaviour:
   jumpNRunAudioSource: {fileID: 4434772396412369606}
   wallJumpClip: {fileID: 8300000, guid: ffb0a51458f1c024b98a41b501294c8e, type: 3}
   wallWalkClip: {fileID: 8300000, guid: 863f55354c31dc349bed99372703c2ca, type: 3}
-  jumpForce: 139
+  jumpForce: 125
   maxRotationAngle: 60.5
   slowDownFactor: 0.1
   rb: {fileID: 1402342497931596602}
@@ -1400,6 +1400,7 @@ MonoBehaviour:
   handUpMaxTolerance: 0.05
   minLookAtLedgeDot: 45
   enoughSpaceTrigger: {fileID: 937621585283811399}
+  isSpaceFree: 0
 --- !u!1 &7943579179455273203
 GameObject:
   m_ObjectHideFlags: 0
@@ -1425,7 +1426,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7943579179455273203}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.746, z: 0}
+  m_LocalPosition: {x: 0, y: 0.926, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6668616569618225407}

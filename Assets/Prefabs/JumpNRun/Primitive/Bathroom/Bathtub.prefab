@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 9072067853721540566}
   m_Layer: 0
   m_Name: Collider
-  m_TagString: Untagged
+  m_TagString: JumpNRunElement
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -85,7 +85,7 @@ GameObject:
   - component: {fileID: 478436331937554678}
   m_Layer: 0
   m_Name: Bathtub
-  m_TagString: Untagged
+  m_TagString: JumpNRunElement
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -170,7 +170,7 @@ GameObject:
   - component: {fileID: 4730009460423787388}
   m_Layer: 0
   m_Name: FloorCollider
-  m_TagString: Untagged
+  m_TagString: JumpNRunElement
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -215,7 +215,7 @@ GameObject:
   - component: {fileID: 2648211603908857782}
   m_Layer: 0
   m_Name: Collider (1)
-  m_TagString: Untagged
+  m_TagString: JumpNRunElement
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
