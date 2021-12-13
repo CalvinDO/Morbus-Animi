@@ -141,8 +141,8 @@ Transform:
   - {fileID: 3089168511485833950}
   - {fileID: 4494251013626885576}
   - {fileID: 6646665666698900372}
-  m_Father: {fileID: 96229848711621201}
-  m_RootOrder: 1
+  m_Father: {fileID: 9183672319088821973}
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &338159119870231748
 GameObject:
@@ -327,7 +327,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 9183672319088821973}
-  - {fileID: 9193302593600946144}
   m_Father: {fileID: 6404148241480252427}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -410,6 +409,7 @@ Transform:
   - {fileID: 6805139352607263400}
   - {fileID: 5244149247826619845}
   - {fileID: 3435475713914841554}
+  - {fileID: 9193302593600946144}
   m_Father: {fileID: 96229848711621201}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -799,7 +799,7 @@ MonoBehaviour:
   transitionSpeed: 7.18
   slideTransitionSpeed: 1
   airTransitionSpeed: 2.5
-  maxMovementSpeed: 1.05
+  maxMovementSpeed: 2
   maxMovementSprintSpeedFactor: 2
   mouseSensitivity: 438
   lockMouse: 1
@@ -1401,6 +1401,8 @@ MonoBehaviour:
   maxLookAtAngle: 35
   enoughSpaceTrigger: {fileID: 937621585283811399}
   isSpaceFree: 0
+  isHanging: 0
+  isCatpassing: 0
 --- !u!1 &7943579179455273203
 GameObject:
   m_ObjectHideFlags: 0
