@@ -1398,7 +1398,7 @@ MonoBehaviour:
   handUpMaxPosition: {fileID: 3089168511485833950}
   handDownMinPosition: {fileID: 6646665666698900372}
   handUpMaxTolerance: 0.05
-  minLookAtLedgeDot: 45
+  maxLookAtAngle: 35
   enoughSpaceTrigger: {fileID: 937621585283811399}
   isSpaceFree: 0
 --- !u!1 &7943579179455273203
