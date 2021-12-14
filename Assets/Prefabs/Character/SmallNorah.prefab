@@ -799,8 +799,8 @@ MonoBehaviour:
   transitionSpeed: 7.18
   slideTransitionSpeed: 1
   airTransitionSpeed: 2.5
-  maxMovementSpeed: 2
-  maxMovementSprintSpeedFactor: 2
+  maxMovementSpeed: 1.25
+  maxMovementSprintSpeedFactor: 3
   mouseSensitivity: 438
   lockMouse: 1
   groundCheck: {fileID: 7702953765379088309}

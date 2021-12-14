@@ -107,7 +107,7 @@ public class MAEntityMover : MonoBehaviour {
 
     private void OnDrawGizmos() {
         // Gizmos.DrawWireSphere(this.randomPointInSphere, 5);
-        Gizmos.DrawSphere(this.navMeshAgent.destination, 4);
+        Gizmos.DrawSphere(this.navMeshAgent.destination, 1);
     }
 
     [System.Obsolete("Not needed anymore because NavMesh.SetDestination() is used")]
