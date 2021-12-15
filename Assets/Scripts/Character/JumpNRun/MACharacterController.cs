@@ -68,6 +68,8 @@ public class MACharacterController : MonoBehaviour {
 
 
     private bool directionInputExists = false;
+    public Vector3 normalizedSummedInput;
+
     private bool isTooFast = false;
 
     public MAGroundCheck groundCheck;
@@ -234,6 +236,8 @@ public class MACharacterController : MonoBehaviour {
     public GameObject screenDisplay;
     public UnityEngine.UI.Text hoverTextObject;
 
+
+    public 
 
 
     void Start() {
@@ -502,7 +506,7 @@ public class MACharacterController : MonoBehaviour {
 
         this.directionInputExists = false;
 
-        Vector3 normalizedSummedInput = this.getNormalizedSummedInputVector();
+        this.normalizedSummedInput = this.getNormalizedSummedInputVector();
 
 
         this.ManageSprinting();
@@ -525,10 +529,10 @@ public class MACharacterController : MonoBehaviour {
 
 
             if (this.isSprinting) {
-                desiredVelocity = normalizedSummedInput * this.maxMovementSpeed * this.maxMovementSprintSpeedFactor;
+                desiredVelocity = this.normalizedSummedInput * this.maxMovementSpeed * this.maxMovementSprintSpeedFactor;
             }
             else {
-                desiredVelocity = normalizedSummedInput * this.maxMovementSpeed;
+                desiredVelocity = this.normalizedSummedInput * this.maxMovementSpeed;
             }
 
 

@@ -15,9 +15,8 @@ public class MAJackUpper : MonoBehaviour {
 
     public bool isHanging = false;
     public bool isCatpassing = false;
+    public bool isAttached = false;
 
-
-    private Vector3 currentClosestPoint;
     private Vector3 attachedPoint;
 
 
@@ -27,7 +26,20 @@ public class MAJackUpper : MonoBehaviour {
     public float obstacleCollectorRadius;
 
 
+    private MACharacterController characterController;
+
+
+    private bool liftUp = false;
+    public float liftUpSlerpFactor;
+    public float liftUpExtraThreshhold;
+
+    //public float timeLiftUp;
+    // private float remainingTimeLiftUp;
+
     void Start() {
+
+
+        this.characterController = this.transform.root.GetComponent<MACharacterController>();
     }
 
 
@@ -35,8 +47,10 @@ public class MAJackUpper : MonoBehaviour {
     void Update() {
         if (Input.GetKey(KeyCode.Backspace)) {
             this.DiscardLedge();
-            this.isHanging = false;
-            this.isCatpassing = false;
+        }
+
+        if (this.isAttached) {
+            this.Move();
         }
     }
 
@@ -71,6 +85,9 @@ public class MAJackUpper : MonoBehaviour {
             return;
         }
 
+        if (this.isAttached) {
+            return;
+        }
 
 
         Vector3 closestPoint = Vector3.zero;
@@ -91,38 +108,59 @@ public class MAJackUpper : MonoBehaviour {
             return;
         }
 
-        this.currentClosestPoint = closestPoint;
 
         Vector3 sameYCharacterClosestPoint = this.transform.position;
         sameYCharacterClosestPoint.y = closestPoint.y;
 
 
+
+
         if (closestPoint.y > this.handDownMinPosition.position.y && closestPoint.y < this.handUpMaxPosition.position.y - this.handUpMaxTolerance) {
 
-            if (this.isHanging || this.isCatpassing) {
-                return;
-            }
 
-            if (Vector3.Angle(this.transform.forward, closestPoint - sameYCharacterClosestPoint) < this.maxLookAtAngle) {
+            Vector3 ledgeDirectionSameYCharPos = closestPoint - sameYCharacterClosestPoint;
 
-                if (this.enoughSpaceTrigger.GetSpaceFreeAt(closestPoint)) {
-                    Debug.DrawLine(this.handUpMaxPosition.position, closestPoint, Color.green);
+            if (Vector3.Angle(this.transform.forward, ledgeDirectionSameYCharPos) < this.maxLookAtAngle) {
 
-                    this.DecideCatpassOrHang(closestPoint, sameYCharacterClosestPoint);
+                if (this.IsCharacterInputTowardsLedge(closestPoint)) {
+
+                    if (this.enoughSpaceTrigger.GetSpaceFreeAt(closestPoint)) {
+                        Debug.DrawLine(this.handUpMaxPosition.position, closestPoint, Color.green);
+
+                        this.DecideCatpassOrHang(closestPoint, sameYCharacterClosestPoint);
+
+                        return;
+                    }
+                    else {
+                        Debug.DrawLine(this.handUpMaxPosition.position, closestPoint, Color.yellow);
+                    }
                 }
-                else {
-                    Debug.DrawLine(this.handUpMaxPosition.position, closestPoint, Color.yellow);
-                    this.DiscardLedge();
-                }
-
             }
             else {
                 Debug.DrawLine(this.handUpMaxPosition.position, closestPoint, Color.red);
-                this.DiscardLedge();
+
             }
         }
+
+        this.DiscardLedge();
     }
 
+    private bool IsCharacterInputTowardsLedge(Vector3 closestPoint) {
+
+        Vector3 sameYCharacterClosestPoint = this.transform.position;
+        sameYCharacterClosestPoint.y = closestPoint.y;
+        Vector3 ledgeDirectionSameYCharPos = closestPoint - sameYCharacterClosestPoint;
+
+        Debug.DrawLine(this.characterController.transform.position, this.characterController.transform.TransformPoint(this.characterController.normalizedSummedInput));
+
+
+        if (Vector3.Angle(this.characterController.normalizedSummedInput, ledgeDirectionSameYCharPos) < this.maxLookAtAngle) {
+            return true;
+        }
+
+        return false;
+
+    }
 
     private void OnDrawGizmos() {
 
@@ -172,6 +210,9 @@ public class MAJackUpper : MonoBehaviour {
 
         this.isHanging = false;
         this.isCatpassing = false;
+        this.isAttached = false;
+
+        this.liftUp = false;
     }
 
 
@@ -180,6 +221,8 @@ public class MAJackUpper : MonoBehaviour {
 
         this.isHanging = true;
         this.isCatpassing = false;
+        this.isAttached = true;
+
 
         this.attachedPoint = closestPoint;
     }
@@ -188,8 +231,31 @@ public class MAJackUpper : MonoBehaviour {
 
         this.isHanging = false;
         this.isCatpassing = true;
+        this.isAttached = true;
 
         this.attachedPoint = closestPoint;
 
+    }
+
+    public void Move() {
+
+        if (this.IsCharacterInputTowardsLedge(this.attachedPoint)) {
+            this.liftUp = true;
+        }
+
+
+        if (this.characterController.transform.position.y >= this.attachedPoint.y) {
+            this.DiscardLedge();
+        }
+
+    }
+
+    void FixedUpdate() {
+        if (this.liftUp) {
+
+            Vector3 characterArrivedPosition = new Vector3(this.characterController.transform.position.x, this.attachedPoint.y + this.liftUpExtraThreshhold * 10, this.characterController.transform.position.z);
+
+            this.characterController.transform.position = Vector3.Lerp(characterController.transform.position, characterArrivedPosition, this.liftUpSlerpFactor);
+        }
     }
 }

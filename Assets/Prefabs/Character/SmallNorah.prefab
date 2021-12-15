@@ -4509,6 +4509,7 @@ MonoBehaviour:
   maxMovementSprintSpeedFactor: 3
   mouseSensitivity: 438
   lockMouse: 1
+  normalizedSummedInput: {x: 0, y: 0, z: 0}
   groundCheck: {fileID: 7702953765379088309}
   defaultTranslation: {fileID: 4956536749511618883}
   slideTransform: {fileID: 3219436218694975809}
@@ -5287,7 +5288,10 @@ MonoBehaviour:
   enoughSpaceTrigger: {fileID: 937621585283811399}
   isHanging: 0
   isCatpassing: 0
+  isAttached: 0
   obstacleCollectorRadius: 1
+  liftUpSlerpFactor: 0.1
+  liftUpExtraThreshhold: 0.05
 --- !u!1 &7534904971383046353
 GameObject:
   m_ObjectHideFlags: 0
