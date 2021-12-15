@@ -10,24 +10,24 @@ public class MAJackUpper : MonoBehaviour {
 
     public float maxLookAtAngle;
 
-    private bool isLedgeInRange = false;
-    private bool isLedgeFree = false;
 
-
-
-    public MAJackUpEnoughSpaceTrigger enoughSpaceTrigger;
-
-    public bool isSpaceFree = true;
+    public MAJackUpEnoughSpaceChecker enoughSpaceTrigger;
 
     public bool isHanging = false;
     public bool isCatpassing = false;
 
 
+    private Vector3 currentClosestPoint;
     private Vector3 attachedPoint;
 
 
-    void Start() {
+    private bool runAlgorithm = true;
 
+
+    public float obstacleCollectorRadius;
+
+
+    void Start() {
     }
 
 
@@ -40,25 +40,64 @@ public class MAJackUpper : MonoBehaviour {
         }
     }
 
+
+    public Collider[] GetCurrentObstacles() {
+
+        Collider[] physicOverlappedObstacles = Physics.OverlapSphere(this.attachedPoint, this.obstacleCollectorRadius);
+
+
+        List<Collider> filteredColliders = new List<Collider>();
+
+        foreach (Collider obstacle in physicOverlappedObstacles) {
+            if (!obstacle.isTrigger) {
+                if (!obstacle.transform.root.GetComponent<MACharacterController>()) {
+
+                    filteredColliders.Add(obstacle);
+                }
+            }
+        }
+
+        return filteredColliders.ToArray();
+    }
+
+
     private void OnTriggerStay(Collider ledgeCandidateCollider) {
+
         if (ledgeCandidateCollider.isTrigger) {
             return;
         }
 
-        Vector3 closestPoint = ledgeCandidateCollider.ClosestPoint(this.handUpMaxPosition.position);
+        if (!this.runAlgorithm) {
+            return;
+        }
+
+
+
+        Vector3 closestPoint = Vector3.zero;
+
+        if (ledgeCandidateCollider.GetType() == typeof(BoxCollider) || ledgeCandidateCollider.GetType() == typeof(SphereCollider)) {
+            closestPoint = ledgeCandidateCollider.ClosestPoint(this.handUpMaxPosition.position);
+        }
+        else if (ledgeCandidateCollider.GetType() == typeof(MeshCollider)) {
+
+            MeshCollider currentMeshCollider = (MeshCollider)ledgeCandidateCollider;
+
+            if (currentMeshCollider.convex) {
+                closestPoint = ledgeCandidateCollider.ClosestPoint(this.handUpMaxPosition.position);
+            }
+        }
+
+        if (closestPoint == Vector3.zero) {
+            return;
+        }
+
+        this.currentClosestPoint = closestPoint;
 
         Vector3 sameYCharacterClosestPoint = this.transform.position;
         sameYCharacterClosestPoint.y = closestPoint.y;
 
 
-
-
         if (closestPoint.y > this.handDownMinPosition.position.y && closestPoint.y < this.handUpMaxPosition.position.y - this.handUpMaxTolerance) {
-
-            //Debug.DrawLine(this.transform.position, this.transform.position + closestPoint - sameYCharacterClosestPoint, Color.yellow);
-            // Debug.DrawRay(this.transform.position, this.transform.forward, Color.cyan);
-
-            //Debug.Log(Vector3.Angle(this.transform.forward, closestPoint - sameYCharacterClosestPoint));
 
             if (this.isHanging || this.isCatpassing) {
                 return;
@@ -66,17 +105,14 @@ public class MAJackUpper : MonoBehaviour {
 
             if (Vector3.Angle(this.transform.forward, closestPoint - sameYCharacterClosestPoint) < this.maxLookAtAngle) {
 
-                this.isLedgeInRange = true;
-
-                this.SetEnoughSpaceTriggerPosition(closestPoint);
-
-                if (this.isSpaceFree) {
+                if (this.enoughSpaceTrigger.GetSpaceFreeAt(closestPoint)) {
                     Debug.DrawLine(this.handUpMaxPosition.position, closestPoint, Color.green);
 
-                    this.DecideCatpassOrHang(closestPoint);
+                    this.DecideCatpassOrHang(closestPoint, sameYCharacterClosestPoint);
                 }
                 else {
                     Debug.DrawLine(this.handUpMaxPosition.position, closestPoint, Color.yellow);
+                    this.DiscardLedge();
                 }
 
             }
@@ -87,52 +123,61 @@ public class MAJackUpper : MonoBehaviour {
         }
     }
 
+
     private void OnDrawGizmos() {
 
+
         if (this.isHanging) {
+            //Debug.Log("hang: " + this.isHanging + "  |||   catpass: " + this.isCatpassing);
             Gizmos.DrawWireSphere(this.attachedPoint, 0.2f);
             return;
         }
 
         if (this.isCatpassing) {
+            // Debug.Log("hang: " + this.isHanging + "  |||   catpass: " + this.isCatpassing);
+
             Gizmos.DrawSphere(this.attachedPoint, 0.2f);
         }
+
     }
 
-    private void DecideCatpassOrHang(Vector3 closestPoint) {
+    private void DecideCatpassOrHang(Vector3 closestPoint, Vector3 sameYCharacterClosestPoint) {
+
+        Ray floorRay = new Ray(sameYCharacterClosestPoint, Vector3.down);
+
+
+        if (Physics.Raycast(floorRay, out _, this.handUpMaxPosition.localPosition.y, 13)) {
+
+            this.Catpass(closestPoint);
+        }
+        else {
+
+            this.Hang(closestPoint);
+        }
+
+        /*
         if (closestPoint.y > (this.handDownMinPosition.transform.position.y + this.handUpMaxPosition.transform.position.y) / 2) {
+
             this.Hang(closestPoint);
         }
         else {
             this.Catpass(closestPoint);
         }
+        */
     }
 
-    private void SetEnoughSpaceTriggerPosition(Vector3 closestPoint) {
-        this.isSpaceFree = false;
-        this.enoughSpaceTrigger.transform.position = closestPoint + Vector3.up * 0.05f;
-    }
 
 
     private void DiscardLedge() {
-        this.isLedgeFree = false;
-        this.isLedgeInRange = false;
-        this.isSpaceFree = false;
 
         this.isHanging = false;
         this.isCatpassing = false;
     }
 
 
-    public void SetSpaceFree() {
-        this.isSpaceFree = true;
-    }
-
-    public void SetSpaceOccupied() {
-        this.isSpaceFree = false;
-    }
 
     public void Hang(Vector3 closestPoint) {
+
         this.isHanging = true;
         this.isCatpassing = false;
 
@@ -140,6 +185,7 @@ public class MAJackUpper : MonoBehaviour {
     }
 
     public void Catpass(Vector3 closestPoint) {
+
         this.isHanging = false;
         this.isCatpassing = true;
 

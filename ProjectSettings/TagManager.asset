@@ -27,8 +27,8 @@ TagManager:
   - MA_WeightCollider
   - MA_NavMesh
   - MA_Entity
-  - 
-  - 
+  - MA_JackUpEnoughSpaceTrigger
+  - MA_VisualCollider
   - 
   - 
   - 

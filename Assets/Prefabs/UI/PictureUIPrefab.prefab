@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1878860245}
   - component: {fileID: 1878860246}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: PictureManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -201,8 +201,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4691950067118147802}
   - component: {fileID: 5688193012476689151}
-  m_Layer: 0
-  m_Name: PicturePrefab
+  m_Layer: 5
+  m_Name: PictureUIPrefab
   m_TagString: PictureDisplay
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
