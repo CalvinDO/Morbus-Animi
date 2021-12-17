@@ -240,7 +240,7 @@ public class MAJackUpper : MonoBehaviour {
     public void Move() {
 
         if (this.IsCharacterInputTowardsLedge(this.attachedPoint)) {
-            this.liftUp = true;
+            this.LiftUp();
         }
 
 
@@ -250,7 +250,14 @@ public class MAJackUpper : MonoBehaviour {
 
     }
 
-    void FixedUpdate() {
+
+
+    private void LiftUp() {
+        this.liftUp = true;
+        this.characterController.rb.isKinematic = true;
+    }
+
+    private void FixedUpdate() {
         if (this.liftUp) {
 
             Vector3 characterArrivedPosition = new Vector3(this.characterController.transform.position.x, this.attachedPoint.y + this.liftUpExtraThreshhold * 10, this.characterController.transform.position.z);
