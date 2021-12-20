@@ -6751,9 +6751,37 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8391222552659086748, guid: 344249dfa84feb842859255cc36bd75e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4714817154256824709, guid: 344249dfa84feb842859255cc36bd75e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -516098083770646512, guid: 344249dfa84feb842859255cc36bd75e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 344249dfa84feb842859255cc36bd75e, type: 3}
       propertyPath: m_Name
       value: NorahClothed
+      objectReference: {fileID: 0}
+    - target: {fileID: 3942844865621104101, guid: 344249dfa84feb842859255cc36bd75e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6688365970232631406, guid: 344249dfa84feb842859255cc36bd75e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8416272007918961125, guid: 344249dfa84feb842859255cc36bd75e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8821623529969584324, guid: 344249dfa84feb842859255cc36bd75e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 5866666021909216657, guid: 344249dfa84feb842859255cc36bd75e, type: 3}
