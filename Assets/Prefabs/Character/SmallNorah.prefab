@@ -5290,8 +5290,8 @@ MonoBehaviour:
   isCatpassing: 0
   isAttached: 0
   obstacleCollectorRadius: 1
-  liftUpSlerpFactor: 0.01
-  liftUpExtraThreshhold: 0.05
+  liftUpSlerpFactor: 0.1
+  liftUpExtraThreshhold: 0.24
 --- !u!1 &7534904971383046353
 GameObject:
   m_ObjectHideFlags: 0

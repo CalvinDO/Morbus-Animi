@@ -1523,8 +1523,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d843acbfcf9f6d42857fd7e91982441, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  menuCanvas: {fileID: 2004364977411377445}
+  menuCanvas: {fileID: 2004364977411377624}
   isMainMenu: 1
+  clickSound: {fileID: 0}
 --- !u!1 &7159501520414467510
 GameObject:
   m_ObjectHideFlags: 0
