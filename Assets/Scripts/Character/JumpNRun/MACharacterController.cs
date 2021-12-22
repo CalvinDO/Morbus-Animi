@@ -235,12 +235,14 @@ public class MACharacterController : MonoBehaviour {
 
     public GameObject screenDisplay;
     public UnityEngine.UI.Text hoverTextObject;
+    
+    
+    private bool isPerformingSoloJumpNRunMove = false;
 
-
-    public 
-
-
-    void Start() {
+    public bool IsPerformingSoloJumpNRunMove {
+        get => this.isPerformingSoloJumpNRunMove;
+    }
+    public void Start() {
 
         this.currentXRotation = 0;
         this.xRotationAmount = 0;
@@ -774,6 +776,20 @@ public class MACharacterController : MonoBehaviour {
     }
 
     private void ManageSwing() {
+
+       
+        if (this.isSwinging) {
+            if (!Input.GetKey(KeyCode.Space)) {
+                //Stop Swinging
+                this.isSwinging = false;
+
+                Debug.Log(this.characterSwingTrigger.reachableSwingbar);
+                this.characterSwingTrigger.reachableSwingbar.ReleaseCharacter(this);
+                
+            }
+            return;
+        }
+
         if (this.isGrounded) {
             return;
         }
@@ -782,19 +798,12 @@ public class MACharacterController : MonoBehaviour {
             return;
         }
 
-        if (this.isSwinging) {
-            if (!Input.GetKey(KeyCode.Space)) {
-                //Stop Swinging
-                this.isSwinging = false;
-                this.characterSwingTrigger.reachableSwingbar.ReleaseCharacter(this);
-            }
-            else {
-                return;
-            }
+        if (this.isPerformingSoloJumpNRunMove) {
+            return;
         }
 
         if (Input.GetKey(KeyCode.Space)) {
-            this.characterSwingTrigger.reachableSwingbar.SetCharacterInitialPosition(this);
+            this.characterSwingTrigger.reachableSwingbar.StartSwingAndSetCharacterInitialPosition(this);
             this.isSwinging = true;
         }
     }
@@ -835,6 +844,8 @@ public class MACharacterController : MonoBehaviour {
 
     private void StartSliding() {
 
+        this.SetPerformingSoloJumpNRunMove(true);
+
         this.defaultCollider.gameObject.SetActive(false);
         this.slideCollider.gameObject.SetActive(true);
 
@@ -846,6 +857,10 @@ public class MACharacterController : MonoBehaviour {
     }
 
     private void EndSliding() {
+
+        this.SetPerformingSoloJumpNRunMove(false);
+
+
         this.remainingSlideTime = this.maxSlideDuration;
 
 
@@ -1045,6 +1060,13 @@ public class MACharacterController : MonoBehaviour {
 
     public void DeGround() {
         this.isGrounded = false;
+    }
+
+    public void SetPerformingSoloJumpNRunMove(bool value) {
+
+         Debug.Log("set: " + value);
+
+        this.isPerformingSoloJumpNRunMove = value;
     }
 }
 

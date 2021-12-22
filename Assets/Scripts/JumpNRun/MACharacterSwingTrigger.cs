@@ -6,9 +6,17 @@ public class MACharacterSwingTrigger : MonoBehaviour {
 
     public bool isSwingbarReachable = false;
     public MASwingbar reachableSwingbar;
+    private MACharacterController characterController;
 
+    void Start() {
+        this.characterController = this.transform.root.GetComponent<MACharacterController>();
+    }
 
     private void OnTriggerStay(Collider other) {
+
+        if (this.characterController.IsPerformingSoloJumpNRunMove) {
+            return;
+        }
 
         if (other.gameObject.CompareTag("SwingbarTrigger")) {
             this.isSwingbarReachable = true;
@@ -18,6 +26,10 @@ public class MACharacterSwingTrigger : MonoBehaviour {
 
 
     private void OnTriggerExit(Collider other) {
+
+        if (this.characterController.IsPerformingSoloJumpNRunMove) {
+            return;
+        }
 
         if (other.gameObject.CompareTag("SwingbarTrigger")) {
             this.isSwingbarReachable = false;

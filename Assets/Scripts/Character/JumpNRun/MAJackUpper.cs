@@ -4,37 +4,51 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class MAJackUpper : MonoBehaviour {
+
+
     public Transform handUpMaxPosition;
     public Transform handDownMinPosition;
-    public float handUpMaxTolerance;
-
-    public float maxLookAtAngle;
 
 
     public MAJackUpEnoughSpaceChecker enoughSpaceTrigger;
+
+    private MACharacterController characterController;
+
+    private Vector3 attachedPoint;
+
+
+    [Range(0, 10)]
+    public float obstacleCollectorRadius;
+
+    [Range(0, 180)]
+    public float maxLookAtAngle;
+
+    [Range(0, 1)]
+    public float liftUpSlerpFactor;
+    [Range(0, 1)]
+    public float liftUpExtraThreshhold;
+    [Range(0, 1)]
+    public float handUpMaxTolerance;
+
+    [Range(0, 1)]
+    public float xzDistanceToClosestPointThreshhold;
+
+
 
     public bool isHanging = false;
     public bool isCatpassing = false;
     public bool isAttached = false;
 
-    private Vector3 attachedPoint;
+
+    private bool isUpjackingEnabled = true;
+    private bool isLiftingUp = false;
 
 
-    private bool runAlgorithm = true;
+    private bool isHeightReached = false;
 
+    [Range(0, 1)]
+    public float moveXYExtraMagnitude;
 
-    public float obstacleCollectorRadius;
-
-
-    private MACharacterController characterController;
-
-
-    private bool liftUp = false;
-    public float liftUpSlerpFactor;
-    public float liftUpExtraThreshhold;
-
-    //public float timeLiftUp;
-    // private float remainingTimeLiftUp;
 
     void Start() {
 
@@ -45,13 +59,16 @@ public class MAJackUpper : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
+
         if (Input.GetKey(KeyCode.Backspace)) {
             this.DiscardLedge();
+            return;
         }
 
         if (this.isAttached) {
-            this.Move();
+            this.CheckCharacterInputTowardsLedge();
         }
+
     }
 
 
@@ -81,11 +98,15 @@ public class MAJackUpper : MonoBehaviour {
             return;
         }
 
-        if (!this.runAlgorithm) {
+        if (!this.isUpjackingEnabled) {
             return;
         }
 
         if (this.isAttached) {
+            return;
+        }
+
+        if (this.characterController.IsPerformingSoloJumpNRunMove) {
             return;
         }
 
@@ -147,6 +168,11 @@ public class MAJackUpper : MonoBehaviour {
 
     private bool IsCharacterInputTowardsLedge(Vector3 closestPoint) {
 
+        if (closestPoint == Vector3.zero) {
+            Debug.LogError("closest point is zero!");
+        }
+
+
         Vector3 sameYCharacterClosestPoint = this.transform.position;
         sameYCharacterClosestPoint.y = closestPoint.y;
         Vector3 ledgeDirectionSameYCharPos = closestPoint - sameYCharacterClosestPoint;
@@ -193,15 +219,7 @@ public class MAJackUpper : MonoBehaviour {
             this.Hang(closestPoint);
         }
 
-        /*
-        if (closestPoint.y > (this.handDownMinPosition.transform.position.y + this.handUpMaxPosition.transform.position.y) / 2) {
-
-            this.Hang(closestPoint);
-        }
-        else {
-            this.Catpass(closestPoint);
-        }
-        */
+        this.characterController.SetPerformingSoloJumpNRunMove(true);
     }
 
 
@@ -212,7 +230,13 @@ public class MAJackUpper : MonoBehaviour {
         this.isCatpassing = false;
         this.isAttached = false;
 
-        this.liftUp = false;
+        this.isLiftingUp = false;
+
+        this.characterController.rb.isKinematic = false;
+
+
+        this.isHeightReached = false;
+
     }
 
 
@@ -222,7 +246,6 @@ public class MAJackUpper : MonoBehaviour {
         this.isHanging = true;
         this.isCatpassing = false;
         this.isAttached = true;
-
 
         this.attachedPoint = closestPoint;
     }
@@ -234,35 +257,86 @@ public class MAJackUpper : MonoBehaviour {
         this.isAttached = true;
 
         this.attachedPoint = closestPoint;
-
     }
 
-    public void Move() {
+    public void CheckCharacterInputTowardsLedge() {
 
         if (this.IsCharacterInputTowardsLedge(this.attachedPoint)) {
-            this.LiftUp();
+            this.SetLiftUpState();
         }
-
-
-        if (this.characterController.transform.position.y >= this.attachedPoint.y) {
-            this.DiscardLedge();
-        }
-
     }
 
 
 
-    private void LiftUp() {
-        this.liftUp = true;
+    private void SetLiftUpState() {
+
+        this.isLiftingUp = true;
         this.characterController.rb.isKinematic = true;
     }
 
+    private void SetHeightReached() {
+        this.isHeightReached = true;
+    }
+
+    private void SetJackUpCompleted() {
+
+        this.characterController.SetPerformingSoloJumpNRunMove(false);
+        this.DiscardLedge();
+    }
+
+    private void LiftUp() {
+        Vector3 characterArrivedPosition = new Vector3(this.characterController.transform.position.x, this.attachedPoint.y + this.liftUpExtraThreshhold * 10, this.characterController.transform.position.z);
+
+        this.characterController.transform.position = Vector3.Lerp(characterController.transform.position, characterArrivedPosition, this.liftUpSlerpFactor);
+    }
+
+    private void MoveXY() {
+        Vector3 characterArrivedPosition = this.attachedPoint;
+        characterArrivedPosition += (this.attachedPoint - characterController.transform.position).normalized * this.moveXYExtraMagnitude;
+
+
+        this.characterController.transform.position = Vector3.Lerp(characterController.transform.position, characterArrivedPosition, this.liftUpSlerpFactor);
+    }
+
     private void FixedUpdate() {
-        if (this.liftUp) {
 
-            Vector3 characterArrivedPosition = new Vector3(this.characterController.transform.position.x, this.attachedPoint.y + this.liftUpExtraThreshhold * 10, this.characterController.transform.position.z);
+        if (!this.isUpjackingEnabled) {
+            return;
+        }
 
-            this.characterController.transform.position = Vector3.Lerp(characterController.transform.position, characterArrivedPosition, this.liftUpSlerpFactor);
+        if (!this.isAttached) {
+            return;
+        }
+
+
+        if (this.attachedPoint == Vector3.zero) {
+            Debug.LogError("Character attached but attached Point is Zero!");
+        }
+
+
+        if (this.isLiftingUp) {
+            this.LiftUp();
+        }
+
+        if (this.isHeightReached) {
+            Debug.Log("moveXZ");
+            this.MoveXY();
+        }
+
+
+        if (this.attachedPoint != Vector3.zero) {
+
+            if (this.characterController.transform.position.y >= this.attachedPoint.y) {
+                this.SetHeightReached();
+            }
+
+        }
+
+        Vector3 XZDistanceToClosestPointVector = this.attachedPoint - new Vector3(this.characterController.transform.position.x, this.attachedPoint.y, this.characterController.transform.position.z);
+        float xzdistanceToClosestPoint = XZDistanceToClosestPointVector.magnitude;
+
+        if (xzdistanceToClosestPoint < this.xzDistanceToClosestPointThreshhold) {
+            this.SetJackUpCompleted();
         }
     }
 }

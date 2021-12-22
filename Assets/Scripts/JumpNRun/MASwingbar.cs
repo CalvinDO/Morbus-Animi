@@ -9,7 +9,7 @@ public class MASwingbar : MonoBehaviour {
 
 
     void Start() {
-        this.InitializeCharacterFeetPositions();
+        // this.InitializeCharacterFeetPositions();
     }
 
 
@@ -24,9 +24,11 @@ public class MASwingbar : MonoBehaviour {
     }
 
 
-    public void SetCharacterInitialPosition(MACharacterController characterController) {
+    public void StartSwingAndSetCharacterInitialPosition(MACharacterController characterController) {
 
         this.rb.isKinematic = false;
+
+        characterController.SetPerformingSoloJumpNRunMove(true);
 
         //prepare Character values
         characterController.rb.isKinematic = true;
@@ -40,11 +42,11 @@ public class MASwingbar : MonoBehaviour {
         characterController.physicalBody.transform.rotation = Quaternion.identity;
 
         Vector3 pointToLookAt = new Vector3(this.transform.position.x, characterController.transform.position.y, this.transform.position.z);
-      
+
 
         characterController.transform.LookAt(pointToLookAt);
 
-   
+
 
         this.currentRotator = new GameObject();
         this.currentRotator.name = "CurrentRotator";
@@ -56,21 +58,21 @@ public class MASwingbar : MonoBehaviour {
         characterController.transform.SetParent(this.currentRotator.transform);
         this.currentRotator.transform.LookAt(this.transform);
 
-        
+
         //move Character so arms grab the bar
 
         characterController.transform.SetParent(null);
         this.currentRotator.transform.SetPositionAndRotation(characterController.swingGrabPosition.position, characterController.swingGrabPosition.rotation);
         characterController.transform.SetParent(this.currentRotator.transform);
         this.currentRotator.transform.position = this.transform.position;
-        
-        
+
+
         this.RotateSwingTowardsCharacter(characterController);
 
 
         this.currentRotator.transform.SetParent(this.transform);
-        
-       
+
+
         //this.rb.centerOfMass = characterController.transform.position;
     }
 
@@ -86,7 +88,8 @@ public class MASwingbar : MonoBehaviour {
     }
 
     public void ReleaseCharacter(MACharacterController characterController) {
-        
+
+        characterController.SetPerformingSoloJumpNRunMove(false);
 
         characterController.transform.SetParent(null);
         characterController.transform.rotation = Quaternion.identity;
@@ -109,7 +112,7 @@ public class MASwingbar : MonoBehaviour {
         this.rb.velocity = Vector3.zero;
         this.transform.localRotation = Quaternion.identity;
 
-       // this.InitializeCharacterFeetPositions();
+        // this.InitializeCharacterFeetPositions();
 
         this.rb.isKinematic = true;
 

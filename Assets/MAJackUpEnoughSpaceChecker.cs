@@ -31,6 +31,10 @@ public class MAJackUpEnoughSpaceChecker : MonoBehaviour {
     }
 
     private void OnDrawGizmos() {
+
+        return;
+
+
         if (this.spaceCheckPoints == null) {
             return;
         }
