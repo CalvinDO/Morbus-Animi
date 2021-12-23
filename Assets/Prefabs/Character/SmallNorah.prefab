@@ -3413,8 +3413,8 @@ MonoBehaviour:
   transitionSpeed: 7.18
   slideTransitionSpeed: 1
   airTransitionSpeed: 0.7
-  maxMovementSpeed: 1.25
-  maxMovementSprintSpeedFactor: 3
+  maxMovementSpeed: 0.75
+  maxMovementSprintSpeedFactor: 4
   mouseSensitivity: 438
   lockMouse: 1
   normalizedSummedInput: {x: 0, y: 0, z: 0}
@@ -4145,7 +4145,7 @@ MonoBehaviour:
   isHanging: 0
   isCatpassing: 0
   isAttached: 0
-  moveXYExtraMagnitude: 0
+  moveXYExtraMagnitude: 0.197
 --- !u!1 &7534904971383046353
 GameObject:
   m_ObjectHideFlags: 0
@@ -5147,6 +5147,10 @@ PrefabInstance:
     - target: {fileID: 9073363407602085253, guid: d970cd0b087a81c4d9c211fa2166d1e7, type: 3}
       propertyPath: m_Name
       value: MainCamera
+      objectReference: {fileID: 0}
+    - target: {fileID: 9073363407602085253, guid: d970cd0b087a81c4d9c211fa2166d1e7, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d970cd0b087a81c4d9c211fa2166d1e7, type: 3}

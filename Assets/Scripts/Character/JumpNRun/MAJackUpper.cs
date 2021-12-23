@@ -129,6 +129,13 @@ public class MAJackUpper : MonoBehaviour {
             return;
         }
 
+        Vector3 extraMagnitudeXZProject = Vector3.ProjectOnPlane(this.attachedPoint - characterController.transform.position, Vector3.up);
+        closestPoint += extraMagnitudeXZProject.normalized * this.moveXYExtraMagnitude;
+
+       
+
+       
+
 
         Vector3 sameYCharacterClosestPoint = this.transform.position;
         sameYCharacterClosestPoint.y = closestPoint.y;
@@ -173,12 +180,17 @@ public class MAJackUpper : MonoBehaviour {
         }
 
 
+
         Vector3 sameYCharacterClosestPoint = this.transform.position;
         sameYCharacterClosestPoint.y = closestPoint.y;
         Vector3 ledgeDirectionSameYCharPos = closestPoint - sameYCharacterClosestPoint;
 
         Debug.DrawLine(this.characterController.transform.position, this.characterController.transform.TransformPoint(this.characterController.normalizedSummedInput));
 
+
+        if (this.characterController.normalizedSummedInput == Vector3.zero) {
+            return false;
+        }
 
         if (Vector3.Angle(this.characterController.normalizedSummedInput, ledgeDirectionSameYCharPos) < this.maxLookAtAngle) {
             return true;
@@ -262,6 +274,7 @@ public class MAJackUpper : MonoBehaviour {
     public void CheckCharacterInputTowardsLedge() {
 
         if (this.IsCharacterInputTowardsLedge(this.attachedPoint)) {
+
             this.SetLiftUpState();
         }
     }
@@ -269,6 +282,8 @@ public class MAJackUpper : MonoBehaviour {
 
 
     private void SetLiftUpState() {
+
+        Debug.Log("set lift up state");
 
         this.isLiftingUp = true;
         this.characterController.rb.isKinematic = true;
@@ -292,7 +307,6 @@ public class MAJackUpper : MonoBehaviour {
 
     private void MoveXY() {
         Vector3 characterArrivedPosition = this.attachedPoint;
-        characterArrivedPosition += (this.attachedPoint - characterController.transform.position).normalized * this.moveXYExtraMagnitude;
 
 
         this.characterController.transform.position = Vector3.Lerp(characterController.transform.position, characterArrivedPosition, this.liftUpSlerpFactor);
