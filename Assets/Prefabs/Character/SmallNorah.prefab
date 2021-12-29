@@ -4086,7 +4086,7 @@ GameObject:
   - component: {fileID: 1122854364013833951}
   - component: {fileID: 7477208179604591315}
   - component: {fileID: 2123240168853162328}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: JackUpperEdgeCollector
   m_TagString: Untagged
   m_Icon: {fileID: 0}

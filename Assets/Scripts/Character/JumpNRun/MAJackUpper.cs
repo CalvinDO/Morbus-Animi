@@ -74,7 +74,7 @@ public class MAJackUpper : MonoBehaviour {
 
     public Collider[] GetCurrentObstacles() {
 
-        Collider[] physicOverlappedObstacles = Physics.OverlapSphere(this.attachedPoint, this.obstacleCollectorRadius);
+        Collider[] physicOverlappedObstacles = Physics.OverlapSphere(this.attachedPoint, this.obstacleCollectorRadius, 13);
 
 
         List<Collider> filteredColliders = new List<Collider>();

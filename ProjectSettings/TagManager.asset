@@ -13,6 +13,7 @@ TagManager:
   - PictureDisplay
   - MainCollider
   - PhysicalPlayerBody
+  - Fire
   layers:
   - Default
   - TransparentFX
@@ -30,7 +31,7 @@ TagManager:
   - MA_JackUpEnoughSpaceTrigger
   - MA_VisualCollider
   - MA_OrderedButton
-  - 
+  - MA_Throwable
   - 
   - 
   - 
