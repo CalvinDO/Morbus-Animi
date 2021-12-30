@@ -11,8 +11,9 @@ GameObject:
   - component: {fileID: 4128314637669668453}
   - component: {fileID: 5262038770078492040}
   - component: {fileID: 1126054034413141631}
+  - component: {fileID: -7351704598510820532}
   m_Layer: 0
-  m_Name: Cabinet
+  m_Name: Cabinet_2
   m_TagString: JumpNRunElement
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -82,3 +83,16 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &-7351704598510820532
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 698653982510267628}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.8276832, y: 2.2956524, z: 0.61200476}
+  m_Center: {x: 0.003132254, y: 1.1478262, z: 0.010689512}
