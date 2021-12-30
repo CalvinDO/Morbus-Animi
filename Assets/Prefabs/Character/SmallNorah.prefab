@@ -3446,7 +3446,7 @@ MonoBehaviour:
   cameraMode: 0
   keyboardControlMode: 3
   rotationMode: 1
-  camSlerpFactor: 0.037
+  camSlerpFactor: 1
   slideSpeedThreshhold: 0
   SprintFOVLerpFactor: 5
   movementEnabled: 1
