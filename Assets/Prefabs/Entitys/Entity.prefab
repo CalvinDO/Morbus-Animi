@@ -444,7 +444,7 @@ MonoBehaviour:
   maxDecisionTime: 60
   navMeshAgent: {fileID: 1467365877746765642}
   frustumDetector: {fileID: 1446209778213229405}
-  randomDestinationRange: 120
+  randomDestinationRange: 50
   characterDetectedSpeedIncrease: 0.5
   maxSpeed: 4
 --- !u!195 &1467365877746765642

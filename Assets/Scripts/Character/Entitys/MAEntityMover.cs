@@ -36,6 +36,8 @@ public class MAEntityMover : MonoBehaviour {
 
     public float maxSpeed;
 
+
+
     void Start() {
         this.currentDecisionTime = this.maxDecisionTime;
 
@@ -92,7 +94,7 @@ public class MAEntityMover : MonoBehaviour {
 
     private void SetNewRandomDestination() {
 
-        this.randomPointInSphere = Random.insideUnitSphere * this.randomDestinationRange + this.navMeshCenter.position;
+        this.randomPointInSphere = Random.insideUnitSphere * this.randomDestinationRange + this.transform.parent.position;
 
         NavMeshHit hit;
         NavMesh.SamplePosition(this.randomPointInSphere, out hit, int.MaxValue, 1);
@@ -106,6 +108,7 @@ public class MAEntityMover : MonoBehaviour {
     }
 
     private void OnDrawGizmos() {
+        Gizmos.DrawWireSphere(this.transform.parent.position, this.randomDestinationRange);
         // Gizmos.DrawWireSphere(this.randomPointInSphere, 5);
         Gizmos.DrawSphere(this.navMeshAgent.destination, 1);
     }
