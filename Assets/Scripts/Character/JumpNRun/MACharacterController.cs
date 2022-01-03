@@ -67,7 +67,7 @@ public class MACharacterController : MonoBehaviour {
     public bool lockMouse = true;
 
 
-    private bool directionInputExists = false;
+    public bool directionInputExists = false;
     public Vector3 normalizedSummedInput;
 
     private bool isTooFast = false;
@@ -235,13 +235,16 @@ public class MACharacterController : MonoBehaviour {
 
     public GameObject screenDisplay;
     public UnityEngine.UI.Text hoverTextObject;
-    
-    
+
+
     private bool isPerformingSoloJumpNRunMove = false;
 
     public bool IsPerformingSoloJumpNRunMove {
         get => this.isPerformingSoloJumpNRunMove;
     }
+
+    public MAJackUpper jackUpper;
+
     public void Start() {
 
         this.currentXRotation = 0;
@@ -260,6 +263,7 @@ public class MACharacterController : MonoBehaviour {
 
         // this.rb.velocity = new Vector3(0, 5, 3);
     }
+
     void Update() {
 
         this.CalculateMovement();
@@ -303,6 +307,11 @@ public class MACharacterController : MonoBehaviour {
     }
 
     private void RotatePhysicalBody() {
+
+        if (this.IsPerformingSoloJumpNRunMove) {
+            return;
+        }
+
         this.physicalBody.transform.rotation = Quaternion.Slerp(this.physicalBody.transform.rotation, this.goalDirectionRotation, this.directionRotationSlerpFactor);
     }
 
@@ -777,7 +786,7 @@ public class MACharacterController : MonoBehaviour {
 
     private void ManageSwing() {
 
-       
+
         if (this.isSwinging) {
             if (!Input.GetKey(KeyCode.Space)) {
                 //Stop Swinging
@@ -785,7 +794,7 @@ public class MACharacterController : MonoBehaviour {
 
                 Debug.Log(this.characterSwingTrigger.reachableSwingbar);
                 this.characterSwingTrigger.reachableSwingbar.ReleaseCharacter(this);
-                
+
             }
             return;
         }
@@ -1049,6 +1058,13 @@ public class MACharacterController : MonoBehaviour {
     }
 
     public void Ground() {
+
+        if (!this.isGrounded) {
+            if (!this.isPerformingSoloJumpNRunMove) {
+                this.animator.SetTrigger("Land");
+            }
+        }
+
         this.isGrounded = true;
 
         if (this.jumped) {
@@ -1056,6 +1072,10 @@ public class MACharacterController : MonoBehaviour {
         }
         this.lastCollidedWall = null;
         this.lastJumpedWall = null;
+
+
+        this.animator.ResetTrigger("DropFromHang");
+
     }
 
     public void DeGround() {
@@ -1064,7 +1084,7 @@ public class MACharacterController : MonoBehaviour {
 
     public void SetPerformingSoloJumpNRunMove(bool value) {
 
-         Debug.Log("set: " + value);
+        Debug.Log("set: " + value);
 
         this.isPerformingSoloJumpNRunMove = value;
     }
