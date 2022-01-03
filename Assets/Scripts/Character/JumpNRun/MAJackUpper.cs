@@ -212,6 +212,7 @@ public class MAJackUpper : MonoBehaviour {
 
     }
 
+
     private void OnDrawGizmos() {
 
 
@@ -233,15 +234,21 @@ public class MAJackUpper : MonoBehaviour {
 
         Ray floorRay = new Ray(sameYCharacterClosestPoint, Vector3.down);
 
+        Debug.DrawRay(floorRay.origin, floorRay.direction, Color.cyan);
 
-        if (Physics.Raycast(floorRay, out _, this.handUpMaxPosition.localPosition.y, 13)) {
+        LayerMask mask = LayerMask.GetMask( "Default", "MA_NavMesh", "Wall");
+        Debug.Log(mask.value);
+
+        if (Physics.Raycast(floorRay, out _, this.handUpMaxPosition.localPosition.y, mask)) {
 
             this.Catpass(closestPoint);
 
+            Debug.Log("catpass!");
         }
         else {
 
             this.Hang(closestPoint);
+            Debug.Log("hang!");
         }
 
 
