@@ -15,11 +15,11 @@ GameObject:
   - component: {fileID: 1656718763}
   - component: {fileID: 1656718762}
   m_Layer: 0
-  m_Name: Dresser
+  m_Name: DresserPushable
   m_TagString: JumpNRunElement
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &6503895014745175383
 Transform:

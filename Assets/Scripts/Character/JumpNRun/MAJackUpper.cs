@@ -236,7 +236,7 @@ public class MAJackUpper : MonoBehaviour {
 
         Debug.DrawRay(floorRay.origin, floorRay.direction, Color.cyan);
 
-        LayerMask mask = LayerMask.GetMask( "Default", "MA_NavMesh", "Wall");
+        LayerMask mask = LayerMask.GetMask("Default", "MA_NavMesh", "Wall");
         Debug.Log(mask.value);
 
         if (Physics.Raycast(floorRay, out _, this.handUpMaxPosition.localPosition.y, mask)) {
@@ -377,7 +377,9 @@ public class MAJackUpper : MonoBehaviour {
 
                     if (!this.isLiftingUp) {
 
-                        this.DropFromHang();
+                        if (this.isUpjackingEnabled) {
+                            this.DropFromHang();
+                        }
                     }
 
                 }
