@@ -78,6 +78,7 @@ public class MAJackUpper : MonoBehaviour {
             this.CheckCharacterInputTowardsLedge();
         }
 
+        this.handlePush();
 
     }
 
@@ -487,6 +488,19 @@ public class MAJackUpper : MonoBehaviour {
 
         if (xzdistanceToClosestPoint < this.xzDistanceToClosestPointThreshhold) {
             this.SetJackUpCompleted();
+        }
+    }
+
+    private void handlePush()
+    {
+        // fix for conflict with pushing mechanic
+        if (Input.GetKey("e"))
+        {
+            this.isUpjackingEnabled = false;
+        }
+        if (Input.GetKeyUp("e"))
+        {
+            this.isUpjackingEnabled = true;
         }
     }
 }
