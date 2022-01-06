@@ -37,7 +37,6 @@ public class MAEntityMover : MonoBehaviour {
     public float maxSpeed;
 
 
-
     void Start() {
         this.currentDecisionTime = this.maxDecisionTime;
 

@@ -234,7 +234,9 @@
         Rechtshändiges zu Linkshändiges Koordinatensystem - Blender zu Unity
     </h4>
 
-    Blender-Export:
+    <h5>
+        Blender-Export für alles AUßER Character:
+    </h5>
     <ol>
         <li>
             Ctrl + A -> Apply Rotation & Scale
@@ -252,6 +254,85 @@
             fertig :)
         </li>
     </ol>
+
+
+    <h5>
+        Blender-Export für Character:
+    </h5>
+
+
+    <li>
+        <li>
+            Ctrl + A -> Apply Rotation & Scale
+            
+        </li>
+        <li>
+            Character Mesh auswählen, Shift Select Rig dazu auswählen
+        </li>
+        <li>
+            file -> Export -> FBX
+        </li>
+    </li>
+    <li>
+        Include
+        <ul>
+            <li>
+                Selected Objects only = an
+            </li>
+            
+            <li>
+                Bei den zu exportierenden Objekttypen nur Mesh, Armature und Empty auswählen
+                Export Unity FBX
+            </li>
+        </ul>
+    </li>
+    <li>
+        Transform
+        <ul>
+            <li>
+                Scale = 1.00
+            </li>
+            <li>
+                Apply Scalings = FBX All (viele benutzen All Local, doch das gibt bei uns anscheinend Probleme)
+            </li>
+            <li>
+                Forward = Z Forward
+            </li>
+            <li>
+                Up = Y Up
+            </li>
+        </ul>
+    </li>
+    <li>
+        Armature -> Add Leaf Bones AUS! Gibt schlechte Performance! Ausnahme: Dynamic Hair Rigging, etc. (Bitte
+        vorher andere aus dem Team fragen)
+    </li>
+    <li>
+        Bake Animation -> Bake Animation an.
+
+        <ul>
+            <li>
+                Key all Bones = an
+            </li>
+            <li>
+                NLA Strips = aus
+            </li>
+            <li>
+                All Actions = an (Wenn es Probleme gibt, dass Animation (Aktionen) exportiert werden, die gar nicht
+                mehr wirklich vorhanden sind, dann lieber AUS schalten)
+            </li>
+            <li>
+                Force Start/End Keying = aus
+            </li>
+        </ul>
+    </li>
+    <li>
+        Export FBX :)
+        fertig :)
+    </li>
+
+
+
 
     <h2>
         Versionskontrolle

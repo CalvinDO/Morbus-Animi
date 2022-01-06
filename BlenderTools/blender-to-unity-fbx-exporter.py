@@ -218,7 +218,7 @@ def export_unity_fbx(context, filepath, active_collection, selected_objects, def
 
 		# Export FBX file
 
-		params = dict(filepath=filepath, apply_scale_options='FBX_SCALE_UNITS', object_types={'EMPTY', 'MESH', 'ARMATURE'}, use_active_collection=active_collection, use_selection=selected_objects, use_armature_deform_only=deform_bones, add_leaf_bones=leaf_bones)
+		params = dict(filepath=filepath, apply_scale_options='FBX_SCALE_UNITS', object_types={'EMPTY', 'MESH', 'ARMATURE'}, use_active_collection=active_collection, use_selection=selected_objects, use_armature_deform_only=deform_bones, add_leaf_bones=leaf_bones, primary_bone_axis='Z', secondary_bone_axis='X')
 
 		print("Invoking default FBX Exporter:", params)
 		bpy.ops.export_scene.fbx(**params)

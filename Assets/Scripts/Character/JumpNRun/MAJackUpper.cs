@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Animations.Rigging;
 
 public class MAJackUpper : MonoBehaviour {
 
@@ -54,7 +55,8 @@ public class MAJackUpper : MonoBehaviour {
     [Range(0, 1)]
     public float moveXYExtraMagnitude;
 
-
+    public Rig armRig;
+    public Transform handTarget;
 
     void Start() {
 
@@ -258,8 +260,22 @@ public class MAJackUpper : MonoBehaviour {
         this.RotateCharacterTowardsAttachedPoint();
 
         this.characterController.SetPerformingSoloJumpNRunMove(true);
+
+        this.SetHandsOnLedge(closestPoint);
+
     }
 
+
+    private void SetHandsOnLedge(Vector3 closestPoint) {
+        this.armRig.weight = 1;
+
+        this.handTarget.position = closestPoint;
+        this.handTarget.LookAt(closestPoint);
+    }
+
+    private void FreeHandsFromLedge() {
+        this.armRig.weight = 0;
+    }
 
     private void RotateCharacterTowardsAttachedPoint() {
         this.characterController.physicalBody.transform.LookAt(new Vector3(this.attachedPoint.x, this.characterController.transform.position.y, this.attachedPoint.z));
@@ -284,6 +300,10 @@ public class MAJackUpper : MonoBehaviour {
         this.attachedPoint = Vector3.zero;
 
         this.characterController.movementEnabled = true;
+
+
+
+        this.FreeHandsFromLedge();
 
     }
 
@@ -457,6 +477,7 @@ public class MAJackUpper : MonoBehaviour {
             Debug.LogError("Character attached but attached Point is Zero!");
         }
 
+        this.SetHandsOnLedge(this.attachedPoint);
 
         if (this.isLiftingUp) {
 
@@ -491,15 +512,12 @@ public class MAJackUpper : MonoBehaviour {
         }
     }
 
-    private void handlePush()
-    {
+    private void handlePush() {
         // fix for conflict with pushing mechanic
-        if (Input.GetKey("e"))
-        {
+        if (Input.GetKey("e")) {
             this.isUpjackingEnabled = false;
         }
-        if (Input.GetKeyUp("e"))
-        {
+        if (Input.GetKeyUp("e")) {
             this.isUpjackingEnabled = true;
         }
     }

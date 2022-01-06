@@ -31,7 +31,7 @@ public class MAFrustumDetector : MonoBehaviour {
     public AudioClip iSeeYou;
     public AudioClip whereAreYou;
 
-
+    public Animator animator;
 
     void Start() {
         this.characterController = GameObject.Find("SmallNorah").GetComponent<MACharacterController>();
@@ -65,25 +65,9 @@ public class MAFrustumDetector : MonoBehaviour {
         }
 
 
-        if (this.characterWhichGotHit(hit) != null) {
-            Debug.DrawRay(ray.origin, hit.point - this.transform.position);
-            this.light.color = Color.yellow;
+        if (this.GetCharacterWhichGotHit(hit) != null) {
 
-            if (!this.characterDetected) {
-                this.audioSource.PlayOneShot(this.iSeeYou);
-            }
-
-            this.characterDetected = true;
-            this.detectedCharacter = this.characterWhichGotHit(hit);
-            this.lastSeenCharacterPosition = this.detectedCharacter.transform.position;
-
-
-            float distance = Vector3.Distance(this.transform.position, hit.point);
-            if (distance < this.catchDistance) {
-                this.light.color = Color.red;
-                Debug.Log("Game over! You got catched!");
-            }
-
+            this.DetectCharacter(ray, hit);
 
             return;
         }
@@ -104,16 +88,48 @@ public class MAFrustumDetector : MonoBehaviour {
             Debug.Log(this.remainingTimeTillCalmDown);
 
             if (this.remainingTimeTillCalmDown <= 0) {
-                this.characterDetected = false;
-                this.reachedOldPos = false;
-                this.remainingTimeTillCalmDown = this.timeTillCalmDown;
 
-                this.entityMover.LostCharacter();
+                this.ReturnToRoaming();
             }
         }
     }
 
-    private MACharacterController characterWhichGotHit(RaycastHit hit) {
+
+    private void DetectCharacter(Ray ray, RaycastHit hit) {
+
+        Debug.DrawRay(ray.origin, hit.point - this.transform.position);
+        this.light.color = Color.yellow;
+
+        if (!this.characterDetected) {
+            this.audioSource.PlayOneShot(this.iSeeYou);
+        }
+
+        this.characterDetected = true;
+        this.detectedCharacter = this.GetCharacterWhichGotHit(hit);
+        this.lastSeenCharacterPosition = this.detectedCharacter.transform.position;
+
+
+        float distance = Vector3.Distance(this.transform.position, hit.point);
+        if (distance < this.catchDistance) {
+            this.light.color = Color.red;
+            Debug.Log("Game over! You got catched!");
+        }
+
+        this.animator.SetBool("isSprinting", true);
+    }
+
+
+    private void ReturnToRoaming() {
+        this.characterDetected = false;
+        this.reachedOldPos = false;
+        this.remainingTimeTillCalmDown = this.timeTillCalmDown;
+
+        this.entityMover.LostCharacter();
+
+        this.animator.SetBool("isSprinting", false);
+    }
+
+    private MACharacterController GetCharacterWhichGotHit(RaycastHit hit) {
         if (hit.transform == null) {
             return null;
         }
