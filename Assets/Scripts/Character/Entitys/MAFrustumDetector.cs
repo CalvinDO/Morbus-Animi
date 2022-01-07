@@ -35,6 +35,8 @@ public class MAFrustumDetector : MonoBehaviour {
 
     void Start() {
         this.characterController = GameObject.Find("SmallNorah").GetComponent<MACharacterController>();
+
+        this.animator.SetBool("isWalking", true);
     }
 
 
@@ -116,6 +118,7 @@ public class MAFrustumDetector : MonoBehaviour {
         }
 
         this.animator.SetBool("isSprinting", true);
+        this.animator.SetBool("isWalking", false);
     }
 
 
@@ -127,6 +130,7 @@ public class MAFrustumDetector : MonoBehaviour {
         this.entityMover.LostCharacter();
 
         this.animator.SetBool("isSprinting", false);
+        this.animator.SetBool("isWalking", true);
     }
 
     private MACharacterController GetCharacterWhichGotHit(RaycastHit hit) {
