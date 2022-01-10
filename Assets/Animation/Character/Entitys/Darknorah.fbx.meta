@@ -1,17 +1,17 @@
 fileFormatVersion: 2
-guid: aed9faa8fd2d8dc4fba0878406bc8883
+guid: 8c106603b0899f04d91cff6ce6bfc299
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable:
+  - first:
+      74: 2522241149904950146
+    second: metarig|Cube.003Action
   - first:
       74: 7241771982285646821
     second: metarig|CubeAction
   - first:
       74: -887982601649841707
     second: metarig|metarigAction
-  - first:
-      74: 2522241149904950146
-    second: metarig|Cube.003Action
   externalObjects: {}
   materials:
     materialImportMode: 2
