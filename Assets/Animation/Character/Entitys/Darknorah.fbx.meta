@@ -1,8 +1,17 @@
 fileFormatVersion: 2
-guid: c479a8e234ca6b54b9d410a9f52b7ea6
+guid: 8c106603b0899f04d91cff6ce6bfc299
 ModelImporter:
   serializedVersion: 20200
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      74: 2522241149904950146
+    second: metarig|Cube.003Action
+  - first:
+      74: 7241771982285646821
+    second: metarig|CubeAction
+  - first:
+      74: -887982601649841707
+    second: metarig|metarigAction
   externalObjects: {}
   materials:
     materialImportMode: 2
@@ -94,7 +103,7 @@ ModelImporter:
   autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 2
   humanoidOversampling: 1
-  avatarSetup: 0
+  avatarSetup: 1
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1
   additionalBone: 0
   userData: 

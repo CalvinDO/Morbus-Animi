@@ -9,6 +9,9 @@ ModelImporter:
   - first:
       74: -887982601649841707
     second: metarig|metarigAction
+  - first:
+      74: 2522241149904950146
+    second: metarig|Cube.003Action
   externalObjects: {}
   materials:
     materialImportMode: 2
