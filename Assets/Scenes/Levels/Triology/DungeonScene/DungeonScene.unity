@@ -2852,7 +2852,7 @@ Light:
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 0
+    m_Type: 2
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -8074,7 +8074,7 @@ PrefabInstance:
     - target: {fileID: 2257839046220350566, guid: 73fa5b0c27cd376429a16d8f507d5911, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 66b390b8ee0371846b57803f914242ae, type: 2}
+      objectReference: {fileID: 2100000, guid: c58270d9231b3804d905926ef6748c73, type: 2}
     - target: {fileID: 2295647369895794397, guid: 73fa5b0c27cd376429a16d8f507d5911, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 4294967295
