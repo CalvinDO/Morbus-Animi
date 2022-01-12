@@ -4082,6 +4082,25 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -8545257712906646834, guid: 73fa5b0c27cd376429a16d8f507d5911, type: 3}
+--- !u!1 &1081103893 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6407447424764331168, guid: 73fa5b0c27cd376429a16d8f507d5911, type: 3}
+  m_PrefabInstance: {fileID: 1703764386}
+  m_PrefabAsset: {fileID: 0}
+--- !u!64 &1081103894
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1081103893}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -6768452156211219114, guid: 73fa5b0c27cd376429a16d8f507d5911, type: 3}
 --- !u!1 &1086537702 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -2230037358073716620, guid: 73fa5b0c27cd376429a16d8f507d5911, type: 3}
@@ -4940,6 +4959,25 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -5827922698695745013, guid: 73fa5b0c27cd376429a16d8f507d5911, type: 3}
+--- !u!1 &1271077276 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5233929598277757087, guid: 73fa5b0c27cd376429a16d8f507d5911, type: 3}
+  m_PrefabInstance: {fileID: 1703764386}
+  m_PrefabAsset: {fileID: 0}
+--- !u!64 &1271077277
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1271077276}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 5093942531733814481, guid: 73fa5b0c27cd376429a16d8f507d5911, type: 3}
 --- !u!1 &1278959126 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4748432257976129578, guid: 73fa5b0c27cd376429a16d8f507d5911, type: 3}
@@ -7766,6 +7804,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 73fa5b0c27cd376429a16d8f507d5911, type: 3}
       propertyPath: m_Name
       value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 73fa5b0c27cd376429a16d8f507d5911, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 944732331439892557, guid: 73fa5b0c27cd376429a16d8f507d5911, type: 3}
       propertyPath: m_StaticEditorFlags
