@@ -7465,6 +7465,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Flashlight
       objectReference: {fileID: 0}
+    - target: {fileID: 6082428475273563719, guid: 01b9b1d8ab5f186499915df84e43565c, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8029106800918022278, guid: 01b9b1d8ab5f186499915df84e43565c, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: c58270d9231b3804d905926ef6748c73, type: 2}
+    - target: {fileID: 9173960565414028732, guid: 01b9b1d8ab5f186499915df84e43565c, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 01b9b1d8ab5f186499915df84e43565c, type: 3}
 --- !u!4 &2527060944829609606 stripped
