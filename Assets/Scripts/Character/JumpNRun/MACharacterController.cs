@@ -524,7 +524,7 @@ public class MACharacterController : MonoBehaviour {
 
         if (this.directionInputExists) {
 
-            this.playFootsteps();
+            //this.playFootsteps();
 
             /*
             Vector3 scaledNormalizedResult = normalizedSummedInput * this.movementAcceleration;
