@@ -197,7 +197,6 @@ public class MACharacterController : MonoBehaviour {
 
     public MASpaceType spaceType;
 
-    public AudioSource footsteps;
 
     public float maxSlideDuration;
     private float remainingSlideTime;
@@ -636,13 +635,6 @@ public class MACharacterController : MonoBehaviour {
 
         this.directionInputExists = true;
         return directionAccordingToInput;
-    }
-
-    private void playFootsteps() {
-        if (this.footsteps.isPlaying) {
-            return;
-        }
-        this.footsteps.PlayOneShot(this.footsteps.clip);
     }
 
 
