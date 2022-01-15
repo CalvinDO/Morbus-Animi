@@ -67,6 +67,9 @@ public class MAJackUpper : MonoBehaviour {
     [Range(0, 0.5f)]
     public float hangEdgeDistance;
 
+    [Range(0, 0.5f)]
+    public float handSpreadDistance;
+
 
     void Start() {
 
@@ -286,13 +289,27 @@ public class MAJackUpper : MonoBehaviour {
     private void SetHandsOnLedge(Vector3 closestPoint) {
         this.armRig.weight = 1;
 
+        //this.leftHandTarget.LookAt(closestPoint);
+       // this.rightHandTarget.LookAt(closestPoint);
+
+        //this.leftHandTarget.Rotate(Vector3.up * 180);
+       // this.rightHandTarget.Rotate(Vector3.up * 180);
+
+       
+        //this.leftHand.localRotation = Quaternion.identity;
+        //this.rightHand.localRotation = Quaternion.identity;
+
+
         this.leftHandTarget.position = closestPoint;
 
         this.rightHandTarget.position = closestPoint;
 
 
-        this.leftHand.rotation = Quaternion.identity;
-        this.rightHand.rotation = Quaternion.identity;
+        this.leftHandTarget.Translate(this.leftHandTarget.forward * this.handSpreadDistance);
+        this.rightHandTarget.Translate(this.rightHandTarget.forward * this.handSpreadDistance);
+
+        // this.leftHand.LookAt(closestPoint);
+        //this.rightHand.LookAt(closestPoint);
     }
 
     private void FreeHandsFromLedge() {
