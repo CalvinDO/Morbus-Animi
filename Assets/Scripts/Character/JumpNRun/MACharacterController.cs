@@ -1080,5 +1080,10 @@ public class MACharacterController : MonoBehaviour {
 
         this.isPerformingSoloJumpNRunMove = value;
     }
+
+
+    public void Die() {
+        this.transform.position = Vector3.zero;
+    }
 }
 
