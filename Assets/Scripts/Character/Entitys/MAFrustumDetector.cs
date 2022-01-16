@@ -33,6 +33,7 @@ public class MAFrustumDetector : MonoBehaviour {
 
     public Animator animator;
 
+
     void Start() {
         this.characterController = GameObject.Find("SmallNorah").GetComponent<MACharacterController>();
 
@@ -75,7 +76,9 @@ public class MAFrustumDetector : MonoBehaviour {
         }
 
 
-
+        if (this.entityMover.isStationary) {
+            return;
+        }
 
         if (Vector3.Distance(this.lastSeenCharacterPosition, this.transform.position) < 2 || this.entityMover.navMeshAgent.pathStatus == NavMeshPathStatus.PathInvalid) {
 
