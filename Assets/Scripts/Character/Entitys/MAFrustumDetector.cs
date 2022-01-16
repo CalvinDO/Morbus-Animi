@@ -114,22 +114,25 @@ public class MAFrustumDetector : MonoBehaviour {
         this.lastSeenCharacterPosition = this.detectedCharacter.transform.position;
 
         if (this.entityMover.isStationary) {
-            this.light.color = Color.red;
-            this.characterController.Die();
+            this.KillCharacter();
         }
         
 
         float distance = Vector3.Distance(this.transform.position, hit.point);
         if (distance < this.catchDistance) {
-            this.light.color = Color.red;
-            Debug.Log("Game over! You got catched!");
-            this.characterController.Die();
+            this.KillCharacter();
         }
 
         this.animator.SetBool("isSprinting", true);
         this.animator.SetBool("isWalking", false);
     }
 
+
+    private void KillCharacter() {
+        this.light.color = Color.red;
+        this.characterController.Die();
+        this.entityMover.LostCharacter();
+    }
 
 
 
