@@ -178,7 +178,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49f91ab72789e564d8a82176c8337611, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentSelection: 2
+  characterController: {fileID: 0}
+  objectType: 2
   currentInteraction: 0
   radius: 0.5
   textDisplay: {fileID: 0}
@@ -244,7 +245,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49f91ab72789e564d8a82176c8337611, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentSelection: 2
+  characterController: {fileID: 0}
+  objectType: 2
   currentInteraction: 0
   radius: 0.5
   textDisplay: {fileID: 0}
@@ -310,7 +312,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49f91ab72789e564d8a82176c8337611, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentSelection: 2
+  characterController: {fileID: 0}
+  objectType: 2
   currentInteraction: 0
   radius: 0.5
   textDisplay: {fileID: 0}
@@ -376,7 +379,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49f91ab72789e564d8a82176c8337611, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentSelection: 2
+  characterController: {fileID: 0}
+  objectType: 2
   currentInteraction: 0
   radius: 0.5
   textDisplay: {fileID: 0}
@@ -442,7 +446,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49f91ab72789e564d8a82176c8337611, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentSelection: 2
+  characterController: {fileID: 0}
+  objectType: 2
   currentInteraction: 0
   radius: 0.5
   textDisplay: {fileID: 0}
@@ -508,7 +513,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49f91ab72789e564d8a82176c8337611, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentSelection: 2
+  characterController: {fileID: 0}
+  objectType: 2
   currentInteraction: 0
   radius: 0.5
   textDisplay: {fileID: 0}
@@ -574,7 +580,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49f91ab72789e564d8a82176c8337611, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentSelection: 2
+  characterController: {fileID: 0}
+  objectType: 2
   currentInteraction: 0
   radius: 0.5
   textDisplay: {fileID: 0}
@@ -640,7 +647,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49f91ab72789e564d8a82176c8337611, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentSelection: 2
+  characterController: {fileID: 0}
+  objectType: 2
   currentInteraction: 0
   radius: 0.5
   textDisplay: {fileID: 0}
