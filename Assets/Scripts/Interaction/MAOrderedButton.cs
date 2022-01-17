@@ -2,18 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MAOrderedButton : MonoBehaviour {
+public class MAOrderedButton : MAButton {
     public int order;
-
-    public MeshRenderer buttonRenderer;
-
-    public Material defaultMaterial;
-    public Material pressedMaterial;
-
-
-    private bool isPressed = false;
-
-    private bool characterInReach = false;
 
     private MAOrderedButtonRiddleManager riddleManager;
 
@@ -21,57 +11,17 @@ public class MAOrderedButton : MonoBehaviour {
         this.riddleManager = this.transform.parent.GetComponent<MAOrderedButtonRiddleManager>();
     }
 
-    // Update is called once per frame
-    void Update() {
 
-        if (this.isPressed) {
-            return;
-        }
+    public override void SetPressed() {
 
-        if (this.characterInReach) {
-
-            if (Input.GetKeyUp(KeyCode.E)) {
-                // this.isPressed = !this.isPressed;
-                this.isPressed = true;
-                this.SetState(this.isPressed);
-            }
-        }
-    }
-
-    void OnTriggerStay(Collider characterCollider) {
-        this.characterInReach = true;
-    }
-
-    void OnTriggerExit(Collider characterCollider) {
-        this.characterInReach = false;
-    }
-
-    void SetState(bool value) {
-        if (value) {
-            this.SetPressed();
-        }
-        else {
-            this.SetDefault();
-        }
-    }
-
-    void SetPressed() {
-
-        this.isPressed = true;
-
-        this.buttonRenderer.material = this.pressedMaterial;
+        base.SetPressed();
 
         this.riddleManager.PressedButtonIndex(this.order);
     }
 
-    void SetDefault() {
-        this.isPressed = false;
-        this.buttonRenderer.material = this.defaultMaterial;
-    }
+    public override void Reset() {
 
-    public void Reset() {
-
-        Debug.Log($"reset button nr.:{this.order}");
+        base.Reset();
 
         this.SetDefault();
     }
