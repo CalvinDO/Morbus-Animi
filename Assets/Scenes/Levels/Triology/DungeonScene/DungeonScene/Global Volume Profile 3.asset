@@ -19,23 +19,23 @@ MonoBehaviour:
     m_Value: 2
   contrast:
     m_OverrideState: 1
-    m_Value: 69
+    m_Value: -31
     min: -100
     max: 100
   colorFilter:
     m_OverrideState: 1
-    m_Value: {r: 1, g: 1, b: 1, a: 1}
+    m_Value: {r: 0.6320754, g: 0.6320754, b: 0.6320754, a: 1}
     hdr: 1
     showAlpha: 0
     showEyeDropper: 1
   hueShift:
     m_OverrideState: 1
-    m_Value: 5
+    m_Value: 0
     min: -180
     max: 180
   saturation:
     m_OverrideState: 1
-    m_Value: 21
+    m_Value: -100
     min: -100
     max: 100
 --- !u!114 &-7492676422806669305
@@ -85,7 +85,7 @@ MonoBehaviour:
     m_Value: 0.05
     min: 0
     max: 0.2
---- !u!114 &-4008722422291404280
+--- !u!114 &-4941207891828270916
 MonoBehaviour:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
@@ -94,34 +94,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c5e1dc532bcb41949b58bc4f2abfbb7e, type: 3}
-  m_Name: LensDistortion
+  m_Script: {fileID: 11500000, guid: 5485954d14dfb9a4c8ead8edb0ded5b1, type: 3}
+  m_Name: LiftGammaGain
   m_EditorClassIdentifier: 
   active: 1
   m_AdvancedMode: 0
-  intensity:
+  lift:
+    m_OverrideState: 0
+    m_Value: {x: 1, y: 1, z: 1, w: 0.18819499}
+  gamma:
     m_OverrideState: 1
-    m_Value: -0.52
-    min: -1
-    max: 1
-  xMultiplier:
+    m_Value: {x: 1, y: 1, z: 1, w: 0.17108639}
+  gain:
     m_OverrideState: 1
-    m_Value: 0.25
-    min: 0
-    max: 1
-  yMultiplier:
-    m_OverrideState: 1
-    m_Value: 0.07
-    min: 0
-    max: 1
-  center:
-    m_OverrideState: 1
-    m_Value: {x: 0.5, y: 0.5}
-  scale:
-    m_OverrideState: 1
-    m_Value: 1.14
-    min: 0.01
-    max: 5
+    m_Value: {x: 1, y: 1, z: 1, w: 0.03421728}
 --- !u!114 &-3462791432097327239
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -138,7 +124,7 @@ MonoBehaviour:
   m_AdvancedMode: 0
   temperature:
     m_OverrideState: 1
-    m_Value: -28
+    m_Value: -40
     min: -100
     max: 100
   tint:
@@ -166,7 +152,7 @@ MonoBehaviour:
     min: 0
   intensity:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 0.22
     min: 0
   scatter:
     m_OverrideState: 1
@@ -188,7 +174,7 @@ MonoBehaviour:
     m_Value: 1
   skipIterations:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 4
     min: 0
     max: 16
   dirtTexture:
@@ -213,13 +199,13 @@ MonoBehaviour:
   components:
   - {fileID: -7492676422806669305}
   - {fileID: -8149540853218469951}
-  - {fileID: 4168657534898912523}
+  - {fileID: -4941207891828270916}
   - {fileID: -7268126775163257615}
   - {fileID: -2303813542931258505}
   - {fileID: 6780526354268599377}
   - {fileID: 124958982321483873}
   - {fileID: -3462791432097327239}
-  - {fileID: -4008722422291404280}
+  - {fileID: 1502480048963336202}
   - {fileID: 5556322041141044056}
 --- !u!114 &124958982321483873
 MonoBehaviour:
@@ -240,11 +226,11 @@ MonoBehaviour:
     m_Value: 1
   gaussianStart:
     m_OverrideState: 1
-    m_Value: 6
+    m_Value: 2
     min: 0
   gaussianEnd:
     m_OverrideState: 1
-    m_Value: 10
+    m_Value: 5
     min: 0
   gaussianMaxRadius:
     m_OverrideState: 1
@@ -253,7 +239,7 @@ MonoBehaviour:
     max: 1.5
   highQualitySampling:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 1
   focusDistance:
     m_OverrideState: 0
     m_Value: 10
@@ -283,7 +269,7 @@ MonoBehaviour:
     m_Value: 0
     min: -180
     max: 180
---- !u!114 &4168657534898912523
+--- !u!114 &1502480048963336202
 MonoBehaviour:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
@@ -292,20 +278,34 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5485954d14dfb9a4c8ead8edb0ded5b1, type: 3}
-  m_Name: LiftGammaGain
+  m_Script: {fileID: 11500000, guid: c5e1dc532bcb41949b58bc4f2abfbb7e, type: 3}
+  m_Name: LensDistortion
   m_EditorClassIdentifier: 
   active: 1
   m_AdvancedMode: 0
-  lift:
+  intensity:
     m_OverrideState: 0
-    m_Value: {x: 1, y: 0.9959345, z: 0.9961427, w: -0.042771537}
-  gamma:
-    m_OverrideState: 1
-    m_Value: {x: 1, y: 1, z: 1, w: 0.15452136}
-  gain:
-    m_OverrideState: 1
-    m_Value: {x: 1, y: 0.87700486, z: 0.8806742, w: 0.21358615}
+    m_Value: 0
+    min: -1
+    max: 1
+  xMultiplier:
+    m_OverrideState: 0
+    m_Value: 1
+    min: 0
+    max: 1
+  yMultiplier:
+    m_OverrideState: 0
+    m_Value: 1
+    min: 0
+    max: 1
+  center:
+    m_OverrideState: 0
+    m_Value: {x: 0.5, y: 0.5}
+  scale:
+    m_OverrideState: 0
+    m_Value: 1
+    min: 0.01
+    max: 5
 --- !u!114 &5556322041141044056
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -322,7 +322,7 @@ MonoBehaviour:
   m_AdvancedMode: 0
   intensity:
     m_OverrideState: 1
-    m_Value: 0.211
+    m_Value: 0.331
     min: 0
     max: 1
 --- !u!114 &6780526354268599377
@@ -350,12 +350,12 @@ MonoBehaviour:
     m_Value: {x: 0.5, y: 0.5}
   intensity:
     m_OverrideState: 1
-    m_Value: 0.444
+    m_Value: 0.582
     min: 0
     max: 1
   smoothness:
     m_OverrideState: 1
-    m_Value: 0.673
+    m_Value: 0.799
     min: 0.01
     max: 1
   rounded:
