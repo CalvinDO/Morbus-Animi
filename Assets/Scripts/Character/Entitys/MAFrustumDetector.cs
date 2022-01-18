@@ -116,7 +116,7 @@ public class MAFrustumDetector : MonoBehaviour {
         if (this.entityMover.isStationary) {
             this.KillCharacter();
         }
-        
+
 
         float distance = Vector3.Distance(this.transform.position, hit.point);
         if (distance < this.catchDistance) {
@@ -131,7 +131,7 @@ public class MAFrustumDetector : MonoBehaviour {
     private void KillCharacter() {
         this.light.color = Color.red;
         this.characterController.Die();
-        this.entityMover.LostCharacter();
+        this.ReturnToRoaming();
     }
 
 
