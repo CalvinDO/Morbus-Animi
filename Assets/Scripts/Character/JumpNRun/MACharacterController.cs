@@ -1083,7 +1083,16 @@ public class MACharacterController : MonoBehaviour {
 
 
     public void Die() {
-        this.transform.position = Vector3.zero;
+
+        Transform currentCheckpoint = GameObject.FindObjectOfType<MACheckpointManager>().currentCheckpoint;
+
+        if (currentCheckpoint == null) {
+            this.transform.position = Vector3.zero;
+            this.physicalBody.transform.rotation = Quaternion.identity;
+            return;
+        }
+        this.transform.position = currentCheckpoint.position;
+        this.physicalBody.transform.rotation = currentCheckpoint.rotation;
     }
 }
 
