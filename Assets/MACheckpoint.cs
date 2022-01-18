@@ -5,6 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(Collider))]
 public class MACheckpoint : MonoBehaviour {
 
+
    
     void Start() {
 

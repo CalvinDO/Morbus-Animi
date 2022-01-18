@@ -14,6 +14,7 @@ public class MAFanSpinner : MonoBehaviour {
     public MAAxis axis;
     public bool isSpinning = true;
     public WindZone windZone;
+    public MAWindZone MAWindZone;
 
     // Start is called before the first frame update
     void Start() {
@@ -50,5 +51,6 @@ public class MAFanSpinner : MonoBehaviour {
     public void Stop() {
         this.isSpinning = false;
         this.windZone.windMain = 0;
+        this.MAWindZone.isRunnning = false;
     }
 }
