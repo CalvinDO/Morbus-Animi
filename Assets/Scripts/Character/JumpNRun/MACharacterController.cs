@@ -238,6 +238,8 @@ public class MACharacterController : MonoBehaviour {
 
     private bool isPerformingSoloJumpNRunMove = false;
 
+    public SkinnedMeshRenderer skinnedMeshRenderer;
+
     public bool IsPerformingSoloJumpNRunMove {
         get => this.isPerformingSoloJumpNRunMove;
     }
