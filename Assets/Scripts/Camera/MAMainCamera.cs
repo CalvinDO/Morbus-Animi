@@ -40,7 +40,7 @@ public class MAMainCamera : MonoBehaviour {
         Vector3 lineCastStart = this.characterController.goalRotator.transform.position;
         Vector3 lineCastEnd = this.characterController.goalRotator.transform.position + this.characterController.goalRotator.transform.rotation * this.cameraOffset;
 
-        if (Physics.Linecast(lineCastStart, lineCastEnd, out hit, mask)) {
+        if (Physics.SphereCast(lineCastStart, 0.2f, lineCastEnd - lineCastStart, out hit, Vector3.Distance(lineCastStart, lineCastEnd),mask)) {
             this.characterController.thirdPCameraGoal.localPosition = new Vector3(0, 0, -Vector3.Distance(this.characterController.goalRotator.transform.position, hit.point));
         }
         else {
