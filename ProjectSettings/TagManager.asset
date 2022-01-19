@@ -38,8 +38,8 @@ TagManager:
   - MA_Checkpoint
   - MA_WindZone
   - MA_Camera
-  - 
-  - 
+  - MA_Button
+  - MA_OnlyCharacterCollision
   - 
   - 
   - 

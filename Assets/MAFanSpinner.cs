@@ -15,6 +15,8 @@ public class MAFanSpinner : MonoBehaviour {
     public bool isSpinning = true;
     public WindZone windZone;
     public MAWindZone MAWindZone;
+    public AudioSource[] audioSources;
+
 
     // Start is called before the first frame update
     void Start() {
@@ -52,5 +54,10 @@ public class MAFanSpinner : MonoBehaviour {
         this.isSpinning = false;
         this.windZone.windMain = 0;
         this.MAWindZone.isRunnning = false;
+
+        foreach (AudioSource audioSource in this.audioSources) {
+            audioSource.Stop();
+        }
+
     }
 }

@@ -5730,6 +5730,8 @@ MonoBehaviour:
   rightHand: {fileID: 4901265531746696706}
   hangEdgeDistance: 0.166
   handSpreadDistance: 0.202
+  audioSource: {fileID: 8803462353487072060}
+  hangClip: {fileID: 8300000, guid: 800220e8a2ddda743a304bd554df7eea, type: 3}
 --- !u!1 &7522522031901407477
 GameObject:
   m_ObjectHideFlags: 0

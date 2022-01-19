@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 
-public class MAFootSteps : MonoBehaviour
-{
+public class MAFootSteps : MonoBehaviour {
     [SerializeField]
     private AudioClip[] walkClips;
     [SerializeField]
@@ -12,35 +11,29 @@ public class MAFootSteps : MonoBehaviour
     private AudioClip[] landClips;
     [SerializeField]
     private AudioClip[] liftClips;
-    
+
 
     private AudioSource audioSource;
     private TerrainDetector terrainDetector;
 
-    private void Awake()
-    {
+    private void Awake() {
         this.audioSource = GetComponent<AudioSource>();
         //this.terrainDetector = new TerrainDetector();
     }
 
-    private void Step()
-    {
+    private void Step() {
 
-        Debug.Log("step!");
         AudioClip clip = GetRandomWalkClip();
         audioSource.PlayOneShot(clip);
     }
 
-    private void Jump()
-    {
+    private void Jump() {
 
-        Debug.Log("jump!");
         AudioClip clip = GetRandomJumpClip();
         audioSource.PlayOneShot(clip);
     }
 
-    private AudioClip GetRandomWalkClip()
-    {
+    private AudioClip GetRandomWalkClip() {
 
         if (this.walkClips.Length <= 0) {
             Debug.LogWarning("No Stone Clips assigned!");
@@ -48,12 +41,11 @@ public class MAFootSteps : MonoBehaviour
         }
 
 
-        
-        return this.walkClips[UnityEngine.Random.Range(0, walkClips.Length)];    
+
+        return this.walkClips[UnityEngine.Random.Range(0, walkClips.Length)];
     }
 
-        private AudioClip GetRandomJumpClip()
-    {
+    private AudioClip GetRandomJumpClip() {
 
         if (this.jumpClips.Length <= 0) {
             Debug.LogWarning("No Stone Clips assigned!");
@@ -61,19 +53,18 @@ public class MAFootSteps : MonoBehaviour
         }
 
 
-        
-        return this.jumpClips[UnityEngine.Random.Range(0, jumpClips.Length)];    
+
+        return this.jumpClips[UnityEngine.Random.Range(0, jumpClips.Length)];
     }
-    private void Hang()
-    {
+
+    private void Hang() {
 
         Debug.Log("hang!");
         AudioClip clip = GetRandomHangClip();
         audioSource.PlayOneShot(clip);
     }
 
-    private AudioClip GetRandomHangClip()
-    {
+    private AudioClip GetRandomHangClip() {
 
         if (this.hangClips.Length <= 0) {
             Debug.LogWarning("No Stone Clips assigned!");
@@ -81,19 +72,16 @@ public class MAFootSteps : MonoBehaviour
         }
 
 
-        
-        return this.hangClips[UnityEngine.Random.Range(0, hangClips.Length)];    
-    }
-        private void Land()
-    {
 
-        Debug.Log("land!");
+        return this.hangClips[UnityEngine.Random.Range(0, hangClips.Length)];
+    }
+    private void Land() {
+
         AudioClip clip = GetRandomLandClip();
         audioSource.PlayOneShot(clip);
     }
 
-    private AudioClip GetRandomLandClip()
-    {
+    private AudioClip GetRandomLandClip() {
 
         if (this.landClips.Length <= 0) {
             Debug.LogWarning("No Stone Clips assigned!");
@@ -101,19 +89,17 @@ public class MAFootSteps : MonoBehaviour
         }
 
 
-        
-        return this.landClips[UnityEngine.Random.Range(0, landClips.Length)];    
+
+        return this.landClips[UnityEngine.Random.Range(0, landClips.Length)];
     }
-            private void Lift()
-    {
+    private void Lift() {
 
         Debug.Log("lift!");
         AudioClip clip = GetRandomLiftClip();
         audioSource.PlayOneShot(clip);
     }
 
-    private AudioClip GetRandomLiftClip()
-    {
+    private AudioClip GetRandomLiftClip() {
 
         if (this.liftClips.Length <= 0) {
             Debug.LogWarning("No Stone Clips assigned!");
@@ -121,7 +107,7 @@ public class MAFootSteps : MonoBehaviour
         }
 
 
-        
-        return this.liftClips[UnityEngine.Random.Range(0, liftClips.Length)];    
+
+        return this.liftClips[UnityEngine.Random.Range(0, liftClips.Length)];
     }
 }
