@@ -1,42 +1,208 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>The Official Morbus-Animi Wiki</title>
-  </head>
 
-  <body>
-    <h1>The Official Morbus-Animi Wiki</h1>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Morbus Animi</title>
+    <link rel="stylesheet" href="index.css">
+</head>
 
-    <ul>
-      <li>
-        <a href="Wiki/Documentations/MazerGeneratorDoku.html">Documentations</a>
-      </li>
-      <li>
-        <a href="../Morbus-Animi/Wiki/Sprint-Reports/">Sprint-Reports</a>
-      </li>
-      <li>
-        <a href="Wiki/Guidelines/guidelines.html">Guidelines</a>
-      </li>
-      <li>
-        <a href="Wiki/Story/story.html">Story</a>
-      </li>
-      <li>
-        <a href="Wiki/Protokolle/protokolle.html">Protocols</a>
-      </li>
-      <li>
-        <a href="../Morbus-Animi/Wiki/Mechanics/mechanics.html">Mechanics</a>
-      </li>
-      <li>
-        <a href="../Morbus-Animi/Wiki/Assets/index.html">Asset Scales</a>
-      </li>
-    </ul>
+<body>
+    <div class="main">
+        <div class="headline">
+            <h1>Morbus Animi - Norah's Tale</h1>
+        </div>
 
-    <img
-      src="Wiki/Roadmap.png"
-      style="max-width: 700px; max-height: 268px; margin-top: 30px"
-    />
-  </body>
+        <div class="flex img_large img_large_left">
+            <div id="logo_container" class="img_big">
+                <img id="logo2" src="Images/malogo2.png">
+            </div>
+            <div class="text_small">
+                <div>
+                    <h2>About</h2>
+                    <p>Morbus Animi ist unsere gemeinsame Projektarbeit im 4. Bzw. 5. Fachsemester unseres
+                        Bachelor-Studiums der Studiengänge Online-Medien, Medienkonzeption und Medieninformatik. Schon
+                        zu Beginn unseres Projektes war uns klar, dass wir ein Computerspiel entwickeln wollten, das
+                        Horror in einer etwas ungewohnteren Art vermittelt als es klassische Genre-Vertreter machen.
+                        <br><br>
+                        In den ersten Wochen der Projektarbeit begannen wir Ideen zu sammeln, wie es möglich ist, Horror
+                        zu generieren, ohne dabei auf zu viele stereotypische Hilfsmittel wie Jump Scares
+                        zurückzugreifen. Hier kristallisierte sich die Grundidee psychischer Krankheiten heraus, an
+                        denen unser Protagonist erkrankt ist. Diese sind, gerade durch die anhaltende Pandemie, in der
+                        Gesellschaft präsent ohne für Außenstehende sichtbar zu sein.
+
+                    </p>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="flex text_only">
+            <h2>Grundidee</h2>
+            <p>Da jeder der am Projekt Beteiligten gute Gedanken einbrachte, die wir nicht verwerfen wollten, entstand
+                zu Beginn der Konzeptionsphase die Idee, dass ein Hauptcharakter mehrere verschiedene psychische
+                Störungen in sich trägt und mit diesen seinen Alltag bestreiten muss. Allerdings merkten wir nach
+                einiger Zeit, dass mehrere Punkte gegen dieses Konzept sprachen und der nötige Respekt vor diesen Themen
+                nicht gewahrt werden kann, wenn man eben jene Krankheiten nach Belieben hinzufügt oder entfernt.
+                An dieser Stelle wurden das Grundkonzept von Morbus Animi und die Rollenaufteilung nochmal neu
+                erarbeitet. In diesem Zuge haben wir uns als Gruppe geeinigt, dass Story und Spielmechanik aus nur einer
+                Feder kommen sollten, da wir im ersten Anlauf die Erfahrung machten, dass zu viele Ideen ohne klaren
+                roten Faden das Konzept überladen. An diesem Punkt begann unser Game Designer die Geschichte um den
+                neuen Hauptcharakter Norah zu erstellen und legte fest, dass nur eine psychische Krankheit im großen
+                Ausmaß thematisiert werden sollte, dafür aber mit dem nötigen Respekt und gut aufgearbeitet.
+                <br>
+                <br>
+                Um zu verstehen, wie sich das Leben mit Depressionen anfühlt, haben wir sowohl ein Gruppenmitglied als
+                auch mehrere Freunde und Bekannte mit der Diagnose Depression zu ihren Geschichten befragt.
+                Dabei hörten wir immer wieder ähnliche Schilderungen: Hilflosigkeit gepaart mit extremer
+                Energielosigkeit. Gefangen in dem gleichen, kräftezehrenden Kreislauf, ohne sichtbaren Ausweg.
+                Verloren in den eigenen, destruktiven Gedanken. Die komplette Abwesenheit von Freude, die einem nach und
+                nach alle Hobbys, Freunde und Interessen raubt.
+
+                Mit Norahs Geschichte wollen wir diese Schilderungen lebendig werden lassen und in Morbus Animi eine
+                andere Art von Horror kreieren.
+            </p>
+        </div>
+
+        <div class="flex img_large img_large_right">
+            <div class="img_big">
+                <img src="Images/room_norah2.png">
+            </div>
+            <div class="text_small">
+                <div>
+                    <h2>Art</h2>
+                    <p>Für den Art-Style haben wir uns für den Low-Poly Stil entschieden. Wir wollten sehen, wie wir den
+                        niedlichen, einfachen Low-Poly Look in einem Horror-Spiel unterbringen und mit den Gegensätzen
+                        spielen können.
+                        Bei der 3D-Software haben wir uns für Blender entschieden, da wir alle dank Computergrafik und
+                        3D-Modellierung bereits aus dem zweiten Semester Vorwissen hatten.
+                        Charakteristisch für die Assets ist, dass gerade Kanten verzerrt wurden. Damit wird auch nochmal
+                        sichtbar, dass die Modelle über extrem wenige Polys verfügen. Die Proportionen sind leicht
+                        übertrieben. Nicht so, dass es gleich auffällt, denn die Gegenstände sollten sich zwar
+                        einerseits vertraut, andererseits aber auch nicht ganz richtig anfühlen. Genauso wie Norah soll
+                        sich auch der Spieler in den Gängen unwohl fühlen. Dieser Effekt steigert sich, je schlechter
+                        Norahs Zustand wird. </p>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- <div class="flex img_small img_small_right">
+            <div class="img_tiny">
+                <img src="assets.png">
+            </div>
+            <div class="text_big">
+                <div>
+                    <h2>Assets</h2>
+                    <p>Die Assets dienen nicht nur zur Dekoration, sondern auch als Interaktionsmöglichkeit während der
+                        Jump & Run Passagen. Wir haben uns überlegt, welche Interaktionen mit welchem Gegenstand am
+                        meisten Sinn ergeben – dabei wollten wir zu Beginn möglichst nah an den echten Gegenständen
+                        bleiben. So dienen verschiedene Regale zum Klettern, Couchtische und ein Kinderzelt zum Sliden
+                        oder eine Kommode zum Hochziehen.
+                        Für die verschiedenen Themes haben wir dabei jeweils verschiedene Sets von Assets gestaltet,
+                        immer mit dem Jump & Run im Hinterkopf. Heraus kam eine beachtliche Sammlung an Assets für ein
+                        Haus, einen Garten und ein Dungeon, wobei bei letzterem die Hindernisse direkt in die Umgebung
+                        eingefügt wurden, weil hier der Verlauf des Levels linearer ist.
+
+                    </p>
+                </div>
+
+            </div>
+        </div> -->
+
+        <div class="flex img_row">
+            <img src="Images/norah_room.png">
+            <img src="Images/room_norah1.png">
+            <img src="Images/room_norah3.png">
+            <img src="Images/room_norah2.png">
+        </div>
+
+        <div class="flex text_only">
+            <h2>Labyrinth</h2>
+            <p>Neben den Assets haben wir auch die Labyrinthe gestaltet, aus denen Norah zu entkommen versucht. Dabei
+                haben wir die Level entsprechend einem eigenen Theme designt und mit Assets ausgestattet. In den Levels
+                wechseln sich drei Bereiche ab: Jump & Run, Verfolgung und Rätsel.
+                Für die Jump & Run Bereiche haben wir wie bereits erwähnt viele verschiedene Assets angefertigt, die als
+                Hindernisse dienen und mit den verschiedenen Skills von Norah überwunden werden können. Die Bereiche, in
+                denen Norah von Evil Norah verfolgt wird, sind hingegen deutlich leerer. Es gibt also kaum
+                Möglichkeiten, sich zu verstecken und wieder ist Norah schutzlos ausgeliefert.
+                In den Rätselbereichen werden muss der Spieler Rätsel lösen, um im Spiel weiterzukommen. Hinweise und
+                benötigte Gegenstände können aber im ganzen Labyrinth versteckt sein.
+            </p>
+        </div>
+
+        <div class="flex img_row">
+            <img src="Images/labrinth_oben.jpg">
+            <img src="Images/forest2.png">
+            <img src="Images/labrinth_dungeon.jpg">
+            <img src="Images/menu_eevee.png">
+        </div>
+
+
+
+        <div class="flex img_large img_large_right">
+            <div class="img_big">
+                <img src="Images/character01.png">
+            </div>
+            <div class="text_small">
+                <div>
+                    <h2>Character</h2>
+                    <p>Als Collectables finden sich in den Labyrinthen immer wieder Tagebuchseiten, die mit Zeichnungen
+                        von Norah illustriert sind. Hier soll dem Spieler Erklärung zum Geschehen gegeben und die
+                        Geschichte von Norah geschildert werden. Und auch von wem Norah verfolgt wird: Evil Norah, einer
+                        Personifizierung ihrer Depression. Die Zeichnungen wurden von einer Person im Projekt
+                        angefertigt, die selbst in ihrer Vergangenheit an Depressionen erkrankt war. Einige Sachverhalte
+                        wurden zur Dramatisierung überspitzt dargestellt. </p>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="flex img_small img_small_left">
+            <div class="img_tiny">
+                <img src="Images/tagebuch.png">
+            </div>
+            <div class="text_big">
+                <h2>Tagebuchseiten</h2>
+                <p>Als Collectables finden sich in den Labyrinthen immer wieder Tagebuchseiten, die mit Zeichnungen von
+                    Norah illustriert sind. Hier soll dem Spieler Erklärung zum Geschehen gegeben und die Geschichte von
+                    Norah geschildert werden. Und auch von wem Norah verfolgt wird: Evil Norah, einer Personifizierung
+                    ihrer Depression. Die Zeichnungen wurden von einer Person im Projekt angefertigt, die selbst in
+                    ihrer Vergangenheit an Depressionen erkrankt war. Einige Sachverhalte wurden zur Dramatisierung
+                    überspitzt dargestellt.
+                </p>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+       <!--  <div class="flex img_only">
+            <img src="img5.jpg">
+        </div>
+
+
+
+        <div class="flex img_row">
+            <img src="img1.jpg">
+            <img src="img2.jpg">
+            <img src="img3.jpg">
+            <img src="img4.jpg">
+        </div> -->
+
+
+    </div>
+</body>
+
 </html>

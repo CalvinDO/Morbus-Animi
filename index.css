@@ -1,0 +1,166 @@
+:root {
+    --red: #89483c;
+    --darkblue: #212331;
+    --white: #F2F2F2;
+    --lightblue: #535e71;
+}
+
+@font-face {
+    font-family: handwriting;
+    src: url(Schriften/Handschrift.ttf);
+}
+
+@font-face {
+    font-family: roboto;
+    src: url(Schriften/Roboto-Thin.ttf);
+}
+
+body {
+    background-color: var(--darkblue);
+    width: 90%;
+    margin: auto;
+    margin-top: 80px;
+}
+
+#logo2 {
+    object-fit: contain;
+}
+
+.img_big#logo_container {
+    background-color: white;
+}
+
+
+
+
+h1, h2, h3 {
+    font-family: handwriting;
+    color: var(--red);
+}
+
+h1 {
+    font-size: 45px;
+}
+
+h2 {
+    font-size: 35px;
+}
+
+p {
+    font-family: roboto;
+    line-height: 1.4;
+    color: var(--black)
+}
+
+img {
+    max-width: 100%;
+}
+
+.flex {
+    display: flex;
+    flex-direction: row;
+    margin: 50px 0;
+}
+
+
+
+
+.flex.img_large_right, .flex.img_small_right {
+    flex-direction: row-reverse;
+}
+
+.img_large .img_big {
+    width: 70%;
+}
+
+.img_large .img_big img {
+    height: 100%;
+    object-fit: cover;
+}
+
+.img_large .text_small {
+    width: 30%;
+    display: flex;
+    align-items: center;
+
+    padding: 50px 70px;
+
+    background-color: var(--lightblue);
+    color: var(--white);
+}
+
+.img_large .text_small h1,
+.img_large .text_small h2,
+.img_large .text_smallh3 {
+    color: var(--white);
+}
+
+
+
+.img_small .img_tiny {
+    width: 30%;
+}
+
+.img_small .text_big {
+    width: 70%;
+    padding: 50px 70px;
+
+    background-color: var(--white);
+}
+
+.img_small .img_tiny img {
+    height: 100%;
+    object-fit: cover;
+}
+
+
+
+.img_only img {
+    width: 100%;
+    object-fit: cover;
+}
+
+
+
+.flex.text_only {
+    flex-direction: column;
+    background-color: var(--white);
+    padding: 50px 70px;
+}
+
+.img_row img {
+    width: 25%;
+    object-fit: cover;
+}
+
+@media (max-width: 1400px) {
+
+    .img_large_left,
+    .flex.img_large_right,
+    .flex.img_small_left {
+        flex-direction: column;
+    }
+
+
+    .img_large .text_small,
+    .img_small .text_big {
+        width: unset;
+        margin-top: 50px;
+
+    }
+
+    .img_large .img_big,
+    .img_small .img_tiny {
+        width: 100%;
+    }
+
+    .flex.img_row {
+        flex-wrap: wrap;
+    }
+
+    .img_row img {
+        width: 25%;
+        flex: 1 0 50%;
+        object-fit: cover;
+    }
+}
