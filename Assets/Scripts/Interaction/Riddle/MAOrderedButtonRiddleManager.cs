@@ -7,12 +7,18 @@ public class MAOrderedButtonRiddleManager : MonoBehaviour {
 
     private int currentIndex = 0;
 
-    public int maxIndex;
+    private int maxIndex;
 
     public MARiddleDoor riddleDoor;
 
     void Start() {
         this.riddleButtons = this.transform.GetComponentsInChildren<MAOrderedButton>();
+
+        this.maxIndex = this.riddleButtons.Length;
+
+        for (int index = 0; index < this.maxIndex; index++) {
+            this.riddleButtons[index].order = index;
+        }
     }
 
     // Update is called once per frame

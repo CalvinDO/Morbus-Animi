@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class MAOrderedButton : MAButton {
+
     public int order;
 
     private MAOrderedButtonRiddleManager riddleManager;
