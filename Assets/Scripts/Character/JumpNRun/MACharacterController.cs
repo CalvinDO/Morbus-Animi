@@ -246,6 +246,9 @@ public class MACharacterController : MonoBehaviour {
 
     public MAJackUpper jackUpper;
 
+    [Range(0, 10)]
+    public float climbSpeed;
+
     public void Start() {
 
         this.currentXRotation = 0;
@@ -277,10 +280,18 @@ public class MACharacterController : MonoBehaviour {
         //this.ManageRaycastInteraction();
 
 
+        this.ManageSuicide();
+
 
         this.framesTillStart++;
         this.millisecondsSinceStart += Time.deltaTime;
         this.scaledTimeSinceStart += Time.deltaTime;
+    }
+
+    private void ManageSuicide() {
+        if (Input.GetKeyUp(KeyCode.Backspace)) {
+            this.Die();
+        }
     }
 
     private void Awake() {

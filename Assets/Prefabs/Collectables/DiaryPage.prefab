@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8613837908406768237}
   - component: {fileID: 8296798261642827105}
-  - component: {fileID: 674615065690944537}
+  - component: {fileID: 6517351599977837574}
   m_Layer: 0
   m_Name: DiaryPage
   m_TagString: Untagged
@@ -52,8 +52,8 @@ MonoBehaviour:
   textDisplay: {fileID: 0}
   hoverTextObject: {fileID: 0}
   picture: {fileID: 0}
---- !u!65 &674615065690944537
-BoxCollider:
+--- !u!135 &6517351599977837574
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -63,7 +63,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Radius: 1.37
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &3894710729528634525
 PrefabInstance:

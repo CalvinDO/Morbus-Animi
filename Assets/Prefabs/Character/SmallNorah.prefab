@@ -5114,6 +5114,7 @@ MonoBehaviour:
   hoverTextObject: {fileID: 1022157614349243134}
   skinnedMeshRenderer: {fileID: 4833867882532533859}
   jackUpper: {fileID: 2123240168853162328}
+  climbSpeed: 6.23
 --- !u!54 &1402342497931596602
 Rigidbody:
   m_ObjectHideFlags: 0
