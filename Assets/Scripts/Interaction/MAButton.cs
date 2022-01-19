@@ -11,23 +11,24 @@ public class MAButton : MonoBehaviour {
     public Material pressedMaterial;
     public MeshRenderer buttonRenderer;
 
+
     private bool characterInReach = false;
-    private bool isPressed = false;
+
+    [HideInInspector]
+    public bool isPressed = false;
 
 
     void Update() {
-
-        if (this.isPressed) {
-            return;
-        }
 
         if (this.characterInReach) {
 
             if (Input.GetKeyUp(KeyCode.E)) {
 
+                Debug.Log("press press");
                 if (!this.staysPressed) {
 
                     this.isPressed = !this.isPressed;
+                    
                 }
                 else {
                     this.isPressed = true;
@@ -67,16 +68,15 @@ public class MAButton : MonoBehaviour {
 
     public virtual void SetDefault() {
 
+        Debug.Log("default");
+
         this.isPressed = false;
 
-    
-
+   
         this.buttonRenderer.material = this.defaultMaterial;
-
     }
 
     public virtual void Reset() {
-
 
         this.SetDefault();
     }

@@ -11,11 +11,7 @@ public class MARiddleDoor : MonoBehaviour {
 
     }
 
-    // Update is called once per frame
-    void Update() {
-
-    }
-
+   
     public void Open() {
         this.transform.Rotate(new Vector3(0, this.angle));
 

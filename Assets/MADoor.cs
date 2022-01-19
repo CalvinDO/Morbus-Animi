@@ -12,6 +12,9 @@ public class MADoor : MonoBehaviour {
 
     private bool isOpen = false;
 
+    public MAItem requiredItem;
+
+
     void Start() {
 
     }
@@ -26,6 +29,8 @@ public class MADoor : MonoBehaviour {
         if (this.isOpen) {
             return;
         }
+
+        
 
         Vector3 axisVector = Vector3.up;
 
