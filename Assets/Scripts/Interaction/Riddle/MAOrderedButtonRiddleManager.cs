@@ -9,7 +9,7 @@ public class MAOrderedButtonRiddleManager : MonoBehaviour {
 
     private int maxIndex;
 
-    public MARiddleDoor riddleDoor;
+    public MADoor riddleDoor;
 
     void Start() {
         this.riddleButtons = this.transform.GetComponentsInChildren<MAOrderedButton>();
@@ -46,7 +46,7 @@ public class MAOrderedButtonRiddleManager : MonoBehaviour {
 
         this.ResetButtons();
 
-        this.riddleDoor.Close();
+       // this.riddleDoor.Close();
     }
 
     void WinRiddle() {

@@ -9,7 +9,7 @@ public class MAOrderedLeverRiddleManager : MonoBehaviour {
 
     private int maxIndex;
 
-    public MARiddleDoor riddleDoor;
+    public MADoor riddleDoor;
 
     void Start() {
 
@@ -44,7 +44,6 @@ public class MAOrderedLeverRiddleManager : MonoBehaviour {
 
         this.ResetLevers();
 
-        this.riddleDoor.Close();
     }
 
     void WinRiddle() {
