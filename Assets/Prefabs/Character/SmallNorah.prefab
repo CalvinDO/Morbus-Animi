@@ -3225,6 +3225,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8318163298490157999}
+  - component: {fileID: 3873781577023686327}
   m_Layer: 0
   m_Name: spine.006
   m_TagString: Untagged
@@ -3246,6 +3247,14 @@ Transform:
   m_Father: {fileID: 706560508102225514}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 6.3765473, y: 2.5319638, z: 1.4690096}
+--- !u!81 &3873781577023686327
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3756723155541230866}
+  m_Enabled: 1
 --- !u!1 &3797302740542893840
 GameObject:
   m_ObjectHideFlags: 0
@@ -7335,14 +7344,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 703dff98af9fe0c4e9b3a2b1d649f5ab, type: 3}
---- !u!4 &1022157614763165316 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1928384564670138104, guid: 703dff98af9fe0c4e9b3a2b1d649f5ab, type: 3}
-  m_PrefabInstance: {fileID: 1508021309926916220}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1022157614763165319 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1928384564670138107, guid: 703dff98af9fe0c4e9b3a2b1d649f5ab, type: 3}
+  m_PrefabInstance: {fileID: 1508021309926916220}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1022157614763165316 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1928384564670138104, guid: 703dff98af9fe0c4e9b3a2b1d649f5ab, type: 3}
   m_PrefabInstance: {fileID: 1508021309926916220}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &1022157614349243134 stripped
@@ -7411,7 +7420,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: MainCamera
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7160471603860523091, guid: d970cd0b087a81c4d9c211fa2166d1e7, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: d970cd0b087a81c4d9c211fa2166d1e7, type: 3}
 --- !u!20 &9073363406643043258 stripped
 Camera:
