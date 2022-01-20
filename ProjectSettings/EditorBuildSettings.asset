@@ -12,8 +12,8 @@ EditorBuildSettings:
     path: Assets/Scenes/Levels/Triology/MainHallwayScene/MainHallwayScene.unity
     guid: 14846301b410ddf46bfd06b0c53c673f
   - enabled: 1
-    path: Assets/Scenes/Levels/Triology/Cave/CaveScene.unity
-    guid: ca4df9b30449e33468971da27bb5d265
+    path: Assets/Scenes/Levels/Triology/DungeonScene/DungeonScene.unity
+    guid: 09abf622445d26c448b2f31d3048ace2
   - enabled: 1
     path: Assets/Scenes/Levels/Triology/MainHallwayScene/MainHallwayScene 1.unity
     guid: caecfe67aac73384ea725c1e64d2f7b8
