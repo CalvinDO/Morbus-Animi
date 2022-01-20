@@ -130,6 +130,10 @@ public class MAJackUpper : MonoBehaviour {
             return;
         }
 
+        if (!ledgeCandidateCollider.CompareTag("NoJackup")) {
+            return;
+        }
+
         if (this.isAttached) {
             return;
         }
@@ -160,18 +164,12 @@ public class MAJackUpper : MonoBehaviour {
         Vector3 extraMagnitudeXZProject = Vector3.ProjectOnPlane(closestPoint - characterController.transform.position, Vector3.up);
 
 
-
-
-
         Vector3 standingPoint = closestPoint;
         standingPoint += extraMagnitudeXZProject.normalized * this.moveXYExtraMagnitude;
 
 
-
-
         Vector3 sameYCharacterStandingPoint = this.transform.position;
         sameYCharacterStandingPoint.y = standingPoint.y;
-
 
 
 
