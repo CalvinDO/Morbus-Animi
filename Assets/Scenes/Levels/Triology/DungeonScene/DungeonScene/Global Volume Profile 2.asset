@@ -19,11 +19,11 @@ MonoBehaviour:
     m_Value: 1
   gaussianStart:
     m_OverrideState: 1
-    m_Value: 8
+    m_Value: 5
     min: 0
   gaussianEnd:
     m_OverrideState: 1
-    m_Value: 14
+    m_Value: 7
     min: 0
   gaussianMaxRadius:
     m_OverrideState: 1
@@ -32,7 +32,7 @@ MonoBehaviour:
     max: 1.5
   highQualitySampling:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 1
   focusDistance:
     m_OverrideState: 0
     m_Value: 10
@@ -111,7 +111,7 @@ MonoBehaviour:
     m_Value: 2
   contrast:
     m_OverrideState: 1
-    m_Value: 12
+    m_Value: 14
     min: -100
     max: 100
   colorFilter:
@@ -122,12 +122,12 @@ MonoBehaviour:
     showEyeDropper: 1
   hueShift:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: -4
     min: -180
     max: 180
   saturation:
     m_OverrideState: 1
-    m_Value: -18
+    m_Value: -82
     min: -100
     max: 100
 --- !u!114 &-3922817393820512931
@@ -146,7 +146,7 @@ MonoBehaviour:
   m_AdvancedMode: 0
   intensity:
     m_OverrideState: 1
-    m_Value: 0.58
+    m_Value: 1
     min: 0
     max: 1
 --- !u!114 &-3069183550141337011
@@ -293,13 +293,13 @@ MonoBehaviour:
   m_AdvancedMode: 0
   lift:
     m_OverrideState: 1
-    m_Value: {x: 0.95353365, y: 0.957178, z: 1, w: 0}
+    m_Value: {x: 0.97497565, y: 0.93440413, z: 1, w: 0}
   gamma:
     m_OverrideState: 1
-    m_Value: {x: 1, y: 1, z: 1, w: -0.05295676}
+    m_Value: {x: 1, y: 0.98281926, z: 0.99042606, w: -0.01765226}
   gain:
     m_OverrideState: 1
-    m_Value: {x: 1, y: 0.75299364, z: 0.7383108, w: 0.035304494}
+    m_Value: {x: 1, y: 0.75299364, z: 0.7383108, w: -0.31774056}
 --- !u!114 &1022470763135021222
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -316,12 +316,12 @@ MonoBehaviour:
   m_AdvancedMode: 0
   intensity:
     m_OverrideState: 1
-    m_Value: 0.26
+    m_Value: 0.24
     min: -1
     max: 1
   xMultiplier:
     m_OverrideState: 1
-    m_Value: 0.682
+    m_Value: 0.628
     min: 0
     max: 1
   yMultiplier:
@@ -333,8 +333,8 @@ MonoBehaviour:
     m_OverrideState: 1
     m_Value: {x: 0.5, y: 0.5}
   scale:
-    m_OverrideState: 1
-    m_Value: 3.03
+    m_OverrideState: 0
+    m_Value: 2.28
     min: 0.01
     max: 5
 --- !u!114 &1586251158021432144

@@ -398,7 +398,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterController: {fileID: 0}
-  objectType: 0
+  objectType: 2
   currentInteraction: 0
   radius: 0.5
   textDisplay: {fileID: 0}
@@ -465,7 +465,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterController: {fileID: 0}
-  objectType: 0
+  objectType: 2
   currentInteraction: 0
   radius: 0.5
   textDisplay: {fileID: 0}
@@ -532,7 +532,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterController: {fileID: 0}
-  objectType: 0
+  objectType: 2
   currentInteraction: 0
   radius: 0.5
   textDisplay: {fileID: 0}
@@ -599,7 +599,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterController: {fileID: 0}
-  objectType: 0
+  objectType: 2
   currentInteraction: 0
   radius: 0.5
   textDisplay: {fileID: 0}
@@ -666,7 +666,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterController: {fileID: 0}
-  objectType: 0
+  objectType: 2
   currentInteraction: 0
   radius: 0.5
   textDisplay: {fileID: 0}
@@ -733,7 +733,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterController: {fileID: 0}
-  objectType: 0
+  objectType: 2
   currentInteraction: 0
   radius: 0.5
   textDisplay: {fileID: 0}
@@ -800,7 +800,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterController: {fileID: 0}
-  objectType: 0
+  objectType: 2
   currentInteraction: 0
   radius: 0.5
   textDisplay: {fileID: 0}
@@ -867,7 +867,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterController: {fileID: 0}
-  objectType: 0
+  objectType: 2
   currentInteraction: 0
   radius: 0.5
   textDisplay: {fileID: 0}

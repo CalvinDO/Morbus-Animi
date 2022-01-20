@@ -56,6 +56,7 @@ public class MAJackUpEnoughSpaceChecker : MonoBehaviour {
 
                 Vector3 checkPositionLifted = spaceCheckPoint.position + Vector3.up * 0.05f;
 
+
                 if (Physics.CheckSphere(checkPositionLifted, 0.0003f, 13, QueryTriggerInteraction.Ignore)) {
                     output = false;
                 }

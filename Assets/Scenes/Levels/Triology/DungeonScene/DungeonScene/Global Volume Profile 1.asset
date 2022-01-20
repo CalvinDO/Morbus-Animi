@@ -40,7 +40,7 @@ MonoBehaviour:
   m_AdvancedMode: 0
   intensity:
     m_OverrideState: 1
-    m_Value: -0.5
+    m_Value: -0.52
     min: -1
     max: 1
   xMultiplier:
@@ -50,7 +50,7 @@ MonoBehaviour:
     max: 1
   yMultiplier:
     m_OverrideState: 1
-    m_Value: 0.052
+    m_Value: 0.07
     min: 0
     max: 1
   center:
@@ -58,7 +58,7 @@ MonoBehaviour:
     m_Value: {x: 0.5, y: 0.5}
   scale:
     m_OverrideState: 1
-    m_Value: 1.23
+    m_Value: 1.14
     min: 0.01
     max: 5
 --- !u!114 &-5327790790225048153
@@ -138,12 +138,12 @@ MonoBehaviour:
     m_Value: {x: 0.5, y: 0.5}
   intensity:
     m_OverrideState: 1
-    m_Value: 0.546
+    m_Value: 0.288
     min: 0
     max: 1
   smoothness:
     m_OverrideState: 1
-    m_Value: 0.437
+    m_Value: 0.627
     min: 0.01
     max: 1
   rounded:
@@ -168,7 +168,7 @@ MonoBehaviour:
     m_Value: 2
   contrast:
     m_OverrideState: 1
-    m_Value: 12
+    m_Value: 14
     min: -100
     max: 100
   colorFilter:
@@ -179,12 +179,12 @@ MonoBehaviour:
     showEyeDropper: 1
   hueShift:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 5
     min: -180
     max: 180
   saturation:
     m_OverrideState: 1
-    m_Value: -18
+    m_Value: 21
     min: -100
     max: 100
 --- !u!114 &11400000
@@ -256,7 +256,7 @@ MonoBehaviour:
   m_AdvancedMode: 0
   intensity:
     m_OverrideState: 1
-    m_Value: 0.58
+    m_Value: 0.078
     min: 0
     max: 1
 --- !u!114 &3522508379020958743
@@ -275,13 +275,13 @@ MonoBehaviour:
   m_AdvancedMode: 0
   lift:
     m_OverrideState: 1
-    m_Value: {x: 0.95353365, y: 0.957178, z: 1, w: 0}
+    m_Value: {x: 0.9889575, y: 0.98447293, z: 1, w: 0}
   gamma:
     m_OverrideState: 1
-    m_Value: {x: 1, y: 1, z: 1, w: -0.05295676}
+    m_Value: {x: 1, y: 1, z: 1, w: 0.017652249}
   gain:
     m_OverrideState: 1
-    m_Value: {x: 1, y: 0.75299364, z: 0.7383108, w: 0.035304494}
+    m_Value: {x: 1, y: 0.87700486, z: 0.8806742, w: -0.008826123}
 --- !u!114 &3596364269927346827
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -318,7 +318,7 @@ MonoBehaviour:
     m_Value: 1
   gaussianStart:
     m_OverrideState: 1
-    m_Value: 8
+    m_Value: 10
     min: 0
   gaussianEnd:
     m_OverrideState: 1

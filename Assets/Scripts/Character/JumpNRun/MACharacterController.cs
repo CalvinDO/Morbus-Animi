@@ -238,11 +238,16 @@ public class MACharacterController : MonoBehaviour {
 
     private bool isPerformingSoloJumpNRunMove = false;
 
+    public SkinnedMeshRenderer skinnedMeshRenderer;
+
     public bool IsPerformingSoloJumpNRunMove {
         get => this.isPerformingSoloJumpNRunMove;
     }
 
     public MAJackUpper jackUpper;
+
+    [Range(0, 10)]
+    public float climbSpeed;
 
     public void Start() {
 
@@ -275,10 +280,18 @@ public class MACharacterController : MonoBehaviour {
         //this.ManageRaycastInteraction();
 
 
+        this.ManageSuicide();
+
 
         this.framesTillStart++;
         this.millisecondsSinceStart += Time.deltaTime;
         this.scaledTimeSinceStart += Time.deltaTime;
+    }
+
+    private void ManageSuicide() {
+        if (Input.GetKeyUp(KeyCode.Backspace)) {
+            this.Die();
+        }
     }
 
     private void Awake() {
@@ -1079,6 +1092,20 @@ public class MACharacterController : MonoBehaviour {
         Debug.Log("set: " + value);
 
         this.isPerformingSoloJumpNRunMove = value;
+    }
+
+
+    public void Die() {
+
+        Transform currentCheckpoint = GameObject.FindObjectOfType<MACheckpointManager>().currentCheckpoint;
+
+        if (currentCheckpoint == null) {
+            this.transform.position = Vector3.zero;
+            this.physicalBody.transform.rotation = Quaternion.identity;
+            return;
+        }
+        this.transform.position = currentCheckpoint.position;
+        this.physicalBody.transform.rotation = currentCheckpoint.rotation;
     }
 }
 

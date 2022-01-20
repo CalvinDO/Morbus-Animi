@@ -67,6 +67,11 @@ public class MAJackUpper : MonoBehaviour {
     [Range(0, 0.5f)]
     public float hangEdgeDistance;
 
+    [Range(0, 0.5f)]
+    public float handSpreadDistance;
+
+    public AudioSource audioSource;
+    public AudioClip hangClip;
 
     void Start() {
 
@@ -125,6 +130,10 @@ public class MAJackUpper : MonoBehaviour {
             return;
         }
 
+        if (ledgeCandidateCollider.CompareTag("NoJackup")) {
+            return;
+        }
+
         if (this.isAttached) {
             return;
         }
@@ -155,20 +164,12 @@ public class MAJackUpper : MonoBehaviour {
         Vector3 extraMagnitudeXZProject = Vector3.ProjectOnPlane(closestPoint - characterController.transform.position, Vector3.up);
 
 
-
-
-
         Vector3 standingPoint = closestPoint;
         standingPoint += extraMagnitudeXZProject.normalized * this.moveXYExtraMagnitude;
-
-        Debug.Log(standingPoint);
-        Debug.Log(closestPoint);
-
 
 
         Vector3 sameYCharacterStandingPoint = this.transform.position;
         sameYCharacterStandingPoint.y = standingPoint.y;
-
 
 
 
@@ -255,20 +256,17 @@ public class MAJackUpper : MonoBehaviour {
 
         Debug.DrawRay(floorRay.origin, floorRay.direction, Color.cyan);
 
-        LayerMask mask = LayerMask.GetMask("Default", "MA_NavMesh", "Wall");
-        Debug.Log(mask.value);
+        LayerMask mask = LayerMask.GetMask("Default", "MA_NavMesh", "Wall", "LayerMask", "SeeThrough");
 
         if (Physics.Raycast(floorRay, out _, this.handUpMaxPosition.localPosition.y, mask)) {
 
             this.Catpass(closestPoint);
 
-            Debug.Log("catpass!");
         }
         else {
 
             this.Hang(closestPoint);
 
-            Debug.Log("hang!");
         }
 
 
@@ -286,13 +284,27 @@ public class MAJackUpper : MonoBehaviour {
     private void SetHandsOnLedge(Vector3 closestPoint) {
         this.armRig.weight = 1;
 
+        //this.leftHandTarget.LookAt(closestPoint);
+        // this.rightHandTarget.LookAt(closestPoint);
+
+        //this.leftHandTarget.Rotate(Vector3.up * 180);
+        // this.rightHandTarget.Rotate(Vector3.up * 180);
+
+
+        //this.leftHand.localRotation = Quaternion.identity;
+        //this.rightHand.localRotation = Quaternion.identity;
+
+
         this.leftHandTarget.position = closestPoint;
 
         this.rightHandTarget.position = closestPoint;
 
 
-        this.leftHand.rotation = Quaternion.identity;
-        this.rightHand.rotation = Quaternion.identity;
+        this.leftHandTarget.Translate(this.leftHandTarget.forward * this.handSpreadDistance);
+        this.rightHandTarget.Translate(this.rightHandTarget.forward * this.handSpreadDistance);
+
+        // this.leftHand.LookAt(closestPoint);
+        //this.rightHand.LookAt(closestPoint);
     }
 
     private void FreeHandsFromLedge() {
@@ -342,6 +354,7 @@ public class MAJackUpper : MonoBehaviour {
         this.isUpjackingEnabled = false;
 
         this.characterController.animator.SetTrigger("Hang");
+        this.audioSource.PlayOneShot(this.hangClip);
 
         this.characterController.rb.isKinematic = true;
     }

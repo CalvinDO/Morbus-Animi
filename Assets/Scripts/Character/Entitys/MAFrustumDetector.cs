@@ -33,6 +33,7 @@ public class MAFrustumDetector : MonoBehaviour {
 
     public Animator animator;
 
+
     void Start() {
         this.characterController = GameObject.Find("SmallNorah").GetComponent<MACharacterController>();
 
@@ -75,7 +76,9 @@ public class MAFrustumDetector : MonoBehaviour {
         }
 
 
-
+        if (this.entityMover.isStationary) {
+            return;
+        }
 
         if (Vector3.Distance(this.lastSeenCharacterPosition, this.transform.position) < 2 || this.entityMover.navMeshAgent.pathStatus == NavMeshPathStatus.PathInvalid) {
 
@@ -110,16 +113,27 @@ public class MAFrustumDetector : MonoBehaviour {
         this.detectedCharacter = this.GetCharacterWhichGotHit(hit);
         this.lastSeenCharacterPosition = this.detectedCharacter.transform.position;
 
+        if (this.entityMover.isStationary) {
+            this.KillCharacter();
+        }
+
 
         float distance = Vector3.Distance(this.transform.position, hit.point);
         if (distance < this.catchDistance) {
-            this.light.color = Color.red;
-            Debug.Log("Game over! You got catched!");
+            this.KillCharacter();
         }
 
         this.animator.SetBool("isSprinting", true);
         this.animator.SetBool("isWalking", false);
     }
+
+
+    private void KillCharacter() {
+        this.light.color = Color.red;
+        this.characterController.Die();
+        this.ReturnToRoaming();
+    }
+
 
 
     private void ReturnToRoaming() {

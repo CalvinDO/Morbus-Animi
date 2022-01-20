@@ -21,7 +21,7 @@ public class MAEntityMover : MonoBehaviour {
     public float minDecisionTime;
     public float maxDecisionTime;
 
-    private float currentDecisionTime;
+    private float remainingDecisionTime;
 
     public NavMeshAgent navMeshAgent;
     public MAFrustumDetector frustumDetector;
@@ -36,22 +36,39 @@ public class MAEntityMover : MonoBehaviour {
 
     public float maxSpeed;
 
+    public bool isStationary = false;
+    public Transform rotationGoal;
+
+
+    [Range(0, 1f)]
+    public float rotationSlerpFactor;
+
 
     void Start() {
-        this.currentDecisionTime = this.maxDecisionTime;
+
+        this.remainingDecisionTime = this.maxDecisionTime;
 
         this.navMeshCenter = GameObject.Find("NavMeshCenter").transform;
 
 
-        this.SetNavAgentDefaultValues();
+        if (!this.isStationary) {
+            this.SetNavAgentDefaultValues();
+        }
     }
 
-    private void Update() {
-        this.currentDecisionTime -= Time.deltaTime;
 
-        if (this.currentDecisionTime <= 0) {
-            this.SetNewRandomDestination();
+    private void Update() {
+
+        this.remainingDecisionTime -= Time.deltaTime;
+
+
+
+        if (this.isStationary) {
+            this.ManageRandomRotation();
+            return;
         }
+
+
 
         if (this.frustumDetector.characterDetected) {
             this.navMeshAgent.SetDestination(this.frustumDetector.lastSeenCharacterPosition);
@@ -62,8 +79,42 @@ public class MAEntityMover : MonoBehaviour {
 
         if ((this.navMeshAgent.remainingDistance < this.destinationReachThreshhold) || this.navMeshAgent.pathStatus == NavMeshPathStatus.PathInvalid) {
             this.SetNewRandomDestination();
-            this.currentDecisionTime = this.maxDecisionTime;
+            this.remainingDecisionTime = this.maxDecisionTime;
         }
+
+    }
+
+
+    private void FixedUpdate() {
+        if (this.isStationary) {
+            this.Rotate();
+        }
+    }
+
+    private void ManageRandomRotation() {
+
+        if (this.remainingDecisionTime <= 0) {
+            this.remainingDecisionTime = Random.Range(this.minDecisionTime, this.maxDecisionTime);
+            this.SetNewRandomRotation();
+        }
+
+        this.remainingDecisionTime -= Time.deltaTime;
+    }
+
+    private void Rotate() {
+        this.transform.rotation = Quaternion.Slerp(this.transform.rotation, this.rotationGoal.rotation, this.rotationSlerpFactor);
+    }
+
+    private void SetNewRandomRotation() {
+
+        //float currentYRotation = this.transform.rotation.y;
+        //float newMinAngle = 180 + currentYRotation - 45;
+        //float newMaxAngle = 180 + currentYRotation + 45;
+
+        // this.currentGoalRotation = Quaternion.Euler(new Vector3(0, Random.Range(newMinAngle, newMaxAngle), 0));
+
+        this.rotationGoal.Rotate(Vector3.up * 180);
+        this.rotationGoal.Rotate(Vector3.up * Random.Range(-45, 45));
 
     }
 
@@ -102,7 +153,7 @@ public class MAEntityMover : MonoBehaviour {
 
 
         float newDecisionTime = Random.Range(this.minDecisionTime, this.maxDecisionTime);
-        this.currentDecisionTime = newDecisionTime;
+        this.remainingDecisionTime = newDecisionTime;
 
     }
 
