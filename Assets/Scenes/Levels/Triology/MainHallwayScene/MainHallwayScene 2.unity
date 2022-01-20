@@ -213,13 +213,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 14639110}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.215}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: 0.5, y: 0.5, z: 0.5, w: 0.5}
+  m_LocalPosition: {x: 1.409, y: 1.25, z: 2.934}
+  m_LocalScale: {x: 0.5, y: 0.4, z: 0.2}
   m_Children: []
   m_Father: {fileID: 1349948311}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 90}
 --- !u!114 &14639112
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -46317,6 +46317,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   musicAudioSource: {fileID: 1284909246}
+  playsMultipleTimes: 0
+  playCounter: 0
 --- !u!1 &788353719 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5383597252949576081, guid: 4edc4660c7e157845a24776781c73119, type: 3}
@@ -61611,6 +61613,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   musicAudioSource: {fileID: 84710232}
+  playsMultipleTimes: 0
+  playCounter: 0
 --- !u!4 &1007448872
 Transform:
   m_ObjectHideFlags: 0
@@ -77385,13 +77389,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1273440279}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 48.184692, y: 13.28, z: -69.16793}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: 0.5, y: -0.5, z: 0.5, w: 0.5}
+  m_LocalPosition: {x: 16.036, y: 0.555, z: -4.263}
+  m_LocalScale: {x: 0.2, y: 0.5, z: 0.7}
   m_Children: []
   m_Father: {fileID: 239803005}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 90}
 --- !u!65 &1273440281
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -98931,6 +98935,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   musicAudioSource: {fileID: 2099605739}
+  playsMultipleTimes: 1
+  playCounter: 99999
 --- !u!1 &1844239294 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2866565244158422450, guid: 4edc4660c7e157845a24776781c73119, type: 3}
@@ -114884,10 +114890,10 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 5.4
-  MaxDistance: 7.14
+  MinDistance: 4.2
+  MaxDistance: 6.83
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 1
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 1
