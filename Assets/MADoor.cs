@@ -50,5 +50,6 @@ public class MADoor : MonoBehaviour {
         this.transform.Rotate(axisVector * this.openAngle);
 
         this.isOpen = true;
+
     }
 }

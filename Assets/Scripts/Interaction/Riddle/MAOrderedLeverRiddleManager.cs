@@ -17,13 +17,14 @@ public class MAOrderedLeverRiddleManager : MonoBehaviour {
 
         this.maxIndex = this.riddleLevers.Length -1;
 
-        for (int index = 0; index < this.maxIndex; index++) {
+        for (int index = 0; index <= this.maxIndex; index++) {
             this.riddleLevers[index].order = index;
         }
     }
 
 
     public void PressedLeverIndex(int index) {
+
         if (index != this.currentIndex) {
             this.FailRiddle();
         }
