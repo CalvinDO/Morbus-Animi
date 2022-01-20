@@ -15,7 +15,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Levels/Triology/DungeonScene/DungeonScene.unity
     guid: ca4df9b30449e33468971da27bb5d265
   - enabled: 0
-    path: Assets/Scenes/Levels/Triology/AbandonedScene/AbandonedHouseScene.unity
+    path: Assets/Scenes/Levels/Triology/Forest/Forest.unity
     guid: acd33eeaf6bd5a54e974d7ad45da78e3
   - enabled: 0
     path: Assets/Scenes/Levels/OldSeperateLevels/RoundHallway.unity
