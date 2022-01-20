@@ -5,22 +5,29 @@ using UnityEngine;
 public class MAMusicTrigger : MonoBehaviour {
 
     public AudioSource musicAudioSource;
+
+    public bool playsMultipleTimes = false;
+    public int playCounter;
+
     private bool isAlreadyPlayed = false;
 
-    void Start() {
-
-    }
-
-    // Update is called once per frame
-    void Update() {
-
-    }
 
     void OnTriggerEnter(Collider other) {
 
-        if (!this.isAlreadyPlayed) {
-            this.musicAudioSource.Play();
-            this.isAlreadyPlayed = true;
+        if (this.playsMultipleTimes) {
+
+            this.playCounter--;
+
+            if (this.playCounter >= 0) {
+                this.musicAudioSource.Play();
+            }
+        }
+        else {
+            if (!this.isAlreadyPlayed) {
+                this.musicAudioSource.Play();
+                this.isAlreadyPlayed = true;
+
+            }
         }
     }
 }
