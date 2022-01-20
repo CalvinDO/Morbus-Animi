@@ -16,8 +16,6 @@ public class MAOrderedLever : MALever
 
     public override void SetPressed() {
 
-        this.SetPressed();
-
         this.riddleManager.PressedLeverIndex(this.order);
     }
 
