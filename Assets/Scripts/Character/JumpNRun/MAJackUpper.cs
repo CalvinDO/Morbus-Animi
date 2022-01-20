@@ -130,7 +130,7 @@ public class MAJackUpper : MonoBehaviour {
             return;
         }
 
-        if (!ledgeCandidateCollider.CompareTag("NoJackup")) {
+        if (ledgeCandidateCollider.CompareTag("NoJackup")) {
             return;
         }
 
