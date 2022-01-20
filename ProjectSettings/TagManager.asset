@@ -14,6 +14,7 @@ TagManager:
   - MainCollider
   - PhysicalPlayerBody
   - Fire
+  - NoJackup
   layers:
   - Default
   - TransparentFX
@@ -40,7 +41,7 @@ TagManager:
   - MA_Camera
   - MA_Button
   - MA_OnlyCharacterCollision
-  - 
+  - MA_Pushable
   - 
   - 
   - 
