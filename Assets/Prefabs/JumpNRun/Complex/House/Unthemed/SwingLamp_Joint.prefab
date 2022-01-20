@@ -351,7 +351,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 1028422005953685688}
-  swingTimeScale: 1
+  swingTimeScale: 0.55
 --- !u!54 &1028422005953685688
 Rigidbody:
   m_ObjectHideFlags: 0
