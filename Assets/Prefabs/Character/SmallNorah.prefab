@@ -5101,7 +5101,7 @@ MonoBehaviour:
   characterSwingTrigger: {fileID: 2415645609979186630}
   swingGrabPosition: {fileID: 1039997808753021869}
   swingCOM: {fileID: 4494251013626885576}
-  swingReleaseVelocityFactor: 1
+  swingReleaseVelocityFactor: 1.25
   ledgeInteraction: {fileID: 2090320057}
   jumped: 0
   up: 0

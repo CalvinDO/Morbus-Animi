@@ -6,7 +6,8 @@ public class MASwingbar : MonoBehaviour {
     public Rigidbody rb;
     private GameObject currentRotator;
 
-
+    [Range(0, 1)]
+    public float swingTimeScale;
 
     void Start() {
         // this.InitializeCharacterFeetPositions();

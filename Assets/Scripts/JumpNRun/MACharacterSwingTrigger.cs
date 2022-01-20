@@ -21,7 +21,7 @@ public class MACharacterSwingTrigger : MonoBehaviour {
         if (other.gameObject.CompareTag("SwingbarTrigger")) {
             this.isSwingbarReachable = true;
             this.reachableSwingbar = other.transform.root.GetComponentInChildren<MASwingbar>();
-            Time.timeScale = 0.33f;
+            Time.timeScale = this.reachableSwingbar.swingTimeScale;
         }
     }
 
