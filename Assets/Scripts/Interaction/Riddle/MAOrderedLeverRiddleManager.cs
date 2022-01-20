@@ -15,7 +15,7 @@ public class MAOrderedLeverRiddleManager : MonoBehaviour {
 
         this.riddleLevers = this.transform.GetComponentsInChildren<MAOrderedLever>();
 
-        this.maxIndex = this.riddleLevers.Length;
+        this.maxIndex = this.riddleLevers.Length -1;
 
         for (int index = 0; index < this.maxIndex; index++) {
             this.riddleLevers[index].order = index;
