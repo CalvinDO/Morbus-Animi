@@ -14,7 +14,6 @@ public class MALever : MAButton {
 
     public override void SetPressed() {
 
-        Debug.Log("press");
 
         this.isPressed = true;
 
@@ -38,7 +37,6 @@ public class MALever : MAButton {
 
     public override void SetDefault() {
 
-        Debug.Log("default");
 
         if (this.staysPressed) {
             return;
