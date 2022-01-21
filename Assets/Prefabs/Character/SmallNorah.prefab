@@ -1492,7 +1492,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Weight: 1
   m_Data:
-    m_Root: {fileID: 2414627791326732549}
+    m_Root: {fileID: 7383425392864046797}
     m_Tip: {fileID: 1220263035782217507}
     m_Target: {fileID: 6234279490463500013}
     m_ChainRotationWeight: 0.928
@@ -6150,7 +6150,7 @@ MonoBehaviour:
   rightHand: {fileID: 8585332792903817597}
   hangEdgeDistance: 0.166
   handSpreadDistance: 0.202
-  audioSource: {fileID: 0}
+  audioSource: {fileID: 4739305598718438333}
   hangClip: {fileID: 8300000, guid: 800220e8a2ddda743a304bd554df7eea, type: 3}
 --- !u!1 &7534904971383046353
 GameObject:
@@ -6599,7 +6599,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Weight: 1
   m_Data:
-    m_Root: {fileID: 8573542026918500902}
+    m_Root: {fileID: 8181335731441737381}
     m_Tip: {fileID: 8585332792903817597}
     m_Target: {fileID: 8261636546279695547}
     m_ChainRotationWeight: 0.928

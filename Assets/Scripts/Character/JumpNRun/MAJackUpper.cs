@@ -449,7 +449,7 @@ public class MAJackUpper : MonoBehaviour {
     }
 
     private void DropFromHang() {
-        this.characterController.animator.SetTrigger("DropFromHang");
+        this.characterController.animator.SetTrigger("HangDropDown");
         this.characterController.SetPerformingSoloJumpNRunMove(false);
         this.DiscardLedge();
     }

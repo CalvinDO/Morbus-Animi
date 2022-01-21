@@ -12,6 +12,17 @@ public class MAMusicTrigger : MonoBehaviour {
     private bool isAlreadyPlayed = false;
 
 
+    void Update() {
+
+        if (this.playsMultipleTimes) {
+            return;
+        }
+
+        if (!this.musicAudioSource.isPlaying) {
+
+        }
+    }
+
     void OnTriggerEnter(Collider other) {
 
         if (this.playsMultipleTimes) {

@@ -249,6 +249,8 @@ public class MACharacterController : MonoBehaviour {
     [Range(0, 10)]
     public float climbSpeed;
 
+    public bool isFalling = false;
+
     public void Start() {
 
         this.currentXRotation = 0;
@@ -283,9 +285,30 @@ public class MACharacterController : MonoBehaviour {
         this.ManageSuicide();
 
 
+        this.CheckFall();
+
         this.framesTillStart++;
         this.millisecondsSinceStart += Time.deltaTime;
         this.scaledTimeSinceStart += Time.deltaTime;
+    }
+
+    private void CheckFall() {
+
+        if (!this.isGrounded) {
+
+            if (this.rb.velocity.y < 0) {
+                if (this.isFalling) {
+                    return;
+                }
+
+                this.animator.SetTrigger("fall");
+                this.isFalling = true;
+            }
+        }
+        else {
+            this.animator.ResetTrigger("fall");
+            this.isFalling = false;
+        }
     }
 
     private void ManageSuicide() {
@@ -1072,14 +1095,14 @@ public class MACharacterController : MonoBehaviour {
 
         this.isGrounded = true;
 
-        if (this.jumped) {
-            return;
-        }
+        
+
         this.lastCollidedWall = null;
         this.lastJumpedWall = null;
 
 
         this.animator.ResetTrigger("DropFromHang");
+
 
     }
 
