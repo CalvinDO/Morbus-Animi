@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Flickeringlight : MonoBehaviour
+public class MAFlickeringlight : MonoBehaviour
 {
 
     public Light _Light;
@@ -20,7 +20,7 @@ public class Flickeringlight : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Timer = Random.Range(MinTime, MaxTime);
+        this.Timer = Random.Range(this.MinTime, this.MaxTime);
     }
 
     // Update is called once per frame
@@ -36,14 +36,14 @@ public class Flickeringlight : MonoBehaviour
             return;
         }
 
-        if(Timer > 0)
-        Timer -= Time.deltaTime;
+        if(this.Timer > 0)
+        this.Timer -= Time.deltaTime;
 
-        if(Timer<=0)
+        if(this.Timer<=0)
         {
-            _Light.enabled = !_Light.enabled;
-            Timer = Random.Range(MinTime, MaxTime);
-            AS.PlayOneShot(LightAudio);
+            this._Light.enabled = !this._Light.enabled;
+            this.Timer = Random.Range(this.MinTime, this.MaxTime);
+            this.AS.PlayOneShot(LightAudio);
         }
     }
 
