@@ -6,6 +6,7 @@ public class MALevelStartManager : MonoBehaviour
 {
 
     public bool resetCharacterPosition = true;
+    public Transform characterStartPosition;
 
     void Start()
     {
@@ -15,7 +16,7 @@ public class MALevelStartManager : MonoBehaviour
         }
 
         MACharacterController characterController = GameObject.Find("SmallNorah").GetComponent<MACharacterController>();
-        characterController.transform.position = Vector3.zero;
+        characterController.transform.position = this.characterStartPosition.position;
         characterController.physicalBody.transform.rotation = Quaternion.identity;
     }
 

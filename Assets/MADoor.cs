@@ -15,14 +15,10 @@ public class MADoor : MonoBehaviour {
     public MAItem requiredItem;
 
 
-    void Start() {
+    public AudioSource doorAudioSource;
+    public AudioClip doorFail;
+    public AudioClip doorOpen;
 
-    }
-
-    // Update is called once per frame
-    void Update() {
-
-    }
 
     public void Open() {
 
@@ -30,7 +26,16 @@ public class MADoor : MonoBehaviour {
             return;
         }
 
-        
+        if (this.requiredItem != null) {
+            if (!MAInventory.instance.items.Contains(this.requiredItem)) {
+
+                this.doorAudioSource.PlayOneShot(this.doorFail);
+
+                return;
+            }
+        }
+
+        this.doorAudioSource.PlayOneShot(this.doorOpen);
 
         Vector3 axisVector = Vector3.up;
 

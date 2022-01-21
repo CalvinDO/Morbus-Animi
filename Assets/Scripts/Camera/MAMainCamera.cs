@@ -56,15 +56,18 @@ public class MAMainCamera : MonoBehaviour {
 
         if (currentDistance < this.transparencyStartDistance) {
 
-            this.characterController.skinnedMeshRenderer.enabled = false;
-           
-            int materialsLength = this.characterController.skinnedMeshRenderer.materials.Length;
+            foreach (SkinnedMeshRenderer skinnedRenderer in this.characterController.skinnedMeshRenderers) {
+                skinnedRenderer.enabled = false;
+            }
+            /*
+
+            int materialsLength = this.characterController.skinnedMeshRenderers.materials.Length;
 
             Material[] materials = new Material[materialsLength];
 
             for (int index = 0; index < materialsLength; index++) {
 
-                Material currentMaterial = this.characterController.skinnedMeshRenderer.materials[index];
+                Material currentMaterial = this.characterController.skinnedMeshRenderers.materials[index];
                 Color color = currentMaterial.color;
                 color.a = currentOppacity;
                 currentMaterial.color = color;
@@ -72,10 +75,14 @@ public class MAMainCamera : MonoBehaviour {
                 materials[index] = currentMaterial;
             }
 
-            this.characterController.skinnedMeshRenderer.materials = materials;
+            this.characterController.skinnedMeshRenderers.materials = materials;
+            */
         }
         else {
-            this.characterController.skinnedMeshRenderer.enabled = true;
+            foreach(SkinnedMeshRenderer skinnedRenderer in this.characterController.skinnedMeshRenderers) {
+                skinnedRenderer.enabled = true;
+            }
+            
         }
     }
 

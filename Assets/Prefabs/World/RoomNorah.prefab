@@ -2166,7 +2166,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   axis: 1
   openAngle: 90
-  requiredItem: {fileID: 0}
+  requiredItem: {fileID: 11400000, guid: 439a524ddda1cb541a9dae172d73ba80, type: 2}
 --- !u!114 &7681977554424225824
 MonoBehaviour:
   m_ObjectHideFlags: 0
