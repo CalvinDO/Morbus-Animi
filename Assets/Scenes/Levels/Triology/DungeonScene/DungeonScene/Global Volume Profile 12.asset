@@ -16,10 +16,10 @@ MonoBehaviour:
   m_AdvancedMode: 0
   postExposure:
     m_OverrideState: 1
-    m_Value: 2.25
+    m_Value: 3.09
   contrast:
     m_OverrideState: 1
-    m_Value: -10
+    m_Value: 2.67
     min: -100
     max: 100
   colorFilter:
@@ -129,11 +129,11 @@ MonoBehaviour:
     m_Value: 1
   gaussianStart:
     m_OverrideState: 1
-    m_Value: 4
+    m_Value: 8
     min: 0
   gaussianEnd:
     m_OverrideState: 1
-    m_Value: 6
+    m_Value: 10
     min: 0
   gaussianMaxRadius:
     m_OverrideState: 1
