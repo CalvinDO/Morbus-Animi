@@ -19,11 +19,11 @@ MonoBehaviour:
     m_Value: 1
   gaussianStart:
     m_OverrideState: 1
-    m_Value: 5
+    m_Value: 8
     min: 0
   gaussianEnd:
     m_OverrideState: 1
-    m_Value: 7
+    m_Value: 10
     min: 0
   gaussianMaxRadius:
     m_OverrideState: 1
@@ -108,15 +108,15 @@ MonoBehaviour:
   m_AdvancedMode: 0
   postExposure:
     m_OverrideState: 1
-    m_Value: 2
+    m_Value: 2.42
   contrast:
     m_OverrideState: 1
-    m_Value: 14
+    m_Value: 9.09
     min: -100
     max: 100
   colorFilter:
     m_OverrideState: 1
-    m_Value: {r: 1, g: 1, b: 1, a: 1}
+    m_Value: {r: 1, g: 0.9198113, b: 0.9198113, a: 1}
     hdr: 1
     showAlpha: 0
     showEyeDropper: 1
@@ -126,7 +126,7 @@ MonoBehaviour:
     min: -180
     max: 180
   saturation:
-    m_OverrideState: 1
+    m_OverrideState: 0
     m_Value: -82
     min: -100
     max: 100
@@ -142,7 +142,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81180773991d8724ab7f2d216912b564, type: 3}
   m_Name: ChromaticAberration
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   m_AdvancedMode: 0
   intensity:
     m_OverrideState: 1
@@ -165,11 +165,11 @@ MonoBehaviour:
   m_AdvancedMode: 0
   threshold:
     m_OverrideState: 1
-    m_Value: 0.9
+    m_Value: 1.12
     min: 0
   intensity:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 1.18
     min: 0
   scatter:
     m_OverrideState: 1
@@ -226,12 +226,12 @@ MonoBehaviour:
     m_Value: {x: 0.5, y: 0.5}
   intensity:
     m_OverrideState: 1
-    m_Value: 0.546
+    m_Value: 0.726
     min: 0
     max: 1
   smoothness:
     m_OverrideState: 1
-    m_Value: 0.437
+    m_Value: 0.585
     min: 0.01
     max: 1
   rounded:
@@ -254,30 +254,7 @@ MonoBehaviour:
   mode:
     m_OverrideState: 1
     m_Value: 2
---- !u!114 &11400000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d7fd9488000d3734a9e00ee676215985, type: 3}
-  m_Name: Global Volume Profile 2
-  m_EditorClassIdentifier: 
-  components:
-  - {fileID: -952153384749457342}
-  - {fileID: -6682047371887172804}
-  - {fileID: 198788855315534370}
-  - {fileID: -6711792044273167698}
-  - {fileID: -3069183550141337011}
-  - {fileID: -2353652771621122827}
-  - {fileID: -7921624111307235447}
-  - {fileID: 1586251158021432144}
-  - {fileID: 1022470763135021222}
-  - {fileID: -3922817393820512931}
---- !u!114 &198788855315534370
+--- !u!114 &-837725036460676877
 MonoBehaviour:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
@@ -293,13 +270,36 @@ MonoBehaviour:
   m_AdvancedMode: 0
   lift:
     m_OverrideState: 1
-    m_Value: {x: 0.97497565, y: 0.93440413, z: 1, w: 0}
+    m_Value: {x: 0.9428885, y: 0.95976144, z: 1, w: 0}
   gamma:
     m_OverrideState: 1
-    m_Value: {x: 1, y: 0.98281926, z: 0.99042606, w: -0.01765226}
+    m_Value: {x: 1, y: 1, z: 1, w: 0.10591351}
   gain:
     m_OverrideState: 1
-    m_Value: {x: 1, y: 0.75299364, z: 0.7383108, w: -0.31774056}
+    m_Value: {x: 1, y: 1, z: 1, w: -0.19417478}
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7fd9488000d3734a9e00ee676215985, type: 3}
+  m_Name: Global Volume Profile 2
+  m_EditorClassIdentifier: 
+  components:
+  - {fileID: -952153384749457342}
+  - {fileID: -6682047371887172804}
+  - {fileID: -837725036460676877}
+  - {fileID: -6711792044273167698}
+  - {fileID: -3069183550141337011}
+  - {fileID: -2353652771621122827}
+  - {fileID: -7921624111307235447}
+  - {fileID: 1586251158021432144}
+  - {fileID: 1022470763135021222}
+  - {fileID: -3922817393820512931}
 --- !u!114 &1022470763135021222
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -312,7 +312,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5e1dc532bcb41949b58bc4f2abfbb7e, type: 3}
   m_Name: LensDistortion
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   m_AdvancedMode: 0
   intensity:
     m_OverrideState: 1
@@ -349,7 +349,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 221518ef91623a7438a71fef23660601, type: 3}
   m_Name: WhiteBalance
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   m_AdvancedMode: 0
   temperature:
     m_OverrideState: 1
