@@ -5,6 +5,7 @@ using UnityEngine;
 public class MADoorOpener : MonoBehaviour {
     public MADoor door;
 
+    [HideInInspector]
     public bool characterInReach = false;
 
     void Start() {

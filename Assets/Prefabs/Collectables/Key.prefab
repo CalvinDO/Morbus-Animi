@@ -4921,7 +4921,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 4.641, z: 0.2016871, w: -6.001804}
+  m_BoundingSphereOverride: {x: 4.5904e-41, y: 0.003969509, z: 4.5904e-41, w: 0}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
@@ -4935,8 +4935,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3082075749169035779}
-  - component: {fileID: 3940478937648909201}
-  m_Layer: 0
+  - component: {fileID: 8281055368162539202}
+  - component: {fileID: 1623085347582877957}
+  m_Layer: 24
   m_Name: Key
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4960,7 +4961,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3940478937648909201
+--- !u!114 &8281055368162539202
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4969,17 +4970,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 6121324652668191600}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef5a78b0dbb05d44697ee842832cf39c, type: 3}
+  m_Script: {fileID: 11500000, guid: 2150601d93329ba47863546b912e6750, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterController: {fileID: 0}
-  objectType: 0
-  currentInteraction: 0
-  radius: 2
-  textDisplay: {fileID: 0}
-  hoverTextObject: {fileID: 0}
   item: {fileID: 11400000, guid: 439a524ddda1cb541a9dae172d73ba80, type: 2}
-  inventory: {fileID: 0}
+--- !u!135 &1623085347582877957
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6121324652668191600}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.82
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &1744251472502352332
 PrefabInstance:
   m_ObjectHideFlags: 0

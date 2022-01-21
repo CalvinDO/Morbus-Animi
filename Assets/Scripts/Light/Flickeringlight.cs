@@ -14,6 +14,9 @@ public class Flickeringlight : MonoBehaviour
     public AudioSource AS;
     public AudioClip LightAudio;
 
+    private bool isFlickering = true;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,6 +31,11 @@ public class Flickeringlight : MonoBehaviour
 
     void FlickerLight()
     {
+
+        if (!this.isFlickering) {
+            return;
+        }
+
         if(Timer > 0)
         Timer -= Time.deltaTime;
 
@@ -37,5 +45,10 @@ public class Flickeringlight : MonoBehaviour
             Timer = Random.Range(MinTime, MaxTime);
             AS.PlayOneShot(LightAudio);
         }
+    }
+
+    public void TurnOff() {
+        this._Light.enabled = false;
+        this.isFlickering = false;
     }
 }
