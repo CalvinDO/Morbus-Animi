@@ -1,10 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
+
 [RequireComponent(typeof(Collider))]
 public class MAMusicTrigger : MonoBehaviour {
 
     public AudioSource musicAudioSource;
+    public UnityEvent musicOvertriggeredEvent;
 
     public bool playsMultipleTimes = false;
     public int playCounter;
@@ -30,4 +33,5 @@ public class MAMusicTrigger : MonoBehaviour {
             }
         }
     }
+    
 }
