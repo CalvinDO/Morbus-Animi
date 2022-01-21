@@ -21,8 +21,13 @@ public class MAMusicTrigger : MonoBehaviour {
             return;
         }
 
-        if (!this.musicAudioSource.isPlaying) {
 
+        if (this.musicOvertriggeredEvent == null) {
+            return;
+        }
+
+        if (!this.musicAudioSource.isPlaying) {
+            this.musicOvertriggeredEvent.Invoke();
         }
     }
 
@@ -44,5 +49,5 @@ public class MAMusicTrigger : MonoBehaviour {
             }
         }
     }
-    
+
 }
