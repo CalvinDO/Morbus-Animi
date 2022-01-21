@@ -3262,7 +3262,7 @@ Light:
   serializedVersion: 10
   m_Type: 0
   m_Shape: 0
-  m_Color: {r: 0.45882353, g: 0.7607843, b: 1, a: 1}
+  m_Color: {r: 0.504717, g: 0.7804415, b: 1, a: 1}
   m_Intensity: 13.76
   m_Range: 3.92
   m_SpotAngle: 83.28488
@@ -5347,6 +5347,7 @@ MonoBehaviour:
   skinnedMeshRenderers: []
   jackUpper: {fileID: 2123240168853162328}
   climbSpeed: 6.23
+  isFalling: 0
 --- !u!54 &1402342497931596602
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -7597,6 +7598,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8585332792903817597}
     m_Modifications:
+    - target: {fileID: 3374848341177078440, guid: 1a675c6f12e258e48980383485f75ff1, type: 3}
+      propertyPath: m_Intensity
+      value: 14
+      objectReference: {fileID: 0}
     - target: {fileID: 6052954665226703521, guid: 1a675c6f12e258e48980383485f75ff1, type: 3}
       propertyPath: m_RootOrder
       value: 1
