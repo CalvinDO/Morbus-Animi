@@ -1101,7 +1101,7 @@ public class MACharacterController : MonoBehaviour {
         this.lastJumpedWall = null;
 
 
-        this.animator.ResetTrigger("DropFromHang");
+        this.animator.ResetTrigger("HangDropDown");
 
 
     }

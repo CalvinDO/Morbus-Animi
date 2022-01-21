@@ -26,6 +26,11 @@ public class MAMusicTrigger : MonoBehaviour {
             return;
         }
 
+        if (this.musicAudioSource == null) {
+            Debug.LogWarning("no audio source assigned!!!");
+            return;
+        }
+
         if (!this.musicAudioSource.isPlaying) {
             this.musicOvertriggeredEvent.Invoke();
         }
