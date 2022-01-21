@@ -442,8 +442,8 @@ ModelImporter:
       name: Catpass
       takeName: metarig|metarigAction
       internalID: 0
-      firstFrame: 820
-      lastFrame: 840
+      firstFrame: 1700
+      lastFrame: 1750
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
