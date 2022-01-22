@@ -214,11 +214,12 @@ img {
         padding: 30px 50px;
     }
 
-    .menu a {
+    .header {
         display: none;
     }
 
-    #menu_icon {
-        display: initial;
+    .main {
+        margin-top: 50px;
     }
+
 }
