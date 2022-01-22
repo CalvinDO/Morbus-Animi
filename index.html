@@ -10,12 +10,26 @@
 </head>
 
 <body>
+    <div class="header invisible">
+        <div id="menu_icon">
+            <p class="icon">ICON</p>
+        </div>
+        <div class="menu">
+            <a class="item" href="#general">Allgemein</a>
+            <a class="item" href="#gamedesign">Gamedesign</a>
+            <a class="item" href="#art">Art</a>
+            <a class="item" href="#development">Development</a>
+            <a class="item" href="#vfx">VFX</a>
+            <a class="item" href="#music">Sounds</a>
+            <a class="item last" href="">Zum Spiel</a>
+        </div>
+    </div>
     <div class="main">
         <div class="headline">
             <h1>Morbus Animi - Norah's Tale</h1>
         </div>
 
-        <div class="flex img_large img_large_left">
+        <div id="general" class="flex img_large img_large_left">
             <div id="logo_container" class="img_big">
                 <img id="logo2" src="Images/malogo2.png">
             </div>
@@ -66,7 +80,46 @@
             </p>
         </div>
 
-        <div class="flex img_large img_large_right">
+        <div id="gamedesign" class="flex img_large img_large_right">
+            <div class="img_big">
+                <img src="Images/gamedesign1.jpg">
+            </div>
+            <div class="text_small">
+                <div>
+                    <h2>Gamedesign</h2>
+                    <p>Morbus Animi handelt von Depression und Angstzuständen. Dies sind sensieble Themen, denen wir auf
+                        verspielte aber respektvolle Art eine Plattform bieten und darauf aufmerksam machen wollen.
+                        Daher stellten sich unter anderem die Fragen, wie man Ziellosigkeit oder Angst sinn- und
+                        stilvoll in ein Videospiel einbauen kann.<br><br>
+
+                        Da das Projektstudium in einer kleineren Gruppe stattfindet, hat das Game Design bei Morbus
+                        Animi verschiedene Facetten. Zum einen mussten die grundlegenden Spielmechaniken ausgedacht und
+                        mit den Projektmitgliedern abgestimmt werden.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="flex text_only">
+            <h2>Mechaniken und Rätsel</h2>
+            <p>Die Jump and Run Mechaniken beispielsweise mussten mit den Developern gemeinsam entwickelt werden, um ein
+                möglichst reibungslosen Spielablauf zu ermöglichen. Wie weit kann der Charakter springen, wie schnell
+                sprinten und wie kann man es ermöglichen mit Objekten zu interagieren. <br> <br>
+
+                Mit diesen Informationen mussten dann gemeinsam mit den Artists die Abmessungen und Dimensionen der
+                Assets erarbeitet werden. Wie groß kann ein Hindernis sein, welche Assets werden für verschiedene Rätsel
+                benötigt und wie kann man diese gestalten um sie Stimmig in der Szene zu platzeren.<br> <br>
+
+                Zu jedem im Spiel vorkommenden Rätsel musste eine Mechanik erdacht werden, die mit den Entwicklern
+                besprochen wurde um herauszufinden, wie diese codiert und ins Spiel eingebunden werden kann.
+
+                Zum heutigen Tag ist die Story noch nicht vollends ausgearbeitet, weswegen für die Präsentation vorerst
+                auf die Implementiereung im Spiel verzichtet wurde.
+            </p>
+        </div>
+
+        <div id="art" class="flex img_large img_large_left">
             <div class="img_big">
                 <img src="Images/room_norah2.png">
             </div>
@@ -76,68 +129,44 @@
                     <p>Für den Art-Style haben wir uns für den Low-Poly Stil entschieden. Wir wollten sehen, wie wir den
                         niedlichen, einfachen Low-Poly Look in einem Horror-Spiel unterbringen und mit den Gegensätzen
                         spielen können.
-                        Bei der 3D-Software haben wir uns für Blender entschieden, da wir alle dank Computergrafik und
-                        3D-Modellierung bereits aus dem zweiten Semester Vorwissen hatten.
-                        Charakteristisch für die Assets ist, dass gerade Kanten verzerrt wurden. Damit wird auch nochmal
-                        sichtbar, dass die Modelle über extrem wenige Polys verfügen. Die Proportionen sind leicht
-                        übertrieben. Nicht so, dass es gleich auffällt, denn die Gegenstände sollten sich zwar
-                        einerseits vertraut, andererseits aber auch nicht ganz richtig anfühlen. Genauso wie Norah soll
-                        sich auch der Spieler in den Gängen unwohl fühlen. Dieser Effekt steigert sich, je schlechter
-                        Norahs Zustand wird. </p>
-                </div>
-
-            </div>
-        </div>
-
-        <!-- <div class="flex img_small img_small_right">
-            <div class="img_tiny">
-                <img src="assets.png">
-            </div>
-            <div class="text_big">
-                <div>
-                    <h2>Assets</h2>
-                    <p>Die Assets dienen nicht nur zur Dekoration, sondern auch als Interaktionsmöglichkeit während der
-                        Jump & Run Passagen. Wir haben uns überlegt, welche Interaktionen mit welchem Gegenstand am
-                        meisten Sinn ergeben – dabei wollten wir zu Beginn möglichst nah an den echten Gegenständen
-                        bleiben. So dienen verschiedene Regale zum Klettern, Couchtische und ein Kinderzelt zum Sliden
-                        oder eine Kommode zum Hochziehen.
-                        Für die verschiedenen Themes haben wir dabei jeweils verschiedene Sets von Assets gestaltet,
-                        immer mit dem Jump & Run im Hinterkopf. Heraus kam eine beachtliche Sammlung an Assets für ein
-                        Haus, einen Garten und ein Dungeon, wobei bei letzterem die Hindernisse direkt in die Umgebung
-                        eingefügt wurden, weil hier der Verlauf des Levels linearer ist.
-
+                        Bei der 3D-Software haben wir uns für Blender entschieden, da wir alle dank dem Kurs
+                        “Computergrafik und 3D-Modellierung” aus dem zweiten Semester bereits Vorkenntnisse hatten.
+                        Charakteristisch für die Assets sind verzerrte Kanten und gut sichtbare Faces. Die Proportionen
+                        sind leicht übertrieben. Nicht so dass es gleich auffällt, aber die Umgebung soll sich nicht
+                        ganz “richtig” anfühlen. Genauso wie Norah soll sich der Spieler in den Gängen unwohl fühlen.
                     </p>
                 </div>
 
             </div>
-        </div> -->
+        </div>
 
         <div class="flex img_row">
-            <img src="Images/norah_room.png">
-            <img src="Images/room_norah1.png">
-            <img src="Images/room_norah3.png">
-            <img src="Images/room_norah2.png">
+            <img src="Images/art4.png">
+            <img src="Images/art.png">
+            <img src="Images/art3.png">
+            <img src="Images/art5.png">
         </div>
 
         <div class="flex text_only">
-            <h2>Labyrinth</h2>
-            <p>Neben den Assets haben wir auch die Labyrinthe gestaltet, aus denen Norah zu entkommen versucht. Dabei
-                haben wir die Level entsprechend einem eigenen Theme designt und mit Assets ausgestattet. In den Levels
-                wechseln sich drei Bereiche ab: Jump & Run, Verfolgung und Rätsel.
-                Für die Jump & Run Bereiche haben wir wie bereits erwähnt viele verschiedene Assets angefertigt, die als
-                Hindernisse dienen und mit den verschiedenen Skills von Norah überwunden werden können. Die Bereiche, in
-                denen Norah von Evil Norah verfolgt wird, sind hingegen deutlich leerer. Es gibt also kaum
-                Möglichkeiten, sich zu verstecken und wieder ist Norah schutzlos ausgeliefert.
-                In den Rätselbereichen werden muss der Spieler Rätsel lösen, um im Spiel weiterzukommen. Hinweise und
-                benötigte Gegenstände können aber im ganzen Labyrinth versteckt sein.
+            <h2>Leveldesign</h2>
+            <p>Norah muss im Verlauf des Spiels aus thematisch verschiedenen Bereichen entkommen. Dabei muss
+                Norah mit Jump & Run Skills ihren Verfolgern ausweichen und Hindernisse überwinden. Als
+                Hindernisse dienen einerseits fest ins Level eingebaute Elemente wie Ventilatoren oder Luken,
+                andererseits separate Assets wie Fässer oder Schränke. <br><br>
+                Bei den Farben haben wir uns für gedeckte, dunkle Farben entschieden. Als Kontrast dazu haben
+                wir Partikel, Fackeln und LEDs/ Kabel die als Lichtquelle dienen und leuchtend bunt sind. Damit
+                können wir auch gut mit der Stimmung spielen, melancholische, ruhige Passagen wechseln sich mit
+                den grusligen und stressigen Horror-Passagen ab.<br><br>
+                Mit Rauch und Nebel schränken wir die Sichtweite ein und verstärken das Gefühl der
+                Schutzlosigkeit, weil der Spieler nicht sieht, was kommt.
             </p>
         </div>
 
         <div class="flex img_row">
-            <img src="Images/labrinth_oben.jpg">
-            <img src="Images/forest2.png">
-            <img src="Images/labrinth_dungeon.jpg">
+            <img src="Images/art6.png">
+            <img src="Images/art7.png">
             <img src="Images/menu_eevee.png">
+            <img src="Images/room_norah2.png">
         </div>
 
 
@@ -149,18 +178,21 @@
             <div class="text_small">
                 <div>
                     <h2>Character</h2>
-                    <p>Als Collectables finden sich in den Labyrinthen immer wieder Tagebuchseiten, die mit Zeichnungen
-                        von Norah illustriert sind. Hier soll dem Spieler Erklärung zum Geschehen gegeben und die
-                        Geschichte von Norah geschildert werden. Und auch von wem Norah verfolgt wird: Evil Norah, einer
-                        Personifizierung ihrer Depression. Die Zeichnungen wurden von einer Person im Projekt
-                        angefertigt, die selbst in ihrer Vergangenheit an Depressionen erkrankt war. Einige Sachverhalte
-                        wurden zur Dramatisierung überspitzt dargestellt. </p>
+                    <p>Wir haben uns bei dem Charakter-Modell von Norah bewusst dafür entschieden, das Gesicht
+                        wegzulassen. Norah verliert sich im Laufe des Spiels immer weiter in ihrer Krankheit und
+                        verliert dabei den Sinn für sich selbst – das wollten wir damit verdeutlichen.
+                        Ansonsten sind wir uns beim Stil von Norah treu geblieben: so wenige Polys wie nötig, leicht
+                        überspitzte Proportionen. Norah ist im Verhältnis zu den Fluren und den Möbeln klein – die Möbel
+                        sind normal groß, Norahs Körpergröße beträgt als Erwachsene trotzdem nur 115 cm.
+                        Damit wollten wir erreichen, dass sich der Spieler klein und schutzlos fühlt, das Laufen in den
+                        großen Gängen dauert lang, Evil Norah ist deutlich schneller und größer.
+                    </p>
                 </div>
 
             </div>
         </div>
 
-        <div class="flex img_small img_small_left">
+        <div class="flex img_small img_small_right">
             <div class="img_tiny">
                 <img src="Images/tagebuch.png">
             </div>
@@ -176,31 +208,127 @@
             </div>
         </div>
 
+        <div id="development" class="flex img_large img_large_left">
+            <div class="img_big">
+                <img src="Images/dev2.png">
+            </div>
+            <div class="text_small">
+                <div>
+                    <h2>Development</h2>
+                    <p>Die Developer haben sich mit allem beschäftigt, was in Unity passiert. Für ein 3D Spiel wie
+                        Morbus Animi ist der Großteil unserer Zeit in die Steuerung und Interaktionen des spielbaren
+                        Charakters Norah gesteckt worden. Unity bietet zwar fertige Implementierungen für Character
+                        Controller und Spielphysik, wir haben jedoch im Rahmen dieses Projektes, um so nah wie möglich
+                        an unsere eigene Vision der Steuerung und des Gameplays zu kommen, vieles davon selbst
+                        implementiert.
+                    </p>
+                </div>
 
-
-
-
-
-
-
-
-
-
-
-
-       <!--  <div class="flex img_only">
-            <img src="img5.jpg">
+            </div>
         </div>
 
 
+        <div class="flex img_small img_small_left">
+            <div class="img_tiny">
+                <img src="Images/dev.png">
+            </div>
+            <div class="text_big">
+                <div>
+                    <h2>Interaktion und Kamera</h2>
+                    <p>Im ersten Semester des Projekts war das gesamte Team noch damit beschäftigt, Ideen zu finden, wie
+                        unser Spiel aussehen soll. Anfangs bewegten wir uns noch in einer 2.5D-Umgebung, stellten dann
+                        aber komplett auf eine 3D-Welt mit einer voll drehbaren Kamera um.
+                        Einiges würde aber auf jeden Fall im Spiel sein, neben der Charaktersteuerung war das
+                        Interaktion. Dafür mussten wir Developer eigene Skripte schreiben damit grundlegende Gameplay
+                        Elemente wie Objekte aufheben, Klettern, Hebel umlegen oder Kollisionen im Spiel nicht fehlen.
+                        Ebenso haben wir uns noch einige weniger häufig zu sehende Funktionen eingebaut wie das Sprühen
+                        von Graffiti in Form von 2D-Sprites an die Wände unserer Level.
+
+                    </p>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="flex img_only">
+            <img src="Images/dev3.png">
+        </div>
+
+        <div class="flex text_only">
+            <h2>Jump & Run und Puzzle</h2>
+            <p>Im letzten Semester des Projekts wurde der Jump-And-Run Aspekt des Gameplays zunehmend wichtiger. Zum
+                Programmierteil gehörten unter anderem das Schwingen an einer Stange, Wandsprünge und das Hochklettern
+                an Hindernissen.<br><br>
+
+                Puzzle-Mechaniken wie Schlüssel für Türen sammeln, Hebel in der richtigen Reihenfolge umlegen und das
+                Schieben von großen Schachfiguren waren wichtig, um das Spiel spannend und interaktiv zu machen. Für das
+                letzte Level im Spiel haben wir uns auch eine Mechanik überlegt, die Wind simuliert und den Spieler zur
+                Seite schiebt. Um für Spannung zu sorgen haben wir verfolgende KI Entitäten in die Flure der Level
+                programmiert, die auf eigens definierten Bereichen den Spieler verfolgen.
+                <br><br>
+                Auch das Einbauen des User-Interfaces war Arbeit der Developer, da man in Unity direkt UI-Elemente wie
+                das Hauptmenü oder interaktive Tagebuchseiten erstellen kann.
+
+                Laut Git sind seitens der Developer im Laufe des Projekts über 1,5 Millionen Zeilen hinzugefügt und
+                geändert worden.
+
+
+            </p>
+        </div>
+
+        <div id="vfx" class="flex img_large img_large_right">
+            <div class="img_big">
+                <img src="Images/vfx.png">
+            </div>
+            <div class="text_small">
+                <div>
+                    <h2>Visuals / VFX </h2>
+                    <p>Für die Visuals haben wir viel mit Partikelsystemen gearbeitet, um einen einzigartigen Look zu
+                        erzeugen. Dazu verwendeten wir den Visual Effect Graph und erstellten Texturen in Photoshop.
+                        Wir hatten einige Probleme wegen der gewählten Renderpipeline in Unity, die wir aber mit
+                        Post-Processing Effekten lösen konnten.<br><br>
+                        Wo es sinnvoll war haben wir dann noch Sounds für die Effekte eingefügt.
+                        Passend zu den Themes haben wir uns andere visuelle Effekte und Einstellungen überlegt, welche
+                        untereinander abgestimmt sind, um die Immersion nicht zu zerstören. Dahinter gab es einen langen
+                        konzeptionellen Prozess bis zur Umsetzung, bei der wir die Themes und die Effekte immer wieder
+                        verändert haben, bis wir 100 % zufrieden waren.
+
+                    </p>
+                </div>
+            </div>
+        </div>
 
         <div class="flex img_row">
-            <img src="img1.jpg">
-            <img src="img2.jpg">
-            <img src="img3.jpg">
-            <img src="img4.jpg">
-        </div> -->
+            <img src="Images/vfx2.png">
+            <img src="Images/vfx3.png">
+            <img src="Images/vfx4.png">
+            <img src="Images/vfx5.png">
+        </div>
 
+        <div id="music" class="flex img_large img_large_left">
+            <div class="img_big">
+                <img src="Images/sounds.png">
+            </div>
+            <div class="text_small">
+                <div>
+                    <h2>Sounds</h2>
+                    <p>Die Soundgestaltung in Horror-Spielen ist sehr wichtig, denn Sounds erzeugen Gefühle. Für unser
+                        Spiel war vor allem wichtig, mit den Sounds einen Ausgleich zum niedlichen Artstyle zu schaffen.
+                        Die Sounds geben uns ein mächtiges Mittel, um Angst, aber auch Melancholie oder Freude zu
+                        erzeugen. Für unser Spiel haben wir Sounds selbst aufgenommen oder in FL-Studio erstellt und
+                        bearbeitet. Dadurch haben wir eine große Bandbreite an verschiedenen Sounds, mit denen wir
+                        arbeiten können. In Unity haben wir dann die Sounds mit Code kombiniert, um sie im richtigen
+                        Moment zu triggern und die 3D-Soundeinstellungen bearbeitet.<br><br>
+
+                        Für das Title Theme haben wir einen eigenen Beat erstellt und eine Sängerin hat den eigens
+                        geschriebenen Songtext für uns aufgenommen.
+
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        
 
     </div>
 </body>

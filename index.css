@@ -7,12 +7,12 @@
 
 @font-face {
     font-family: handwriting;
-    src: url(Schriften/Handschrift.ttf);
+    src: url(Assets/Schriften/Handschrift.ttf);
 }
 
 @font-face {
     font-family: roboto;
-    src: url(Schriften/Roboto-Thin.ttf);
+    src: url(Assets/Schriften/Roboto-Thin.ttf);
 }
 
 body {
@@ -33,13 +33,15 @@ body {
 
 
 
-h1, h2, h3 {
+h2, h3 {
     font-family: handwriting;
     color: var(--red);
 }
 
 h1 {
     font-size: 45px;
+    color: var(--white);
+    font-family: handwriting;
 }
 
 h2 {
@@ -133,6 +135,41 @@ img {
     object-fit: cover;
 }
 
+.main {
+    margin-top: 110px;
+}
+
+.header {
+    position: fixed; 
+    top: 0;
+    left: 0;
+    background-color: var(--red);
+    width: 100%;
+    height: 40px;
+    padding-top: 20px;
+    margin-right: 20px;
+    text-align: right;
+    font-family: roboto;
+}
+
+.menu a {
+    margin: 0 10px;
+    color: var(--white);
+    text-decoration: none;
+}
+
+.menu a:visited {
+    color: var(--white);
+}
+
+.menu a.last {
+    margin-right: 40px;
+}
+
+#menu_icon {
+    display: none;
+}
+
 @media (max-width: 1400px) {
 
     .img_large_left,
@@ -162,5 +199,26 @@ img {
         width: 25%;
         flex: 1 0 50%;
         object-fit: cover;
+    }
+}
+
+
+@media (max-width: 700px) {
+    h1 {
+        font-size: 40px; 
+    }
+
+    .img_large .text_small, 
+    .img_small .text_big,
+    .flex.text_only {
+        padding: 30px 50px;
+    }
+
+    .menu a {
+        display: none;
+    }
+
+    #menu_icon {
+        display: initial;
     }
 }
