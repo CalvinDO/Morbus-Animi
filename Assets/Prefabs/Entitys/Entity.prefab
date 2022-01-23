@@ -5088,6 +5088,7 @@ MonoBehaviour:
   characterDetectedSpeedIncrease: 0.5
   maxSpeed: 4
   isStationary: 0
+  rotationGoal: {fileID: 0}
   rotationSlerpFactor: 0
 --- !u!195 &1467365877746765642
 NavMeshAgent:
@@ -5277,6 +5278,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6607212347777469975, guid: efdf1db89b0ed9943b030700be01173d, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 4166053133057956847}
+    - target: {fileID: 6607212347777469975, guid: efdf1db89b0ed9943b030700be01173d, type: 3}
+      propertyPath: entityMover
+      value: 
+      objectReference: {fileID: 7994824952847853411}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: efdf1db89b0ed9943b030700be01173d, type: 3}
 --- !u!4 &5770017934688212465 stripped
