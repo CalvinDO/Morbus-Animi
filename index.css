@@ -140,7 +140,7 @@ img {
 }
 
 .header {
-    position: fixed; 
+    position: fixed;
     top: 0;
     left: 0;
     background-color: var(--red);
@@ -174,7 +174,8 @@ img {
 
     .img_large_left,
     .flex.img_large_right,
-    .flex.img_small_left {
+    .flex.img_small_left,
+    .flex.img_small_right {
         flex-direction: column;
     }
 
@@ -200,15 +201,19 @@ img {
         flex: 1 0 50%;
         object-fit: cover;
     }
+
+    img {
+        max-height: 200px
+    }
 }
 
 
 @media (max-width: 700px) {
     h1 {
-        font-size: 40px; 
+        font-size: 40px;
     }
 
-    .img_large .text_small, 
+    .img_large .text_small,
     .img_small .text_big,
     .flex.text_only {
         padding: 30px 50px;
