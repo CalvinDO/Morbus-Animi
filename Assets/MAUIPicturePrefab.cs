@@ -24,6 +24,6 @@ public class MAUIPicturePrefab : MonoBehaviour {
 
     public void Close() {
         this.canvas.gameObject.SetActive(false);
-        this.transform.root.GetComponent<MAMainMenu>().ResumeGame();
+        this.transform.root.GetComponentInChildren<MAMainMenu>().ResumeGame();
     }
 }

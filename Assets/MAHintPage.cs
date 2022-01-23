@@ -2,8 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MAHintPage : MAPictureInteraction
-{
+public class MAHintPage : MAPictureInteraction {
 
     private bool isCurrentlyOpened = false;
 
@@ -11,8 +10,11 @@ public class MAHintPage : MAPictureInteraction
     public override void Update() {
 
         if (this.isCurrentlyOpened) {
+
             if (Input.GetKeyUp(KeyCode.E) && this.isCharacterInTrigger) {
-                Debug.Log("e while opened!");
+
+                this.CloseHintPage();
+
                 return;
             }
         }
@@ -20,10 +22,14 @@ public class MAHintPage : MAPictureInteraction
         base.Update();
     }
 
+    private void CloseHintPage() {
+        this.uiPicturePrefab.Close();
+        this.isCurrentlyOpened = false;
+    }
+
     public override void DoCollectActions() {
 
         this.isCurrentlyOpened = true;
-        //do nothing, because a HintPage is not a diaryPage
     }
 
 }
