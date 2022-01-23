@@ -41,6 +41,11 @@ public class MAPictureInteraction : MAInteractable {
         this.MAInteract();
     }
 
+    private void OnTriggerExit(Collider other) {
+
+        this.isCharacterInTrigger = false;
+    }
+
     public override void MAInteract() {
 
         this.clearText();

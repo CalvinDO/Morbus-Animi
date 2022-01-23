@@ -64,7 +64,7 @@ MonoBehaviour:
   radius: 3
   textDisplay: {fileID: 0}
   hoverTextObject: {fileID: 0}
-  picture: {fileID: 11400000, guid: 048e7fcdb6475ec41bed8b954f0c3496, type: 2}
+  picture: {fileID: 11400000, guid: b609e41e47ef39546a2dded1a513e8db, type: 2}
   uiPicturePrefab: {fileID: 0}
   isCharacterInTrigger: 0
 --- !u!1001 &4283781532969008479
