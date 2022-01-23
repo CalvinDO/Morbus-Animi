@@ -8,52 +8,43 @@ public class MAPictureInteraction : MAInteractable {
 
     public MAPicture picture;
 
-    private MAUIPicturePrefab uiPicturePrefab;
+    [HideInInspector]
+    public MAUIPicturePrefab uiPicturePrefab;
 
-    private bool isCharacterInTrigger = false;
+    [HideInInspector]
+    public bool isCharacterInTrigger = false;
 
 
-    private void Start() {
-
-       
-
-    }
-
-    private void Update() {
-        if (Input.GetKey(KeyCode.E) && this.isCharacterInTrigger) {
+    public virtual void Update() {
+        if (Input.GetKeyUp(KeyCode.E) && this.isCharacterInTrigger) {
             this.uiPicturePrefab = GameObject.Find("PictureUIPrefab").GetComponent<MAUIPicturePrefab>();
-            this.uiPicturePrefab.showPicture(this.picture);
-            MAInventory.instance.AddPicture(this.picture);
+            this.uiPicturePrefab.ShowPicture(this.picture);
 
-            GameObject.Destroy(this.gameObject);
+            this.DoCollectActions();
+
         }
     }
-    public void showNorah() {
-        //this.darkNorah.gameObject.SetActive(true);
 
-        // this.darkNorah.StartMoving();
+    public virtual void DoCollectActions() {
+        MAInventory.instance.AddPicture(this.picture);
+
+        GameObject.Destroy(this.gameObject);
+    }
+
+    void OnDrawGizmosSelected() {
     }
 
     private void OnTriggerStay(Collider other) {
-
-        if (!other.CompareTag("MainCollider")) {
-            return;
-        }
 
         this.isCharacterInTrigger = true;
 
         this.MAInteract();
     }
+
     public override void MAInteract() {
 
         this.clearText();
         base.MAInteract();
 
-
-        /*
-        if (this.darkNorah != null) {
-            canvas.GetComponentInChildren<Button>().onClick.AddListener(this.showNorah);
-        }
-        */
     }
 }

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8613837908406768237}
   - component: {fileID: 8296798261642827105}
   - component: {fileID: 6517351599977837574}
-  m_Layer: 0
+  m_Layer: 24
   m_Name: DiaryPage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -119,6 +119,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 8a6ed34709e59934d83a44d346a707d7, type: 3}
       propertyPath: m_Name
       value: MeshDiaryPage
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 8a6ed34709e59934d83a44d346a707d7, type: 3}
+      propertyPath: m_Layer
+      value: 24
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8a6ed34709e59934d83a44d346a707d7, type: 3}

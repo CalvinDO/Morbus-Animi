@@ -38,7 +38,7 @@ public class MAInventoryController : MonoBehaviour {
 
         MAUIPicturePrefab uiPicturePrefab = GameObject.Find("PictureUIPrefab").GetComponent<MAUIPicturePrefab>();
         try {
-        uiPicturePrefab.showPicture(MAInventory.instance.pictures[index]);
+        uiPicturePrefab.ShowPicture(MAInventory.instance.pictures[index]);
 
         }
         catch {
