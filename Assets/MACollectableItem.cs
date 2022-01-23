@@ -12,7 +12,7 @@ public class MACollectableItem : MonoBehaviour
 
     private bool isCharacterInReach = false;
 
-
+    private bool isAlreadyCollected = false;
 
     // Update is called once per frame
     void Update()
@@ -24,7 +24,8 @@ public class MACollectableItem : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.E)) {
             MAInventory.instance.Add(item);
 
-            GameObject.Destroy(this.gameObject);
+            this.gameObject.SetActive(false);
+            this.isAlreadyCollected = true;
         }
 
 
