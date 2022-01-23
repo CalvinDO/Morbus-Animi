@@ -1129,6 +1129,9 @@ public class MACharacterController : MonoBehaviour {
         }
         this.transform.position = currentCheckpoint.position;
         this.physicalBody.transform.rotation = currentCheckpoint.rotation;
+
+
+        GameObject.Find("MenuManager").GetComponent<MAMainMenu>().PauseGame();
     }
 }
 
