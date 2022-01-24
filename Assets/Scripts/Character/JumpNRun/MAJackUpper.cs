@@ -76,7 +76,7 @@ public class MAJackUpper : MonoBehaviour {
     void Start() {
 
 
-        this.characterController = this.transform.root.GetComponent<MACharacterController>();
+        this.characterController = this.transform.GetComponentInParent<MACharacterController>();
     }
 
 
@@ -109,7 +109,7 @@ public class MAJackUpper : MonoBehaviour {
 
         foreach (Collider obstacle in physicOverlappedObstacles) {
             if (!obstacle.isTrigger) {
-                if (!obstacle.transform.root.GetComponent<MACharacterController>()) {
+                if (!obstacle.transform.GetComponentInParent<MACharacterController>()) {
 
                     filteredColliders.Add(obstacle);
                 }

@@ -10,7 +10,7 @@ public class MAGroundCheck : MonoBehaviour {
 
 
     void Start() {
-        this.characterController = this.transform.root.GetComponent<MACharacterController>();
+        this.characterController = this.transform.GetComponentInParent<MACharacterController>();
     }
 
     private void Update() {

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,7 +18,13 @@ public class MAFanSpinner : MonoBehaviour {
     public MAWindZone MAWindZone;
     public AudioSource[] audioSources;
 
-    public bool isCharacterOnFan = false;
+
+
+    public bool transportsCharacter = false;
+
+    public MACharacterController transportedCharacter;
+
+
 
     // Start is called before the first frame update
     void Start() {
@@ -49,10 +56,34 @@ public class MAFanSpinner : MonoBehaviour {
 
         this.transform.Rotate(axisVector * this.spinSpeed * Time.deltaTime);
 
+        if (this.transportsCharacter) {
 
+            this.transportedCharacter.transform.rotation = Quaternion.identity;
+        }
 
     }
 
+    public void TransportCharacter(MACharacterController characterController) {
+
+        this.transportedCharacter = characterController;
+        this.transportedCharacter.transform.parent = this.transform;
+        this.transportsCharacter = true;
+    }
+
+
+    public void ReleaseCharacter() {
+
+        if (!this.transportsCharacter) {
+            return;
+        }
+
+        this.transportedCharacter.transform.parent = null;
+
+        this.transportedCharacter = null;
+
+        this.transportsCharacter = false;
+
+    }
 
     public void Stop() {
 
