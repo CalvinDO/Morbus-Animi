@@ -522,6 +522,54 @@ ModelImporter:
   - first:
       74: 9205268135880581712
     second: Spinning_Floor_Fans.001|Vent_Entry_DoorAction
+  - first:
+      74: -7893129585963339129
+    second: Spinning_Floor_Fans.002|Exit.001Action
+  - first:
+      74: 8690513879698291399
+    second: Spinning_Floor_Fans.002|Interactive_DoorAction
+  - first:
+      74: -5132562207938993757
+    second: Spinning_Floor_Fans.002|LevlerAction
+  - first:
+      74: 7439223029138980385
+    second: Spinning_Floor_Fans.002|Vent_Entry_DoorAction
+  - first:
+      74: -930105106767358009
+    second: Spinning_Floor_Fans.003|Exit.001Action
+  - first:
+      74: -7914441927863929451
+    second: Spinning_Floor_Fans.003|Interactive_DoorAction
+  - first:
+      74: -8517018111999903394
+    second: Spinning_Floor_Fans.003|LevlerAction
+  - first:
+      74: -7769046525010774726
+    second: Spinning_Floor_Fans.003|Vent_Entry_DoorAction
+  - first:
+      74: 4146758201473592639
+    second: Spinning_Floor_Fans.004|Exit.001Action
+  - first:
+      74: -7938186734132851560
+    second: Spinning_Floor_Fans.004|Interactive_DoorAction
+  - first:
+      74: 5575232703244717874
+    second: Spinning_Floor_Fans.004|LevlerAction
+  - first:
+      74: 2313679659682018716
+    second: Spinning_Floor_Fans.004|Vent_Entry_DoorAction
+  - first:
+      74: -2636099694183280001
+    second: Spinning_Floor_Fans.005|Exit.001Action
+  - first:
+      74: -8086383320264463760
+    second: Spinning_Floor_Fans.005|Interactive_DoorAction
+  - first:
+      74: -3547492858752711802
+    second: Spinning_Floor_Fans.005|LevlerAction
+  - first:
+      74: -1573376232056020473
+    second: Spinning_Floor_Fans.005|Vent_Entry_DoorAction
   externalObjects: {}
   materials:
     materialImportMode: 2
