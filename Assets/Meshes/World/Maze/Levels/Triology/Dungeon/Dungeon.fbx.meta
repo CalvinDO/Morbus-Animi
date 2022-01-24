@@ -510,6 +510,18 @@ ModelImporter:
   - first:
       74: -4663551809198175397
     second: Wind_fan|Vent_Entry_DoorAction
+  - first:
+      74: 990546403629450705
+    second: Spinning_Floor_Fans.001|Exit.001Action
+  - first:
+      74: 5142991659472215165
+    second: Spinning_Floor_Fans.001|Interactive_DoorAction
+  - first:
+      74: -5791050255512159200
+    second: Spinning_Floor_Fans.001|LevlerAction
+  - first:
+      74: 9205268135880581712
+    second: Spinning_Floor_Fans.001|Vent_Entry_DoorAction
   externalObjects: {}
   materials:
     materialImportMode: 2
