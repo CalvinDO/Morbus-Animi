@@ -112,4 +112,9 @@ public class MAFootSteps : MonoBehaviour {
 
         return this.liftClips[UnityEngine.Random.Range(0, liftClips.Length)];
     }
+
+    public void DieFinished() {
+        MACharacterController characterController = this.transform.root.GetComponent<MACharacterController>();
+        characterController.DieFinished();
+    }
 }

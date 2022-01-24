@@ -2581,6 +2581,7 @@ GameObject:
   - component: {fileID: 5097181980327286686}
   - component: {fileID: 107369939432427482}
   - component: {fileID: 5039597740886285229}
+  - component: {fileID: 7678972642198128899}
   m_Layer: 0
   m_Name: Rug
   m_TagString: Untagged
@@ -2651,6 +2652,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &7678972642198128899
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3537337896370095109}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 6596421120192813242, guid: 5bb811db45992d146b197b6f8d7fc9a8, type: 3}
 --- !u!1 &3756321364609237013
 GameObject:
   m_ObjectHideFlags: 0

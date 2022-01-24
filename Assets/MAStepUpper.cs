@@ -52,7 +52,7 @@ public class MAStepUpper : MonoBehaviour {
 
     private void StepClimb() {
 
-        LayerMask mask = LayerMask.GetMask("Default", "Wall", "MA_NavMesh", "LayerMask", "SeeThrough");
+        LayerMask mask = LayerMask.GetMask("Default",  "MA_NavMesh", "LayerMask", "SeeThrough");
 
         Debug.DrawRay(this.stepRayLower.position, this.transform.forward * this.lowerRayDistance, Color.red);
         Debug.DrawRay(this.stepRayUpper.position, this.transform.forward * this.upperRayDistance, Color.blue);

@@ -254,6 +254,10 @@ public class MACharacterController : MonoBehaviour {
     [HideInInspector]
     public bool isSteppingUp;
 
+
+    private bool isDieing = false;
+
+
     public void Start() {
 
         this.currentXRotation = 0;
@@ -275,6 +279,10 @@ public class MACharacterController : MonoBehaviour {
 
     void Update() {
 
+        if (this.isDieing) {
+            return;
+        }
+
         this.CalculateMovement();
 
         this.CalculateSpeedAverage();
@@ -287,6 +295,7 @@ public class MACharacterController : MonoBehaviour {
 
         this.ManageSuicide();
 
+        this.ManageDie();
 
         this.CheckFall();
 
@@ -333,6 +342,9 @@ public class MACharacterController : MonoBehaviour {
     }
 
     private void FixedUpdate() {
+        if (this.isDieing) {
+            return;
+        }
 
         //this.CalculateAimRotation();
 
@@ -1105,7 +1117,7 @@ public class MACharacterController : MonoBehaviour {
 
         this.isGrounded = true;
 
-        
+
 
         this.lastCollidedWall = null;
         this.lastJumpedWall = null;
@@ -1130,18 +1142,48 @@ public class MACharacterController : MonoBehaviour {
 
     public void Die() {
 
+        this.animator.SetBool("Die", true);
+
+        this.isDieing = true;
+
+    }
+
+
+    public void ManageDie() {
+        if (this.isDieing) {
+
+        }
+    }
+
+
+    public void DieFinished() {
+
+        this.isDieing = false;
+
         Transform currentCheckpoint = GameObject.FindObjectOfType<MACheckpointManager>().currentCheckpoint;
 
         if (currentCheckpoint == null) {
             this.transform.position = Vector3.zero;
             this.physicalBody.transform.rotation = Quaternion.identity;
-            return;
+
         }
-        this.transform.position = currentCheckpoint.position;
-        this.physicalBody.transform.rotation = currentCheckpoint.rotation;
+        else {
+            this.transform.position = currentCheckpoint.position;
+            this.physicalBody.transform.rotation = currentCheckpoint.rotation;
+        }
 
 
-        GameObject.Find("MenuManager").GetComponent<MAMainMenu>().PauseGame();
+
+
+        this.animator.SetBool("Die", false);
+
+
+
+        MAMainMenu mainMenu = GameObject.Find("MenuManager").GetComponent<MAMainMenu>();
+        mainMenu.menuCanvas.gameObject.SetActive(true);
+        mainMenu.PauseGame();
+
+
     }
 }
 

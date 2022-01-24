@@ -8,4 +8,8 @@ public class MADeathZone : MonoBehaviour {
     void OnTriggerEnter(Collider characterCollider) {
         characterCollider.transform.root.GetComponent<MACharacterController>().Die();
     }
+
+    void OnCollisionEnter(Collider characterCollider) {
+        characterCollider.transform.root.GetComponent<MACharacterController>().Die();
+    }
 }
