@@ -145,7 +145,7 @@ public class MACharacterController : MonoBehaviour {
     public float camSlerpFactor;
 
 
-    private bool isSprinting = false;
+    public bool isSprinting = false;
     private float timeSinceSprintStarted = 0;
     public float slideSpeedThreshhold;
     public float SprintFOVLerpFactor;
@@ -251,6 +251,9 @@ public class MACharacterController : MonoBehaviour {
 
     public bool isFalling = false;
 
+    [HideInInspector]
+    public bool isSteppingUp;
+
     public void Start() {
 
         this.currentXRotation = 0;
@@ -294,6 +297,9 @@ public class MACharacterController : MonoBehaviour {
 
     private void CheckFall() {
 
+        if (this.isSteppingUp) {
+            return;
+        }
         if (!this.isGrounded) {
 
             if (this.rb.velocity.y < 0) {
@@ -1086,6 +1092,10 @@ public class MACharacterController : MonoBehaviour {
     }
 
     public void Ground() {
+
+        if (this.isSteppingUp) {
+            return;
+        }
 
         if (!this.isGrounded) {
             if (!this.isPerformingSoloJumpNRunMove) {

@@ -16,6 +16,8 @@ public class MAFootSteps : MonoBehaviour {
     private AudioSource audioSource;
     private TerrainDetector terrainDetector;
 
+    
+
     private void Awake() {
         this.audioSource = GetComponent<AudioSource>();
         //this.terrainDetector = new TerrainDetector();

@@ -9,17 +9,32 @@ public class MAStepUpper : MonoBehaviour {
 
     [Range(0, 1)]
     public float stepHeight;
-    [Range(0, 1)]
+    [Range(0, .1f)]
     public float stepSpeed;
+
+    [Range(0, .1f)]
+    public float stepForwardSpeed;
+
+    [Range(0, 1)]
+    public float lowerRayDistance;
+    [Range(0, 1)]
+    public float upperRayDistance;
+
+    [Range(0, .5f)]
+    public float afterStepAnimationsDelay;
+
+    private float remainingTimeAfterStepAnimationsDelay;
 
     private MACharacterController characterController;
 
     void Start() {
         this.characterController = this.transform.root.GetComponent<MACharacterController>();
+
+        this.remainingTimeAfterStepAnimationsDelay = this.afterStepAnimationsDelay;
     }
 
     private void Awake() {
-        this.stepRayUpper.position = new Vector3(this.stepRayUpper.position.x, this.stepHeight, this.stepRayUpper.position.z);
+        this.stepRayUpper.localPosition = new Vector3(this.stepRayUpper.localPosition.x, this.stepHeight, this.stepRayUpper.localPosition.z);
     }
 
     // Update is called once per frame
@@ -27,18 +42,82 @@ public class MAStepUpper : MonoBehaviour {
         this.StepClimb();
     }
 
+    void Update() {
+        if (!this.characterController.isSteppingUp) {
+            return;
+        }
+
+        this.remainingTimeAfterStepAnimationsDelay -= Time.deltaTime;
+    }
+
     private void StepClimb() {
-        RaycastHit hitLower;
 
-        if (Physics.Raycast(this.stepRayLower.position, this.transform.forward, out hitLower, 0.1f)) {
-            RaycastHit hitUpper;
+        LayerMask mask = LayerMask.GetMask("Default", "Wall", "MA_NavMesh", "LayerMask", "SeeThrough");
 
-            Debug.Log("collider lower");
-            if (!Physics.Raycast(this.stepRayUpper.position, this.transform.forward, out hitUpper, 0.2f)) {
-                this.characterController.transform.position += new Vector3(0, this.stepSpeed);
-                Debug.Log("not collider upper");
+        Debug.DrawRay(this.stepRayLower.position, this.transform.forward * this.lowerRayDistance, Color.red);
+        Debug.DrawRay(this.stepRayUpper.position, this.transform.forward * this.upperRayDistance, Color.blue);
 
+
+
+        if (Physics.Raycast(this.stepRayLower.position, this.transform.forward, out _, this.lowerRayDistance, mask)) {
+
+
+            if (!Physics.Raycast(this.stepRayUpper.position, this.transform.forward, out _, this.upperRayDistance, mask)) {
+
+                float currentStepSpeed = this.stepSpeed * (this.characterController.isSprinting ? 2 : 1);
+
+                this.characterController.transform.position += new Vector3(0, currentStepSpeed) + this.stepForwardSpeed * this.transform.forward;
+                this.characterController.isGrounded = true;
+
+                this.characterController.isSteppingUp = true;
+                this.remainingTimeAfterStepAnimationsDelay = this.afterStepAnimationsDelay;
+
+                return;
             }
+        }
+
+        if (Physics.Raycast(this.stepRayLower.position, this.transform.TransformDirection(1.5f, 0, 1f), out _, this.lowerRayDistance, mask)) {
+
+
+            if (!Physics.Raycast(this.stepRayUpper.position, this.transform.forward, out _, this.upperRayDistance, mask)) {
+
+                float currentStepSpeed = this.stepSpeed * (this.characterController.isSprinting ? 2 : 1);
+
+                this.characterController.transform.position += new Vector3(0, currentStepSpeed) + this.stepForwardSpeed * this.transform.forward;
+                this.characterController.isGrounded = true;
+
+                this.characterController.isSteppingUp = true;
+                this.remainingTimeAfterStepAnimationsDelay = this.afterStepAnimationsDelay;
+
+                return;
+            }
+        }
+
+
+
+        if (Physics.Raycast(this.stepRayLower.position, this.transform.TransformDirection(-1.5f, 0, 1f), out _, this.lowerRayDistance, mask)) {
+
+
+            if (!Physics.Raycast(this.stepRayUpper.position, this.transform.forward, out _, this.upperRayDistance, mask)) {
+
+                float currentStepSpeed = this.stepSpeed * (this.characterController.isSprinting ? 2 : 1);
+
+                this.characterController.transform.position += new Vector3(0, currentStepSpeed) + this.stepForwardSpeed * this.transform.forward;
+                this.characterController.isGrounded = true;
+
+                this.characterController.isSteppingUp = true;
+                this.remainingTimeAfterStepAnimationsDelay = this.afterStepAnimationsDelay;
+
+                return;
+            }
+        }
+
+
+
+
+        if (this.remainingTimeAfterStepAnimationsDelay <= 0) {
+            this.characterController.isSteppingUp = false;
+            this.remainingTimeAfterStepAnimationsDelay = this.afterStepAnimationsDelay;
         }
     }
 }
