@@ -299,6 +299,8 @@ public class MACharacterController : MonoBehaviour {
 
         this.CheckFall();
 
+        this.transform.rotation = Quaternion.identity;
+
         this.framesTillStart++;
         this.millisecondsSinceStart += Time.deltaTime;
         this.scaledTimeSinceStart += Time.deltaTime;
@@ -1151,6 +1153,7 @@ public class MACharacterController : MonoBehaviour {
 
         this.isDieing = true;
 
+        this.jackUpper.SetJackUpCompleted();
     }
 
 

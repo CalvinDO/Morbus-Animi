@@ -59,14 +59,15 @@ public class MAFanSpinner : MonoBehaviour {
 
         if (this.transportsCharacter) {
 
-            this.transportedCharacter.transform.rotation = Quaternion.identity;
-            //this.transportedCharacter.physicalBody.transform.Rotate(rotationVector);
+            this.transportedCharacter.physicalBody.transform.Rotate(rotationVector);
         }
 
     }
 
     public void TransportCharacter(MACharacterController characterController) {
 
+
+        Debug.Log("Transport Character");
         this.transportedCharacter = characterController;
         this.transportedCharacter.transform.parent = this.transform;
         this.transportsCharacter = true;

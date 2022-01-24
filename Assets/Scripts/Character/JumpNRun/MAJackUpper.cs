@@ -341,10 +341,12 @@ public class MAJackUpper : MonoBehaviour {
         this.attachedStandingPoint.parent = this.transform;
 
 
-        if (this.characterController.transform.parent == this.attachedGameObject.transform) {
-            this.characterController.transform.parent = null;
-        }
+        if (this.attachedGameObject != null) {
 
+            if (this.characterController.transform.parent == this.attachedGameObject.transform) {
+                this.characterController.transform.parent = null;
+            }
+        }
 
         this.attachedGameObject = null;
 
@@ -479,7 +481,7 @@ public class MAJackUpper : MonoBehaviour {
         this.isHeightReached = true;
     }
 
-    private void SetJackUpCompleted() {
+    public void SetJackUpCompleted() {
 
         this.characterController.animator.ResetTrigger("HangLiftUp");
         this.characterController.animator.ResetTrigger("Catpass");
