@@ -14,7 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: DefaultDiary
   icon: {fileID: 21300000, guid: 67f9909cc666ca5489639c8ddeacc7f1, type: 3}
-  description: "Gehe nach rechts und \xF6ffne die T\xFCre.\nWenn das nicht klappt
-    dann gehe den Weg\nden du gekommen bist zur\xFCck"
+  description: "Ich wei\xDF dieses Haus macht dir noch zu schaffen.\nDie riesige
+    Umstellung die du ertragen musstest. \nDas ist eine Herausforderung f\xFCr dich,
+    aber ich bin sicher\ndu kannst sie meistern mein Schatz.\n\nIch habe dir noch
+    etwas zu essen hingestellt,\nfalls du noch Hunger bekommst bevor du schlafen
+    gehst. \n\nPS: Das Haus ist wirklich gro\xDF, die K\xFCche ist rechts. \nVerirr
+    dich nicht\n\nIn Liebe"
   value: 0
   image: {fileID: 0}
