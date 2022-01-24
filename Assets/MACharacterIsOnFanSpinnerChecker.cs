@@ -12,14 +12,11 @@ public class MACharacterIsOnFanSpinnerChecker : MonoBehaviour {
 
     void OnCollisionStay(Collision characterCollider) {
 
-       MACharacterController characterController = characterCollider.transform.GetComponentInParent<MACharacterController>();
+        MACharacterController characterController = characterCollider.transform.GetComponentInParent<MACharacterController>();
         this.fanSpinner.TransportCharacter(characterController);
-      
-
-     
     }
 
-    void OnTriggerExit(Collider characterCollider) {
+    void OnCollisionExit(Collision characterCollider) {
 
         this.fanSpinner.ReleaseCharacter();
 

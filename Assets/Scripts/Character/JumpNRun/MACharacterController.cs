@@ -369,6 +369,7 @@ public class MACharacterController : MonoBehaviour {
             return;
         }
 
+        Debug.Log("setting physicalbody rotation!");
         this.physicalBody.transform.rotation = Quaternion.Slerp(this.physicalBody.transform.rotation, this.goalDirectionRotation, this.directionRotationSlerpFactor);
     }
 

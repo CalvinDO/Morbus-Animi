@@ -15,9 +15,12 @@ public class MAJackUpper : MonoBehaviour {
 
     private MACharacterController characterController;
 
-    private Vector3 attachedEdgePoint;
-    private Vector3 attachedStandingPoint;
+    [SerializeField]
+    private Transform attachedEdgePoint;
+    [SerializeField]
+    private Transform attachedStandingPoint;
 
+    private GameObject attachedGameObject;
 
     [Range(0, 10)]
     public float obstacleCollectorRadius;
@@ -102,7 +105,7 @@ public class MAJackUpper : MonoBehaviour {
 
     public Collider[] GetCurrentObstacles() {
 
-        Collider[] physicOverlappedObstacles = Physics.OverlapSphere(this.attachedStandingPoint, this.obstacleCollectorRadius, 13);
+        Collider[] physicOverlappedObstacles = Physics.OverlapSphere(this.attachedStandingPoint.position, this.obstacleCollectorRadius, 13);
 
 
         List<Collider> filteredColliders = new List<Collider>();
@@ -185,7 +188,10 @@ public class MAJackUpper : MonoBehaviour {
 
                         Debug.DrawLine(this.handUpMaxPosition.position, standingPoint, Color.green);
 
-                        this.attachedEdgePoint = closestPoint;
+                        this.attachedEdgePoint.position = closestPoint;
+
+                        this.attachedGameObject = ledgeCandidateCollider.gameObject;
+
                         this.DecideCatpassOrHang(standingPoint, sameYCharacterStandingPoint);
 
 
@@ -238,14 +244,14 @@ public class MAJackUpper : MonoBehaviour {
 
         if (this.isHanging) {
             //Debug.Log("hang: " + this.isHanging + "  |||   catpass: " + this.isCatpassing);
-            Gizmos.DrawWireSphere(this.attachedStandingPoint, 0.2f);
+            Gizmos.DrawWireSphere(this.attachedStandingPoint.position, 0.2f);
             return;
         }
 
         if (this.isCatpassing) {
             // Debug.Log("hang: " + this.isHanging + "  |||   catpass: " + this.isCatpassing);
 
-            Gizmos.DrawSphere(this.attachedStandingPoint, 0.2f);
+            Gizmos.DrawSphere(this.attachedStandingPoint.position, 0.2f);
         }
 
     }
@@ -276,23 +282,18 @@ public class MAJackUpper : MonoBehaviour {
 
         this.characterController.SetPerformingSoloJumpNRunMove(true);
 
-        this.SetHandsOnLedge(this.attachedEdgePoint);
+        this.SetHandsOnLedge(this.attachedEdgePoint.position);
 
+
+        this.attachedEdgePoint.parent = this.attachedGameObject.transform;
+        this.attachedStandingPoint.parent = this.attachedGameObject.transform;
+        this.characterController.transform.parent = this.attachedGameObject.transform;
     }
 
 
     private void SetHandsOnLedge(Vector3 closestPoint) {
         this.armRig.weight = 1;
 
-        //this.leftHandTarget.LookAt(closestPoint);
-        // this.rightHandTarget.LookAt(closestPoint);
-
-        //this.leftHandTarget.Rotate(Vector3.up * 180);
-        // this.rightHandTarget.Rotate(Vector3.up * 180);
-
-
-        //this.leftHand.localRotation = Quaternion.identity;
-        //this.rightHand.localRotation = Quaternion.identity;
 
 
         this.leftHandTarget.position = closestPoint;
@@ -303,8 +304,6 @@ public class MAJackUpper : MonoBehaviour {
         this.leftHandTarget.Translate(this.leftHandTarget.forward * this.handSpreadDistance);
         this.rightHandTarget.Translate(this.rightHandTarget.forward * this.handSpreadDistance);
 
-        // this.leftHand.LookAt(closestPoint);
-        //this.rightHand.LookAt(closestPoint);
     }
 
     private void FreeHandsFromLedge() {
@@ -312,7 +311,7 @@ public class MAJackUpper : MonoBehaviour {
     }
 
     private void RotateCharacterTowardsAttachedPoint() {
-        this.characterController.physicalBody.transform.LookAt(new Vector3(this.attachedStandingPoint.x, this.characterController.transform.position.y, this.attachedStandingPoint.z));
+        this.characterController.physicalBody.transform.LookAt(new Vector3(this.attachedStandingPoint.position.x, this.characterController.transform.position.y, this.attachedStandingPoint.position.z));
     }
 
     private void DiscardLedge() {
@@ -331,11 +330,23 @@ public class MAJackUpper : MonoBehaviour {
         this.isUpjackingEnabled = true;
         this.isReadyToHangLift = false;
 
-        this.attachedStandingPoint = Vector3.zero;
-        this.attachedEdgePoint = Vector3.zero;
+        this.attachedStandingPoint.position = Vector3.zero;
+        this.attachedEdgePoint.position = Vector3.zero;
 
         this.characterController.movementEnabled = true;
 
+
+
+        this.attachedEdgePoint.parent = this.transform;
+        this.attachedStandingPoint.parent = this.transform;
+
+
+        if (this.characterController.transform.parent == this.attachedGameObject.transform) {
+            this.characterController.transform.parent = null;
+        }
+
+
+        this.attachedGameObject = null;
 
         this.FreeHandsFromLedge();
 
@@ -349,7 +360,7 @@ public class MAJackUpper : MonoBehaviour {
         this.isCatpassing = false;
         this.isAttached = true;
 
-        this.attachedStandingPoint = closestPoint;
+        this.attachedStandingPoint.position = closestPoint;
 
         this.isUpjackingEnabled = false;
 
@@ -391,7 +402,7 @@ public class MAJackUpper : MonoBehaviour {
 
     private void LerpCharacterToHangPos() {
 
-        Vector3 hangPos = new Vector3(this.attachedEdgePoint.x, (this.attachedStandingPoint - this.handUpMaxPosition.localPosition).y, this.attachedEdgePoint.z);
+        Vector3 hangPos = new Vector3(this.attachedEdgePoint.position.x, (this.attachedStandingPoint.position - this.handUpMaxPosition.localPosition).y, this.attachedEdgePoint.position.z);
 
         Vector3 hangPosToCharXZDirection = this.characterController.transform.position - hangPos;
         hangPosToCharXZDirection.y = 0;
@@ -409,7 +420,7 @@ public class MAJackUpper : MonoBehaviour {
         this.isCatpassing = true;
         this.isAttached = true;
 
-        this.attachedStandingPoint = closestPoint;
+        this.attachedStandingPoint.position = closestPoint;
 
 
         this.isUpjackingEnabled = true;
@@ -423,7 +434,7 @@ public class MAJackUpper : MonoBehaviour {
     private void CheckCharacterInputTowardsLedge() {
 
 
-        if (this.IsCharacterInputTowardsLedge(this.attachedStandingPoint)) {
+        if (this.IsCharacterInputTowardsLedge(this.attachedStandingPoint.position)) {
 
             if (this.isUpjackingEnabled) {
 
@@ -475,18 +486,20 @@ public class MAJackUpper : MonoBehaviour {
 
         this.characterController.SetPerformingSoloJumpNRunMove(false);
 
+
+
         this.DiscardLedge();
     }
 
     private void LiftUpCatpass() {
-        Vector3 characterArrivedPosition = new Vector3(this.characterController.transform.position.x, this.attachedStandingPoint.y + this.liftUpExtraThreshhold, this.characterController.transform.position.z);
+        Vector3 characterArrivedPosition = new Vector3(this.characterController.transform.position.x, this.attachedStandingPoint.position.y + this.liftUpExtraThreshhold, this.characterController.transform.position.z);
 
         this.characterController.transform.position = Vector3.Slerp(this.characterController.transform.position, characterArrivedPosition, this.catpassSlerpFactor);
     }
 
 
     private void LiftUpHang() {
-        Vector3 characterArrivedPosition = new Vector3(this.characterController.transform.position.x, this.attachedStandingPoint.y + this.liftUpExtraThreshhold, this.characterController.transform.position.z);
+        Vector3 characterArrivedPosition = new Vector3(this.characterController.transform.position.x, this.attachedStandingPoint.position.y + this.liftUpExtraThreshhold, this.characterController.transform.position.z);
 
         this.characterController.transform.position = Vector3.Slerp(this.characterController.transform.position, characterArrivedPosition, this.hangSlerpFactor);
     }
@@ -494,7 +507,7 @@ public class MAJackUpper : MonoBehaviour {
 
 
     private void LiftPlanar() {
-        Vector3 characterArrivedPosition = this.attachedStandingPoint;
+        Vector3 characterArrivedPosition = this.attachedStandingPoint.position;
 
 
         this.characterController.transform.position = Vector3.Lerp(this.characterController.transform.position, characterArrivedPosition, this.catpassSlerpFactor);
@@ -508,7 +521,7 @@ public class MAJackUpper : MonoBehaviour {
             return;
         }
 
-        this.SetHandsOnLedge(this.attachedEdgePoint);
+        this.SetHandsOnLedge(this.attachedEdgePoint.position);
 
         if (!this.isUpjackingEnabled) {
             return;
@@ -516,7 +529,7 @@ public class MAJackUpper : MonoBehaviour {
 
 
 
-        if (this.attachedStandingPoint == Vector3.zero) {
+        if (this.attachedStandingPoint.position == Vector3.zero) {
             Debug.LogError("Character attached but attached Point is Zero!");
         }
 
@@ -539,16 +552,19 @@ public class MAJackUpper : MonoBehaviour {
         }
 
 
-        if (this.attachedStandingPoint != Vector3.zero) {
+        if (this.attachedStandingPoint.position != Vector3.zero) {
 
-            if (this.characterController.transform.position.y >= this.attachedStandingPoint.y) {
+            if (this.characterController.transform.position.y >= this.attachedStandingPoint.position.y) {
                 this.SetHeightReached();
             }
 
         }
 
-        Vector3 XZDistanceToClosestPointVector = this.attachedStandingPoint - new Vector3(this.characterController.transform.position.x, this.attachedStandingPoint.y, this.characterController.transform.position.z);
+        Vector3 XZDistanceToClosestPointVector = this.attachedStandingPoint.position - new Vector3(this.characterController.transform.position.x, this.attachedStandingPoint.position.y, this.characterController.transform.position.z);
         float xzdistanceToClosestPoint = XZDistanceToClosestPointVector.magnitude;
+
+
+        Debug.Log(xzdistanceToClosestPoint);
 
         if (xzdistanceToClosestPoint < this.xzDistanceToClosestPointThreshhold) {
             this.SetJackUpCompleted();

@@ -53,12 +53,14 @@ public class MAFanSpinner : MonoBehaviour {
                 break;
         }
 
+        Vector3 rotationVector = axisVector * this.spinSpeed * Time.deltaTime;
 
-        this.transform.Rotate(axisVector * this.spinSpeed * Time.deltaTime);
+        this.transform.Rotate(rotationVector);
 
         if (this.transportsCharacter) {
 
             this.transportedCharacter.transform.rotation = Quaternion.identity;
+            //this.transportedCharacter.physicalBody.transform.Rotate(rotationVector);
         }
 
     }
