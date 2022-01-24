@@ -15,8 +15,8 @@ public class MADeathZone : MonoBehaviour {
         characterController.Die();
     }
 
-    void OnCollisionEnter(Collider characterCollider) {
-        MACharacterController characterController = characterCollider.transform.root.GetComponent<MACharacterController>();
+    void OnCollisionEnter(Collision characterCollision) {
+        MACharacterController characterController = characterCollision.transform.root.GetComponent<MACharacterController>();
 
         if (characterController.isDieing) {
             return;
