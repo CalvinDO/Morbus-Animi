@@ -48,10 +48,14 @@ public class MAFanSpinner : MonoBehaviour {
 
 
         this.transform.Rotate(axisVector * this.spinSpeed * Time.deltaTime);
+
+
+
     }
 
 
     public void Stop() {
+
         this.isSpinning = false;
         this.windZone.windMain = 0;
         this.MAWindZone.isRunnning = false;

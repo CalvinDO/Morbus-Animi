@@ -7,7 +7,7 @@ EditorBuildSettings:
   m_Scenes:
   - enabled: 1
     path: Assets/Scenes/UI/NewMainMenu.unity
-    guid: 77b27de3610bff1428ec071e27d3d354
+    guid: 6b865d143d57e254c949d723e8be5477
   - enabled: 1
     path: Assets/Scenes/Levels/Triology/MainHallwayScene/MainHallwayScene.unity
     guid: 14846301b410ddf46bfd06b0c53c673f
