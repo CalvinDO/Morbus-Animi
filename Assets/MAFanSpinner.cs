@@ -17,6 +17,7 @@ public class MAFanSpinner : MonoBehaviour {
     public MAWindZone MAWindZone;
     public AudioSource[] audioSources;
 
+    public bool isCharacterOnFan = false;
 
     // Start is called before the first frame update
     void Start() {
@@ -59,5 +60,10 @@ public class MAFanSpinner : MonoBehaviour {
             audioSource.Stop();
         }
 
+    }
+
+
+    void OnTriggerStay(Collider characterCollider) {
+        Debug.Log("character is On spinner!");
     }
 }

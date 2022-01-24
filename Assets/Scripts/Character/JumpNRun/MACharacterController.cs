@@ -255,7 +255,7 @@ public class MACharacterController : MonoBehaviour {
     public bool isSteppingUp;
 
 
-    private bool isDieing = false;
+    public bool isDieing = false;
 
 
     public void Start() {
@@ -327,6 +327,10 @@ public class MACharacterController : MonoBehaviour {
     }
 
     private void ManageSuicide() {
+
+        if (this.isDieing) {
+            return;
+        }
         if (Input.GetKeyUp(KeyCode.Backspace)) {
             this.Die();
         }
