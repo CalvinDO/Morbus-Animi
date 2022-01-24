@@ -6,7 +6,7 @@ using UnityEngine;
 public class MADeathZone : MonoBehaviour {
 
     void OnTriggerEnter(Collider characterCollider) {
-        MACharacterController characterController = characterCollider.transform.root.GetComponent<MACharacterController>();
+        MACharacterController characterController = characterCollider.transform.GetComponentInParent<MACharacterController>();
 
         if (characterController.isDieing) {
             return;
@@ -16,7 +16,7 @@ public class MADeathZone : MonoBehaviour {
     }
 
     void OnCollisionEnter(Collision characterCollision) {
-        MACharacterController characterController = characterCollision.transform.root.GetComponent<MACharacterController>();
+        MACharacterController characterController = characterCollision.transform.GetComponentInParent<MACharacterController>();
 
         if (characterController.isDieing) {
             return;

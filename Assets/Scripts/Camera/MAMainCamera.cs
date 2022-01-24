@@ -23,7 +23,7 @@ public class MAMainCamera : MonoBehaviour {
 
 
     void Start() {
-        this.characterController = this.transform.root.GetComponent<MACharacterController>();
+        this.characterController = this.transform.GetComponentInParent<MACharacterController>();
 
 
         this.cameraOffset = this.characterController.thirdPCameraGoal.localPosition;

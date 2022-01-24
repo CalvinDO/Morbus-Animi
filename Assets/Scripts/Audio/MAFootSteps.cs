@@ -114,7 +114,7 @@ public class MAFootSteps : MonoBehaviour {
     }
 
     public void DieFinished() {
-        MACharacterController characterController = this.transform.root.GetComponent<MACharacterController>();
+        MACharacterController characterController = this.transform.GetComponentInParent<MACharacterController>();
         characterController.DieFinished();
     }
 }

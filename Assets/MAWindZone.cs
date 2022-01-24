@@ -26,7 +26,7 @@ public class MAWindZone : MonoBehaviour {
             return;
         }
 
-        MACharacterController characterController = other.transform.root.GetComponent<MACharacterController>();
+        MACharacterController characterController = other.transform.GetComponentInParent<MACharacterController>();
 
 
         if (characterController == null) {
