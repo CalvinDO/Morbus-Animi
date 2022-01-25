@@ -81,6 +81,8 @@ public class MAFanSpinner : MonoBehaviour {
         }
 
         this.transportedCharacter.transform.parent = null;
+        DontDestroyOnLoad(this.transportedCharacter);
+
 
         this.transportedCharacter = null;
 

@@ -14,11 +14,20 @@ public class MAPictureInteraction : MAInteractable {
     [HideInInspector]
     public bool isCharacterInTrigger = false;
 
+    public AudioSource audioSource;
+    public AudioClip openSound;
+
 
     public virtual void Update() {
         if (Input.GetKeyUp(KeyCode.E) && this.isCharacterInTrigger) {
             this.uiPicturePrefab = GameObject.Find("PictureUIPrefab").GetComponent<MAUIPicturePrefab>();
             this.uiPicturePrefab.ShowPicture(this.picture);
+
+            if (this.audioSource != null) {
+                if (this.openSound != null) {
+                    this.audioSource.PlayOneShot(this.openSound);
+                }
+            }
 
             this.DoCollectActions();
 

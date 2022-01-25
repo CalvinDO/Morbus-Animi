@@ -345,6 +345,8 @@ public class MAJackUpper : MonoBehaviour {
 
             if (this.characterController.transform.parent == this.attachedGameObject.transform) {
                 this.characterController.transform.parent = null;
+
+                GameObject.DontDestroyOnLoad(this.characterController.gameObject);
             }
         }
 

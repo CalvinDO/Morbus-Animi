@@ -14,6 +14,10 @@ public class MACollectableItem : MonoBehaviour
 
     private bool isAlreadyCollected = false;
 
+
+    public AudioSource collectAudio;
+    public AudioClip keyPickupSound;
+
     // Update is called once per frame
     void Update()
     {
@@ -26,6 +30,8 @@ public class MACollectableItem : MonoBehaviour
 
             this.gameObject.SetActive(false);
             this.isAlreadyCollected = true;
+
+            this.collectAudio.PlayOneShot(this.keyPickupSound);
         }
 
 

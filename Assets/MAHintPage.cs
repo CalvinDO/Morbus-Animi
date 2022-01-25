@@ -6,6 +6,7 @@ public class MAHintPage : MAPictureInteraction {
 
     private bool isCurrentlyOpened = false;
 
+    
 
     public override void Update() {
 

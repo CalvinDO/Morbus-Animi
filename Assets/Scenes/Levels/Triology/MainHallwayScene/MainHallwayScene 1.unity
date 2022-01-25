@@ -73081,7 +73081,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f041de456a614e7409516648d02c0bd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resetCharacterPosition: 0
+  resetCharacterPosition: 1
   characterStartPosition: {fileID: 1058376196}
 --- !u!4 &1598241708
 Transform:

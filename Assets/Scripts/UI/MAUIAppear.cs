@@ -27,6 +27,12 @@ public class MAUIAppear : MonoBehaviour {
         if (!this.gameObject.activeSelf) {
             return;
         }
+
+
+        if (this.customImage == null) {
+            return;
+        }
+
         if (this.isCharacterInReach) {
 
             this.customImage.enabled = true;
