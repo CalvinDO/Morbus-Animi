@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4112543429253881601}
   - component: {fileID: 4112543429253881600}
   m_Layer: 0
-  m_Name: Vent_Opening
+  m_Name: Vent_OpeningDoor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -110,3 +110,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   axis: 2
   openAngle: 85
+  requiredItem: {fileID: 0}
+  doorAudioSource: {fileID: 0}
+  doorFail: {fileID: 0}
+  doorOpen: {fileID: 0}
