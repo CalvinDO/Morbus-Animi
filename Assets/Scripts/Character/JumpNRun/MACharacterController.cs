@@ -258,6 +258,10 @@ public class MACharacterController : MonoBehaviour {
     public bool isDieing = false;
 
 
+
+    public bool isOnFanSpinner = false;
+
+
     public void Start() {
 
         this.currentXRotation = 0;

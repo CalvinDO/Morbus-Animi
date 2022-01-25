@@ -5476,6 +5476,7 @@ MonoBehaviour:
   isFalling: 0
   isSteppingUp: 0
   isDieing: 0
+  isOnFanSpinner: 0
 --- !u!54 &1402342497931596602
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -6266,7 +6267,7 @@ MonoBehaviour:
   attachedEdgePoint: {fileID: 367924880789976998}
   attachedStandingPoint: {fileID: 9157868922311802752}
   obstacleCollectorRadius: 1
-  maxLookAtAngle: 35
+  maxLookAtAngle: 46.1
   catpassSlerpFactor: 0.15
   hangSlerpFactor: 0.102
   liftUpExtraThreshhold: 0.25
