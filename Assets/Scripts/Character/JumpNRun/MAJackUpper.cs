@@ -525,6 +525,12 @@ public class MAJackUpper : MonoBehaviour {
 
         this.SetHandsOnLedge(this.attachedEdgePoint.position);
 
+        MAFanSpinner fanSpinner = this.attachedGameObject.GetComponentInParent<MAFanSpinner>();
+        if (fanSpinner != null) {
+            fanSpinner.transportsCharacter = true;
+            fanSpinner.transportedCharacter = this.characterController;
+        }
+
         if (!this.isUpjackingEnabled) {
             return;
         }
@@ -565,8 +571,6 @@ public class MAJackUpper : MonoBehaviour {
         Vector3 XZDistanceToClosestPointVector = this.attachedStandingPoint.position - new Vector3(this.characterController.transform.position.x, this.attachedStandingPoint.position.y, this.characterController.transform.position.z);
         float xzdistanceToClosestPoint = XZDistanceToClosestPointVector.magnitude;
 
-
-        Debug.Log(xzdistanceToClosestPoint);
 
         if (xzdistanceToClosestPoint < this.xzDistanceToClosestPointThreshhold) {
             this.SetJackUpCompleted();

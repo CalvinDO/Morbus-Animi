@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 336507930004162939}
   m_LocalRotation: {x: -0.00000011920929, y: 0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: -0.037, z: 0}
+  m_LocalPosition: {x: -0, y: 0.00000016908234, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2171853410219024176}
@@ -57,6 +57,7 @@ GameObject:
   - component: {fileID: 8221433438533433909}
   - component: {fileID: 7656853065242104676}
   - component: {fileID: 5355767532608209102}
+  - component: {fileID: 453774627912532585}
   m_Layer: 24
   m_Name: Spinning_Floor_Fans.002
   m_TagString: Untagged
@@ -141,6 +142,18 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -2411891403841489076, guid: 73fa5b0c27cd376429a16d8f507d5911, type: 3}
+--- !u!114 &453774627912532585
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 532014303255315534}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47bccfb328c8fee45b90b77c089487df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2747398046511854283
 GameObject:
   m_ObjectHideFlags: 0
@@ -153,6 +166,7 @@ GameObject:
   - component: {fileID: 7399133645921026383}
   - component: {fileID: 8086024450241617787}
   - component: {fileID: 7452819120376711143}
+  - component: {fileID: 68718764577414434}
   m_Layer: 24
   m_Name: Spinning_Floor_Fans.005
   m_TagString: Untagged
@@ -237,6 +251,18 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -7769513516293253216, guid: 73fa5b0c27cd376429a16d8f507d5911, type: 3}
+--- !u!114 &68718764577414434
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2747398046511854283}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47bccfb328c8fee45b90b77c089487df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2841236593361067716
 GameObject:
   m_ObjectHideFlags: 0
@@ -249,6 +275,7 @@ GameObject:
   - component: {fileID: 3768100877864211374}
   - component: {fileID: 1393330289603088517}
   - component: {fileID: 186806310853231678}
+  - component: {fileID: 283519419006324806}
   m_Layer: 24
   m_Name: Spinning_Floor_Fans.003
   m_TagString: Untagged
@@ -333,6 +360,18 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -7071975423191048282, guid: 73fa5b0c27cd376429a16d8f507d5911, type: 3}
+--- !u!114 &283519419006324806
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2841236593361067716}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47bccfb328c8fee45b90b77c089487df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3141946424388144152
 GameObject:
   m_ObjectHideFlags: 0
@@ -358,7 +397,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3141946424388144152}
   m_LocalRotation: {x: -0.00000011920929, y: 0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: -0.037, z: 0}
+  m_LocalPosition: {x: -0, y: 0.00000016908234, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2171853410219024176}
@@ -534,6 +573,7 @@ GameObject:
   - component: {fileID: 4531311156166188686}
   - component: {fileID: 5879704366928623998}
   - component: {fileID: 5665843907588460201}
+  - component: {fileID: 3993455991801367326}
   m_Layer: 24
   m_Name: Spinning_Floor_Fans.004
   m_TagString: Untagged
@@ -618,6 +658,18 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -5476177045844025732, guid: 73fa5b0c27cd376429a16d8f507d5911, type: 3}
+--- !u!114 &3993455991801367326
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7351446613074051187}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47bccfb328c8fee45b90b77c089487df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7437695584447908074
 GameObject:
   m_ObjectHideFlags: 0
@@ -643,7 +695,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7437695584447908074}
   m_LocalRotation: {x: -0.00000011920929, y: 0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: -0.037, z: 0}
+  m_LocalPosition: {x: -0, y: 0.00000016908234, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2171853410219024176}
@@ -688,7 +740,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8099991120416322505}
   m_LocalRotation: {x: -0.00000011920929, y: 0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: -0.037, z: 0}
+  m_LocalPosition: {x: -0, y: 0.00000016908234, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2171853410219024176}
@@ -720,6 +772,7 @@ GameObject:
   - component: {fileID: 1194406505945178182}
   - component: {fileID: 4855622953722613655}
   - component: {fileID: 1206503652643297138}
+  - component: {fileID: 3221168970278052848}
   m_Layer: 24
   m_Name: Spinning_Floor_Fans.001
   m_TagString: Untagged
@@ -804,6 +857,18 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -7262211996706748033, guid: 73fa5b0c27cd376429a16d8f507d5911, type: 3}
+--- !u!114 &3221168970278052848
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9113676834162871157}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47bccfb328c8fee45b90b77c089487df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &9171043801608738068
 GameObject:
   m_ObjectHideFlags: 0
@@ -829,7 +894,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9171043801608738068}
   m_LocalRotation: {x: -0.00000011920929, y: 0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: -0.037, z: 0}
+  m_LocalPosition: {x: -0, y: 0.00000016908234, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2171853410219024176}

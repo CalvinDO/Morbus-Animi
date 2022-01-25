@@ -274,7 +274,6 @@ public class MACharacterController : MonoBehaviour {
 
         this.mainCamera = GameObject.Find("MainCamera").GetComponent<Camera>();
 
-        // this.rb.velocity = new Vector3(0, 5, 3);
     }
 
     void Update() {
