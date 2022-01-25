@@ -11,10 +11,6 @@ public class MACharacterIsOnFanSpinnerChecker : MonoBehaviour {
     }
 
 
-    void Update() {
-        //if (this.GetComponentInChildren)
-    }
-
     void OnCollisionStay(Collision characterCollider) {
 
         Debug.Log("character collides");
