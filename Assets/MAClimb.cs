@@ -19,7 +19,7 @@ public class MAClimb : MonoBehaviour
 
 
         this.characterInTrigger = true;
-        this.controller = other.transform.root.GetComponent<MACharacterController>();
+        this.controller = other.transform.GetComponentInParent<MACharacterController>();
 
     }
 

@@ -11,8 +11,10 @@ GameObject:
   - component: {fileID: 651749625355841028}
   - component: {fileID: 813270631106601109}
   - component: {fileID: 5559984754540974988}
-  m_Layer: 0
-  m_Name: keycard_blue.003
+  - component: {fileID: 7224411198166821605}
+  - component: {fileID: 3497381376327467817}
+  m_Layer: 24
+  m_Name: keycard_green
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -82,3 +84,29 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!135 &7224411198166821605
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2670180334863655337}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1
+  m_Center: {x: 0, y: 0.0009570207, z: 0}
+--- !u!114 &3497381376327467817
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2670180334863655337}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2150601d93329ba47863546b912e6750, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  item: {fileID: 11400000, guid: 311ae9f215a631b45a2d56b042eb22cd, type: 2}

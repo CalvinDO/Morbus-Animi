@@ -14,11 +14,17 @@ public class MADoor : MonoBehaviour {
 
     public MAItem requiredItem;
 
+    public bool isLocked;
+
 
     public AudioSource doorAudioSource;
     public AudioClip doorFail;
     public AudioClip doorOpen;
 
+
+    public void UnLock() {
+        this.isLocked = false;
+    }
 
     public void Open() {
 
@@ -26,10 +32,15 @@ public class MADoor : MonoBehaviour {
             return;
         }
 
+        if (this.isLocked) {
+            this.FailOpen();
+            return;
+        }
+
         if (this.requiredItem != null) {
             if (!MAInventory.instance.items.Contains(this.requiredItem)) {
 
-                this.doorAudioSource.PlayOneShot(this.doorFail);
+                this.FailOpen();
 
                 return;
             }
@@ -56,5 +67,9 @@ public class MADoor : MonoBehaviour {
 
         this.isOpen = true;
 
+    }
+
+    void FailOpen() {
+        this.doorAudioSource.PlayOneShot(this.doorFail);
     }
 }

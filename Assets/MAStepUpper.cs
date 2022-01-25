@@ -28,7 +28,7 @@ public class MAStepUpper : MonoBehaviour {
     private MACharacterController characterController;
 
     void Start() {
-        this.characterController = this.transform.root.GetComponent<MACharacterController>();
+        this.characterController = this.transform.GetComponentInParent<MACharacterController>();
 
         this.remainingTimeAfterStepAnimationsDelay = this.afterStepAnimationsDelay;
     }
