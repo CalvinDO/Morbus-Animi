@@ -37,6 +37,12 @@ public class MAFrustumDetector : MonoBehaviour {
     void Start() {
         this.characterController = GameObject.Find("SmallNorah").GetComponent<MACharacterController>();
 
+
+        if (this.entityMover.isVentEnitity) {
+            this.animator.SetBool("isCrawling", true);
+            return;
+        }
+
         this.animator.SetBool("isWalking", true);
     }
 

@@ -37,6 +37,9 @@ public class MAEntityMover : MonoBehaviour {
     public float maxSpeed;
 
     public bool isStationary = false;
+    public bool isVentEnitity = false;
+
+
     public Transform rotationGoal;
 
 
