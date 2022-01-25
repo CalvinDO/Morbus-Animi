@@ -67,9 +67,13 @@ public class MAFrustumDetector : MonoBehaviour {
         float angle = Vector3.Angle(this.transform.TransformDirection(Vector3.forward), hitConnection);
 
 
-        if (!this.characterDetected) {
-            if (angle > this.light.spotAngle) {
-                return;
+
+        if (!this.entityMover.isVentEnitity) {
+
+            if (!this.characterDetected) {
+                if (angle > this.light.spotAngle) {
+                    return;
+                }
             }
         }
 
@@ -86,10 +90,27 @@ public class MAFrustumDetector : MonoBehaviour {
             return;
         }
 
+
+
+        if (this.entityMover.isVentEnitity) {
+            if (this.characterDetected) {
+
+
+                if (Vector3.Distance(this.detectedCharacter.transform.position, this.transform.position) > 20) {
+                    this.ReturnToRoaming();
+                    return;
+                }
+            }
+        }
+
         if (Vector3.Distance(this.lastSeenCharacterPosition, this.transform.position) < 2 || this.entityMover.navMeshAgent.pathStatus == NavMeshPathStatus.PathInvalid) {
 
             if (!this.reachedOldPos) {
-                this.audioSource.PlayOneShot(this.whereAreYou);
+                if (this.whereAreYou != null) {
+
+
+                    this.audioSource.PlayOneShot(this.whereAreYou);
+                }
             }
 
             this.reachedOldPos = true;
@@ -148,6 +169,16 @@ public class MAFrustumDetector : MonoBehaviour {
         this.remainingTimeTillCalmDown = this.timeTillCalmDown;
 
         this.entityMover.LostCharacter();
+
+
+        if (this.entityMover.isVentEnitity) {
+
+        }
+
+        if (this.entityMover.isVentEnitity) {
+            this.animator.SetBool("isCrawling", true);
+            return;
+        }
 
         this.animator.SetBool("isSprinting", false);
         this.animator.SetBool("isWalking", true);

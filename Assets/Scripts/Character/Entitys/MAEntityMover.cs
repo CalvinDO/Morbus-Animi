@@ -5,10 +5,10 @@ using UnityEngine.AI;
 
 public class MAEntityMover : MonoBehaviour {
 
-    [Range(0, 1f)]
+    [Range(0, 3f)]
     public float defaultSpeed;
 
-    [Range(0, 400f)]
+    [Range(0, 4000f)]
     public float defaultAngularSpeed;
 
     [Range(0, 100f)]
@@ -57,10 +57,18 @@ public class MAEntityMover : MonoBehaviour {
         if (!this.isStationary) {
             this.SetNavAgentDefaultValues();
         }
+
+        if (this.isVentEnitity) {
+          //  this.frustumDetector.characterDetected = true;
+        }
     }
 
 
     private void Update() {
+
+        if (this.isVentEnitity) {
+           // this.frustumDetector.characterDetected = true;
+        }
 
         this.remainingDecisionTime -= Time.deltaTime;
 
