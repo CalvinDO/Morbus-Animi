@@ -113,7 +113,7 @@ MonoBehaviour:
   item: {fileID: 11400000, guid: 1042b8b414284b146b2b68aa4daac949, type: 2}
   collectAudio: {fileID: 0}
   pickupSound: {fileID: 8300000, guid: b12c439a71884884790ffb900220d9c8, type: 3}
-  physicalItem: {fileID: 0}
+  physicalItem: {fileID: 8834745298188457840}
   indicator: {fileID: 886841771059150022}
 --- !u!1001 &6802807886488275272
 PrefabInstance:
