@@ -292,8 +292,8 @@ public class MAJackUpper : MonoBehaviour {
 
 
     private void SetHandsOnLedge(Vector3 closestPoint) {
-        this.armRig.weight = 1;
 
+        this.armRig.weight = 1;
 
 
         this.leftHandTarget.position = closestPoint;
@@ -431,6 +431,7 @@ public class MAJackUpper : MonoBehaviour {
 
         this.characterController.rb.isKinematic = true;
 
+        this.SetCatpassLiftUpState();
 
         this.characterController.animator.SetTrigger("Catpass");
     }
@@ -443,7 +444,7 @@ public class MAJackUpper : MonoBehaviour {
             if (this.isUpjackingEnabled) {
 
                 if (!this.isLiftingUp) {
-                    this.SetLiftUpState();
+                    this.SetHangLiftUpState();
                 }
             }
         }
@@ -469,7 +470,7 @@ public class MAJackUpper : MonoBehaviour {
         this.DiscardLedge();
     }
 
-    private void SetLiftUpState() {
+    private void SetHangLiftUpState() {
 
         this.isLiftingUp = true;
 
@@ -477,6 +478,10 @@ public class MAJackUpper : MonoBehaviour {
             this.characterController.animator.SetTrigger("HangLiftUp");
             this.characterController.animator.ResetTrigger("Hang");
         }
+    }
+
+    private void SetCatpassLiftUpState() {
+        this.isLiftingUp = true;
     }
 
     private void SetHeightReached() {
