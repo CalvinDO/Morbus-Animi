@@ -9,7 +9,9 @@ public class MADoorOpener : MonoBehaviour {
     public MADoor door;
 
     [HideInInspector]
-    public bool characterInReach = false;
+    public bool isCharacterInReach = false;
+
+    public Canvas indicator;
 
     void Start() {
 
@@ -18,9 +20,13 @@ public class MADoorOpener : MonoBehaviour {
     // Update is called once per frame
     void Update() {
 
-        if (!this.characterInReach) {
+        if (!this.isCharacterInReach) {
+            this.indicator.gameObject.SetActive(false);
+
             return;
         }
+
+        this.indicator.gameObject.SetActive(true);
 
         if (Input.GetKeyUp(KeyCode.E)) {
             this.door.Open();
@@ -28,11 +34,11 @@ public class MADoorOpener : MonoBehaviour {
     }
 
     void OnTriggerStay(Collider characterCollider) {
-        this.characterInReach = true;
+        this.isCharacterInReach = true;
     }
 
 
     void OnTriggerExit(Collider characterCollider) {
-        this.characterInReach = false;
+        this.isCharacterInReach = false;
     }
 }

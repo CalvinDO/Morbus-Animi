@@ -18,7 +18,19 @@ public class MAPictureInteraction : MAInteractable {
     public AudioClip openSound;
 
 
+    public Canvas indicator;
+
+
+
     public virtual void Update() {
+
+        if (!this.isCharacterInTrigger) {
+            this.indicator.gameObject.SetActive(false);
+
+            return;
+        }
+
+        this.indicator.gameObject.SetActive(true);
 
 
         if (Input.GetKeyUp(KeyCode.E) && this.isCharacterInTrigger) {

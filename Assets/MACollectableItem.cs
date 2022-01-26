@@ -16,17 +16,24 @@ public class MACollectableItem : MonoBehaviour {
 
 
     public AudioSource collectAudio;
-    public AudioClip keyPickupSound;
+    public AudioClip pickupSound;
 
 
     public Transform physicalItem;
 
 
-    // Update is called once per frame
+    public Canvas indicator;
+
+
     void Update() {
+
         if (!this.isCharacterInReach) {
+            this.indicator.gameObject.SetActive(false);
+
             return;
         }
+
+        this.indicator.gameObject.SetActive(true);
 
         if (Input.GetKeyUp(KeyCode.E)) {
             this.Collect();
@@ -41,7 +48,7 @@ public class MACollectableItem : MonoBehaviour {
         this.physicalItem.gameObject.SetActive(false);
         this.isAlreadyCollected = true;
 
-        this.collectAudio.PlayOneShot(this.keyPickupSound);
+        this.collectAudio.PlayOneShot(this.pickupSound);
 
     }
 

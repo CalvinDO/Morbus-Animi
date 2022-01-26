@@ -24,6 +24,8 @@ public class MAUIAppear : MonoBehaviour {
 
     void Update() {
 
+        return;
+
         if (!this.gameObject.activeSelf) {
             return;
         }
