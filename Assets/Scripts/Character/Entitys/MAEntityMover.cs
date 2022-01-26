@@ -8,7 +8,7 @@ public class MAEntityMover : MonoBehaviour {
     [Range(0, 3f)]
     public float defaultSpeed;
 
-    [Range(0, 4000f)]
+    [Range(0, 10000f)]
     public float defaultAngularSpeed;
 
     [Range(0, 100f)]

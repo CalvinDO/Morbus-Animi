@@ -332,7 +332,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defaultSpeed: 3
-  defaultAngularSpeed: 3521
+  defaultAngularSpeed: 10000
   defaultAcceleration: 50.6
   destinationReachThreshhold: 0.23
   minDecisionTime: 20
@@ -510,6 +510,10 @@ PrefabInstance:
     - target: {fileID: 1959246709964264448, guid: efdf1db89b0ed9943b030700be01173d, type: 3}
       propertyPath: m_Name
       value: FlashlightDetector
+      objectReference: {fileID: 0}
+    - target: {fileID: 1959246709964264450, guid: efdf1db89b0ed9943b030700be01173d, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1959246709964264451, guid: efdf1db89b0ed9943b030700be01173d, type: 3}
       propertyPath: m_RootOrder
