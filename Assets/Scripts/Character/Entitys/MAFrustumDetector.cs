@@ -45,6 +45,7 @@ public class MAFrustumDetector : MonoBehaviour {
 
         if (this.entityMover.isStationary) {
             this.animator.SetBool("isFloating", true);
+            Debug.Log("floating!");
             return;
         }
 
@@ -61,6 +62,7 @@ public class MAFrustumDetector : MonoBehaviour {
     void Update() {
 
         if (this.entityMover.isStationary) {
+            Debug.Log("floating!");
             this.animator.SetBool("isFloating", true);
         }
 
