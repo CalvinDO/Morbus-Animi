@@ -101856,6 +101856,10 @@ PrefabInstance:
       propertyPath: customImage
       value: 
       objectReference: {fileID: 2049309521}
+    - target: {fileID: 7678972642198128899, guid: 4f4a9522920c1bb4f8dde2c1a51ef8d0, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7943268383724059029, guid: 4f4a9522920c1bb4f8dde2c1a51ef8d0, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.432
@@ -141238,7 +141242,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!108 &2066111457
 Light:
   m_ObjectHideFlags: 0
@@ -141251,7 +141255,7 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 0, b: 0, a: 1}
-  m_Intensity: 3
+  m_Intensity: 1.12
   m_Range: 0.18
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
