@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MAOrderedLever : MALever
-{
+public class MAOrderedLever : MALever {
 
     public int order;
 
     private MAOrderedLeverRiddleManager riddleManager;
+
+    public AudioClip resetSound;
 
     void Start() {
         this.riddleManager = this.transform.parent.GetComponent<MAOrderedLeverRiddleManager>();
@@ -23,6 +24,17 @@ public class MAOrderedLever : MALever
 
     public override void Reset() {
 
-       this.SetDefault();
+        this.SetDefault();
+        
+        
+        if (this.resetSound == null) {
+            return;
+        }
+
+        if (this.audioSource == null) {
+            return;
+        }
+
+        this.audioSource.PlayOneShot(this.resetSound);
     }
 }

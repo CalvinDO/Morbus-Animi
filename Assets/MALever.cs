@@ -10,7 +10,7 @@ public class MALever : MAButton {
 
     public Transform rotatingLever;
 
-
+    
 
     public override void SetPressed() {
 
@@ -29,6 +29,11 @@ public class MALever : MAButton {
             case MAAxis.Z:
                 axisVector = Vector3.forward;
                 break;
+        }
+
+
+        if (this.isPressed) {
+            return;
         }
 
         this.rotatingLever.transform.Rotate(axisVector * this.openAngle);

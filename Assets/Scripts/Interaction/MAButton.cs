@@ -18,6 +18,9 @@ public class MAButton : MonoBehaviour {
     public bool isPressed = false;
 
 
+    public AudioSource audioSource;
+    public AudioClip pressSound;
+
     void Update() {
 
         if (this.characterInReach) {
@@ -63,7 +66,18 @@ public class MAButton : MonoBehaviour {
         Material[] mats = new Material[] { this.buttonRenderer.materials[0], this.pressedMaterial };
 
         this.buttonRenderer.materials = mats;
-        
+
+
+
+        if (this.audioSource == null) {
+            return;
+        }
+
+        if (this.pressSound == null) {
+            return;
+        }
+
+        this.audioSource.PlayOneShot(this.pressSound);
     }
 
     public virtual void SetDefault() {
