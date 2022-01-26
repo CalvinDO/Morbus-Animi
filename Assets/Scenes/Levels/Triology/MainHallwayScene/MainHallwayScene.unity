@@ -17583,6 +17583,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3693015257758761520, guid: 892ddbd52774faa449d312ca1528ae70, type: 3}
   m_PrefabInstance: {fileID: 331816147}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &336827192 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2668367404220805792, guid: 678cc8a50c68df24faa52276141b9f45, type: 3}
+  m_PrefabInstance: {fileID: 2050195968}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &362009216
 GameObject:
   m_ObjectHideFlags: 0
@@ -54351,7 +54356,7 @@ BoxCollider:
   m_GameObject: {fileID: 776225427}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 3.0100007, y: 0.13041136, z: 1.8700005}
   m_Center: {x: 0, y: 0.017774642, z: -0.0000013411046}
@@ -64928,6 +64933,18 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 336827192}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
         m_CallState: 2
 --- !u!1 &945847033 stripped
 GameObject:
@@ -101843,6 +101860,10 @@ PrefabInstance:
       propertyPath: customImage
       value: 
       objectReference: {fileID: 2049309521}
+    - target: {fileID: 7678972642198128899, guid: 4f4a9522920c1bb4f8dde2c1a51ef8d0, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7943268383724059029, guid: 4f4a9522920c1bb4f8dde2c1a51ef8d0, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.432
@@ -141225,7 +141246,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!108 &2066111457
 Light:
   m_ObjectHideFlags: 0
@@ -141238,7 +141259,7 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 0, b: 0, a: 1}
-  m_Intensity: 3
+  m_Intensity: 1.12
   m_Range: 0.18
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -147278,6 +147299,18 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 336827192}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
         m_CallState: 2
 --- !u!65 &2137947137
 BoxCollider:
