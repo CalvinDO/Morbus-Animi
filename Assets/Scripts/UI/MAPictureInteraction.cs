@@ -24,14 +24,18 @@ public class MAPictureInteraction : MAInteractable {
 
     public virtual void Update() {
 
-        if (!this.isCharacterInTrigger) {
-            this.indicator.gameObject.SetActive(false);
+        if (!(this.indicator == null) && !(this.indicator.gameObject == null)) {
 
-            return;
+
+
+            if (!this.isCharacterInTrigger) {
+                this.indicator.gameObject.SetActive(false);
+
+                return;
+            }
+
+            this.indicator.gameObject.SetActive(true);
         }
-
-        this.indicator.gameObject.SetActive(true);
-
 
         if (Input.GetKeyUp(KeyCode.E) && this.isCharacterInTrigger) {
             this.uiPicturePrefab = GameObject.Find("PictureUIPrefab").GetComponent<MAUIPicturePrefab>();
