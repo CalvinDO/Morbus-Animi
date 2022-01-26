@@ -43,11 +43,26 @@ public class MAFrustumDetector : MonoBehaviour {
             return;
         }
 
+        if (this.entityMover.isStationary) {
+            this.animator.SetBool("isFloating", true);
+            return;
+        }
+
         this.animator.SetBool("isWalking", true);
     }
 
+    void Awake() {
+        if (this.entityMover.isStationary) {
+            this.animator.SetBool("isFloating", true);
+            return;
+        }
+    }
 
     void Update() {
+
+        if (this.entityMover.isStationary) {
+            this.animator.SetBool("isFloating", true);
+        }
 
 
         this.light.color = Color.white;
