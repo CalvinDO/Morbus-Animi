@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class MAHintPage : MAPictureInteraction {
 
-    private bool isCurrentlyOpened = false;
+    public static bool isCurrentlyOpened = false;
 
-    
+
 
     public override void Update() {
 
-        if (this.isCurrentlyOpened) {
+        if (MAHintPage.isCurrentlyOpened) {
 
             if (Input.GetKeyUp(KeyCode.E) && this.isCharacterInTrigger) {
 
@@ -25,12 +25,14 @@ public class MAHintPage : MAPictureInteraction {
 
     private void CloseHintPage() {
         this.uiPicturePrefab.Close();
-        this.isCurrentlyOpened = false;
+        MAHintPage.isCurrentlyOpened = false;
+
+        
     }
 
     public override void DoCollectActions() {
 
-        this.isCurrentlyOpened = true;
+        MAHintPage.isCurrentlyOpened = true;
     }
 
 }

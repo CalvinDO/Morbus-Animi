@@ -19,6 +19,8 @@ public class MAPictureInteraction : MAInteractable {
 
 
     public virtual void Update() {
+
+
         if (Input.GetKeyUp(KeyCode.E) && this.isCharacterInTrigger) {
             this.uiPicturePrefab = GameObject.Find("PictureUIPrefab").GetComponent<MAUIPicturePrefab>();
             this.uiPicturePrefab.ShowPicture(this.picture);

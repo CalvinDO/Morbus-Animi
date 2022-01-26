@@ -1,11 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 
 [RequireComponent(typeof(Collider))]
-public class MACollectableItem : MonoBehaviour
-{
+public class MACollectableItem : MonoBehaviour {
 
 
     public MAItem item;
@@ -18,25 +18,32 @@ public class MACollectableItem : MonoBehaviour
     public AudioSource collectAudio;
     public AudioClip keyPickupSound;
 
+
+    public Transform physicalItem;
+
+
     // Update is called once per frame
-    void Update()
-    {
+    void Update() {
         if (!this.isCharacterInReach) {
             return;
         }
 
         if (Input.GetKeyUp(KeyCode.E)) {
-            MAInventory.instance.Add(item);
-
-            this.gameObject.SetActive(false);
-            this.isAlreadyCollected = true;
-
-            this.collectAudio.PlayOneShot(this.keyPickupSound);
+            this.Collect();
         }
-
 
     }
 
+    private void Collect() {
+
+        MAInventory.instance.Add(item);
+
+        this.physicalItem.gameObject.SetActive(false);
+        this.isAlreadyCollected = true;
+
+        this.collectAudio.PlayOneShot(this.keyPickupSound);
+
+    }
 
     void OnTriggerStay(Collider characterCollider) {
         this.isCharacterInReach = true;

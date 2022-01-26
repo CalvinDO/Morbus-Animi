@@ -17,6 +17,15 @@ public class MAMainMenu : MonoBehaviour
         bool current = menuCanvas.gameObject.activeSelf;
         if (Input.GetKeyDown(KeyCode.Escape) && !isMainMenu)
         {
+
+            MAUIPicturePrefab pictureUIPrefab = GameObject.FindObjectOfType<MAUIPicturePrefab>();
+            if (pictureUIPrefab != null) {
+                if (pictureUIPrefab.isShowingPicture) {
+                    pictureUIPrefab.Close();
+                }
+            }
+
+
             menuCanvas.gameObject.SetActive(!current);
             if (current)
             {
@@ -47,6 +56,16 @@ public class MAMainMenu : MonoBehaviour
     {
         Time.timeScale = 1;
         Cursor.lockState = CursorLockMode.Locked;
+
+
+        MAUIPicturePrefab pictureUIPrefab = GameObject.FindObjectOfType<MAUIPicturePrefab>();
+        if (pictureUIPrefab != null) {
+            if (pictureUIPrefab.isShowingPicture) {
+                pictureUIPrefab.Close();
+            }
+        }
+
+
     }
 
     public void playClickSound() {
