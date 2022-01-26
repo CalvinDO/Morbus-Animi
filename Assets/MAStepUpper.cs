@@ -43,6 +43,9 @@ public class MAStepUpper : MonoBehaviour {
     }
 
     void Update() {
+
+        Debug.Log("running step upper update");
+
         if (!this.characterController.isSteppingUp) {
             return;
         }
