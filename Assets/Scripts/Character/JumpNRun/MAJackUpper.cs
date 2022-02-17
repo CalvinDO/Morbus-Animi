@@ -125,6 +125,10 @@ public class MAJackUpper : MonoBehaviour {
 
     private void OnTriggerStay(Collider ledgeCandidateCollider) {
 
+        if (!this.characterController.permissions.allowJumpNRun) {
+            return;
+        }
+
         if (ledgeCandidateCollider.isTrigger) {
             return;
         }
@@ -523,6 +527,10 @@ public class MAJackUpper : MonoBehaviour {
     }
 
     private void FixedUpdate() {
+
+        if (!this.characterController.permissions.allowJumpNRun) {
+            return;
+        }
 
         this.ControlHang();
 

@@ -263,7 +263,8 @@ public class MACharacterController : MonoBehaviour {
 
     public bool isOnFanSpinner = false;
 
-    private MACharacterControlPermissions permissions = new MACharacterControlPermissions();
+    [HideInInspector]
+    public MACharacterControlPermissions permissions = new MACharacterControlPermissions();
 
     public void Start() {
 
