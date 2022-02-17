@@ -20,13 +20,16 @@ public class MAInventoryController : MonoBehaviour {
 
         string inputString = Input.inputString;
 
- 
+
         try {
-            if (int.Parse(inputString) < 0 || int.Parse(inputString) > 9) {
+            if (int.Parse(inputString) < 1 || int.Parse(inputString) > 9) {
                 throw new System.Exception();
             }
         }
         catch {
+            if (int.Parse(inputString) == 0) {
+                this.OpenPicture(10);
+            }
             return;
         }
 
@@ -37,9 +40,9 @@ public class MAInventoryController : MonoBehaviour {
     private void OpenPicture(int index) {
 
         MAUIPicturePrefab uiPicturePrefab = GameObject.Find("PictureUIPrefab").GetComponent<MAUIPicturePrefab>();
-        try {
-        uiPicturePrefab.ShowPicture(MAInventory.instance.pictures[index]);
 
+        try {
+            uiPicturePrefab.ShowPicture(MAInventory.instance.pictures[index - 1]);
         }
         catch {
             Debug.Log("slot " + index + " contains no image!");
