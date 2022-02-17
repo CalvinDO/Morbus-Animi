@@ -29,6 +29,7 @@ public class MADoorOpener : MonoBehaviour {
         this.indicator.gameObject.SetActive(true);
 
         if (Input.GetKeyUp(KeyCode.E)) {
+            
             this.door.Open();
         }
     }

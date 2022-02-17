@@ -50,6 +50,8 @@ public class MACollectableItem : MonoBehaviour {
 
         this.collectAudio.PlayOneShot(this.pickupSound);
 
+        GameObject.FindObjectOfType<MACharacterController>().GetComponent<MACharacterController>().animator.SetTrigger("interact");
+
     }
 
     void OnTriggerStay(Collider characterCollider) {

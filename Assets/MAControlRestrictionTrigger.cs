@@ -16,13 +16,19 @@ public class MACharacterControlPermissions {
         this.allowJumpNRun = allowJumpNRun;
     }
 
+    public MACharacterControlPermissions(bool setAll) {
+        this.allowWalk = setAll;
+        this.allowRun = setAll;
+        this.allowJump = setAll;
+        this.allowJumpNRun = setAll;
+    }
+
+
     public MACharacterControlPermissions() {}
 }
 
 public class MAControlRestrictionTrigger : MonoBehaviour
 {
-    [HideInInspector]
-    public bool isCharacterInTrigger = false;
 
     public bool allowWalk = true;
     public bool allowRun = true;
@@ -38,7 +44,6 @@ public class MAControlRestrictionTrigger : MonoBehaviour
 
     void OnTriggerStay(Collider characterCollider) {
         this.characterController.SetPermissions(new MACharacterControlPermissions(this.allowWalk, this.allowRun, this.allowJump, this.allowJumpNRun));
-        this.isCharacterInTrigger = true;
     }
 
 

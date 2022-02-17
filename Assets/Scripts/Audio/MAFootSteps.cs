@@ -77,6 +77,7 @@ public class MAFootSteps : MonoBehaviour {
 
         return this.hangClips[UnityEngine.Random.Range(0, hangClips.Length)];
     }
+
     private void Land() {
 
         AudioClip clip = GetRandomLandClip();
@@ -94,6 +95,7 @@ public class MAFootSteps : MonoBehaviour {
 
         return this.landClips[UnityEngine.Random.Range(0, landClips.Length)];
     }
+
     private void Lift() {
 
         Debug.Log("lift!");
@@ -111,6 +113,14 @@ public class MAFootSteps : MonoBehaviour {
 
 
         return this.liftClips[UnityEngine.Random.Range(0, liftClips.Length)];
+    }
+
+    private void SetMovementEnabled() {
+        this.GetComponentInParent<MACharacterController>().permissions = new MACharacterControlPermissions();
+    }
+
+    private void SetMovementDisabled() {
+        this.GetComponentInParent<MACharacterController>().permissions = new MACharacterControlPermissions(false);
     }
 
     public void DieFinished() {

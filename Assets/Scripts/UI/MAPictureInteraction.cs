@@ -56,6 +56,8 @@ public class MAPictureInteraction : MAInteractable {
         MAInventory.instance.AddPicture(this.picture);
 
         GameObject.Destroy(this.gameObject);
+
+        GameObject.FindObjectOfType<MACharacterController>().GetComponent<MACharacterController>().animator.SetTrigger("interact");
     }
 
     void OnDrawGizmosSelected() {

@@ -22,6 +22,11 @@ public class MADoor : MonoBehaviour {
     public AudioClip doorOpen;
 
 
+    public MACharacterController characterController;
+
+    void Awake() {
+       this.characterController = GameObject.FindObjectOfType<MACharacterController>().GetComponent<MACharacterController>();
+    }
     public void UnLock() {
         this.isLocked = false;
     }
@@ -67,6 +72,8 @@ public class MADoor : MonoBehaviour {
 
         this.isOpen = true;
 
+        this.characterController.animator.SetTrigger("open");
+        
     }
 
     void FailOpen() {

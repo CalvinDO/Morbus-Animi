@@ -21,6 +21,13 @@ public class MAButton : MonoBehaviour {
     public AudioSource audioSource;
     public AudioClip pressSound;
 
+
+    public MACharacterController characterController;
+
+    void Awake() {
+        this.characterController = GameObject.FindObjectOfType<MACharacterController>().GetComponent<MACharacterController>();
+    }
+
     void Update() {
 
         if (this.characterInReach) {
@@ -31,7 +38,7 @@ public class MAButton : MonoBehaviour {
                 if (!this.staysPressed) {
 
                     this.isPressed = !this.isPressed;
-                    
+
                 }
                 else {
                     this.isPressed = true;
@@ -51,12 +58,15 @@ public class MAButton : MonoBehaviour {
     }
 
     public void SetState(bool value) {
+
         if (value) {
             this.SetPressed();
         }
         else {
             this.SetDefault();
         }
+
+        this.characterController.animator.SetTrigger("interact");
     }
 
     public virtual void SetPressed() {
@@ -86,7 +96,7 @@ public class MAButton : MonoBehaviour {
 
         this.isPressed = false;
 
-   
+
         this.buttonRenderer.material = this.defaultMaterial;
     }
 
