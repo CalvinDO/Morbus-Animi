@@ -44,6 +44,8 @@ public enum TransitionParameter {
     TransitionIndex
 }
 
+
+
 public class MACharacterController : MonoBehaviour {
     //[Range(0, 1000f)]
     //public float movementAcceleration;
@@ -82,7 +84,7 @@ public class MACharacterController : MonoBehaviour {
     private GameObject lastCollidedWall;
     private GameObject lastJumpedWall;
     private Vector3 wallJumpContactNormal;
-    private bool lastJumpWasWalkWalk = false;
+    private bool lastJumpWasWallWalk = false;
 
     [Range(0, 0.5f)]
     public float minWallJumpHeightAboveGround;
@@ -261,6 +263,7 @@ public class MACharacterController : MonoBehaviour {
 
     public bool isOnFanSpinner = false;
 
+    private MACharacterControlPermissions permissions = new MACharacterControlPermissions();
 
     public void Start() {
 
@@ -574,7 +577,7 @@ public class MACharacterController : MonoBehaviour {
 
     private void AccelerateXZ() {
 
-        if (!this.movementEnabled) {
+        if (!this.movementEnabled || !this.permissions.allowWalk) {
             return;
         }
 
@@ -628,20 +631,20 @@ public class MACharacterController : MonoBehaviour {
 
 
     private void ManageSprinting() {
-        if (Input.GetKey("left shift") && this.directionInputExists) {
+        if (Input.GetKey("left shift") && this.directionInputExists && this.permissions.allowRun) {
             this.isSprinting = true;
             //this.mainCamera.fieldOfView = Mathf.Lerp(this.standardFOV, this.sprintFOV, this.timeSinceSprintStarted);
 
-            this.timeSinceSprintStarted += this.SprintFOVLerpFactor;
+           // this.timeSinceSprintStarted += this.SprintFOVLerpFactor;
         }
         else {
             this.isSprinting = false;
             //this.mainCamera.fieldOfView = Mathf.Lerp(this.sprintFOV, this.standardFOV, this.timeSinceSprintStarted);
 
-            this.timeSinceSprintStarted -= this.SprintFOVLerpFactor;
+            //this.timeSinceSprintStarted -= this.SprintFOVLerpFactor;
         }
 
-        this.timeSinceSprintStarted = Mathf.Clamp(this.timeSinceSprintStarted, 0, 1);
+       // this.timeSinceSprintStarted = Mathf.Clamp(this.timeSinceSprintStarted, 0, 1);
     }
 
 
@@ -842,6 +845,9 @@ public class MACharacterController : MonoBehaviour {
 
     private void ManageSwing() {
 
+        if (!this.permissions.allowJumpNRun) {
+            return;
+        }
 
         if (this.isSwinging) {
             if (!Input.GetKey(KeyCode.Space)) {
@@ -879,7 +885,7 @@ public class MACharacterController : MonoBehaviour {
             this.remainingSlideTime -= Time.deltaTime;
         }
 
-        if (Input.GetKeyDown(KeyCode.C)) {
+        if (Input.GetKeyDown(KeyCode.C) && this.permissions.allowJumpNRun) {
 
             if (this.isGrounded) {
 
@@ -941,26 +947,24 @@ public class MACharacterController : MonoBehaviour {
 
     private void ManageJump() {
 
-        if (Input.GetKey("space")) {
-            jumped = true;
+        if (Input.GetKey("space") && this.permissions.allowJump) {
+            this.jumped = true;
 
             if (Input.GetKeyDown("space")) {
 
                 if (this.isGrounded) {
                     this.PerformSimpleJump();
-                    this.lastJumpWasWalkWalk = false;
                 }
                 else {
                     if (this.IsWallJumpOrWalkAllowed()) {
                         this.PerformWallJump();
-                        this.lastJumpWasWalkWalk = false;
                     }
                 }
             }
             else {
                 if (!this.isGrounded) {
                     if (this.IsWallJumpOrWalkAllowed()) {
-                        if (!this.lastJumpWasWalkWalk) {
+                        if (!this.lastJumpWasWallWalk) {
                             this.PerformWallWalk();
                         }
                     }
@@ -988,6 +992,10 @@ public class MACharacterController : MonoBehaviour {
 
     private void PerformWallJump() {
 
+        if (!this.permissions.allowJumpNRun) {
+            return;
+        }
+
         this.rb.velocity = new Vector3(this.rb.velocity.x, 0, this.rb.velocity.z);
 
         this.rb.AddForce(this.wallJumpContactNormal * this.wallJumpImpulse, ForceMode.Impulse);
@@ -998,16 +1006,24 @@ public class MACharacterController : MonoBehaviour {
 
 
         this.jumpNRunAudioSource.PlayOneShot(this.wallJumpClip);
+
+        this.lastJumpWasWallWalk = false;
     }
 
     private void PerformWallWalk() {
+
+        if (!this.permissions.allowJumpNRun) {
+            return;
+        }
+
         this.rb.velocity = new Vector3(this.rb.velocity.x, 0, this.rb.velocity.z);
 
         this.PerformSimpleJump();
         this.SetLastJumpedWall();
-        this.lastJumpWasWalkWalk = true;
 
         this.jumpNRunAudioSource.PlayOneShot(this.wallWalkClip);
+
+        this.lastJumpWasWallWalk = true;
     }
 
     private void SetLastJumpedWall() {
@@ -1149,6 +1165,10 @@ public class MACharacterController : MonoBehaviour {
         this.isPerformingSoloJumpNRunMove = value;
     }
 
+    public void SetPermissions(MACharacterControlPermissions permissions) {
+        this.permissions = permissions;
+    }
+
 
     public void Die() {
 
@@ -1193,8 +1213,6 @@ public class MACharacterController : MonoBehaviour {
         MAMainMenu mainMenu = GameObject.Find("MenuManager").GetComponent<MAMainMenu>();
         mainMenu.menuCanvas.gameObject.SetActive(true);
         mainMenu.PauseGame();
-
-
     }
 }
 
