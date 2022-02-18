@@ -98,10 +98,16 @@ MonoBehaviour:
   - Schaue dich um
   - "Finde den Schl\xFCssel"
   - Verlasse den Raum
+  - Erkunde die Umgebung
+  - Untersuche das Radio
+  - Erreiche den Ausgang
   indicatorLocations:
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 115900319}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   objectiveIndicator: {fileID: 115900314}
 --- !u!1 &5653308343762255164
 GameObject:
@@ -315,31 +321,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3415768336029981424, guid: f47a7d4a97d646e4d978ec79b0e3c144, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -642.173
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3415768336029981424, guid: f47a7d4a97d646e4d978ec79b0e3c144, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -375.308
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3415768336029981424, guid: f47a7d4a97d646e4d978ec79b0e3c144, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 4.476
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3415768336029981424, guid: f47a7d4a97d646e4d978ec79b0e3c144, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.7071068
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3415768336029981424, guid: f47a7d4a97d646e4d978ec79b0e3c144, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.7071068
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3415768336029981424, guid: f47a7d4a97d646e4d978ec79b0e3c144, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3415768336029981424, guid: f47a7d4a97d646e4d978ec79b0e3c144, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3415768336029981424, guid: f47a7d4a97d646e4d978ec79b0e3c144, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

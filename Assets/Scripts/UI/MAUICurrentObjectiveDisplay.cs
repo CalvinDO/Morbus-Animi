@@ -15,6 +15,18 @@ public class MAObjective : ScriptableObject {
 
 public class MAUICurrentObjectiveDisplay : MonoBehaviour {
 
+
+    #region Singleton
+    public static MAUICurrentObjectiveDisplay instance;
+    void Awake() {
+        if (instance == null) {
+            instance = this;
+        }
+
+        instance.UpdateDisplay();
+    }
+    #endregion
+
     private int currentIndex = 0;
 
     public Text displayText;
@@ -29,33 +41,29 @@ public class MAUICurrentObjectiveDisplay : MonoBehaviour {
 
     public GameObject objectiveIndicator;
 
-    void Start() {
-        this.UpdateDisplay();
-    }
-
     public void IncreaseObjectiveIndex() {
-        this.currentIndex += 1;
+        instance.currentIndex += 1;
 
-        this.UpdateDisplay();
+        instance.UpdateDisplay();
     }
 
     private void UpdateDisplay() {
 
-        string objective = this.objectives[this.currentIndex];
-        this.displayText.text = objective;
+        string objective = instance.objectives[instance.currentIndex];
+        instance.displayText.text = objective;
 
-        if (this.indicatorLocations[this.currentIndex] != null) {
-            this.objectiveIndicator.SetActive(true);
-            this.objectiveIndicator.transform.position = this.indicatorLocations[this.currentIndex].position;
+        if (instance.indicatorLocations[instance.currentIndex] != null) {
+            instance.objectiveIndicator.SetActive(true);
+            instance.objectiveIndicator.transform.position = instance.indicatorLocations[instance.currentIndex].position;
             return;
         }
 
-        this.objectiveIndicator.SetActive(false);
+        instance.objectiveIndicator.SetActive(false);
     }
 
     void Update() {
         if (Input.GetKeyUp(KeyCode.I)) {
-            this.IncreaseObjectiveIndex();
+            instance.IncreaseObjectiveIndex();
         }
     }
 }

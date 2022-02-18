@@ -8,9 +8,5 @@ using UnityEngine;
 public class MAObjectivePath : ScriptableObject {
 
     
-    [Tooltip("Place your Objectives:")]
-    public string[] objectives;
-
-    [Tooltip("Set State of each Objective:")]
-    public Transform[] states;
+   
 }

@@ -1,8 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-
+using UnityEngine.Events;
 
 public class MADoor : MonoBehaviour {
     public MAAxis axis;
@@ -23,6 +22,9 @@ public class MADoor : MonoBehaviour {
 
 
     public MACharacterController characterController;
+
+    public UnityEvent triggeredEvent;
+
 
     void Awake() {
        this.characterController = GameObject.FindObjectOfType<MACharacterController>().GetComponent<MACharacterController>();
@@ -73,7 +75,8 @@ public class MADoor : MonoBehaviour {
         this.isOpen = true;
 
         this.characterController.animator.SetTrigger("open");
-        
+
+        MAUICurrentObjectiveDisplay.instance.IncreaseObjectiveIndex();
     }
 
     void FailOpen() {

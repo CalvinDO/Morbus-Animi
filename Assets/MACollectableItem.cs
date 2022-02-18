@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.Events;
 
 [RequireComponent(typeof(Collider))]
 public class MACollectableItem : MonoBehaviour {
@@ -23,6 +23,8 @@ public class MACollectableItem : MonoBehaviour {
 
 
     public Canvas indicator;
+
+    public UnityEvent triggeredEvent;
 
 
     void Update() {
@@ -52,6 +54,13 @@ public class MACollectableItem : MonoBehaviour {
 
         GameObject.FindObjectOfType<MACharacterController>().GetComponent<MACharacterController>().animator.SetTrigger("interact");
 
+        MAUICurrentObjectiveDisplay.instance.IncreaseObjectiveIndex();
+        /*
+        if (this.triggeredEvent == null) {
+            return;
+        }
+        this.triggeredEvent.Invoke();
+        */
     }
 
     void OnTriggerStay(Collider characterCollider) {
