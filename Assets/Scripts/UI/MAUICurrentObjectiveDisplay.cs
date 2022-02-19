@@ -41,6 +41,20 @@ public class MAUICurrentObjectiveDisplay : MonoBehaviour {
 
     public GameObject objectiveIndicator;
 
+    public Image image;
+    public RectTransform imageCollapsedTransform;
+    public RectTransform imageDisplayedTransform;
+    public float lerpFactor;
+
+    private bool showDisplay = true;
+    public float timeTillHideDisplay = 6;
+    private float remainingTimeTillHideDisplay;
+
+
+    void Start() {
+        instance.remainingTimeTillHideDisplay = instance.timeTillHideDisplay;
+    }
+
     public void IncreaseObjectiveIndex() {
         instance.currentIndex += 1;
 
@@ -59,11 +73,47 @@ public class MAUICurrentObjectiveDisplay : MonoBehaviour {
         }
 
         instance.objectiveIndicator.SetActive(false);
+
+        instance.remainingTimeTillHideDisplay = instance.timeTillHideDisplay;
+        instance.ShowDisplay();
     }
 
     void Update() {
         if (Input.GetKeyUp(KeyCode.I)) {
             instance.IncreaseObjectiveIndex();
         }
+
+        if (instance.showDisplay) {
+            instance.remainingTimeTillHideDisplay -= Time.deltaTime;
+        }
+    }
+
+    void FixedUpdate() {
+
+        if (instance.showDisplay) {
+            instance.ShowDisplay();
+
+
+            if (instance.remainingTimeTillHideDisplay <= 0) {
+                instance.HideDisplay();
+            }
+        }
+        else {
+            instance.HideDisplay();
+        }
+    }
+
+    private void HideDisplay() {
+
+        instance.showDisplay = false;
+        instance.remainingTimeTillHideDisplay = instance.timeTillHideDisplay;
+
+        instance.image.rectTransform.position = Vector3.Lerp(instance.image.rectTransform.position, instance.imageCollapsedTransform.position, instance.lerpFactor);
+    }
+    private void ShowDisplay() {
+
+        instance.showDisplay = true;
+
+        instance.image.rectTransform.position = Vector3.Lerp(instance.image.rectTransform.position, instance.imageDisplayedTransform.position, instance.lerpFactor);
     }
 }
