@@ -101,6 +101,11 @@ public class MAFrustumDetector : MonoBehaviour {
 
             return;
         }
+        else {
+            if (this.entityMover.isVentEnitity) {
+                this.ReturnToRoaming();
+            }
+        }
 
 
         if (this.entityMover.isStationary) {
@@ -111,9 +116,7 @@ public class MAFrustumDetector : MonoBehaviour {
 
         if (this.entityMover.isVentEnitity) {
             if (this.characterDetected) {
-
-
-                if (Vector3.Distance(this.detectedCharacter.transform.position, this.transform.position) > 20) {
+                if (Vector3.Distance(this.detectedCharacter.transform.position, this.transform.position) > 15) {
                     this.ReturnToRoaming();
                     return;
                 }
@@ -124,8 +127,6 @@ public class MAFrustumDetector : MonoBehaviour {
 
             if (!this.reachedOldPos) {
                 if (this.whereAreYou != null) {
-
-
                     this.audioSource.PlayOneShot(this.whereAreYou);
                 }
             }
@@ -188,9 +189,6 @@ public class MAFrustumDetector : MonoBehaviour {
         this.entityMover.LostCharacter();
 
 
-        if (this.entityMover.isVentEnitity) {
-
-        }
 
         if (this.entityMover.isVentEnitity) {
             this.animator.SetBool("isCrawling", true);
