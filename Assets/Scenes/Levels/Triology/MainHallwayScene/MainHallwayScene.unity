@@ -130706,6 +130706,42 @@ PrefabInstance:
       value: UICurrentObjectiveDisplay
       objectReference: {fileID: 0}
     - target: {fileID: 6295908877849818287, guid: a8626cc9e19b4cd47978b6d0648694e9, type: 3}
+      propertyPath: objectives.Array.size
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6295908877849818287, guid: a8626cc9e19b4cd47978b6d0648694e9, type: 3}
+      propertyPath: objectives.Array.data[0]
+      value: Schaue dich um
+      objectReference: {fileID: 0}
+    - target: {fileID: 6295908877849818287, guid: a8626cc9e19b4cd47978b6d0648694e9, type: 3}
+      propertyPath: objectives.Array.data[1]
+      value: "Finde den Schl\xFCssel"
+      objectReference: {fileID: 0}
+    - target: {fileID: 6295908877849818287, guid: a8626cc9e19b4cd47978b6d0648694e9, type: 3}
+      propertyPath: objectives.Array.data[2]
+      value: Verlasse den Raum
+      objectReference: {fileID: 0}
+    - target: {fileID: 6295908877849818287, guid: a8626cc9e19b4cd47978b6d0648694e9, type: 3}
+      propertyPath: objectives.Array.data[3]
+      value: Erkunde die Umgebung
+      objectReference: {fileID: 0}
+    - target: {fileID: 6295908877849818287, guid: a8626cc9e19b4cd47978b6d0648694e9, type: 3}
+      propertyPath: objectives.Array.data[4]
+      value: Untersuche das Radio
+      objectReference: {fileID: 0}
+    - target: {fileID: 6295908877849818287, guid: a8626cc9e19b4cd47978b6d0648694e9, type: 3}
+      propertyPath: objectives.Array.data[5]
+      value: Erreiche den Ausgang
+      objectReference: {fileID: 0}
+    - target: {fileID: 6295908877849818287, guid: a8626cc9e19b4cd47978b6d0648694e9, type: 3}
+      propertyPath: objectives.Array.data[6]
+      value: Erreiche den Ausgang
+      objectReference: {fileID: 0}
+    - target: {fileID: 6295908877849818287, guid: a8626cc9e19b4cd47978b6d0648694e9, type: 3}
+      propertyPath: indicatorLocations.Array.size
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6295908877849818287, guid: a8626cc9e19b4cd47978b6d0648694e9, type: 3}
       propertyPath: indicatorLocations.Array.data[2]
       value: 
       objectReference: {fileID: 3415768335017394870}
@@ -130713,6 +130749,10 @@ PrefabInstance:
       propertyPath: indicatorLocations.Array.data[5]
       value: 
       objectReference: {fileID: 1142430040}
+    - target: {fileID: 6295908877849818287, guid: a8626cc9e19b4cd47978b6d0648694e9, type: 3}
+      propertyPath: indicatorLocations.Array.data[6]
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a8626cc9e19b4cd47978b6d0648694e9, type: 3}
 --- !u!114 &1937340426 stripped

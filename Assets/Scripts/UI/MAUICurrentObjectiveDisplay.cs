@@ -50,6 +50,9 @@ public class MAUICurrentObjectiveDisplay : MonoBehaviour {
     public float timeTillHideDisplay = 6;
     private float remainingTimeTillHideDisplay;
 
+    public AudioSource audioSource;
+    public AudioClip displayPopopSound;
+
 
     void Start() {
         instance.remainingTimeTillHideDisplay = instance.timeTillHideDisplay;
@@ -59,6 +62,9 @@ public class MAUICurrentObjectiveDisplay : MonoBehaviour {
         instance.currentIndex += 1;
 
         instance.UpdateDisplay();
+
+
+        instance.audioSource.PlayOneShot(instance.displayPopopSound);
     }
 
     private void UpdateDisplay() {
@@ -110,6 +116,7 @@ public class MAUICurrentObjectiveDisplay : MonoBehaviour {
 
         instance.image.rectTransform.position = Vector3.Lerp(instance.image.rectTransform.position, instance.imageCollapsedTransform.position, instance.lerpFactor);
     }
+
     private void ShowDisplay() {
 
         instance.showDisplay = true;
