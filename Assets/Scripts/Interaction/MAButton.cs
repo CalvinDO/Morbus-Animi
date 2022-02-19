@@ -14,7 +14,7 @@ public class MAButton : MonoBehaviour {
 
     private bool characterInReach = false;
 
-    [HideInInspector]
+
     public bool isPressed = false;
 
 
@@ -24,11 +24,34 @@ public class MAButton : MonoBehaviour {
 
     public MACharacterController characterController;
 
+
+    public MAIndicatorLookat indicator;
+
     void Awake() {
         this.characterController = GameObject.FindObjectOfType<MACharacterController>().GetComponent<MACharacterController>();
     }
 
     void Update() {
+
+        if (this.indicator != null) {
+
+            if (this.characterInReach && !this.isPressed) {
+
+                this.indicator.gameObject.SetActive(true);
+            }
+            else {
+                this.indicator.gameObject.SetActive(false);
+            }
+        }
+
+
+
+        if (this.isPressed && this.staysPressed) {
+            return;
+        }
+
+
+    
 
         if (this.characterInReach) {
 
@@ -66,10 +89,14 @@ public class MAButton : MonoBehaviour {
             this.SetDefault();
         }
 
+
+        Debug.Log("set state: " + value);
         this.characterController.animator.SetTrigger("interact");
     }
 
     public virtual void SetPressed() {
+
+        Debug.Log("executing setPressed in MABUtton");
 
         this.isPressed = true;
 

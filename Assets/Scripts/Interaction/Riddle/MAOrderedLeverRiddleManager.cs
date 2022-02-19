@@ -48,9 +48,8 @@ public class MAOrderedLeverRiddleManager : MonoBehaviour {
     }
 
     void WinRiddle() {
-        Debug.LogWarning("!!!!riddle won!!!!");
 
-        this.ResetLevers();
+        Debug.LogWarning("!!!!riddle won!!!!");
 
         this.riddleDoor.Open();
     }

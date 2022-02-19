@@ -8,7 +8,7 @@ public class MAOrderedLever : MALever {
 
     private MAOrderedLeverRiddleManager riddleManager;
 
-    public AudioClip resetSound;
+
 
     void Start() {
         this.riddleManager = this.transform.parent.GetComponent<MAOrderedLeverRiddleManager>();
@@ -24,17 +24,11 @@ public class MAOrderedLever : MALever {
 
     public override void Reset() {
 
+        if (!this.isPressed) {
+            return;
+        }
+
         this.SetDefault();
         
-        
-        if (this.resetSound == null) {
-            return;
-        }
-
-        if (this.audioSource == null) {
-            return;
-        }
-
-        this.audioSource.PlayOneShot(this.resetSound);
     }
 }

@@ -27,12 +27,14 @@ public class MAInventoryController : MonoBehaviour {
             }
         }
         catch {
-            if (int.Parse(inputString) == 0) {
-                this.OpenPicture(10);
-            }
+           
             return;
         }
 
+        if (int.Parse(inputString) == 0) {
+            this.OpenPicture(10);
+            return;
+        }
 
         this.OpenPicture(int.Parse(inputString));
     }

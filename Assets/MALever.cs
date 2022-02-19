@@ -10,12 +10,12 @@ public class MALever : MAButton {
 
     public Transform rotatingLever;
 
-    
+    public AudioClip resetSound;
 
     public override void SetPressed() {
 
+        Debug.Log("executing setPressed in MALever");
 
-        this.isPressed = true;
 
         Vector3 axisVector = Vector3.up;
 
@@ -29,23 +29,29 @@ public class MALever : MAButton {
             case MAAxis.Z:
                 axisVector = Vector3.forward;
                 break;
+            default:
+                break;
         }
 
 
-        if (this.isPressed) {
+        Debug.Log("rotate " + this.openAngle + " dregrees");
+
+        this.rotatingLever.transform.Rotate(axisVector * this.openAngle);
+
+
+        if (this.audioSource == null) {
             return;
         }
 
-        this.rotatingLever.transform.Rotate(axisVector * this.openAngle);
+        if (this.pressSound == null) {
+            return;
+        }
+
+        this.audioSource.PlayOneShot(this.pressSound);
     }
 
 
     public override void SetDefault() {
-
-
-        if (this.staysPressed) {
-            return;
-        }
 
         this.isPressed = false;
 
@@ -64,5 +70,19 @@ public class MALever : MAButton {
         }
 
         this.rotatingLever.transform.Rotate(axisVector * -this.openAngle);
+
+
+
+
+        if (this.resetSound == null) {
+            return;
+        }
+
+        if (this.audioSource == null) {
+            return;
+        }
+
+        this.audioSource.Stop();
+        this.audioSource.PlayOneShot(this.resetSound);
     }
 }

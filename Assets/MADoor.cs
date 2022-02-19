@@ -27,7 +27,7 @@ public class MADoor : MonoBehaviour {
 
 
     void Awake() {
-       this.characterController = GameObject.FindObjectOfType<MACharacterController>().GetComponent<MACharacterController>();
+        this.characterController = GameObject.FindObjectOfType<MACharacterController>().GetComponent<MACharacterController>();
     }
     public void UnLock() {
         this.isLocked = false;
@@ -53,7 +53,10 @@ public class MADoor : MonoBehaviour {
             }
         }
 
-        this.doorAudioSource.PlayOneShot(this.doorOpen);
+
+        if (this.doorAudioSource != null && this.doorOpen != null) {
+            this.doorAudioSource.PlayOneShot(this.doorOpen);
+        }
 
         Vector3 axisVector = Vector3.up;
 
