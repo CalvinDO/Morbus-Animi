@@ -78,14 +78,15 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Walk: WASD\nSprint: Shift\nJump: Space\nSlide: C (only works when sprinting)\n\nFlashlight
-    On/Off: F\n\nWall - tricks: \n\nWallWalk: \nJump fast against a jumpable Wall,
-    hold \"Space\" and continue walking against the wall to perform a WallWalk\n\nWallJump:\nJump
-    against a jumpable Wall, and press \"Space\" again to perform a WallJump\n\n\nSwing:
-    Jump close to a Swing-Object (Lamp, Garland etc..) and hold  \"Space\" to begin
-    the swinging-cycle. Release \"Space\" to let go and launch Norah through the
-    air\n\nInteract/Pick up: E\n\nOpen Diary Page: \n\t-Page 0  ->  0\n\t-Page 1  
-    ->  1\n\t-Page 2  ->  2\n\t- \t... etc.\n\nToggle Help Menu (Hide/Show): H\n\n"
+  m_Text: "Display Current Objective: I\n\nWalk: WASD\nSprint: Shift\nJump: Space\nSlide:
+    C (only works when sprinting)\n\nFlashlight On/Off: F\n\nWall - tricks: \n\nWallWalk:
+    \nJump fast against a jumpable Wall, hold \"Space\" and continue walking against
+    the wall to perform a WallWalk\n\nWallJump:\nJump against a jumpable Wall, and
+    press \"Space\" again to perform a WallJump\n\n\nSwing: Jump close to a Swing-Object
+    (Lamp, Garland etc..) and hold  \"Space\" to begin the swinging-cycle. Release
+    \"Space\" to let go and launch Norah through the air\n\nInteract/Pick up: E\n\nOpen
+    Diary Page: \n\t-Page 0  ->  0\n\t-Page 1   ->  1\n\t-Page 2  ->  2\n\t- \t...
+    etc.\n\nToggle Help Menu (Hide/Show): H\n\n"
 --- !u!1 &2066722281247466206
 GameObject:
   m_ObjectHideFlags: 0

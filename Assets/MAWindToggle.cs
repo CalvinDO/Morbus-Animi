@@ -12,6 +12,9 @@ public class MAWindToggle : MAButton
         base.SetPressed();
 
         this.fanSpinner.Stop();
+
+
+        MAUICurrentObjectiveDisplay.instance.IncreaseObjectiveIndex();
     }
 
 }

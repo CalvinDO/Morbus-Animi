@@ -13,17 +13,15 @@ public class MAMultibleCollectableRiddle : MonoBehaviour
 
     void Update()
     {
-
+        if (this.isSolved) {
+            return;
+        }
 
         foreach (MAItem item in this.requiredItems) {
             if (!MAInventory.instance.items.Contains(item)) {
                 this.isSolved = false;
                 return;
             }
-        }
-
-        if (this.isSolved) {
-            return;
         }
 
 

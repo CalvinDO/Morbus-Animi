@@ -86,7 +86,7 @@ public class MAUICurrentObjectiveDisplay : MonoBehaviour {
 
     void Update() {
         if (Input.GetKeyUp(KeyCode.I)) {
-            instance.IncreaseObjectiveIndex();
+            instance.showDisplay = true;
         }
 
         if (instance.showDisplay) {
