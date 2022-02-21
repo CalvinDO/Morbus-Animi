@@ -14,6 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: DefaultDiary
   icon: {fileID: 21300000, guid: 67f9909cc666ca5489639c8ddeacc7f1, type: 3}
-  description: Lass dich nicht erwischen und finde die 4 verschiedenfarbigen karten
+  description: "Etwas stimmt hier nicht...\n\nHier ist eine absurde und unheimliche
+    Pr\xE4senzgefangen.\n\n\n\nEs ist alles so erdr\xFCckend\nEs ist alles so dunkel\nEs
+    ist alles so unheimlich\nWeg hier\nWeg hier\nWeg hier\nWeg hier\nW g h er\nW
+    h  er\n\nWEG"
   value: 0
   image: {fileID: 0}
